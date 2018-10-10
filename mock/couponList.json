@@ -1,0 +1,26 @@
+{
+    "status": 200,
+    "msg": "success",
+    "content": [
+        {
+            "id": "50",
+            "price": 30,
+            "use_price": 100,
+            "redeemCode": "VB23592631431",
+            "text": "For a purchase over $50.00",
+            "startdate": "2017-05-05 12:12:12",
+            "enddate": "2017-12-05 12:12:12",
+            "datestatus": 1
+        },
+        {
+            "id": "51",
+            "price": 50,
+            "use_price": 200,
+            "text": "For a purchase over $50.00",
+            "redeemCode": "VB23621280687",
+            "startdate": "2017-05-05 12:12:12",
+            "enddate": "2017-12-05 12:12:12",
+            "datestatus": 2
+        }
+    ]
+}

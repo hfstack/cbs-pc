@@ -1,0 +1,12 @@
+{
+    "status": 200,
+    "msg": "success",
+    "content": {
+        "image": "http://192.168.1.122:6006/goods/20170718/thumb/201707181645191500367519172.jpg",
+        "name": "long.hao",
+        "gender": "male",
+        "birth": "2018-09-30 12:20:30",
+        "email": "long.hao@cucoe.com",
+        "phone": "12346"
+    }
+}

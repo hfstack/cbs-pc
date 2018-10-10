@@ -1,0 +1,26 @@
+{
+    "status": true,
+    "messages": "",
+    "data": [
+        {
+            "price": 10,
+            "condition": 20,
+			"code_name": "VS000004",
+            "getLogo": "",
+            "startdate": "17/08/11 15:45",
+            "enddate": "17/08/21 15:45:05",
+            "datestatus": 1,
+            "codename": "VS22922386149"
+        },
+        {
+            "price": 10,
+            "condition": 20,
+			"code_name": "VS000004",
+            "getLogo": "",
+            "startdate": "17/08/11 15:45",
+            "enddate": "17/08/21 15:45:05",
+            "datestatus": 1,
+            "codename": "VS22994715515"
+        }
+    ]
+}

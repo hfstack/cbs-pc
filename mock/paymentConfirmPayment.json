@@ -1,0 +1,30 @@
+{
+  "status": true,
+  "messages": "",
+  "data": {
+    "user_address": [
+      {
+        "send": true,
+        "delivery": false,
+        "address_id": "246",
+        "recipients": "dddd",
+        "address": "山西省长治市壶关县ddd",
+        "iphone": "18444444444"
+      },
+      {
+        "send": true,
+        "delivery": true,
+        "address_id": "245",
+        "recipients": "vfdc",
+        "address": "北京北京市东城区fg",
+        "iphone": "13111111111"
+      }
+    ],
+    "phone": "184****6182",
+    "money": "0.00",
+    "price": "1223.00",
+    "delivery_type": ["1", "2", "3"],
+    "send_pay": "3.00",
+    "delivery_pay": 0
+  }
+}

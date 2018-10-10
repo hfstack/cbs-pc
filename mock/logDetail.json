@@ -1,0 +1,21 @@
+{
+    "status": 200,
+    "msg": "success",
+    "content": {
+        "img":"http://192.168.1.122:6006/goods/20170718/thumb/201707181645191500367519172.jpg",
+        "items": 2,
+        "status": "transit",
+        "type": "Express",
+        "number": "3900271506000",
+        "tel": "88675",
+        "detail": [
+            {
+                "date": "2018-04-14 15:12:00",
+                "description": "Shipment delivered"
+            },{
+                "date": "2018-04-14 07:47:00",
+                "description": "OUT FOR DELIVERY"
+            }
+        ]
+    }
+}

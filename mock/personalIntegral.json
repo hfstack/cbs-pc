@@ -1,0 +1,19 @@
+{
+    "status": 200,
+    "msg": "success",
+    "content": {
+        "personal_integral": "100",
+        "integral": [
+            {
+                "integral": "+20",
+                "source_type": "购物奖励",
+                "created_at": "2017-07-28 10:56:22"
+            },
+            {
+                "integral": "-30",
+                "source_type": "购物消费",
+                "created_at": "2017-07-29 10:57:31"
+            }
+        ]
+    }
+}

@@ -1,0 +1,37 @@
+{
+    "status": 200,
+    "msg": "success",
+    "content": {
+        "goods": [
+            {
+                "id": 294,
+                "good_img": "http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+                "good_name": "CS",
+                "price": 20,
+                "stock": 85
+            }
+        ],
+        "coupons": [
+            {
+                "id": 65,
+                "price": "10.00",
+                "use_proce": "90.00",
+                "start_at": "2018-09-13 16:05:00",
+                "end_at": "2018-10-31 16:05:06"
+            },{
+                "id": 66,
+                "price": "10.00",
+                "use_proce": "90.00",
+                "start_at": "2018-10-05 16:05:00",
+                "end_at": "2018-10-12 16:05:06"
+            }
+        ],
+        "promotions": {
+            "promotion_start": "2018-09-30 15:38:38",
+            "promotion_end": "2018-10-31 15:38:51",
+            "promotion_msg": "满¥100减¥10"
+        },
+        "activityType": "reduce",
+        "total_page": 1
+    }
+}

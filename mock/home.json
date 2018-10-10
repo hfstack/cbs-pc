@@ -1,0 +1,155 @@
+{
+  "status": true,
+  "messages": "",
+  "data": {
+    "brand_name": "东京热",
+    "brand_image": "",
+    "store_id": 129,
+    "store_name": "dsads",
+    "is_member": false,
+    "voucher": [
+      {
+        "id": "26",
+        "name": "江诗丹顿老师的DVD十大歌手",
+        "price": "150.00",
+        "use_price": "400.00",
+        "use_type": "1",
+        "valid_date": "自获得起5天有效",
+        "logo": "http://gw.alicdn.com/imgextra/i2/2585780740/TB2aqY2srwrBKNjSZPcXXXpapXa_!!2585780740-0-daren.jpg_570x10000Q75.jpg_.webp"
+      },
+      {
+        "id": "25",
+        "name": "江诗丹顿老师的DVD",
+        "price": "100.00",
+        "use_price": "300.00",
+        "use_type": "2",
+        "valid_date": "2017/08/14 09:00-2017/08/29 22:00",
+        "logo": "http://gw.alicdn.com/imgextra/i2/2585780740/TB2aqY2srwrBKNjSZPcXXXpapXa_!!2585780740-0-daren.jpg_570x10000Q75.jpg_.webp"
+      }
+    ],
+    "promotions": [
+      {
+        "id": "25",
+        "title": "哈哈哈哈",
+        "type": "return",
+        "is_trailer": false,
+        "start_date": "2017-08-09",
+        "end_date": "2017-08-25",
+        "rule": [
+          {
+            "condition": 300,
+            "discount": 30
+          }
+        ]
+      },
+      {
+        "id": "47",
+        "title": "呵呵呵呵呵呵",
+        "type": "return",
+        "is_trailer": true,
+        "start_date": "2017-08-27",
+        "end_date": "2017-08-31",
+        "rule": [
+          {
+            "condition": 200,
+            "discount": 30
+          }
+        ]
+      }
+    ],
+    "recharge": {
+      "name": "科技开发的关键看韩剧",
+      "start_date": "2017-08-14",
+      "end_date": "2017-08-25",
+      "rule": [
+        {
+          "recharge": "500",
+          "bonus": "300"
+        },
+        {
+          "recharge": "800",
+          "bonus": "600"
+        },
+        {
+          "recharge": "1000",
+          "bonus": "800"
+        }
+      ]
+    },
+    "ping": {
+      "goods": [
+        {
+          "id": "18",
+          "good_id": "3",
+          "good_name": "HLA/海澜之家中腰牛仔裤男2017春季热卖猫须微弹男士裤子",
+          "good_image": "http://gw.alicdn.com/imgextra/i2/2585780740/TB2aqY2srwrBKNjSZPcXXXpapXa_!!2585780740-0-daren.jpg_570x10000Q75.jpg_.webp",
+          "price": "150.00",
+          "pin_price": "91.00",
+          "discount": "6.0"
+        },
+        {
+          "id": "16",
+          "good_id": "5",
+          "good_name": "型马潮牌破洞牛仔裤男 夏季韩版直筒小脚裤 做旧乞丐牛仔长裤男薄 ",
+          "good_image": "http://gw.alicdn.com/imgextra/i2/2585780740/TB2aqY2srwrBKNjSZPcXXXpapXa_!!2585780740-0-daren.jpg_570x10000Q75.jpg_.webp",
+          "price": "169.00",
+          "pin_price": "92.00",
+          "discount": "5.4"
+        }
+      ],
+      "images": [
+        "http://192.168.1.122:6006/20170609/2017060916450436.jpg",
+        "http://192.168.1.122:6006/20170609/2017060916450436.jpg",
+        "http://192.168.1.122:6006/20170607/2017060711281499.jpg",
+        "http://192.168.1.122:6006/20170607/2017060710503522.jpg"
+      ],
+      "group_num": 9
+    },
+    "new_goods": [
+      {
+        "good_id": "4",
+        "good_name": "OPPO R11手机全新机正品智能机oppor11plus新款全网通2017原装r9s",
+        "good_image": "http://gw.alicdn.com/imgextra/i2/2585780740/TB2aqY2srwrBKNjSZPcXXXpapXa_!!2585780740-0-daren.jpg_570x10000Q75.jpg_.webp",
+        "price": "2799.00"
+      },
+      {
+        "good_id": "8",
+        "good_name": "夏天连衣裙",
+        "good_image": "http://gw.alicdn.com/imgextra/i2/2585780740/TB2aqY2srwrBKNjSZPcXXXpapXa_!!2585780740-0-daren.jpg_570x10000Q75.jpg_.webp",
+        "price": "300.00"
+      },
+      {
+        "good_id": "5",
+        "good_name": "型马潮牌破洞牛仔裤男 夏季韩版直筒小脚裤 做旧乞丐牛仔长裤男薄 ",
+        "good_image": "http://gw.alicdn.com/imgextra/i2/2585780740/TB2aqY2srwrBKNjSZPcXXXpapXa_!!2585780740-0-daren.jpg_570x10000Q75.jpg_.webp",
+        "price": "169.00"
+      }
+    ],
+    "store_goods": [
+      {
+        "good_id": "8",
+        "good_name": "夏天连衣裙",
+        "good_image": "http://gw.alicdn.com/imgextra/i2/2585780740/TB2aqY2srwrBKNjSZPcXXXpapXa_!!2585780740-0-daren.jpg_570x10000Q75.jpg_.webp",
+        "price": "300.00"
+      },
+      {
+        "good_id": "5",
+        "good_name": "型马潮牌破洞牛仔裤男 夏季韩版直筒小脚裤 做旧乞丐牛仔长裤男薄 ",
+        "good_image": "http://gw.alicdn.com/imgextra/i2/2585780740/TB2aqY2srwrBKNjSZPcXXXpapXa_!!2585780740-0-daren.jpg_570x10000Q75.jpg_.webp",
+        "price": "169.00"
+      },
+      {
+        "good_id": "3",
+        "good_name": "HLA/海澜之家中腰牛仔裤男2017春季热卖猫须微弹男士裤子",
+        "good_image": "http://gw.alicdn.com/imgextra/i2/2585780740/TB2aqY2srwrBKNjSZPcXXXpapXa_!!2585780740-0-daren.jpg_570x10000Q75.jpg_.webp",
+        "price": "150.00"
+      },
+      {
+        "good_id": "4",
+        "good_name": "OPPO R11手机全新机正品智能机oppor11plus新款全网通2017原装r9s",
+        "good_image": "http://gw.alicdn.com/imgextra/i2/2585780740/TB2aqY2srwrBKNjSZPcXXXpapXa_!!2585780740-0-daren.jpg_570x10000Q75.jpg_.webp",
+        "price": "2799.00"
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+    "status": 1,
+    "messages": "",
+    "data": [
+        {
+            "id": "50",
+            "price": 30,
+            "text": "For a purchase over $50.00",
+            "use_price": 100,
+            "img": "",
+            "redeemCode": "VB23592631431",
+            "startdate": "17/09/11 12:06",
+            "minDate": 1505102787,
+            "enddate": "17/09/21 12:06",
+            "maxDate": 1505966787,
+            "datestatus": 1
+        },
+        {
+            "id": "51",
+            "price": 50,
+            "text": "For a purchase over $50.00",
+            "use_price": 200,
+            "img": "",
+            "redeemCode": "VB23621280687",
+            "startdate": "17/09/11 12:07",
+            "minDate": 1505102861,
+            "enddate": "17/09/21 12:07",
+            "maxDate": 1505966861,
+            "datestatus": 2
+        },
+        {
+            "id": "51",
+            "price": 50,
+            "text": "For a purchase over $50.00",
+            "use_price": 200,
+            "img": "",
+            "redeemCode": "VB23621280687",
+            "startdate": "17/09/11 12:07",
+            "minDate": 1505102861,
+            "enddate": "17/09/21 12:07",
+            "maxDate": 1505966861,
+            "datestatus": 3
+        }
+    ]
+}

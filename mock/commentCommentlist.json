@@ -1,0 +1,32 @@
+{
+    "status": true,
+    "messages": "",
+    "data": [
+        {
+            "photo": "http://skins.test.com/common/images/head_default.png",
+            "user_alias": "155****7195",
+            "comment": "好看",
+            "img": [],
+            "value_info": [
+                {
+                    "attr_id": "2",
+                    "attr_name": "品牌",
+                    "value_name": "10厘米"
+                },
+                {
+                    "attr_id": "1",
+                    "attr_name": "颜色",
+                    "value_name": "红色"
+                },
+                {
+                    "attr_id": "3",
+                    "attr_name": "尺寸",
+                    "value_name": "4.5英寸"
+                }
+            ],
+            "praise_num": "0",
+            "praiseName": [],
+            "reply": []
+        }
+    ]
+}

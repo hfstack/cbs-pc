@@ -1,0 +1,24 @@
+{
+  "status": true,
+  "data": {
+    "location": {
+      "lng": 116.322987,
+      "lat": 39.983424071404
+    },
+    "formatted_address": "北京市海淀区中关村大街27号1101-08室",
+    "addressComponent": {
+      "country": "中国",
+      "country_code": 0,
+      "province": "北京市",
+      "city": "北京市",
+      "district": "海淀区",
+      "adcode": "110108",
+      "street": "中关村大街",
+      "street_number": "27号1101-08室",
+      "direction": "附近",
+      "distance": "7"
+    },
+    "sematic_description": "北京远景国际公寓(中关村店)内0米",
+    "cityCode": 131
+  }
+}

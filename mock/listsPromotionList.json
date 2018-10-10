@@ -1,0 +1,43 @@
+{
+  "status": true,
+  "messages": "",
+  "data": {
+    "activityType": "reduce",
+    "promotions": {
+      "promotion_name": "哈哈哈哈",
+      "promotion_date": 1503590400,
+      "promotion_day": "17/08/25 00:00",
+      "promotion_msg": "满¥200减¥100",
+      "promotion_rule": [
+        {
+          "condition": 200,
+          "discount": 100
+        }
+      ]
+    },
+    "goods": [
+      {
+        "good_id": "5",
+        "good_img": "http://192.168.1.122:6006/goods/20170718/thumb/201707181645181500367518995.jpg",
+        "good_name": "型马潮牌破洞牛仔裤男 夏季韩版直筒小脚裤 做旧乞丐牛仔长裤男薄 ",
+        "price": "169.00",
+        "promotion_stock": "5",
+        "promotion_price": "139.00"
+      }
+    ],
+    "voucher": [
+      {
+        "id": "16",
+        "price": 30,
+        "use_price": 50,
+        "text": "测试品牌券3",
+        "minDate": 1499823420,
+        "minDay": "17/07/12 09:37",
+        "maxDate": 1504143420,
+        "maxDay": "17/08/31",
+        "img": "http://192.168.1.122:6006/20170607/2017060714031536.jpg"
+      }
+    ],
+    "total_page": 1
+  }
+}

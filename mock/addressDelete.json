@@ -1,0 +1,18 @@
+{
+  "status": true,
+  "message": "",
+  "data": [
+    {
+      "name": "吴先生",
+      "phone": "17606548268",
+      "addrDetail": "河北省石家庄市桥东区哈哈哈哈",
+      "is_default": 0
+    },
+    {
+      "name": "王小二",
+      "phone": "18457977915",
+      "addrDetail": "山西省长治市平顺县新天地",
+      "is_default": 0
+    }
+  ]
+}

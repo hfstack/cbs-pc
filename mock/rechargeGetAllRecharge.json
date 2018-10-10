@@ -1,0 +1,20 @@
+{
+    "status": true,
+    "messages": "",
+    "data": [
+        [
+            {
+                "recharge": "500",
+                "bonus": "300"
+            },
+            {
+                "recharge": "800",
+                "bonus": "600"
+            },
+            {
+                "recharge": "1000",
+                "bonus": "800"
+            }
+        ]
+    ]
+}

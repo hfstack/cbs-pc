@@ -1,0 +1,22 @@
+{
+    "status": 200,
+    "msg": "success",
+    "content": {
+        "money": "10.00",
+        "finance": [
+            {
+                "amount": "40.00",
+                "operate_type": "Shopping Consumption",
+                "operate_description":"You spend $40 on shopping",
+                "created_at": "2017-07-05 15:06:40"
+            },
+            {
+                "amount": "120.00",
+                "operate_type": "Shopping Reward",
+                "operate_description":"You have placed on order for $123",
+                "created_at": "2017-07-05 15:06:40"
+            }
+        ],
+        "total_page": 1
+    }
+}

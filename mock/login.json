@@ -1,0 +1,14 @@
+{
+    "status": 200,
+    "msg": "success",
+    "content": {
+        "user_id": 162,
+        "first_name": "hao",
+        "last_name": "long",
+        "email": "long.hao@cucoe.com",
+        "last_login": "2018-09-04 01:46:50",
+        "registered": 0,
+        "member_since": 1535996810,
+        "token": "bcdfilmopqtwxyzABEFHIJKMRSVWZ058162"
+    }
+}
