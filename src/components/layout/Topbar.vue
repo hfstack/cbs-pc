@@ -32,7 +32,7 @@ export default {
   background-color: #333333;
   .content {
     margin: 0 auto;
-    width: 1040px;
+    width: 1240px;
     text-align: center;
     color: #fff;
     line-height: 40px;
