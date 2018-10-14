@@ -1,0 +1,19 @@
+{
+  "status": 200,
+  "msg": "success",
+  "content": {
+    "user_address": [
+      {
+        "id": 1,
+        "recipients": "hao long",
+        "address": "china zhejiang hangzhou jiangganqu jiuhelu",
+        "iphone": "13003630068",
+        "is_default": 1
+      }
+    ],
+    "money": "0.00",
+    "price": "90.00",
+    "delivery_pay": "0.00",
+    "order_time": "2018-09-20 07:58:33"
+  }
+}

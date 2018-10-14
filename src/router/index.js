@@ -92,7 +92,7 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: '/home'
+      redirect: '/my'
     }
   ]
 });

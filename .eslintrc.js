@@ -26,7 +26,8 @@ module.exports = {
     // allow async-await
     'generator-star-spacing': 'off',
     // 文件末尾强制换行  
-    "eol-last": 0, 
+    "eol-last": 0,
+    "keyword-spacing ": 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }

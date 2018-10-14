@@ -12,7 +12,7 @@
         <div class="history-title">History</div>
         <div class="content">
           <div class="content-list" v-if="integral.length > 0">
-            <div class="clearfix content-item"  v-for="item in integral">
+            <div class="clearfix content-item"  v-for="item in integral" :key="item.id">
               <div class="fl">
                 <p class="c-a">{{item.source_type}}</p>
                 <div class="c-b">{{item.created_at}}</div>
@@ -31,13 +31,13 @@
 <script>
 export default {
   data() {
-    return  {
+    return {
       personal_integral: 0,
       integral: [], // 历史纪录
       params: {
         page: 1
       }
-    }
+    };
   },
   mounted() {
     this.getPoints();
@@ -45,16 +45,16 @@ export default {
   methods: {
     getPoints: function() {
       this.request('PersonalIntegral', this.params).then((res) => {
-        if(res.status === 200 && res.content) {
+        if (res.status === 200 && res.content) {
           this.integral = res.content.integral;
           this.personal_integral = res.content.personal_integral;
         }
       }, err => {
         this.$Toast(err);
-      })
+      });
     }
   }
-}
+};
 </script>
 <style lang="less">
   .my-points {
@@ -161,4 +161,3 @@ export default {
     }
   }
 </style>
-

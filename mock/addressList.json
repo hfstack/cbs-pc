@@ -1,0 +1,20 @@
+{
+  "status": 200,
+  "msg": "success",
+  "content": [
+    {
+      "id": 1,
+      "recipients": "hao long",
+      "address": "china zhejiang hangzhou jiangganqu jiuhelu",
+      "iphone": "13003630068",
+      "is_default": 1
+    },
+    {
+      "id": 4,
+      "recipients": "hao long2",
+      "address": "222china zhejiang hangzhou jiuhelu ",
+      "iphone": "1300363",
+      "is_default": 0
+    }
+  ]
+}

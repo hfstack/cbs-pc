@@ -3,16 +3,25 @@
   "messages": "",
   "data": {
     "max_stock": "1616",
-    "id": "123132321",
+    "code": "CS0001",
     "name": "2018 summer new fashions lotus leaf long sleeved",
-    "summary": "",
-    "brand": "6",
-    "store": "129",
-    "integral_status": "2",
-    "store_name": "贵人鸟",
-    "store_address": "这些是不是不要了",
-    "store_summary": "faf",
-    "coupon": [],
+    "summary": "test",
+    "max_integral": 20,
+
+    "coupon": [
+      {
+        "price": 10,
+        "use_price": 100,
+        "grant_startdate": "2018-09-12 16:05:16",
+        "grant_enddate": "2018-09-12 16:05:16"
+      }
+    ],
+    "promotion": {
+      "role": "sale sale sale",
+      "id": 1,
+      "start_at": "2018-09-12 15:38:38",
+      "end_at": "2018-10-31 15:38:51"
+    },
     "images": [
       "https://g-search1.alicdn.com/img/bao/uploaded/i4/i2/1905882464/O1CN011U4YM0F0X2S73du_!!1905882464.jpg_.webp",
       "http://img.alicdn.com/imgextra/i4/792382564/TB263aGoRHH8KJjy0FbXXcqlpXa_!!792382564.jpg_640x0q85s150_.webp",
@@ -20,7 +29,6 @@
       "http://img.alicdn.com/imgextra/i2/792382564/TB27rsfnz3z9KJjy0FmXXXiwXXa_!!792382564.jpg_640x0q85s150_.webp"
     ],
     "video": "",
-    "promotion": {},
     "style": [
       {
         "id": "233",
@@ -31,7 +39,8 @@
           "https://gw3.alicdn.com/bao/uploaded/i1/1825922675/TB1l4q4wYwrBKNjSZPcXXXpapXa_!!0-item_pic.jpg_.webp",
           "http://img.alicdn.com/imgextra/i1/1847790286/TB2pgutmBfH8KJjy1XbXXbLdXXa_!!1847790286.jpg_2200x2200Q50s50.jpg_.webp"
         ],
-        "supply_price": "190.00",
+        "price": "20.00",
+        "prom_price": "10.00",
         "stock": "25",
         "value_ids": "5",
         "sub": [
@@ -113,8 +122,7 @@
               }
             ]
           }
-        ],
-        "max_price": "190.00"
+        ]
       },
       {
         "id": "234",
@@ -215,7 +223,8 @@
         "img": [
           "https://img.alicdn.com/imgextra/i1/792382564/TB2HK5JoJrJ8KJjSspaXXXuKpXa_!!792382564.jpg_640x0q85s150_.webp"
         ],
-        "supply_price": "180.00",
+        "price": "20.00",
+        "prom_price": "10.00",
         "stock": "30",
         "value_ids": "7",
         "sub": [
@@ -300,7 +309,9 @@
         ]
       }
     ],
-    "max_integral": "vip下单最多可获得190积分，100积分等于1元",
-    "prop": ["Item Id:8432127", "Material:Polyester","Season:Sprint,Summer,Autumn","Sleeves:Sleeveless"]
+    "prop": {
+      "color": "green",
+      "size": "L"
+    }
   }
 }

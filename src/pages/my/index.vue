@@ -54,17 +54,14 @@ export default {
           routerName: 'myProfile'
         }
       ]
-    }
+    };
   },
   computed: {
     selectedRouter: function() {
       let selectName = '';
       const name = this.$route.name;
-      const result = this.bars.filter((item) => {
-        return item.routerName === name;
-      })
-      for(let i = 0; i < this.bars.length; i++) {
-        if(this.bars[i].routerName === name) {
+      for (let i = 0; i < this.bars.length; i++) {
+        if (this.bars[i].routerName === name) {
           selectName = this.bars[i].title;
         }
       }
@@ -75,15 +72,15 @@ export default {
     getBarDetail: function(item) {
       this.$router.push({
         name: item.routerName
-      })
+      });
     }
   }
-}
+};
 </script>
 <style lang="less">
 .c-my {
   width: 1240px;
-  height: 630px;
+  min-height: 630px;
   margin: 0 auto;
   margin-top: 10px;
   background: #fff;
@@ -130,5 +127,3 @@ export default {
   }
 }
 </style>
-
-

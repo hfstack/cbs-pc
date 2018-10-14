@@ -11,9 +11,9 @@ const methodMap = {
   /** 用户中心 **/
   PersonalIndex: {url: '/personal/index', method: 'post'},
   /** 积分详情 **/
-  PersonalIntegral: {url: ' /personal/integral', method: 'post'},
+  PersonalIntegral: {url: '/personal/integral', method: 'post'},
   /** 优惠券列表 **/
-  CouponList: {url: '/coupon/list', method: 'post'},
+  CouponList: {url: '/personal/coupons', method: 'post'},
   /** 交易流水 **/
   PersonalFinance: {url: '/personal/finance', method: 'post'},
   /** 累计收益 **/
@@ -25,9 +25,11 @@ const methodMap = {
   /** 资料修改 **/
   PersonalEdit: {url: '/personal/edit', method: 'post'},
   /** 订单详情 **/
+  OrdersList: {url: '/orders/list', method: 'post'},
+  /** 订单详情 **/
   OrdersDetail: {url: '/orders/detail', method: 'post'},
   /** 订单详情 **/
-  PromotionsList: {url: '/promotions/list', method: 'post'},
+  PromotionsList: {url: '/promotions/list', method: 'get'},
   /** 订单删除 **/
   OrdersDelete: {url: '/orders/delete', method: 'post'},
   /** 订单签收 **/

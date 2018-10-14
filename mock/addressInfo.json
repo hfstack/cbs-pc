@@ -1,0 +1,17 @@
+{
+  "status": 200,
+  "msg": "success",
+  "content": {
+    "address_id": 1,
+    "firstname": "hao",
+    "lastname": "long",
+    "iphone": "13003630068",
+    "country": "china",
+    "state": "zhejiang",
+    "city": "hangzhou",
+    "street": "jiangganqu",
+    "suburb": "jiuhelu",
+    "postalcode": "030016",
+    "default": false
+  }
+}

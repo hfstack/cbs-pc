@@ -36,11 +36,11 @@ export default {
         },
         {
           name: 'FLASH SALE'
-        },
+        }
       ]
     };
   }
-}
+};
 </script>
 <style lang="less">
 .c-nav{
@@ -58,5 +58,3 @@ export default {
   }
 }
 </style>
-
-
