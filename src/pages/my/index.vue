@@ -9,7 +9,7 @@
         </ul>
       </div>
       <div class="c-content">
-        <p class="title">{{selectedRouter}}</p>
+        <p class="page-title">{{selectedRouter}}</p>
         <router-view></router-view>
       </div>
     </div>
@@ -115,7 +115,7 @@ export default {
     }
   }
   .c-content{
-    .title{
+    .page-title{
       margin: 0 30px;
       text-align: center;
       height: 62px;
