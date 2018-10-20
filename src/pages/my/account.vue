@@ -1,324 +1,201 @@
 <template>
-  <div>
-    <div class="my-card-main">
-      <a  href="javascript:;" class="card-detail clearfix">
-        <div class="img fl">
-          <i class="iconfont">&#xe655;</i>
-        </div>
-        <div class="info fl clearfix">
-          <div class="label fl">Balance: </div>
-          <div class="price fl">${{money}}</div>
-        </div>
-      </a>
-      <ul class="card-info clearfix">
-        <li>
-          <a href="javascript:;">
-            <i class="iconfont">&#xe695;</i>
-            <div class="value">{{income}}</div>
-            <p>Accumulated Income</p>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:;">
-            <i class="iconfont">&#xe694;</i>
-            <div class="value">{{wait_account}}</div>
-            <p>Wait for an account</p>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:;">
-            <i class="iconfont">&#xe697;</i>
-            <div class="value">{{funs}}</div>
-            <p>My fans</p>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="account-detial">
-      <p class="account-detail-title">Details</p>
-      <ul class="navs">
-        <li v-for="(item, index) in navs" @click="navsChange(item)" :key="index" :class="{'active': item.active}">{{item.name}}</li>
-      </ul>
-      <div class="detail-list">
-        <div v-for="item in finance" class="detail-item" :key="item.id">
-          <img class="avator"/>
-          <p class="item item1 clearfix"><span class="name fl">{{item.operate_type}}</span><span class="price fr" :style="{'color': item.amount > 0 ? '#FF0000' : '#9ABD00'}">{{item.amount > 0 ? '+ $' + Math.abs(item.amount) : '- &' + Math.abs(item.amount)}}</span></p>
-          <p class="item item2 clearfix"><span class="detail fl">{{item.operate_description}}</span><span class="time fr">{{item.created_at}}</span></p>
+  <div class="my-account">
+    <div class="account-header clearfix">
+      <div class="account-profile fl">
+        <img src="../../assets/images/my/head.png"  class="avator fl" alt="">
+        <div class="fl">
+          <p class="name">name</p>
+          <p class="edit"><i class="iconfont">&#xe621;</i>Edit</p>
         </div>
       </div>
+      <div class="account-balance fl">
+         <div class="total fl">
+           <div class="icon"><i class="iconfont">&#xe655;</i></div>
+           <p class="balance">balance</p>
+           <p class="price">$100</p>
+         </div>
+         <div class="balance-list fl">
+           <div class="balance-list-item clearfix">
+             <i class="iconfont fl">&#xe695;</i>
+             <div class="fl detail">
+               <p class="balance-list-title">Accumulated Income</p>
+               <p class="balance-list-price">$100</p>
+             </div>
+           </div>
+           <div class="balance-list-item clearfix">
+             <i class="iconfont fl">&#xe694;</i>
+             <div class="fl detail">
+               <p class="balance-list-title">Wait for an account</p>
+               <p class="balance-list-price">$100</p>
+             </div>
+           </div>
+           <div class="balance-list-item clearfix">
+             <i class="iconfont fl">&#xe697;</i>
+             <div class="fl detail">
+               <p class="balance-list-title">My fans</p>
+               <p class="balance-list-price">100</p>
+             </div>
+           </div>
+         </div>
+      </div>
+    </div>
+    <div class="account-content clearfix">
+      <div class="account-content-item">
+        <p class="account-content-title">My Points</p>
+        <div class="account-content-detail">Availabale: <span style="color: #FF473C">200</span> Points</div>
+      </div>
+      <div class="account-content-item">
+        <p class="account-content-title">My Coupons</p>
+        <div class="account-content-detail">Coupons : <span style="color: #FF473C">200</span></div>
+      </div>
+      <div class="account-content-item">
+        <p class="account-content-title">My Orders</p>
+        <div class="account-content-detail" style="text-align: center"><div class="fl">Unpaid: <span style="color: #FF473C">200</span></div> Shipping: <span style="color: #FF473C">12</span> <div class="fr">Unpaid: <span style="color: #FF473C">200</span></div></div>
+      </div>
+      <div class="account-content-item">
+        <p class="account-content-title">History View</p>
+        <div class="account-content-detail">Availabale: <span style="color: #FF473C">200</span> Points</div>
+      </div>
+      <div class="account-content-item">
+        <p class="account-content-title">History View</p>
+        <div class="account-content-detail">Manage your shipping information.</div>
+      </div>
+     
     </div>
   </div>
+
 </template>
 <script>
 export default {
-  data () {
-    return {
-      money: 0,
-      integral: 0,
-      wait_account: 0,
-      income: 0,
-      funs: 0,
-      navs: [
-        {
-          id: '',
-          active: true,
-          type: 'balance',
-          name: 'Balance'
-        },
-        {
-          id: '',
-          active: false,
-          type: 'income',
-          name: 'Accumulated Income'
-        },
-        {
-          id: '',
-          active: false,
-          type: 'wait',
-          name: 'Wait for an account'
-        },
-        {
-          id: '',
-          active: false,
-          type: 'fans',
-          name: 'My Fans'
-        }
-      ],
-      finance: [],
-      type: 'balance'
-    };
-  },
-  mounted() {
-    this.getPersonalIndex();
-    this.getFinanceDetail();
-  },
-  methods: {
-    getDetail() {
-      if (this.type === 'balance') {
-        this.getFinanceDetail();
-      } else if (this.type === 'income') {
-        this.getIncome();
-      } else if (this.type === 'wait') {
-        this.getAccount();
-      }
-    },
-    // 个人主页
-    getPersonalIndex() {
-      this.request('PersonalIndex').then((res) => {
-        if (res.status === 200) {
-          this.money = res.content.money; // 用户余额
-          this.integral = res.content.integral; // 积分
-          this.wait_account = res.content.wait_account; // 待入账
-          this.income = res.content.income; // 收入
-          this.funs = res.content.funs;
-        }
-      });
-    },
-    getFinanceDetail() {
-      this.request('PersonalFinance').then((res) => {
-        if (res.status === 200) {
-          this.money = res.content.money;
-          this.finance = res.content.finance;
-        }
-      });
-    },
-    // 累计收益
-    getIncome() {
-      this.request('PersonalIncome', {
-        page: this.page
-      }).then((res) => {
-        if (res.status === 200 && res.content) {
-          this.incomes = res.content.incomes || [];
-          this.total_page = res.content.total_page;
-        }
-      }, err => {
-        this.$Toast(err.data.msg);
-      });
-    },
-    // 待入账
-    getAccount() {
-      this.request('PersonalAccount', {
-        page: this.page
-      }).then((res) => {
-        if (res.status === 200 && res.content) {
-          this.incomes = res.content.incomes || [];
-          this.total_page = res.content.total_page;
-        }
-      }, err => {
-        this.$Toast(err.data.msg);
-      });
-    },
-    navsChange(item) {
-      this.navs.forEach(element => {
-        element.active = false;
-      });
-      item.active = true;
-      this.type = item.type;
-      this.getDetail();
-    }
-  }
-};
-</script>
-
-<style lang="less">
-.my-card-main {
-  margin: 0 auto;
-  width: 910px;
-  height: 250px;
-  background-color: #fff;
-  .card-detail {
-    position: relative;
-    display: block;
-    .img {
-      margin-left: 40px;
-      margin-top: 50px;
-      width: 60px;
-      height: 60px;
-      text-align: center;
-      border-radius: 50%;
-      background-color: #ff473c;
-      i {
-        display: inline-block;
-        color: #fff;
-        font-size: 30px;
-        line-height: 60px;
-      }
-    }
-    .info {
-      margin-top: 50px;
-      .label {
-        margin-left: 8px;
-        font-weight: bold;
-        margin-top: 22px;
-        vertical-align: text-bottom;
-      }
-      .price {
-        margin-top: 12px;
-        margin-left: 10px;
-        color:#000000;
-        font-size: 28px;
-        font-weight: bold;
-      }
-    }
-    // .btn, .iright {
-    //   position: absolute;
-    //   color: @gray2;
-    // }
-    .btn {
-      height: 30px;
-      top: 75px;
-      right: 80px;
-    }
-    .iright {
-      height: 40px;
-      top: 70px;
-      right: 30px;
-    }
-  }
-  .card-info {
-    display: block;
-    width: 100%;
-    margin-top: 40px;
-    li {
-      float: left;
-      width: 33.3%;
-      a {
-        display: block;
-        text-align: center;
-      }
-      i {
-        display: inline-block;
-        color: #ff696d;
-        font-size: 25px;
-      }
-      .value {
-        color: #FF473C;
-        margin-top: 10px;
-        font-size: 16px;
-      }
-      p {
-        color: #939399;
-        text-align: center;
-        font-size: 16px;
-        line-height: 18px;
-      }
-    }
-  }
+  
 }
-.account-detial{
-  width: 913px;
-  margin: 0 auto;
-  .account-detail-title {
-    margin-top: 30px;
-    margin-left: 10px;
-    font-weight: #000000;
-    font-size: 18px;
-    text-align: left;
-  }
-  .navs{
-    height: 36px;
-    margin-top: 20px;
-    li {
-      float: left;
-      color: #141414;
-      width: 228px;
-      height: 36px;
-      border: 1px solid #444;
-      border-right: none;
-      line-height: 36px;
-      cursor: pointer;
-    }
-    .active{
-      background: #444444;
-      color: #fff;
-    }
-    li:last-child{
-      border-right: 1px solid #444;
-    }
-  }
-  .detail-list{
-    margin-top: 10px;
-    .detail-item{
-      box-sizing: border-box;
-      width: 100%;
-      height: 90px;
-      padding-top: 16px;
-      border-bottom: 1px solid #CACACA;
-      position: relative;
-      padding-left: 110px;
-    }
-    .avator{
-      position: absolute;
-      top: 13px;
-      left: 32px;
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-    }
-    .name{
-      font-size: 20px;
-      color: #302F2F;
-    }
-    .time{
-      color: #302F2F;
-      font-size: 16px;
-    }
-    .detail{
-      color: #939399;
-      font-size: 16px;
-    }
-    .price{
-      font-size: 20px;
-      color: #FF0000;
-      font-weight: 400;
-    }
-    .item1{
-      line-height: 37px;
-
-    }
-    span{
+</script>
+<style lang="less">
+.my-account {
+  .account-header{
+    padding: 10px 0;
+    border-bottom: 1px solid #E1E1E1;
+    .account-profile{
       display: inline-block;
+      width: 430px;
+      height: 220px;
+      padding-left: 46px;
+      padding-top: 60px;
+      margin-right: 20px;
+      .avator{
+        width: 100px;
+        height: 100px;
+        background: #F6F6F6;
+        border-radius: 50%;
+      }
+      .name{
+        font-size: 18px;
+        color: #222222;
+        margin: 24px 0 20px 28px;
+        font-weight: bold;
+      }
+      .edit{
+        margin-left: 28px;
+        color: #939399;
+        font-size: 16px;
+        i{
+          font-size: 20px;
+          margin-right: 5px;
+        }
+      }
+    }
+    .account-balance {
+      display: inline-block;
+      width: 430px;
+      height: 220px;
+      background: #F7F9FA;
+      padding: 14px 0;
+      .total{
+        width: 150px;
+        height: 100%;
+        border-right: 1px solid #E1E1E1;
+        text-align: center;
+        .icon{
+          width: 52px;
+          height: 52px;
+          background: #FF473C;
+          border-radius: 50%;
+          margin: 0 auto;
+          margin-top: 50px;
+          i{
+            font-size: 30px;
+            line-height: 52px;
+            color: #fff;
+          }
+        }
+        .balance{
+          font-size: 14px;
+          color: #141414;
+          margin: 10px auto;
+        }
+        .price{
+          color: #E9484F;
+          font-size: 20px;
+        }
+        
+      }
+      .balance-list{
+        padding-left: 20px;
+        padding-top: 20px;
+        .balance-list-item{
+          text-align: left;
+          margin-bottom: 15px;
+          i {
+            font-size: 24px;
+            color: #E9484F;
+            line-height: 46px;
+          }
+          .balance-list-title{
+            color: #939399;
+            font-size: 14px;
+            margin-bottom: 6px;
+          }
+          .balance-list-price {
+            font-size: 16px;
+            color: #FF473C;
+          }
+        }
+        .detail {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+  .account-content{
+    padding-top: 20px;
+    .account-content-item{
+      width: 445px;
+      float: left;
+      margin-right: 20px;
+      &:nth-child(even) {
+        margin-right: 0;
+      }
+    }
+    .account-content-title{
+      width: 445px;
+      height: 45px;
+      line-height: 45px;
+      text-align: center;
+      color: #000000;
+      font-weight: bold;
+      background: #F3F3F3;
+      font-size: 16px;
+    }
+    .account-content-detail{
+      height: 64px;
+      line-height: 64px;
+      color: #131313;
+      font-size: 20px;
+      text-align: left;
+      padding: 0 20px;
     }
   }
 }
 </style>
+
+

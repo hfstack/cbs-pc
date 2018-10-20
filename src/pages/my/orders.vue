@@ -70,7 +70,7 @@ export default {
         title: 'Order Status',
         dataIndex: 'orderstatus',
         render: function(text, item, index) {
-          const str = `<p class="order-status">${item.orderHandle.orderStatusDesc}</p><p class="order-detail"><a href="javascript:;">Track Order Details</a></p>`;
+          const str = `<p class="order-status">${item.orderHandle.orderStatusDesc}</p><p class="order-detail"><a href="orders/detail?orderId=${item.orderid}">Track Order Details</a></p>`;
           return str;
         },
       },

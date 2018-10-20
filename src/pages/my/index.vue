@@ -115,8 +115,8 @@ export default {
     }
   }
   .c-content{
+    width: 913px;
     .page-title{
-      margin: 0 30px;
       text-align: center;
       height: 62px;
       line-height: 62px;

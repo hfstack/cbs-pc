@@ -23,7 +23,7 @@ module.exports = {
   rules: {
     "vetur.validation.template": false,
     "space-before-function-paren": [0, "always"], //函数定义时括号前面要不要有空格
-    "semi": [2, "never"], //语句强制分号结尾
+    "semi": [2, "always"], //语句强制分号结尾
     // allow async-await
     'generator-star-spacing': 'off',
     // 文件末尾强制换行  
