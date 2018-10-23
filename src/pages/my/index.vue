@@ -47,7 +47,7 @@ export default {
         },
         {
           title: 'Address Book',
-          routerName: 'myAddress'
+          routerName: 'addressBook'
         },
         {
           title: 'Profile',

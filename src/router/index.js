@@ -89,6 +89,15 @@ export default new Router({
           }
         },
         {
+          name: 'addressBook',
+          path: 'addressbook',
+          component: function (resolve) {
+            require.ensure([], function () {
+              resolve(require('pages/my/addressbook'));
+            }, 'my');
+          }
+        },
+        {
           name: 'profile',
           path: 'profile',
           component: function (resolve) {
@@ -98,6 +107,15 @@ export default new Router({
           }
         }
       ]
+    },
+    {
+      name: 'login',
+      path: '/login',
+      component: function (resolve) {
+        require.ensure([], function () {
+          resolve(require('pages/my/login'));
+        }, 'login');
+      }
     },
     {
       path: '*',
