@@ -33,8 +33,7 @@ export default {
   .invalid{
     color: #fa4535;
     font-size: 12px;
-    margin-top: 8px;
-
+    margin-top: 10px;
     .iconhandle {
       font-size: 14px;
     }

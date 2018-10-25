@@ -1,36 +1,40 @@
 <template>
   <div>
-    <topbar title="Order Details"></topbar>
     <div class="order-detail">
-      <div class="page-title">
-        {{orderDesc}}
+      <div class="order-title">
+        status: <span style="color: #FF3333">{{orderDesc}}</span>
       </div>
-      <div class="address">
-        <i class="iconfont address-icon">&#xe651;</i>
-        <p class="user"><span class="name">{{name}}</span><span>{{telephone.toString().slice(0, 3)}}*****{{telephone.toString().slice(7, 10)}}</span></p>
-        <p class="adddress-detail">Ship to：{{address}}</p>
-      </div>
+      
       <div  class="my-order-list">
-        <div class="top">
-          <p class="order-id">Order: {{orderid}}</p>
-          <p class="order-time">Date: {{ordertime}}</p>
+        <div class="top clearfix">
+          <p class="order-id fl">Order: {{orderid}}</p>
+          <p class="order-time fr">Date: {{ordertime}}</p>
         </div>
-        <div class="detail" v-for="item in ordergoods">
+        <div class="detail clearfix" v-for="item in ordergoods">
           <div class="img fl">
             <img :src="item.img">
           </div>
           <div class="info fl">
             <div class="title">{{item.name}}</div>
             <div class="sku" v-for="(ele, index) in item.sku_value">{{ele}}</div>
-            <div class="price">${{item.price}}</div>
-            <div class="num">x {{item.num}}</div>
+          </div>
+          <div class="fl qty">
+            Qty: {{item.num}}
+          </div>
+          <div class="fr price">
+            ${{item.price}}
           </div>
         </div>
       </div>
-      <div>
-        <p class="o-price"><span class="fl">Subtotal:</span><span class="fr">${{parseFloat(finalAmount - shipping).toFixed(2)}}</span></p>
-        <p class="o-price"><span class="fl">Shipping：Free</span><span class="fr">$ {{shipping}}</span></p>
-        <p class="o-price total"><span class="fl">All Total：</span><span class="fr">${{finalAmount}}</span></p>
+      <div style="padding: 10px 0;">
+        <p class="o-price"><span class="fr money">${{parseFloat(finalAmount - shipping).toFixed(2)}}</span><span class="fr">Subtotal:</span></p>
+        <p class="o-price"><span class="fr money">$ {{shipping}}</span><span class="fr">Shipping:</span></p>
+        <p class="o-price total"><span class="fr money">${{finalAmount}}</span><span class="fr">All Total: </span></p>
+      </div>
+      <div class="address">
+        <!-- <i class="iconfont address-icon">&#xe651;</i> -->
+        <p class="user"><span class="name">{{name}}</span><span>{{telephone.toString().slice(0, 3)}}*****{{telephone.toString().slice(7, 10)}}</span></p>
+        <p class="adddress-detail">Ship to：{{address}}</p>
       </div>
       <div class="operate clearfix">
         <!-- 订单状态(订单状态 1-待付款 3-待发货 4-待收货 5-交易完成 6-交易取消 ) -->
@@ -40,8 +44,9 @@
         <div class="operate-item" @click="getLogistics" v-if="orderHandle.logistic">Logistics Info</div>
         <div class="operate-item" v-if="orderHandle.delete" @click="handleDelete">Delete</div>
       </div>
+      
     </div>
-    <confirm :show.sync="confirmModal.show" :title="confirmModal.title"  :content="confirmModal.content" :on-ok="confirmModal.action"  okText="Yes"></confirm>
+    <!-- <confirm :show.sync="confirmModal.show" :title="confirmModal.title"  :content="confirmModal.content" :on-ok="confirmModal.action"  okText="Yes"></confirm> -->
   </div>
 </template>
 <script>
@@ -180,26 +185,28 @@ export default {
 </script>
 <style lang="less">
 .order-detail{
-  margin-top: 90px;
   background-color: #fff;
-  .page-title{
-    color: #fff;
-    height: 128px;
-    line-height: 128px;
-    background-color: #FC5866;
-    font-size: 36px;
+  .order-title{
+    color: #010101;
+    height: 58px;
+    line-height: 58px;
+    font-size: 18px;
     text-align: left;
-    padding-left: 50px;
   }
   .o-price{
     width: 100%;
-    height: 48px;
+    height: 38px;
     color: #939399;
-    font-size: 24px;
-    line-height: 48px;
+    font-size: 14px;
+    line-height: 38px;
     padding: 0 20px;
     span{
       display: block;
+    }
+    .money{
+      width: 80px;
+      text-align: left;
+      margin-left: 80px;
     }
   }
   .total{
@@ -212,20 +219,22 @@ export default {
   }
   .address{
     position: relative;
-    height: 117px;
-    padding-left: 70px;
+    height: 100px;
     box-shadow:0px 1px 0px 0px rgba(221,220,220,1);
-    padding-top: 27px;
-    .address-icon{
+    margin-top: 14px;
+    padding: 20px 30px;
+    border: 1px solid rgba(228,228,228,1);
+    text-align: left;
+    color: #030303;
+    .address-line{
       position: absolute;
-      top: 43px;
-      left: 20px;
-      color: #939399;
-      font-size: 33px;
+      left: 0px;
+      width: 8px;
+      height: 100%;
     }
     .user{
       color: #131313;
-      font-size: 28px;
+      font-size: 16px;
       span{
         display: inline-block
       }
@@ -234,7 +243,7 @@ export default {
       }
     }
     .adddress-detail{
-      margin-top: 6px;
+      margin-top: 20px;
     }
   }
   .my-order-list {
@@ -242,58 +251,69 @@ export default {
     .top {
       position: relative;
       width: 100%;
-      height: 100px;
-      padding: 10px 70px;
-      color: #939399;
-      font-size: 24px;
-      margin-bottom: 20px;
-      p{
-        line-height: 44px;
-      }
+      height: 35px;
+      line-height: 35px;
+      padding: 0px 20px;
+      color: #000000;
+      font-size: 14px;
+      background-color: #E4E4E4;
     }
     .detail {
       display: block;
       padding: 0 20px;
-      margin-bottom: 18px;
-      // margin-top: 20px;
-      .img, img {
-        background-size: 100%;
+      width: 100%;
+      height: 180px;
+      border-bottom: 1px solid #E4E4E4;
+      img{
+        margin-top: 30px;
+        width: 120px;
+        height: 120px;
       }
       .info {
         position: relative;
         margin-left: 20px;
-        width: 540px;
+        width: 273px;
+        margin-top: 48px;
         .title {
+          text-align: left;
         }
         .sku {
+          margin-top: 30px;
+          float: left;
+          margin-right: 30px;
         }
-        .price {
-          position: absolute;
-          top: 55px;
-          right: 0;
-        }
-        .num {
-          position: absolute;
-          top: 95px;
-          right: 0;
-        }
+        
+      }
+      .qty{
+        line-height: 180px;
+        margin-left: 150px;
+      }
+      .price{
+        line-height: 180px;
+        margin-right: 30px;
       }
     }
   }
   .operate {
     position: relative;
     width: 100%;
-    border-top: 1px solid #f0f0f3;
+    margin-top: 30px;
     .operate-item{
-      margin: 20px 10px;
+      width: 200px;
+      height: 50px;
+      line-height: 50px;
+      color: #DE525E;
+      border: 1px solid #DE525E;
+      margin-left: 20px;
     }
     & > div {
       float: right;
-      border-radius: 50px;
+      border-radius: 8px;
       text-align: center;
     }
     .operate-two {
-      color: #FF473C
+      background: #DE525E;
+      color: #fff
     }
   }  
 }

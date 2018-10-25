@@ -1,0 +1,22 @@
+{
+  "status": 200,
+  "msg": "success",
+  "content": {
+      "coupons": [
+          {
+              "id": 85,
+              "price": 10,
+              "use_price": 90,
+              "startdata": "2018-09-13 16:05:00",
+              "enddate": "2018-10-31 16:05:06"
+          },
+          {
+              "id": 86,
+              "price": 43,
+              "use_price": 11,
+              "startdata": "2018-10-21 04:07:21",
+              "enddate": "2018-10-28 04:07:21"
+          }
+      ]
+  }
+}

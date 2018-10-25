@@ -5,25 +5,58 @@
         "goods": [
             {
                 "id": 294,
-                "good_img": "http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
-                "good_name": "CS",
+                "name": "One Sheer Lace Yoke Tee La Tee",
+                "img": "https://gw3.alicdn.com/bao/uploaded/i1/1825922675/TB1l4q4wYwrBKNjSZPcXXXpapXa_!!0-item_pic.jpg_.webp",
                 "price": 20,
+                "prom_price": 10,
                 "stock": 85
+            },
+            {
+                "id": 295,
+                "img": "http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+                "name": "CS",
+                "price": 20,
+                "prom_price": 0,
+                "stock": 0
             }
         ],
         "coupons": [
             {
                 "id": 65,
                 "price": "10.00",
-                "use_proce": "90.00",
-                "start_at": "2018-09-13 16:05:00",
-                "end_at": "2018-10-31 16:05:06"
+                "use_price": "90.00",
+                "startdate": "2018-09-13 16:05:00",
+                "enddate": "2018-10-31 16:05:06"                
             },{
                 "id": 66,
                 "price": "10.00",
-                "use_proce": "90.00",
-                "start_at": "2018-10-05 16:05:00",
-                "end_at": "2018-10-12 16:05:06"
+                "use_price": "90.00",
+                "startdate": "2018-10-05 16:05:00",
+                "enddate": "2018-10-12 16:05:06"
+            },{
+                "id": 66,
+                "price": "10.00",
+                "use_price": "90.00",
+                "startdate": "2018-10-05 16:05:00",
+                "enddate": "2018-10-12 16:05:06"
+            },{
+                "id": 66,
+                "price": "10.00",
+                "use_price": "90.00",
+                "startdate": "2018-10-05 16:05:00",
+                "enddate": "2018-10-12 16:05:06"
+            },{
+                "id": 66,
+                "price": "10.00",
+                "use_price": "90.00",
+                "startdate": "2018-10-05 16:05:00",
+                "enddate": "2018-10-12 16:05:06"
+            },{
+                "id": 66,
+                "price": "10.00",
+                "use_price": "90.00",
+                "startdate": "2018-10-05 16:05:00",
+                "enddate": "2018-10-12 16:05:06"
             }
         ],
         "promotions": {

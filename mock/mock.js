@@ -27,14 +27,34 @@ var setOnline = [
     url: '/carts/add'
   },
   {
-    name: 'cartsReduce',
+    name: 'cardsList',
     type: 'post',
-    url: '/carts/reduce'
+    url: '/cards/list'
   },
   {
-    name: 'detail',
+    name: 'cardsInfo',
     type: 'post',
-    url: '/detail'
+    url: '/cards/info'
+  },
+  {
+    name: 'cardsDefault',
+    type: 'post',
+    url: '/cards/default'
+  },
+  {
+    name: 'cardsEdit',
+    type: 'post',
+    url: '/cards/edit'
+  },
+  {
+    name: 'cardsDelete',
+    type: 'post',
+    url: '/cards/delete'
+  },
+  {
+    name: 'productsDetail',
+    type: 'get',
+    url: '/products/detail'
   },
   {
     name: 'addressAdd',
@@ -62,6 +82,11 @@ var setOnline = [
     url: '/address/delete'
   },
   {
+    name: 'addressDefault',
+    type: 'post',
+    url: '/address/default'
+  },
+  {
     name: 'productsList',
     type: 'post',
     url: '/products/list'
@@ -77,9 +102,14 @@ var setOnline = [
     url: '/personal/self'
   },
   {
-    name: 'paymentConfirmPayment',
+    name: 'paymentPalExec',
     type: 'post',
-    url: '/payment/confirmPayment'
+    url: '/payment/palExec'
+  },
+  {
+    name: 'paymentStatus',
+    type: 'post',
+    url: ' /payment/status'
   },
   {
     name: 'pinPinList',
@@ -117,11 +147,6 @@ var setOnline = [
     url: '/search/searchlist'
   },
   {
-    name: 'homeStoreList',
-    type: 'post',
-    url: '/home/storeList'
-  },
-  {
     name: 'listsGoodslist',
     type: 'post',
     url: '/lists/goodslist'
@@ -139,6 +164,12 @@ var setOnline = [
     url: '/personal/coupons'
   },
   {
+    // 优惠券
+    name: 'couponsApply',
+    type: 'post',
+    url: '/coupons/apply'
+  },
+  {
     name: 'couponExchange',
     type: 'post',
     url: '/coupon/exchange'
@@ -152,6 +183,11 @@ var setOnline = [
     name: 'ordersPayment',
     type: 'post',
     url: '/orders/payment'
+  },
+  {
+    name: 'OrdersPay',
+    type: 'post',
+    url: '/orders/pay'
   },
   {// 交易流水
     name: 'personalFinance',
@@ -288,6 +324,21 @@ var setOnline = [
     type: 'post',
     url: '/personal/info'
   },
+  {
+    name: 'cates',
+    type: 'post',
+    url: '/cates'
+  },
+  {
+    name: 'hotword',
+    type: 'post',
+    url: '/search/hotword'
+  },
+  {
+    name: 'couponsRecive',
+    type: 'post',
+    url: '/coupons/receive'
+  }
 
 ];
 

@@ -41,13 +41,12 @@
     "coupon": [
       {
         "id": 81,
-        "price": 10,
-        "use_price": 100,
-        "minDate": "2018-09-14 11:03:50",
-        "maxDate": "2018-09-30 11:04:08",
-        "redeemCode": "VS20046465",
-        "text": "test"
+        "price": "$10",
+        "use_price": "$100",
+        "startdate": "2018-09-14 11:03:50",
+        "enddate": "2018-09-30 11:04:08"
       }
-    ]
+    ],
+    "token": "aegmnqrsvwxzABCDEFILOQRSVWX04569233"
   }
 }

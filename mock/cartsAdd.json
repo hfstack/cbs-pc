@@ -1,4 +1,37 @@
 {
-  "status": true,
-  "messages": ""
+  "status": 200,
+  "msg": "success",
+  "content": {
+    "integral": 0,
+    "goods": [
+      {
+        "cart_id": 228,
+        "id": 294,
+        "name": "test",
+        "img": "http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+        "stock": 50,
+        "sku_id": 1,
+        "is_sold_out": 0,
+        "price": "20.00",
+        "num": 1,
+        "props": {
+          "Clothing version": "修身",
+          "size": "0-3y"
+        }
+      }
+    ],
+    "promotion_id": 88,
+    "promotion_msg": "再买20.00元,可享【满100元减10元】",
+    "specialoffer": "0.00",
+    "coupon": [
+      {
+        "id": 81,
+        "price": "$10",
+        "use_price": "$100",
+        "startdate": "2018-09-14 11:03:50",
+        "endstae": "2018-09-30 11:04:08"
+      }
+    ],
+    "token": "aegmnqrsvwxzABCDEFILOQRSVWX04569233"
+  }
 }

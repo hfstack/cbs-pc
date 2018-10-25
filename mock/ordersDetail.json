@@ -1,40 +1,40 @@
 {
-    "status": 200,
-    "msg": "success",
-    "content": {
-        "orderid": "1111111111",
-        "orderstatus": "4",
-        "ordertime": "2017-05-05 12:12:12",
-        "final_amount": "298",
-        "shipping":"0.00",
-        "name": "longyuan",
-        "telephone": "13003630069",
-        "address":"zhejiang hangzhou jiuhelu 19",
-        "ordergoods": [
-            {
-                "good_id": "5",
-                "good_name": "型马潮牌破洞牛仔裤男 夏季韩版直筒小脚裤 做旧乞丐牛仔长裤男薄 ",
-                "good_img": "http://192.168.1.122:6006/goods/20170718/thumb/201707181645191500367519172.jpg",
-                "good_price": "169.00",
-                "good_num": "1",
-                "sku_value_ids": "5,9",
-                "sku_value": [
-                    "颜色：浅蓝",
-                    "尺寸：4.5英寸"
-                ]
-            },
-            {
-                "good_id": "5",
-                "good_name": "型马潮牌破洞牛仔裤男 夏季韩版直筒小脚裤 做旧乞丐牛仔长裤男薄 ",
-                "good_img": "http://192.168.1.122:6006/goods/20170718/thumb/201707181645191500367519211.jpg",
-                "good_price": "169.00",
-                "good_num": "1",
-                "sku_value_ids": "6,3",
-                "sku_value": [
-                    "颜色：黑色",
-                    "尺寸：3.2英寸"
-                ]
-            }
-        ]
-    }
+  "status": 200,
+  "msg": "success",
+  "content": {
+      "orderid": "1111111111",
+      "orderstatus": "1",
+      "ordertime": "2017-05-05 12:12:12",
+      "final_amount": "298",
+      "shipping":"0.00",
+      "name": "longyuan",
+      "telephone": "13003630069",
+      "address":"zhejiang hangzhou jiuhelu 19",
+      "ordergoods": [
+          {
+              "id": "5",
+              "name": "型马潮牌破洞牛仔裤男 夏季韩版直筒小脚裤 做旧乞丐牛仔长裤男薄 ",
+              "img": "http://192.168.1.122:6006/goods/20170718/thumb/201707181645191500367519172.jpg",
+              "price": "169.00",
+              "num": "1",
+              "sku_value_ids": "5,9",
+              "sku_value": [
+                  "颜色：浅蓝",
+                  "尺寸：4.5英寸"
+              ]
+          },
+          {
+              "id": "5",
+              "name": "型马潮牌破洞牛仔裤男 夏季韩版直筒小脚裤 做旧乞丐牛仔长裤男薄 ",
+              "img": "http://192.168.1.122:6006/goods/20170718/thumb/201707181645191500367519211.jpg",
+              "price": "169.00",
+              "num": "1",
+              "sku_value_ids": "6,3",
+              "sku_value": [
+                  "颜色：黑色",
+                  "尺寸：3.2英寸"
+              ]
+          }
+      ]
+  }
 }
