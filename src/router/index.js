@@ -118,6 +118,15 @@ export default new Router({
       }
     },
     {
+      name: 'forgetpwd',
+      path: '/forgetpwd',
+      component: function (resolve) {
+        require.ensure([], function () {
+          resolve(require('pages/my/forgetpwd'));
+        }, 'forgetpwd');
+      }
+    },
+    {
       path: '*',
       redirect: '/my'
     }

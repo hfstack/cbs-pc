@@ -1,7 +1,8 @@
 import Headers from 'components/layout/Header.vue';
-
+import InvalidTip from 'components/basic/InvalidTip';
 const Components = {
-  Headers
+  Headers,
+  InvalidTip
 };
 
 export default function(Vue) {
