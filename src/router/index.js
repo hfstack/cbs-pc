@@ -11,8 +11,17 @@ export default new Router({
       path: '/home',
       component: function (resolve) {
         require.ensure([], function () {
-          resolve(require('pages/home/index'));
+          resolve(require('pages/home'));
         }, 'home');
+      }
+    },
+    {
+      name: 'detail', // 私有H5
+      path: '/detail', // 商品ID
+      component: function (resolve) {
+        require.ensure([], function () {
+          resolve(require('pages/home/Detail'));
+        }, 'detail');
       }
     },
     {
