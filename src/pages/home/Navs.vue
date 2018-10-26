@@ -3,7 +3,7 @@
     <ul class="clearfix">
       <li class="navs-item" v-for="item in list">
         <router-link :to="{path: '/categories/search?cate=' + item.cate}">
-          <img class="nav-img" v-lazy="item.img && item.img.ossimg()">
+          <img class="nav-img" :src="item.img && item.img.ossimg()">
           <p class="nav-title">{{item.title}}</p>
         </router-link>
       </li>

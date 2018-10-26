@@ -21,7 +21,7 @@
         <div class="cart-list">
           <div class="detail" v-for="item in cartsData.goods">
             <router-link :to="{path: '/detail?id=' + item.id}" class="img fl">
-              <img v-lazy="item.img && item.img.ossimg()">
+              <img :src="item.img && item.img.ossimg()">
             </router-link>
             <div class="info fl">
               <div class="title">{{item.name}}</div>

@@ -96,7 +96,7 @@
       <ul>
         <li v-for="item in dataSearch">
           <router-link :to="{path: '/detail?id=' + item.id + '&from=' + encodeURIComponent('categories/search?name=' + $route.params.name)}">
-            <img v-lazy="item.img && item.img.ossimg()">
+            <img :src="item.img && item.img.ossimg()">
             <p class="p1">{{item.name}}</p>
             <p class="p2">${{item.price}}</p>
           </router-link>

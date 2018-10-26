@@ -7,7 +7,7 @@
     <div class="goods-list" if="data.length">
       <router-link v-for="item in data" :to="{path: '/detail/' + item.good_id}" class="goods-link fl" active-class="cur">
         <div class="goods-img">
-          <img v-lazy="item.good_image && item.good_image.ossimg()"/>
+          <img :src="item.good_image && item.good_image.ossimg()"/>
         </div>
         <div class="goods-info">
           <p class="text">{{item.good_name}}</p>

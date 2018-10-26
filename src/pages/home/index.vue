@@ -14,7 +14,7 @@
       <ul class="home-recommend-goods clearfix">
         <li class="recommend-goods" v-for="item in recommends">
           <router-link :to="{path: '/detail?id=' + item.id}">
-            <img v-lazy="item.img && item.img.ossimg()" class="goods-img" alt="">
+            <img :src="item.img && item.img.ossimg()" class="goods-img" alt="">
             <p class="goods-title">{{item.name}}</p>
             <p class="goods-price">
               <span class="price-now">${{item.price}}</span>

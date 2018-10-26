@@ -1,6 +1,6 @@
 <template>
   <div class="detail-main">
-    <topbar title="Failure Payment" :detailId="$route.query.id"></topbar>
+    11233
     <div class="detail-swipe">
       <Swipe class="my-swipe big-img-swipe" ref="bigImgSwipeRef" :nextCallback="nextCallback">
         <SwipeItem v-for="(img, index) in imgSwipe" :key="index">
@@ -58,7 +58,7 @@
     </div>
 
     <div class="detail-imglist">
-      <img v-for="item in data.images" v-lazy="item && item.ossimg()">
+      <img v-for="item in data.images" :src="item && item.ossimg()">
     </div>
 
     <div class="detail-foot" @click="footCartClick">
@@ -68,34 +68,12 @@
       </div>
     </div>
 
-    <!-- <div class="detail-float-menu" v-show="isShowFloatMenu">
-      <div class="btn-menu" :class="{'cur': isBackMenuShow}" @click="backMenuClick">{{isBackMenuShow ? 'BACK' : 'MENU'}}</div>
-      <ul class="a-fadeinB" :class="{'show': isBackMenuShow}">
-        <li>
-          <div class="name">HOME</div>
-          <router-link :to="{path: '/home'}"><i class="iconfont">&#xe618;</i></router-link>
-        </li>
-        <li>
-          <div class="name">SEARCH</div>
-          <router-link :to="{path: '/search'}"><i class="iconfont">&#xe620;</i></router-link>
-        </li>
-        <li>
-          <div class="name">CART</div>
-          <router-link :to="{path: '/cart'}"><i class="iconfont">&#xe624;</i></router-link>
-        </li>
-        <li>
-          <div class="name">SHARE</div>
-          <router-link :to="{path: '/share'}"><i class="iconfont">&#xe684;</i></router-link>
-        </li>
-      </ul>
-    </div> -->
-    <FloatMenu :show="isShowFloatMenu"></FloatMenu>
     <div class="bg-mask" :class="{'show': isMaskShow}" @click="changeMaskClick"></div>
     <!-- 弹出SKU -->
     <div class="detail-popup-sku" :class="{'a-fadeinT': isPopupSkuShow}" v-show="isPopupSkuShow">
       <div class="popup-sku">
         <div class="sku-info">
-          <img class="fl" v-lazy="goodsData.img && goodsData.img.ossimg()">
+          <img class="fl" :src="goodsData.img && goodsData.img.ossimg()">
           <div class="des fl">
             <div class="price">${{goodsData.price}}</div>
             <div class="stock">Stock：> {{goodsData.stock}} Pieces</div>
@@ -143,7 +121,6 @@
 <script>
 import { Swipe, SwipeItem } from 'components/swipe';
 import Coupon from 'common/Coupon.vue';
-import FloatMenu from 'common/FloatMenu';
 import Point from './Point.vue';
 export default {
   props: {},
@@ -151,13 +128,11 @@ export default {
     Swipe,
     SwipeItem,
     Coupon,
-    Point,
-    FloatMenu
+    Point
   },
   data () {
     return {
       data: {},
-      isShowFloatMenu: false, // 浮动menu
       isShowCoupon: false, // 是否显示coupon弹层
       isShowPoint: false,
       goodsData: {
@@ -183,18 +158,7 @@ export default {
       this.backUrl = decodeURIComponent(this.$route.query.from);
     }
   },
-  mounted () {
-    let self = this;
-    let t = document.documentElement.scrollTop || document.body.scrollTop;
-    let h = document.documentElement.clientHeight || document.body.clientHeight;
-    window.onscroll = function () {
-      t = document.documentElement.scrollTop || document.body.scrollTop;
-      self.isShowFloatMenu = t >= h * 1.5;
-    }
-    self.isShowFloatMenu = t >= h * 1.5;
-    // overflow重置
-    document.documentElement.style.overflow = 'auto';
-  },
+  mounted () {},
   watch: {
     'isPopupSkuShow': function(value) {
       document.documentElement.style.overflow = value ? 'hidden' : 'auto';
