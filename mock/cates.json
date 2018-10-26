@@ -1,0 +1,16 @@
+{
+  "status": 200,
+  "msg": "success",
+  "content": {
+    "name": "man",
+    "sub": [{
+      "id": 1498,
+      "name": "Clothing",
+      "sub": {
+        "id": 1498,
+        "name": "T-shirts",
+        "img": "http:\/\/cucoe.oss-us-west-1.aliyuncs.com\/product\/000001000001\/5b97c013e60ef.jpg"
+      }
+    }]
+  }
+}

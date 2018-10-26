@@ -6,20 +6,7 @@
       "orderid": "1226323215650150162",
       "orderstatus": 3,
       "ordertime": "2018-09-20 06:26:55",
-      "orderTotal": 100,
       "ordergoods": [{
-        "id": 294,
-        "price": 20,
-        "num": 5,
-        "sku_value_ids": "271,273",
-        "sku_value": {
-          "color": "red1",
-          "size": "0-3y"
-        },
-        "name": "CS",
-        "img": "http:\/\/cucoe.oss-us-west-1.aliyuncs.com\/product\/000001000001\/5b97c013e60ef.jpg"
-      },
-      {
         "id": 294,
         "price": 20,
         "num": 5,
@@ -34,7 +21,6 @@
     }, {
       "orderid": "1227208457113410162",
       "orderstatus": 3,
-      "orderTotal": 100,
       "ordertime": "2018-09-29 02:20:57",
       "ordergoods": [{
         "id": 294,
@@ -52,7 +38,6 @@
     {
       "orderid": "1227208457113410162",
       "orderstatus": 1,
-      "orderTotal": 100,
       "ordertime": "2018-10-13 17:17:57",
       "ordergoods": [{
         "id": 294,
@@ -70,7 +55,6 @@
     {
       "orderid": "1227208457113410162",
       "orderstatus": 2,
-      "orderTotal": 100,
       "ordertime": "2018-09-29 02:20:57",
       "ordergoods": [{
         "id": 294,
@@ -88,7 +72,6 @@
     {
       "orderid": "1227208457113410162",
       "orderstatus": 5,
-      "orderTotal": 100,
       "ordertime": "2018-09-29 02:20:57",
       "ordergoods": [{
         "id": 294,
@@ -106,7 +89,6 @@
     {
       "orderid": "1227208457113421162",
       "orderstatus": 4,
-      "orderTotal": 100,
       "ordertime": "2018-09-29 02:20:57",
       "ordergoods": [{
         "id": 294,
@@ -123,7 +105,6 @@
     }, {
       "orderid": "1227208457113431162",
       "orderstatus": 5,
-      "orderTotal": 100,
       "ordertime": "2018-09-29 02:20:57",
       "ordergoods": [{
         "id": 294,
@@ -140,7 +121,6 @@
     }, {
       "orderid": "1227208457113441162",
       "orderstatus": 6,
-      "orderTotal": 100,
       "ordertime": "2018-09-29 02:20:57",
       "ordergoods": [{
         "id": 294,

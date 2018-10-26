@@ -1,0 +1,14 @@
+{
+  "status": 200,
+  "msg": "success",
+  "content": {
+    "total_page": 1,
+    "cards": [
+      {
+        "id": 1,
+        "number": "6217000132289987",
+        "is_default": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "status": 200,
+  "msg": "success",
+  "content": {
+    "orderId": "1227208457113410162",
+    "orderType": "order",
+    "payUrl": "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-2S5396037N451730C"
+  }
+}

@@ -5,7 +5,7 @@
       <div class="siderbar">
         <p class="siderbar-title">{{selectedRouter}}</p>
         <ul class="siderbar-ul">
-          <li class="siderbar-item" @click="getBarDetail(item)" v-for="(item, index) in bars" :key="index" :class="{'active': item.title === selectedRouter }">{{item.title}}</li>
+          <li class="siderbar-item" @click="getBarDetail(item)" v-for="(item, index) in bars" :key="index" :class="{'active': item.active }">{{item.title}}</li>
         </ul>
       </div>
       <div class="c-content">
@@ -23,34 +23,48 @@ export default {
       bars: [
         {
           title: 'My Account',
-          routerName: 'myAccount'
+          routerName: 'myAccount',
+          active: false
         },
         {
           title: 'My Orders',
-          routerName: 'myOrders'
+          routerName: 'myOrders',
+          active: false,
+          children: [
+            {
+              title: 'Orders Details',
+              routerName: 'orderDetail',
+            }
+          ]
         },
         {
           title: 'My Points',
+          active: false,
           routerName: 'myPoints'
         },
         {
           title: 'My Coupons',
+          active: false,
           routerName: 'myCoupons'
         },
         {
           title: 'My Balance',
+          active: false,
           routerName: 'myBalance'
         },
         {
           title: 'History View',
+          active: false,
           routerName: 'historyView'
         },
         {
           title: 'Address Book',
+          active: false,
           routerName: 'addressBook'
         },
         {
           title: 'Profile',
+          active: false,
           routerName: 'myProfile'
         }
       ]
@@ -61,9 +75,20 @@ export default {
       let selectName = '';
       const name = this.$route.name;
       for (let i = 0; i < this.bars.length; i++) {
+        this.bars[i].active = false
         if (this.bars[i].routerName === name) {
           selectName = this.bars[i].title;
+          this.bars[i].active = true
         }
+        if(this.bars[i].children && this.bars[i].children.length) {
+          this.bars[i].children.forEach(element => {
+            if (element.routerName === name) {
+              selectName = element.title;
+               this.bars[i].active = true
+            }
+          });
+        }
+
       }
       return selectName;
     }

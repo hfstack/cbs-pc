@@ -62,6 +62,15 @@ export default new Router({
           }
         },
         {
+          name: 'orderDetail',
+          path: 'orders/detail',
+          component: function (resolve) {
+            require.ensure([], function () {
+              resolve(require('pages/my/orderDetail'));
+            }, 'my');
+          }
+        },
+        {
           name: 'myPoints',
           path: 'points',
           component: function (resolve) {
@@ -124,6 +133,33 @@ export default new Router({
         require.ensure([], function () {
           resolve(require('pages/my/login'));
         }, 'login');
+      }
+    },
+    {
+      name: 'forgetpwd',
+      path: '/login/forgetpwd',
+      component: function (resolve) {
+        require.ensure([], function () {
+          resolve(require('pages/my/forgetpwd'));
+        }, 'forgetpwd');
+      }
+    },
+    {
+      name: 'sendsuccess',
+      path: '/login/sendsuccess',
+      component: function (resolve) {
+        require.ensure([], function () {
+          resolve(require('pages/my/sendSuccess'));
+        }, 'sendsuccess');
+      }
+    },
+    {
+      name: 'setnewpwd',
+      path: '/login/setnewpwd',
+      component: function (resolve) {
+        require.ensure([], function () {
+          resolve(require('pages/my/setnewpwd'));
+        }, 'setnewpwd');
       }
     },
     {

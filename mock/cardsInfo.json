@@ -1,0 +1,25 @@
+{
+  "status": 200,
+  "msg": "success",
+  "content": {
+    "card": {
+      "id": 1,
+      "number": "6217000134989987",
+      "exp": "06/23",
+      "cvc": 686,
+      "is_default": true
+    },
+    "address": {
+      "firstname": "hao",
+      "lastname": "long",
+      "iphone": "13003630068",
+      "country": "china",
+      "state": "zhejiang",
+      "city": "hangzhou",
+      "street": "jiangganqu",
+      "suburb": "jiuhelu",
+      "postalcode": "030016",
+      "email": "long.hao@cucoe.com"
+    }
+  }
+}
