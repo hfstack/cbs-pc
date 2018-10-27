@@ -2,6 +2,7 @@
   <div>
     <headers></headers>
     <div class="activity" >
+      <img src="../../assets/images/home/a_top.jpg" alt="" class="a-top">
       <!-- <div class="activity-header" :style="{'background-color': bgColor}">
         <p class="title">{{promotions.promotion_msg}}<a href="javascript:;" class="title" @click="getCoupon" v-if="coupons.length"> CHECK IT</a></p>
         <div class="activity-countdown">{{startEndDesc}} <countdown v-if="promotions.promotion_end" :color="bgColor" :start-time="promotions.promotion_start" :end-time="!this.isEnd ? promotions.promotion_end : ''"></countdown></div>
@@ -128,6 +129,10 @@ export default {
 <style lang="less">
 .activity{
   text-align: center;
+  .a-top{
+    width: 1440px;
+    height: 400px;
+  }
   .activity-header{
      height:120px;
      color: #fff;

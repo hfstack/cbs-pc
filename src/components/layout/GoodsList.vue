@@ -31,15 +31,22 @@ export default {
 }
 </script>
 <style lang="less">
+@import '~less/tool';
+
 .c-goods-list{
   width: 1440px;
   margin: 0 auto;
   padding: 0 100px;
   background: #fff;
   .goods-item{
-    width: 232px;
+    width: 252px;
+    height: 320px;
+    padding: 10px;
     float: left;
     position: relative;
+    &:hover{
+      box-shadow: 0 4px 8px #ccc;
+    }
     a{
       display: block;
     }
@@ -55,19 +62,15 @@ export default {
       display: -webkit-box; 
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-      // text-overflow: ellipsis;
-      // white-space: nowrap;
       overflow: hidden;
       text-align: left;
     }
     .price{
-      color: #FF473C;
-      font-size: 28px;
+      color: @fred;
       width: 100%;
       text-align: left
     }
     .prom-price{
-      font-size: 24px;
       color: #939399;
       margin-left: 10px;
       text-decoration: line-through;
@@ -76,12 +79,12 @@ export default {
       position: absolute;
       top: 0;
       background-color: rgba(255, 255, 255, 0.5);
-      width: 365px;
-      height: 365px;
+      width: 252px;
+      height: 320px;
+      padding-top: 70px;
       img{
-        margin-top: 100px;
-        width: 185px;
-        height: 160px;
+        width: 110px;
+        height: 96px;
       }
     }
   }
