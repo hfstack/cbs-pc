@@ -144,7 +144,7 @@ export default {
 
           &.cur {
             background-color: #fff;
-            border-left: 6/@rem solid @red;
+            border-left: 6/@rem solid @orange;
             color: #FF473C
           }
         }

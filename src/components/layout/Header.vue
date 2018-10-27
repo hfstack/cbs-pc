@@ -80,7 +80,7 @@ export default {
       height: 45px;
       line-height: 45px;
       font-size: 16px;
-      border:2px solid @bred;
+      border:2px solid @orange;
       border-radius:23px;
       margin-left: 392px;
       margin-top: 10px;
@@ -90,12 +90,14 @@ export default {
         position: absolute;
         right: 0;
         top: -2px;
-        background-color: @red;
+        // background:linear-gradient(90deg,rgba(249,108,23,1),rgba(254,165,111,1));
+        background-color: @orange;
         border-radius:23px;
         color: #fff;
         text-align: center;
         i {
           font-size: 22px;
+          font-weight: bold;
         }
       }
       .s-icon-a{
@@ -117,14 +119,14 @@ export default {
       right: 20px;
       .wh(128, 45);
       line-height: 43px;
-      border: 2px solid @bred;
+      border: 2px solid @orange;
       border-radius: 25px;
       .fb {
         font-weight: bold;
       }
       i {
         font-size: 23px;
-        color: #F25260;
+        color: @orange;
         font-weight: bold;
         margin-left: 17px;
         margin-right: 6px;

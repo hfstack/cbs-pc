@@ -5,7 +5,7 @@
       <homeindex></homeindex>
   </div>
 </div>
- 
+
 </template>
 
 <script>
@@ -57,7 +57,7 @@ export default {
     height: 40px;
     line-height: 40px;
     font-size: 28px;
-    color: @red;
+    color: @orange;
     padding-right: 10px;
   }
 }

@@ -72,11 +72,11 @@ export default {
       height: 100/@rem;
       font-size: 30/@rem;
       i {
-        color: @red;
+        color: @orange;
         font-size: 60/@rem;
         vertical-align: middle;
         margin-right: 10/@rem;
-        border: 2px solid @red;
+        border: 2px solid @orange;
         border-radius: 50%;
         padding: 10/@rem;
       }
@@ -93,7 +93,7 @@ export default {
     display: block;
     .whl(710, 88);
     margin: 0 auto;
-    background-color: @red;
+    background-color: @orange;
     border-radius: 8/@rem;
     color: #fff;
     text-align: center;

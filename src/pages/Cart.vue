@@ -283,7 +283,7 @@ export default {
       float: left;
       display: inline-block;
       font-size: 24px;
-      color: @red;
+      color: @orange;
     }
     .img {
       .wh(60, 28);
@@ -340,7 +340,7 @@ export default {
           top: 142px;
           right: -80px;
           text-algin: right;
-          color: @red;
+          color: @orange;
         }
         .num {
           position: absolute;
@@ -426,9 +426,9 @@ export default {
       display: inline-block;
       .whl(540, 80);
       margin-top: 45px;
-      border: 1px solid @red;
+      border: 1px solid @orange;
       border-radius: 10px;
-      color: @red;
+      color: @orange;
     }
   }
 }

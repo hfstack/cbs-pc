@@ -91,7 +91,7 @@ export default {
     display: block;
     .whl(710, 88);
     margin: 0 auto;
-    background-color: @red;
+    background-color: @orange;
     border-radius: 8/@rem;
     color: #fff;
     text-align: center;
@@ -103,8 +103,8 @@ export default {
     margin: 0 auto;
     background-color: #fff;
     border-radius: 8/@rem;
-    border: 1px solid @red;
-    color: @red;
+    border: 1px solid @orange;
+    color: @orange;
     text-align: center;
     margin-top: 20/@rem;
   }

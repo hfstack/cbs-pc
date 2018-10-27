@@ -134,7 +134,7 @@ export default {
             right: 0;
             top: 70px;
             font-size: 14px;
-            color: @fred;
+            color: @red;
           }
         }
       }
@@ -155,13 +155,13 @@ export default {
       text-align: right;
       font-size: 20px;
       .price {
-        color: @fred;
+        color: @red;
       }
     }
     .submit-button {
       display: block;
       .whl(350, 45);
-      background-color: @red;
+      background-color: @orange;
       border-radius: 4px;
       text-align: center;
       font-size: 16px;
@@ -171,7 +171,7 @@ export default {
   }
   .cart-number {
     .whl(28, 28);
-    background-color: @red;
+    background-color: @orange;
     border-radius: 50%;
     color: #fff;
     position: absolute;

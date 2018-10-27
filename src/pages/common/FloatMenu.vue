@@ -80,9 +80,9 @@ export default {
       text-align: center;
       box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
       &.cur {
-        background-color: @red;
+        background-color: @orange;
         color: #fff;
-        border: 1px solid @red;
+        border: 1px solid @orange;
       }
     }
     ul {

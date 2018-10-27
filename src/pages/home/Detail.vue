@@ -471,7 +471,7 @@ export default {
             }
           }
           img.cur {
-            border: 1px solid @red;
+            border: 1px solid @orange;
           }
         }
       }
@@ -505,7 +505,7 @@ export default {
       .price {
         .red {
           .height(30);
-          color: @fred;
+          color: @red;
           font-size: 28px;
           // font-weight: bold;
           // margin-bottom: 5px;
@@ -580,7 +580,7 @@ export default {
               transition: transform .3s;
               transition: transform .3s, -webkit-transform .3s;
               &.cur {
-                border: 1px solid @fred;
+                border: 1px solid @orange;
               }
               &.disabled {
                 border: 1px solid @bgray;
@@ -631,7 +631,7 @@ export default {
       .whl(340,55);
       margin-top: 25px;
       text-align: center;
-      background-color: @red;
+      background-color: @orange;
       border-radius:4px;
       color: #fff;
       font-size: 24px;

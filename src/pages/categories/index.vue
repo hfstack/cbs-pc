@@ -237,7 +237,7 @@ export default {
         height: 227px;
       }
       .price{
-        color: @fred;
+        color: @red;
         width: 100%;
         text-align: left
       }
@@ -251,7 +251,7 @@ export default {
         padding: 10px 0;
         color: #000000;
         font-weight: bold;
-        display: -webkit-box; 
+        display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
