@@ -56,6 +56,7 @@ export default {
         background-color: @red;
         border-radius:23px;
         color: #fff;
+        text-align: center;
         i {
           font-size: 22px;
         }
@@ -81,11 +82,12 @@ export default {
       line-height: 43px;
       border: 2px solid @bred;
       border-radius: 25px;
-      i{
+      i {
         font-size: 23px;
         color: #F25260;
         font-weight: bold;
         margin-left: 20px;
+        margin-right: 10px;
       }
     }
   }
