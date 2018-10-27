@@ -22,16 +22,13 @@ export default {
       height: 50px;
       margin-right: 10px;
     }
-    color: #222222;
     font-size: 40px;
     font-weight: bold;
     line-height: 50px;
   }
   .desc{
-    color: #222222;
     font-size: 16px;
     font-weight: bold;
-    margin-top: 10px;
   }
 }
 </style>

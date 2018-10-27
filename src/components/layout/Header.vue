@@ -26,9 +26,11 @@ export default {
 };
 </script>
 <style lang="less">
+@import '~less/tool';
 #c-header{
   width: 100%;
   background: #fff;
+  border-bottom: 1px solid @bgray;
   .header-content {
     width: 1240px;
     height: 120px;
@@ -41,7 +43,7 @@ export default {
       height: 45px;
       line-height: 45px;
       font-size: 16px;
-      border:2px solid rgba(221,59,55,1);
+      border:2px solid @bred;
       border-radius:23px;
       margin-left: 392px;
       margin-top: 10px;
@@ -51,15 +53,18 @@ export default {
         position: absolute;
         right: 0;
         top: -2px;
-        background:linear-gradient(90deg,rgba(219,58,54,1),rgba(250,89,110,1));
-        border:2px solid rgba(221,59,55,1);
+        background-color: @red;
         border-radius:23px;
         color: #fff;
+        i {
+          font-size: 22px;
+        }
       }
       .s-icon-a{
         font-size: 16px;
-        line-height: 45px;
+        line-height: 42px;
         margin: 0 12px;
+        color: #B5B5B5;
       }
       .search-input{
         width:460px;
@@ -70,20 +75,18 @@ export default {
     }
     .cart{
       position: absolute;
-      top: 38px;
+      top: 32px;
       right: 20px;
-      height: 45px;
-      width: 128px;
-      border:2px solid rgba(221,59,55,1);
-      line-height: 45px;
-      border-radius:23px;
+      .wh(128, 45);
+      line-height: 43px;
+      border: 2px solid @bred;
+      border-radius: 25px;
       i{
-        font-size: 27px;
+        font-size: 23px;
         color: #F25260;
         font-weight: bold;
         margin-left: 20px;
       }
-      color: #000000;
     }
   }
 }
