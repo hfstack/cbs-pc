@@ -3,25 +3,62 @@
     <topbar></topbar>
     <div class="header-content">
       <logo class="fl"></logo>
-      <div class="search">
+      <div class="search" v-show="!isCart">
         <i class="iconfont fl s-icon-a">&#xe620;</i>
         <input type="text" placeholder="Search" class="search-input">
         <div class="search-a"><i class="iconfont">&#xe620;</i></div>
       </div>
-      <div class="cart"><i class="iconfont fl">&#xe624;</i>CART</div>
+      <div class="cart" @mousemove="mousemoveCart" @mouseout="mouseoutCart" v-show="!isCart">
+        <i class="iconfont fl">&#xe624;</i>
+        <span class="fb">CART</span>
+        <div class="pos-rel">
+          <cartmodal :show="isShowCart"></cartmodal>
+        </div>
+      </div>
+      <div class="is-cart" v-show="isCart">
+        <div class="cart-icon fl mr">
+          <i class="iconfont fl">&#xe67b;</i>
+          <p>Highest Quality Guarantee</p>
+        </div>
+        <div class="cart-icon fl">
+          <i class="iconfont">&#xe601;</i>
+          <p>100% Secured Payments</p>
+        </div>
+      </div>
     </div>
-    <navgation></navgation>
+    <navgation v-show="!isCart"></navgation>
   </div>
 </template>
 <script>
 import topbar from './Topbar';
 import logo from './Logo';
 import navgation from './Nav';
+import cartmodal from './CartModal';
 export default {
+   props: {
+    isCart: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {
     topbar,
     logo,
-    navgation
+    navgation,
+    cartmodal
+  },
+  data () {
+    return {
+      isShowCart: false
+    }
+  },
+  methods: {
+    mousemoveCart () {
+      this.isShowCart = true;
+    },
+    mouseoutCart () {
+      this.isShowCart = false;
+    }
   }
 };
 </script>
@@ -82,12 +119,57 @@ export default {
       line-height: 43px;
       border: 2px solid @bred;
       border-radius: 25px;
+      .fb {
+        font-weight: bold;
+      }
       i {
         font-size: 23px;
         color: #F25260;
         font-weight: bold;
-        margin-left: 20px;
-        margin-right: 10px;
+        margin-left: 17px;
+        margin-right: 6px;
+      }
+      .pos-rel {
+        position: relative;
+        right: 77px;
+        top: -44px;
+        width: 200px;
+        height: 80px;
+        cursor: pointer;
+      }
+    }
+    .is-cart {
+      position: absolute;
+      top: 35px;
+      right: 0;
+      width: 380px;
+      .clearfix();
+      .cart-icon {
+        width: 165px;
+        position: relative;
+        i {
+          position: absolute;
+          left: 0;
+          top: 0;
+          display: inline-block;
+          .whl(50, 50);
+          background-color:rgba(215,215,215,1);
+          border-radius:50%;
+          color: #fff;
+          font-size: 30px;
+          vertical-align: middle;
+          text-align: center;
+        }
+        p {
+          margin-top: 5px;
+          margin-left: 60px;
+          width: 98px;
+          line-height: 20px;
+          color: #444;
+        }
+      }
+      .mr {
+        margin-right: 50px;
       }
     }
   }

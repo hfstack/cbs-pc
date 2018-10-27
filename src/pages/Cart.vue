@@ -1,74 +1,72 @@
 <template>
-  <div class="cart-main">
-    <topbar title="Shopping Cart"></topbar>
-    <!-- 空 -->
-    <template v-if="cartEmpty">
-      <div class="cart-empty">
-        <div class="img"></div>
-        <p>Your shopping cart is currently empty</p>
-        <router-link :to="{path: '/home'}" class="btn">SHOP NOW</router-link>
-      </div>
-      <bottombar></bottombar>
-    </template>
-    <!-- 有 -->
-    <template v-if="cartsData && cartsData.goods && cartsData.goods.length">
-      <div class="cart-have">
-        <router-link :to="{path: '/activity?activity_id=' + cartsData.promotion_id}" class="cart-enjoy">
-          <span class="img"></span>
-          <span>{{cartsData.promotion_msg}}</span>
-          <i class="iconfont">&#xe62e;</i>
-        </router-link>
-        <div class="cart-list">
-          <div class="detail" v-for="item in cartsData.goods">
-            <router-link :to="{path: '/detail?id=' + item.id}" class="img fl">
-              <img :src="item.img && item.img.ossimg()">
-            </router-link>
-            <div class="info fl">
-              <div class="title">{{item.name}}</div>
-              <div class="sku" v-for="(prop, key, index) in item.props" :class="{'mt': index === 1}">{{prop}}</div>
-              <div class="num">{{item.num}} x ${{item.price}}</div>
-              <div class="price">${{item.num * item.price}}.00</div>
-              <div class="reduce" @click="reduce(item)"><i class="iconfont">&#xe62a;</i></div>
-              <div class="add" @click="add(item)"><i class="iconfont">&#xe66f;</i></div>
+  <div class="cart-main-layout">
+    <headers :isCart="true"></headers>
+    <div class="cart-main">s
+
+      <template v-if="cartEmpty">
+        <div class="cart-empty">
+          <div class="img"></div>
+          <p>Your shopping cart is currently empty</p>
+          <router-link :to="{path: '/home'}" class="btn">SHOP NOW</router-link>
+        </div>
+        <bottombar></bottombar>
+      </template>
+      <!-- 有 -->
+      <template v-if="cartsData && cartsData.goods && cartsData.goods.length">
+        <div class="cart-have">
+          <router-link :to="{path: '/activity?activity_id=' + cartsData.promotion_id}" class="cart-enjoy">
+            <span class="img"></span>
+            <span>{{cartsData.promotion_msg}}</span>
+            <i class="iconfont">&#xe62e;</i>
+          </router-link>
+          <div class="cart-list">
+            <div class="detail" v-for="item in cartsData.goods">
+              <router-link :to="{path: '/detail?id=' + item.id}" class="img fl">
+                <img :src="item.img && item.img.ossimg()">
+              </router-link>
+              <div class="info fl">
+                <div class="title">{{item.name}}</div>
+                <div class="sku" v-for="(prop, key, index) in item.props" :class="{'mt': index === 1}">{{prop}}</div>
+                <div class="num">{{item.num}} x ${{item.price}}</div>
+                <div class="price">${{item.num * item.price}}.00</div>
+                <div class="reduce" @click="reduce(item)"><i class="iconfont">&#xe62a;</i></div>
+                <div class="add" @click="add(item)"><i class="iconfont">&#xe66f;</i></div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="cart-discounts cart-rel">
-          <div class="cart-label">Activity Discounts</div>
-          <div class="cart-pos">{{cartsData.specialoffer}}</div>
-        </div>
-        <div class="cart-coupon cart-rel" @click="clickShowCoupon">
-          <div class="cart-label">
-            Coupon<span v-if="cartsData.coupon">（Rewards {{cartsData.coupon.length}})</span>
-            <span v-else class="gray2">( no coupons )</span>
+          <div class="cart-discounts cart-rel">
+            <div class="cart-label">Activity Discounts</div>
+            <div class="cart-pos">{{cartsData.specialoffer}}</div>
           </div>
-          <div class="cart-pos">
-            <span>{{this.couponPrice}}</span>
-            <i class="iconfont gray2">&#xe62e;</i>
+          <div class="cart-coupon cart-rel" @click="clickShowCoupon">
+            <div class="cart-label">
+              Coupon<span v-if="cartsData.coupon">（Rewards {{cartsData.coupon.length}})</span>
+              <span v-else class="gray2">( no coupons )</span>
+            </div>
+            <div class="cart-pos">
+              <span>{{this.couponPrice}}</span>
+              <i class="iconfont gray2">&#xe62e;</i>
+            </div>
+          </div>
+          <div class="cart-points cart-rel">
+            <div class="cart-label">Activity Discounts <span class="label-des">( {{cartsData.integral}} points to use )</span></div>
+            <div class="cart-pos">-${{cartsData.integral / 100}}<mt-switch v-model="isUsePoint"></mt-switch></div>
           </div>
         </div>
-        <div class="cart-points cart-rel">
-          <div class="cart-label">Activity Discounts <span class="label-des">( {{cartsData.integral}} points to use )</span></div>
-          <div class="cart-pos">-${{cartsData.integral / 100}}<mt-switch v-model="isUsePoint"></mt-switch></div>
+        <div class="global-fixed-btn">
+          <div @click="submitCart()" class="fixed-btn">CONTINUE CHECKOUT ( <span>${{totalPrice}}</span> )</div>
         </div>
-      </div>
-      <div class="global-fixed-btn">
-        <div @click="submitCart()" class="fixed-btn">CONTINUE CHECKOUT ( <span>${{totalPrice}}</span> )</div>
-      </div>
 
-      <confirm :show.sync="confirmModal.show" :title="confirmModal.title"  :content="confirmModal.content" :on-ok="confirmModal.action"  okText="Yes"></confirm>
-      <Coupon :show.sync="isShowCoupon" :coupons="cartsData.coupon || []" :isClick="true" :clickCallback="clickCoupon" :isCart="true"></Coupon>
-    </template>
+        <confirm :show.sync="confirmModal.show" :title="confirmModal.title"  :content="confirmModal.content" :on-ok="confirmModal.action"  okText="Yes"></confirm>
+      </template>
+    </div>
   </div>
 </template>
 
 <script>
-import Coupon from 'common/Coupon.vue';
 export default {
   name: 'cart',
-  components: {
-    Coupon
-  },
+  components: {},
   data () {
     return {
       cartsData: [],
@@ -262,10 +260,15 @@ export default {
 
 <style lang="less">
 @import '~less/tool.less';
+.cart-main-layout {
+  width: 100%;
+  background-color: #fff;
+}
 .cart-main {
-  color: #131313;
+  width: 1240px;
+  margin: 0 auto;
   .cart-have {
-    padding-top: 92/@rem;
+    padding-top: 92px;
   }
 
   .cart-enjoy {
@@ -279,34 +282,34 @@ export default {
     span {
       float: left;
       display: inline-block;
-      font-size: 24/@rem;
+      font-size: 24px;
       color: @red;
     }
     .img {
       .wh(60, 28);
       background: url('~img/detail/s2.png');
       background-size: 100% auto;
-      margin: 22/@rem;
-      margin-right: 10/@rem;
+      margin: 22px;
+      margin-right: 10px;
     }
     i {
       position: absolute;
       top: 0;
-      right: 10/@rem;
+      right: 10px;
       color: @gray2;
-      font-size: 32/@rem;
+      font-size: 32px;
     }
   }
 
   .cart-list {
-    margin-bottom:10/@rem;
+    margin-bottom:10px;
     .detail {
       background-color: #fff;
-      padding: 20/@rem;
-      // margin-bottom: 18/@rem;
+      padding: 20px;
+      // margin-bottom: 18px;
       border-bottom: 1px solid @gray3;
       width: 100%;
-      height: 220/@rem;
+      height: 220px;
       .clearfix();
       .img, img {
         .wh(180, 180);
@@ -318,10 +321,10 @@ export default {
       }
       .info {
         position: relative;
-        margin-left: 20/@rem;
-        width: 430/@rem;
+        margin-left: 20px;
+        width: 430px;
         .title {
-          font-size: 28/@rem;
+          font-size: 28px;
           .height(50);
           .line1();
         }
@@ -330,19 +333,19 @@ export default {
           color: @gray2;
         }
         .mt {
-          margin-top: 50/@rem;
+          margin-top: 50px;
         }
         .price {
           position: absolute;
-          top: 142/@rem;
-          right: -80/@rem;
+          top: 142px;
+          right: -80px;
           text-algin: right;
           color: @red;
         }
         .num {
           position: absolute;
-          top: 100/@rem;
-          right: -80/@rem;
+          top: 100px;
+          right: -80px;
           text-algin: right;
           color: @gray2;
         }
@@ -350,15 +353,15 @@ export default {
           position: absolute;
           z-index: 2;
           top: 0;
-          right: -50/@rem;
+          right: -50px;
           .wh(50, 50);
         }
         .add {
           position: absolute;
-          top: -6/@rem;
-          right: -95/@rem;
+          top: -6px;
+          right: -95px;
           i {
-            font-size: 50/@rem;
+            font-size: 50px;
           }
           .wh(50, 50);
         }
@@ -368,7 +371,7 @@ export default {
   .cart-rel {
     position: relative;
     background: #ffffff;
-    padding: 0 20/@rem;
+    padding: 0 20px;
     border-bottom: 1px solid @gray3;
     &:last-child {
       border-bottom: 1px solid #ececec;
@@ -377,7 +380,7 @@ export default {
     .cart-pos {
       position: absolute;
       top: 0;
-      right: 20/@rem;
+      right: 20px;
       .height(88);
       .clearfix();
       span {
@@ -387,8 +390,8 @@ export default {
       }
       .mint-switch {
         float: right;
-        margin-top: 20/@rem;
-        margin-left: 20/@rem;
+        margin-top: 20px;
+        margin-left: 20px;
       }
     }
   }
@@ -400,31 +403,31 @@ export default {
   .cart-points {}
 
   .cart-empty {
-    padding-top: 92/@rem;
+    padding-top: 92px;
     text-align: center;
     .img {
       display: inline-block;
-      margin-top: 209/@rem;
+      margin-top: 209px;
       .wh(315, 185);
       background: url('~img/cart/cart_empty.png') no-repeat;
       background-size: 100% auto;
-      margin-left: 50/@rem;
+      margin-left: 50px;
       img {
         display: block;
       }
     }
     p {
-      margin-top: 80/@rem;
+      margin-top: 80px;
       .height(40);
-      font-size: 28/@rem;
+      font-size: 28px;
       color: @gray2;
     }
     .btn {
       display: inline-block;
       .whl(540, 80);
-      margin-top: 45/@rem;
+      margin-top: 45px;
       border: 1px solid @red;
-      border-radius: 10/@rem;
+      border-radius: 10px;
       color: @red;
     }
   }

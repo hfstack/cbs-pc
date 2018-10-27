@@ -16,12 +16,21 @@ export default new Router({
       }
     },
     {
-      name: 'detail', // 私有H5
-      path: '/detail', // 商品ID
+      name: 'detail',
+      path: '/detail',
       component: function (resolve) {
         require.ensure([], function () {
           resolve(require('pages/home/Detail'));
         }, 'detail');
+      }
+    },
+    {
+      name: 'cart',
+      path: '/cart',
+      component: function (resolve) {
+        require.ensure([], function () {
+          resolve(require('pages/Cart'));
+        }, 'cart');
       }
     },
     {

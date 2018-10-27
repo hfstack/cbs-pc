@@ -148,11 +148,10 @@ export default {
           this.data = res.content;
         }
       }, err => {
-        console.log(err);
-        // this.$Messagebox({
-        //   title: err || '网络错误',
-        //   type: 'error'
-        // });
+        this.$Messagebox({
+          title: err || '网络错误',
+          type: 'error'
+        });
       }).then(() => {
         this.getOneSkuData();
       }).then(() => {
