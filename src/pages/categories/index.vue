@@ -249,7 +249,7 @@ export default {
       .title{
         width: 220px;
         padding: 10px 0;
-         color: #000000;
+        color: #000000;
         font-weight: bold;
         display: -webkit-box; 
         -webkit-line-clamp: 2;

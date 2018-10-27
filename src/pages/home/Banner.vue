@@ -34,29 +34,32 @@
 <style lang="less">
 @import '~less/tool.less';
 .g-banner {
-  width: 750/@rem;
-  height: 400/@rem;
+  width: 100%;
+  height: 435px;
+  .mint-swipe{
+    height: 435px;
+  }
   img{
     width: 100%;
     height: 100%;
     display: block;
   }
   .mint-swipe-indicators {
-    width: 750/@rem;
+    width: 100px;
     margin: 0 auto;
     position: absolute;
     bottom: 0.45rem;
     text-align: center;
     left: 50%;
-    right: 0;
+    margin-left: -50px;
   }
   .mint-swipe-indicator {
-    width: 20/@rem;
-    height: 20/@rem;
+    width: 20px;
+    height: 20px;
     display: inline-block;
     border-radius: 100%;
     background: #bfbfbf;
-    margin: 0 10/@rem;
+    margin: 0 10px;
   }
   .mint-swipe-indicator.is-active {
     background: #000000

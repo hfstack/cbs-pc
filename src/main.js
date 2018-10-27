@@ -12,12 +12,12 @@ import messages from 'components/utils/zh_CN';
 // checkwebp
 import './components/basic/checkwebp';
 
-import 'iview/dist/styles/iview.css';
+// import 'iview/dist/styles/iview.css';
 
-import { Select, Option } from 'iview';
+// import { Select, Option } from 'iview';
 
-Vue.component('Select', Select);
-Vue.component('Option', Option);
+// Vue.component('Select', Select);
+// Vue.component('Option', Option);
 
 const config = {
   errorBagName: 'verrors', // change if property conflicts.
