@@ -154,6 +154,15 @@ export default new Router({
       }
     },
     {
+      name: 'activity',
+      path: '/activity',
+      component: function (resolve) {
+        require.ensure([], function () {
+          resolve(require('pages/activity/index'));
+        }, 'activity');
+      }
+    },
+    {
       path: '*',
       redirect: '/my'
     }
