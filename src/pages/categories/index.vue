@@ -149,7 +149,7 @@ export default {
 @import '~less/tool.less';
 .category-search{
   position: relative;
-  padding-left: 350px;
+  padding-left: 372px;
   background-color: #fff;
   padding-top: 24px;
   .filter-list{
@@ -208,7 +208,6 @@ export default {
   }
   .result-content{
     display: inline-block;
-    margin-left: 20px;
     margin-top: 55px;
     width: 970px;
     .total{
@@ -225,6 +224,7 @@ export default {
       width: 270px;
       height: 40px;
       line-height: 40px;
+      cursor: pointer;
     }
     .goods-list{
       li{
