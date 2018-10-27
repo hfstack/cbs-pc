@@ -148,10 +148,11 @@ export default {
           this.data = res.content;
         }
       }, err => {
-        this.$Messagebox({
-          title: err || '网络错误',
-          type: 'error'
-        });
+        console.log(err);
+        // this.$Messagebox({
+        //   title: err || '网络错误',
+        //   type: 'error'
+        // });
       }).then(() => {
         this.getOneSkuData();
       }).then(() => {
@@ -355,10 +356,10 @@ export default {
     submitClick () {
       // 判定是否选择完毕
       if (!this.skuId) {
-        this.$Messagebox({
-          title: 'Please select your ' + this.goodsData.subArr[0].name,
-          type: 'error'
-        });
+        // this.$Messagebox({
+        //   title: 'Please select your ' + this.goodsData.subArr[0].name,
+        //   type: 'error'
+        // });
         return;
       }
       // 提交锁
@@ -388,16 +389,16 @@ export default {
           }, 1000);
         } else {
           this.submitLocked = false; // 解锁
-          this.$Messagebox({
-            title: res.msg || '网络错误',
-            type: 'error'
-          });
+          // this.$Messagebox({
+          //   title: res.msg || '网络错误',
+          //   type: 'error'
+          // });
         }
       }, err => {
-        this.$Messagebox({
-          title: err || '网络错误',
-          type: 'error'
-        });
+        // this.$Messagebox({
+        //   title: err || '网络错误',
+        //   type: 'error'
+        // });
       });
     }
   }
@@ -436,6 +437,7 @@ export default {
     width: 580px;
     height: 710px;
     .big-img-swipe {
+      background-color: #e0e0e0;
       .wh(580, 580);
       img {
         display: block;
