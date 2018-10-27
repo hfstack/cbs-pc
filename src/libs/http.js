@@ -59,6 +59,7 @@ Http.install = function (Vue) {
       if (json) {
         AxiosInst.defaults.headers['Content-Type'] = 'application/json';
         AxiosInst.defaults.transformRequest = [function (data) {
+          console.log(data + '1');
           // 这里可以在发送请求之前对请求数据做处理，比如form-data格式化等，这里可以使用开头引入的Qs（这个模块在安装axios的时候就已经安装了，不需要另外安装）
           if (window.localStorage.getItem('userToken')) {
             data['token'] = window.localStorage.getItem('userToken');
@@ -73,18 +74,26 @@ Http.install = function (Vue) {
       }).catch((error) => {
         if (error.status === 200) {
           if (!error.data) {
-            this.$Message.error('接口输出异常...');
-            console.log('Customize Notice', error);
+            this.$Messagebox({
+              title: '接口输出异常...',
+              type: 'error'
+            });
           } else if (error.data && error.data.code === 2000) {
-            this.$Message.error(error.data.msg);
-            console.log('Customize Notice', error);
+            this.$Messagebox({
+              title: error.data.msg || '',
+              type: 'error'
+            });
           }
         } else if (error.status === 500) {
-          this.$Message.error('后端服务请求500错误');
-          console.log('Customize Notice', error);
+          this.$Messagebox({
+            title: '后端服务请求500错误',
+            type: 'error'
+          });
         } else {
-          this.$Message.error('服务请求出错');
-          console.log('Customize Notice', error);
+          this.$Messagebox({
+            title: '服务请求出错',
+            type: 'error'
+          });
         }
         closeLoading();
         reject(error);
@@ -112,18 +121,26 @@ Http.install = function (Vue) {
       }).catch((error) => {
         if (error.status === 200) {
           if (!error.data) {
-            this.$Message.error('接口输出异常...');
-            console.log('Customize Notice', error);
+            this.$Messagebox({
+              title: '接口输出异常...',
+              type: 'error'
+            });
           } else if (error.data && error.data.code === 2000) {
-            this.$Message.error(error.data.msg);
-            console.log('Customize Notice', error);
+            this.$Messagebox({
+              title: error.data.msg || '',
+              type: 'error'
+            });
           }
         } else if (error.status === 500) {
-          this.$Message.error('后端服务请求500错误,如一直出现错误,请联系我们');
-          console.log('Customize Notice', error);
+          this.$Messagebox({
+            title: '后端服务请求500错误,如一直出现错误,请联系我们',
+            type: 'error'
+          });
         } else {
-          this.$Message.error('服务请求出错');
-          console.log('Customize Notice', error);
+          this.$Messagebox({
+            title: '服务请求出错',
+            type: 'error'
+          });
         }
         closeLoading();
         reject(error);
