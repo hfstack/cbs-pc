@@ -12,7 +12,7 @@ import messages from 'components/utils/zh_CN';
 // checkwebp
 import './components/basic/checkwebp';
 
-import 'iview/dist/styles/iview.css';
+// import 'iview/dist/styles/iview.css';
 
 import { Select, Option } from 'iview';
 
