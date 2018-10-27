@@ -24,9 +24,10 @@ const config = {
 const AxiosInst = axios.create(config);
 //  请求拦截器
 AxiosInst.interceptors.request.use((config) => {
-  // if (window.localStorage.getItem('userToken')) {
-  //     config.headers.Authorization = 'Bearer ' + `${window.localStorage.getItem('userToken')}`;
-  // }
+
+  if(config.method == 'get'){
+    config.params.token = window.localStorage.getItem('userToken') || '';
+ }
   return config;
 }, (err) => {
   return Promise.reject(err);
