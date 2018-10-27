@@ -1,11 +1,6 @@
 <template>
 <div class="select-group" :class="{open: show}" ref="container" :disabled="disabled" >
-  <span class="select-toggle" :class="{
-      'selblue': value == displayColor.blue && isconfirm,
-      'selyellow': value == displayColor.yellow && isconfirm,
-      'seldisabled': value == displayColor.disabled && isconfirm,
-      'border1px': border
-    }" ref="trigger">
+  <span class="select-toggle" ref="trigger">
     {{selectItem && selectItem[keyname]}}
     <i class="bicon" v-show="!show">&#xe613;</i>
     <i class="bicon" v-show="show">&#xe611;</i>
@@ -104,14 +99,6 @@ export default {
     selectval: {
       default: null
     },
-    displayColor: {
-      type: Object,
-      default: {
-        blue: 1,
-        yellow: 2,
-        disabled: 3
-      }
-    },
     direction: {
       type: String,
       default: 'bottom'
@@ -119,12 +106,12 @@ export default {
     // 是否选择边框
     border: {
       type: Boolean,
-      default: false
+      default: true
     },
     // select 宽度
     width: {
       type: String,
-      default: '160px'
+      default: '200px'
     }
   },
   data() {
@@ -230,7 +217,6 @@ export default {
           this.confirmModal.show = false;
           this.value = this.confirmModal.selectval;
           this.onSelect(this.confirmModal.selectval);
-          this.$dispatch('changeSuccess');
           messagebox({
             title: '修改状态成功!',
             type: 'success'
@@ -282,16 +268,6 @@ export default {
 };
 </script>
 <style lang="less">
-  .border1px {
-    border: 1px solid #ccc;
-    width: 160px;
-    padding: 0 26px 0 8px;
-    text-align: left;
-    .bicon{
-      position: absolute;
-      right: 11px;
-    }
-  }
   .select-group{
     position: relative;
   }

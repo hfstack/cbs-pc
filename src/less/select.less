@@ -1,0 +1,106 @@
+.select-hidden{
+  width: 1px;
+  height: 1px;
+  border: 0;
+}
+
+.select-group {
+  width: 200px;
+  height: 40px;
+  border: 1px solid #ccc;
+  padding: 0 26px 0 8px;
+  text-align: left;
+  position: relative;
+  display: inline-block;
+  &.disabled,
+  &[disabled] {
+    .select-toggle{
+      color:#d8d8d8;
+      cursor: not-allowed;
+      // background: @btn-disabled-bg;
+      // border-color: @btn-disabled-border;
+    }
+  }
+}
+
+.select-toggle {
+
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+  background-color: #fff;
+  height: 38px;
+  line-height: 40px;
+  font-size: 14px;
+  color: #666;
+  // padding: 0 26px 0 14px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;/*超出部分隐藏*/
+  white-space: nowrap;/*不换行*/
+  text-overflow:ellipsis;/*超出部分文字以...显示*/
+  min-width: 87px;
+  .bicon {
+    color: #666;
+    font-size: 12px;
+  }
+  &:hover {
+    .bicon{
+      // color: @btn-default-color;
+    }
+  }
+
+}
+
+.select-menu {
+  border: 1px solid #dedede;
+  background-color: #fff;
+  color: #666666;
+  width: 160px;
+  max-height: 180px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 39px;
+  z-index: 99;
+  border-radius: 4px;
+
+  li {
+    
+    &:last-child {
+      border: 0;
+    }
+    &.active a, &.active .bicon{
+      color: #F96C17;
+    }
+    a{
+      z-index: 999;
+    }
+  }
+
+  a {
+    display: block;
+    position: relative;
+    padding-left: 16px;
+    line-height: 32px;
+    font-size: 12px;
+    cursor: pointer;
+    color: #666;
+    overflow: hidden;/*超出部分隐藏*/
+    white-space: nowrap;/*不换行*/
+    text-overflow:ellipsis;/*超出部分文字以...显示*/
+
+    &:hover {
+      background-color: #f9f9f9;
+      color: #444;
+    }
+  }
+
+  .bicon {
+    font-size: 12px;
+    position: absolute;
+    left: 14px;
+  }
+}
