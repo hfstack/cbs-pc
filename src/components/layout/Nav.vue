@@ -55,7 +55,7 @@ export default {
   padding-left: 15px;
   .nav-item {
     float: left;
-    margin-right: 73px;
+    margin-right: 70px;
     font-weight: bold;
     .height(30);
     &:last-child {

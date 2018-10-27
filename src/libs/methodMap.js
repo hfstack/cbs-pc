@@ -86,6 +86,8 @@ const methodMap = {
   CouponReceive: {url: '/coupons/receive', method: 'post'},
   /** 优惠券apply */
   CouponsApply: {url: '/coupons/apply', method: 'post'},
+  /** PC首页 */
+  PCHome: {url: '/pc/home', method: 'post'}
 };
 
 export default methodMap;

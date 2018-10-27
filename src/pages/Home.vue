@@ -1,8 +1,11 @@
 <template>
+<div>
+  <headers></headers>
   <div class="home-main" ref="indexMain">
-    <homeindex></homeindex>
-    <bottombar></bottombar>
+      <homeindex></homeindex>
   </div>
+</div>
+ 
 </template>
 
 <script>
@@ -40,22 +43,22 @@ export default {
 <style lang="less">
 @import '~less/tool.less';
 .goods-info {
-  padding: 20/@rem 20/@rem 40/@rem;
+  padding: 20px 20px 40px;
   .text {
     .line1();
     text-align: center;
-    font-size: 28/@rem;
-    height: 50/@rem;
-    line-height: 50/@rem;
+    font-size: 28px;
+    height: 50px;
+    line-height: 50px;
   }
   .price {
     text-align: center;
     display: block;
-    height: 40/@rem;
-    line-height: 40/@rem;
-    font-size: 28/@rem;
+    height: 40px;
+    line-height: 40px;
+    font-size: 28px;
     color: @red;
-    padding-right: 10/@rem;
+    padding-right: 10px;
   }
 }
 </style>

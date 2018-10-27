@@ -190,6 +190,15 @@ export default new Router({
       }
     },
     {
+      name: 'index',
+      path: '/index',
+      component: function (resolve) {
+        require.ensure([], function () {
+          resolve(require('pages/Home'));
+        }, 'home');
+      }
+    },
+    {
       path: '*',
       redirect: '/my'
     }

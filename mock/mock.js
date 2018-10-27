@@ -338,6 +338,12 @@ var setOnline = [
     name: 'couponsRecive',
     type: 'post',
     url: '/coupons/receive'
+  },
+  // pc首页
+  {
+    name: 'pcHome',
+    type: 'post',
+    url: '/pc/home'
   }
 
 ];

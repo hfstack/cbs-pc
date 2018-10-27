@@ -1,0 +1,132 @@
+{
+  "status": 200,
+  "msg": "success",
+  "content": {
+      "banners": [
+          {
+              "img":"http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+              "url": "http://m.cucoe.net/home"
+          },{
+              "img":"http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+              "url": "http://m.cucoe.net/home"
+          }
+      ],
+      "daily": [
+          {
+              "id": 294,
+              "name": "test",
+              "img": "http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+              "price": 20,
+              "origin_price": 24.00,
+              "rebate": 5,
+              "stock": 85
+          },{
+              "id": 294,
+              "name": "test",
+              "img": "http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+              "price": 20,
+              "origin_price": 24.00,
+              "rebate": 5,
+              "stock": 85
+          }
+      ],
+      "storey": [
+          {
+              "storey_title": "HOME & LIVING",
+              "storey_url": "/categories/search?cate=334",
+              "storey_left": [
+                  {
+                      "img": "https://cucoe.oss-us-west-1.aliyuncs.com/home/0.png",
+                      "url": "/categories/search?cate=334"
+                  },{
+                      "img": "https://cucoe.oss-us-west-1.aliyuncs.com/home/1.png",
+                      "url": "/categories/search?cate=334"
+                  },{
+                      "img": "https://cucoe.oss-us-west-1.aliyuncs.com/home/2.png",
+                      "url": "/categories/search?cate=334"
+                  },{
+                      "img": "https://cucoe.oss-us-west-1.aliyuncs.com/home/3.png",
+                      "url": "/categories/search?cate=334"
+                  },{
+                      "img": "https://cucoe.oss-us-west-1.aliyuncs.com/home/4.png",
+                      "url": "/categories/search?cate=334"
+                  }
+              ],
+              "storey_right": [
+                  {
+                      "id": 294,
+                      "name": "test",
+                      "img": "http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+                      "price": 20,
+                      "origin_price": 24.00,
+                      "rebate": 5,
+                      "stock": 85
+                  },{
+                      "id": 294,
+                      "name": "test",
+                      "img": "http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+                      "price": 20,
+                      "origin_price": 24.00,
+                      "rebate": 5,
+                      "stock": 85
+                  }
+              ]
+          },{
+              "storey_title": "DIGTAL",
+              "storey_url": "/categories/search?cate=799",
+              "storey_left": [
+                  {
+                      "img": "https://cucoe.oss-us-west-1.aliyuncs.com/home/01.png",
+                      "url": "/categories/search?cate=334"
+                  },{
+                      "img": "https://cucoe.oss-us-west-1.aliyuncs.com/home/12.png",
+                      "url": "/categories/search?cate=334"
+                  },{
+                      "img": "https://cucoe.oss-us-west-1.aliyuncs.com/home/22.png",
+                      "url": "/categories/search?cate=334"
+                  }
+              ],
+              "storey_right": [
+                  {
+                      "id": 294,
+                      "name": "test",
+                      "img": "http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+                      "price": 20,
+                      "origin_price": 24.00,
+                      "rebate": 5,
+                      "stock": 85
+                  },{
+                      "id": 294,
+                      "name": "test",
+                      "img": "http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+                      "price": 20,
+                      "origin_price": 24.00,
+                      "rebate": 5,
+                      "stock": 85
+                  }
+              ]
+          }
+      ],
+      "goods":[
+          {
+              "id":100047,
+              "name":"Selfie Stick",
+              "img":"http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000046/5bcef6d40b8dd.jpg",
+              "price":5.5,
+              "origin_price": 10.00,
+              "rebate": 1,
+              "stock":20000
+          },
+          {
+              "id":100046,
+              "name":"Foldable Mirror Selfie Stick",
+              "img":"http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000045/5bcef5d39826c.jpg",
+              "price":6,
+              "origin_price": 10.00,
+              "rebate": 1,
+              "stock":160000
+          }
+      ],
+      "total_page": 1
+  }
+}
