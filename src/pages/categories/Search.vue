@@ -1,30 +1,7 @@
 <template>
+<div>
+  <headers></headers>
   <div class="search-main">
-    <div class="global-topbar">
-      <div class="global-center search-bar">
-        <a href="javascript:;" @click="$router.go(-1)">
-          <i class="iconfont fl back-url">&#xe62f;</i>
-        </a>
-        <form action="" class="input fl">
-          <i class="iconfont">&#xe66e;</i>
-          <input ref="inputSearchRef" class="w660 t3s J_searchInput" v-model="serachTitle" type="text" name="search" placeholder="What are you looking for?" @focus="inputFocus" @blur="inputBlur">
-        </form>
-        <div class="btn-search" @click="clickSearchResult">Search</div>
-      </div>
-    </div>
-    <!-- 热门关键词 -->
-    <div class="search-history" v-show="dataSearch.length === 0">
-      <div v-show="historyArr.length" class="label gray2">History</div>
-      <ul v-show="historyArr.length">
-        <li v-for="item in historyArr" @click="getProductsList({title: item, page: 1})"><a href="javascript:;">{{item}}</a></li>
-      </ul>
-      <div class="label gray2">Hot Search</div>
-      <ul>
-        <li v-for="item in hotArr" :class="{'hot': item.hot}" @click="getProductsList({cate: item.cate, page: 1})">
-          <a href="javascript:;">{{item.name}}</a>
-        </li>
-      </ul>
-    </div>
     <!-- 搜索结果 -->
     <div class="search-sort-pos" v-show="dataSearch.length">
       <div class="global-center search-sort">
@@ -62,27 +39,6 @@
           <div class="line"></div>
           <input type="text" class="input-max" placeholder="Max" v-model="filterParams.maxPrice">
         </li>
-        <!-- <li>
-          <div class="lable">
-            <p>Size</p>
-            <i class="iconfont">&#xe611;</i>
-            <div class="filter-value">
-              <div class="fl">
-                <div class="value">S<i class="iconfont">&#xe625;</i></div>
-              </div>
-              <div class="fl">
-                <div class="value">M<i class="iconfont">&#xe625;</i></div>
-              </div>
-              <div class="fl">
-                <div class="value">L<i class="iconfont">&#xe625;</i></div>
-              </div>
-              <div class="fl">
-                <div class="value">XL<i class="iconfont">&#xe625;</i></div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li></li> -->
       </ul>
       <div class="filter-btn">
         <div class="btn-reset fl" @click="filterReset">RESET</div>
@@ -104,22 +60,17 @@
       </ul>
     </div>
     <div class="loading" v-show="dataSearch.length">{{loadingContent}}</div>
-
-    <FloatMenu></FloatMenu>
-
     <div class="search-empty" v-show="!dataSearch.length">
       <img src="~img/categories/no_match.png">
       <p class="gray2">No Match Results</p>
     </div>
   </div>
+</div>
+  
 </template>
 
 <script>
-import FloatMenu from 'common/FloatMenu';
 export default {
-  components: {
-    FloatMenu
-  },
   data () {
     return {
       serachTitle: '', // 关键词

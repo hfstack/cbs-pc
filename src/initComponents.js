@@ -1,8 +1,10 @@
 import Headers from 'components/layout/Header.vue';
 import InvalidTip from 'components/basic/InvalidTip';
+import DSelect from 'components/layout/DSelect';
 const Components = {
   Headers,
-  InvalidTip
+  InvalidTip,
+  DSelect
 };
 
 export default function(Vue) {

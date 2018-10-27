@@ -172,6 +172,15 @@ export default new Router({
       }
     },
     {
+      name: 'categorySearch',
+      path: '/category/search',
+      component: function (resolve) {
+        require.ensure([], function () {
+          resolve(require('pages/categories/index'));
+        }, 'category');
+      }
+    },
+    {
       path: '*',
       redirect: '/my'
     }
