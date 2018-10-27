@@ -1,98 +1,66 @@
 <template>
-  <div class="secure-main">
-    <topbar title="Secure Checkout"></topbar>
-    <div class="secure-shipping">
-      <div class="title"><i class="iconfont">&#xe61e;</i>Shipping Address</div>
-      <div class="line"></div>
-      <div class="shipping-con">
-        <router-link :to="{path: '/cart/addAddress', query: {orderId: $route.query.orderId}}" class="empty" v-if="addressId === ''">
-          + Add a shipping address
-          <i class="iconfont gray2">&#xe62e;</i>
-        </router-link>
-        <router-link :to="{path: '/cart/shippingAddress', query: {orderId: $route.query.orderId}}" class="address-detail" v-else>
-          <template v-for="item in data.user_address" v-if="item.is_default === 1">
-            <div class="info">
-              <div class="fl">{{item.recipients}}</div>
-              <div class="fr">+{{item.iphone}}</div>
+  <div class="secure-main-layout">
+    <headers></headers>
+    <div class="secure-main">
+      <orderstatus :activetwo="true"></orderstatus>
+      <div class="global-layout">
+        <div class="fl left-layout">
+          <div class="left-box">
+            <div class="left-top">123</div>
+            <div class="left-content">
+
+
             </div>
-            <div class="address">{{item.address}}</div>
-            <div class="pos">
-              <i class="iconfont gray2">&#xe62e;</i>
+          </div>
+        </div>
+        <div class="fr right-layout">
+          <div class="right-top">Order Summary</div>
+          <div class="right-content">
+            <ul>
+              <li>
+                <div class="label">Product Total</div>
+                <div class="price">$654.98</div>
+              </li>
+              <li>
+                <div class="label">Estimated Shipping</div>
+                <div class="price">$0.00</div>
+              </li>
+              <li>
+                <div class="label">Buy 3 get 15% off</div>
+                <div class="price red">-$7.98</div>
+              </li>
+              <li>
+                <div class="label">Points <span>(Available: 657)</span><span></span></div>
+                <div class="price red">-$0.00</div>
+              </li>
+              <li>
+                <div class="label">Code/Coupon <span>( no coupon)</span></div>
+                <div class="price red">$654.98</div>
+              </li>
+            </ul>
+            <div class="total-price">
+              <div class="label">Total</div>
+              <div class="price red">$256.00</div>
             </div>
-          </template>
-        </router-link>
+            <div class="submit-button">CHECKOUT</div>
+            <div class="we-accept">
+              <div class="title">we accept</div>
+              <div class="img"></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <ul class="secure-ul">
-      <li>
-        <div class="label"><i class="iconfont title-order">&#xe649;</i> Order</div>
-      </li>
-      <li>
-        <div class="label">Products Price</div>
-        <div class="pos-abs">${{data.price}}</div>
-      </li>
-      <li>
-        <div class="label">Express Delivery</div>
-        <div class="pos-abs">{{+data.delivery || 'Free'}}</div>
-      </li>
-      <li>
-        <div class="label">Available Balance</div>
-        <div class="pos-abs red">
-          {{data.money}}
-          <mt-switch v-model="isBalance"></mt-switch>
-        </div>
-      </li>
-      <li>
-        <div class="label">Order Subtotal</div>
-        <div class="pos-abs red">{{totalPrice}}</div>
-      </li>
-    </ul>
-
-    <ul class="secure-ul">
-      <li>
-        <div class="label"><i class="iconfont">&#xe60a;</i>&nbsp;Payment Method</div>
-      </li>
-      <li class="spe">
-        <div class="label">Credit／Debit card</div>
-        <!-- <div class="pos">
-          <i class="iconfont gray2">&#xe62e;</i>
-        </div> -->
-        <div class="card-detail" v-for="item in cards">
-          <div class="card-number">
-            <router-link class="fl" :to="{path: '/cart/addCard', query: {orderId: this.$route.query.orderId || '', cardId: item.id}}">
-              <span>Card No. :</span>
-              <span class="gray2">{{item.number}}</span>
-              <i class="iconfont gray2">&#xe62e;</i>
-            </router-link>
-            <div class="fr" @click="clickCardDel(item.id, item.number)">
-              <i class="iconfont">&#xe63d;</i>Delete
-            </div>
-          </div>
-          <div class="pos-abs">
-            <input type="radio" name="card" @click="radioClick(item.number)">
-          </div>
-        </div>
-        <div class="card-new" @click="addNewCard">+ Add a new card</div>
-      </li>
-      <li>
-        <div class="label">PayPal</div>
-        <div class="pos-abs">
-          <input type="radio" name="card" @click="radioClick('PayPal')">
-        </div>
-      </li>
-    </ul>
-
-    <div class="global-fixed-btn">
-      <div class="fixed-btn" @click="orderPay">PLACE ORDER ( {{totalPrice}} )</div>
-    </div>
-
-    <confirm :show.sync="confirmModal.show" :title="confirmModal.title"  :content="confirmModal.content" :on-ok="confirmModal.action"  okText="Yes"></confirm>
+  </div>
   </div>
 </template>
 
 <script>
+import orderstatus from 'components/layout/OrderStatus';
 export default {
+  name: 'secure',
+  components: {
+    orderstatus
+  },
   data () {
     return {
       isBalance: true, // 余额
@@ -165,7 +133,7 @@ export default {
         duration: 1000
       });
       setTimeout(function() {
-        self.$router.push({path: '/cart'});
+        self.$router.push({path: '/secure'});
       }, 1000);
     },
     // 添加新卡
@@ -173,7 +141,7 @@ export default {
       if (this.addressId === '') {
         this.$Toast('Please add a shipping address');
       } else {
-        this.$router.push({path: '/cart/addCard', query: {
+        this.$router.push({path: '/secure/addCard', query: {
           orderId: this.$route.query.orderId,
           addressId: +this.addressId,
           balance: this.isBalance,
@@ -217,7 +185,7 @@ export default {
               duration: 1200
             });
             // setTimeout(function() {
-            //   self.$router.push({path: '/cart/successful?orderId=' + self.$route.query.orderId});
+            //   self.$router.push({path: '/secure/successful?orderId=' + self.$route.query.orderId});
             // }, 1000);
           }
         } else {
@@ -226,7 +194,7 @@ export default {
             duration: 1200
           });
           // setTimeout(function() {
-          //   self.$router.push({path: '/cart/failure?orderId=' + self.$route.query.orderId});
+          //   self.$router.push({path: '/secure/failure?orderId=' + self.$route.query.orderId});
           // }, 1000);
         }
       }, err => {
@@ -298,145 +266,93 @@ export default {
 <style lang="less">
 @import "~less/tool.less";
 .secure-main {
-  padding-top: 92/@rem;
-  padding-bottom: 90/@rem;
-  .secure-shipping {
-    position: relative;
-    margin: 20/@rem 0;
-    background-color: #fff;
-    padding: 0 20/@rem;
-    font-size: 28/@rem;
-    .title {
-      .height(90);
-      font-weight: bold;
-      border-bottom: 1px solid @gray3;
-      i {
-        font-weight: normal;
+  background-color: #fff;
+}
+// 公用
+.global-layout {
+  width: 1240px;
+  margin: 0 auto;
+  .clearfix();
+  .left-layout {
+    width: 870px;
+    .left-box {
+      width: 870px;
+      border-radius: 8px;
+      border: 1px solid @bgray;
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+      .left-top {
+        padding: 0 20px;
+        font-size: 16px;
+        .height(60);
+        background-color: #F3F3F3;
       }
-    }
-    .shipping-con {
-      position: relative;
-      line-height: 90/@rem;
-      padding-bottom: 20/@rem;
-      .empty {
-        display: block;
-        color: @gray2;
-        i {
-          position: absolute;
-          top: 0;
-          right: -10/@rem;
-        }
+      .left-content {
+        padding: 0 20px;
       }
-      .address-detail {
-        position: relative;
-        display: block;
-        width: 680/@rem;
-        padding: 20/@rem;
-        position: relative;
-        color: #535353;
-
-        .info {
-          .height(40);
-          .clearfix();
-        }
-        .address {
-          word-break: break-all;
-          line-height: 40/@rem;
-        }
-
-        .pos {
-          position: absolute;
-          top: 30/@rem;
-          right: -40/@rem;
-        }
-      }
-    }
-    .line {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 8/@rem;
-      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAE4AAAAIBAMAAAClhdRfAAAAD1BMVEX///+PyfX1iYnH5Pr6xMRR3CN5AAAAJklEQVQY02MAAhYlOFBhgAJDQTgwgIk5IdQ5QIWYEcqEQfwRZxwAKvUUdRO2lFcAAAAASUVORK5CYII=') repeat-x;
-      background-size: 78/@rem;
     }
   }
-  .secure-ul {
-    display: block;
-    background-color: #fff;
-    margin-bottom: 20/@rem;
-    padding: 0 20/@rem;
-
-    li {
-      position: relative;
-      .height(90);
-      border-bottom: 1px solid @gray4;
-      &:last-child {
-        border-bottom: none;
-      }
-      .label {
-        font-size: 28/@rem;
-        font-weight: bold;
-        i {
-          font-weight: normal;
-          &.title-order {
-            vertical-align: middle;
-            font-size: 36/@rem;
-          }
-        }
-      }
-      .pos {
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
-      .pos-abs {
-        position: absolute;
-        top: 0;
-        right: 0;
-        .clearfix();
-        .mint-switch {
-          float: right;
-          margin-top: 20/@rem;
-          margin-left: 20/@rem;
-        }
-      }
+  .right-layout {
+    width: 350px;
+    border-radius: 8px;
+    border: 1px solid @bgray;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    .right-top {
+      padding: 0 20px;
+      font-size: 16px;
+      .height(59);
+      background-color: #F3F3F3;
+      border-bottom: 1px solid @bgray;
     }
-    .spe {
-      height: auto;
-      .card-detail {
-        position: relative;
-        margin-bottom: 20/@rem;
-      }
-      .card-number {
-        .whl(640, 100);
-        background: rgba(243,242,242,1);
-        border-radius: 10/@rem;
-        padding: 0 20/@rem;
-        font-size: 28/@rem;
-        .clearfix();
-        .fl {
-          .height(100);
-          i {
-            vertical-align: middle;
-          }
-        }
-        .fr {
-          font-size: 24/@rem;
-          color: @gray2;
-          i {
-            font-size: 34/@rem;
-            margin-right: 5/@rem;
-            vertical-align: middle;
-          }
-        }
-      }
-      .card-new {
+    .right-content {
+      ul {
         display: block;
-        border: 1px dashed @gray3;
-        margin: 20/@rem 0;
-        padding: 0 20/@rem;
-        color: @gray2;
+        padding: 12px 20px;
+        border-bottom: 1px solid @bgray;
+        li {
+          .height(32);
+          .label {
+            float: left;
+          }
+          .price {
+            float: right;
+          }
+          span {
+            color: @gray;
+          }
+          .clearfix();
+        }
+      }
+      .total-price {
+        padding: 0 20px;
+        .height(68);
+        .clearfix();
+        .label {
+          float: left;
+          font-size: 16px;
+        }
+        .price {
+          float: right;
+          font-size: 22px;
+        }
+      }
+      .submit-button {
+        margin-left: 10px;
+        .whl(330, 50);
+        background: @orange;
+        border-radius: 8px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 30px;
+      }
+      .we-accept {
+        padding: 0 20px;
+        .title {
+          font-size: 16px;
+          .height(16);
+          margin-bottom: 10px;
+        }
       }
     }
   }

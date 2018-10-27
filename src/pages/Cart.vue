@@ -1,72 +1,74 @@
 <template>
   <div class="cart-main-layout">
     <headers :isCart="true"></headers>
-    <div class="cart-main">s
-
-      <template v-if="cartEmpty">
-        <div class="cart-empty">
-          <div class="img"></div>
-          <p>Your shopping cart is currently empty</p>
-          <router-link :to="{path: '/home'}" class="btn">SHOP NOW</router-link>
-        </div>
-        <bottombar></bottombar>
-      </template>
-      <!-- 有 -->
-      <template v-if="cartsData && cartsData.goods && cartsData.goods.length">
-        <div class="cart-have">
-          <router-link :to="{path: '/activity?activity_id=' + cartsData.promotion_id}" class="cart-enjoy">
-            <span class="img"></span>
-            <span>{{cartsData.promotion_msg}}</span>
-            <i class="iconfont">&#xe62e;</i>
-          </router-link>
-          <div class="cart-list">
-            <div class="detail" v-for="item in cartsData.goods">
-              <router-link :to="{path: '/detail?id=' + item.id}" class="img fl">
-                <img :src="item.img && item.img.ossimg()">
-              </router-link>
-              <div class="info fl">
-                <div class="title">{{item.name}}</div>
-                <div class="sku" v-for="(prop, key, index) in item.props" :class="{'mt': index === 1}">{{prop}}</div>
-                <div class="num">{{item.num}} x ${{item.price}}</div>
-                <div class="price">${{item.num * item.price}}.00</div>
-                <div class="reduce" @click="reduce(item)"><i class="iconfont">&#xe62a;</i></div>
-                <div class="add" @click="add(item)"><i class="iconfont">&#xe66f;</i></div>
+    <div class="cart-main">
+      <div class="cart-empty" v-if="cartEmpty">
+        <div class="img"></div>
+        <p>Your shopping cart is currently empty</p>
+        <router-link :to="{path: '/home'}" class="btn">SHOP NOW</router-link>
+      </div>
+      <div class="cart-have" v-else>
+        <orderstatus></orderstatus>
+        <div class="global-layout">
+          <div class="fl left-layout">
+            <div class="left-box">
+              <div class="left-top">123</div>
+              <div class="left-content">
+                <!-- <ul class="cart-list">
+                  <li></li>
+                </ul> -->
               </div>
             </div>
           </div>
-          <div class="cart-discounts cart-rel">
-            <div class="cart-label">Activity Discounts</div>
-            <div class="cart-pos">{{cartsData.specialoffer}}</div>
-          </div>
-          <div class="cart-coupon cart-rel" @click="clickShowCoupon">
-            <div class="cart-label">
-              Coupon<span v-if="cartsData.coupon">（Rewards {{cartsData.coupon.length}})</span>
-              <span v-else class="gray2">( no coupons )</span>
+          <div class="fr right-layout">
+            <div class="right-top">Order Summary</div>
+            <div class="right-content">
+              <ul>
+                <li>
+                  <div class="label">Product Total</div>
+                  <div class="price">$654.98</div>
+                </li>
+                <li>
+                  <div class="label">Estimated Shipping</div>
+                  <div class="price">$0.00</div>
+                </li>
+                <li>
+                  <div class="label">Buy 3 get 15% off</div>
+                  <div class="price red">-$7.98</div>
+                </li>
+                <li>
+                  <div class="label">Points <span>(Available: 657)</span><span></span></div>
+                  <div class="price red">-$0.00</div>
+                </li>
+                <li>
+                  <div class="label">Code/Coupon <span>( no coupon)</span></div>
+                  <div class="price red">$654.98</div>
+                </li>
+              </ul>
+              <div class="total-price">
+                <div class="label">Total</div>
+                <div class="price red">$256.00</div>
+              </div>
+              <div class="submit-button">CHECKOUT</div>
+              <div class="we-accept">
+                <div class="title">we accept</div>
+                <div class="img"></div>
+              </div>
             </div>
-            <div class="cart-pos">
-              <span>{{this.couponPrice}}</span>
-              <i class="iconfont gray2">&#xe62e;</i>
-            </div>
-          </div>
-          <div class="cart-points cart-rel">
-            <div class="cart-label">Activity Discounts <span class="label-des">( {{cartsData.integral}} points to use )</span></div>
-            <div class="cart-pos">-${{cartsData.integral / 100}}<mt-switch v-model="isUsePoint"></mt-switch></div>
           </div>
         </div>
-        <div class="global-fixed-btn">
-          <div @click="submitCart()" class="fixed-btn">CONTINUE CHECKOUT ( <span>${{totalPrice}}</span> )</div>
-        </div>
-
-        <confirm :show.sync="confirmModal.show" :title="confirmModal.title"  :content="confirmModal.content" :on-ok="confirmModal.action"  okText="Yes"></confirm>
-      </template>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import orderstatus from 'components/layout/OrderStatus';
 export default {
   name: 'cart',
-  components: {},
+  components: {
+    orderstatus
+  },
   data () {
     return {
       cartsData: [],
@@ -267,148 +269,13 @@ export default {
 .cart-main {
   width: 1240px;
   margin: 0 auto;
-  .cart-have {
-    padding-top: 92px;
-  }
-
-  .cart-enjoy {
-    display: block;
-    position: relative;
-    width: 100%;
-    background: #ffffff;
-    .height(70);
-    margin: 1px 0 1px 0;
-    .clearfix();
-    span {
-      float: left;
-      display: inline-block;
-      font-size: 24px;
-      color: @orange;
-    }
-    .img {
-      .wh(60, 28);
-      background: url('~img/detail/s2.png');
-      background-size: 100% auto;
-      margin: 22px;
-      margin-right: 10px;
-    }
-    i {
-      position: absolute;
-      top: 0;
-      right: 10px;
-      color: @gray2;
-      font-size: 32px;
-    }
-  }
-
-  .cart-list {
-    margin-bottom:10px;
-    .detail {
-      background-color: #fff;
-      padding: 20px;
-      // margin-bottom: 18px;
-      border-bottom: 1px solid @gray3;
-      width: 100%;
-      height: 220px;
-      .clearfix();
-      .img, img {
-        .wh(180, 180);
-        background-size: 100%;
-      }
-      .img img {
-        display: block;
-        border: 1px solid @gray2;
-      }
-      .info {
-        position: relative;
-        margin-left: 20px;
-        width: 430px;
-        .title {
-          font-size: 28px;
-          .height(50);
-          .line1();
-        }
-        .sku {
-          .height(40);
-          color: @gray2;
-        }
-        .mt {
-          margin-top: 50px;
-        }
-        .price {
-          position: absolute;
-          top: 142px;
-          right: -80px;
-          text-algin: right;
-          color: @orange;
-        }
-        .num {
-          position: absolute;
-          top: 100px;
-          right: -80px;
-          text-algin: right;
-          color: @gray2;
-        }
-        .reduce, .add {
-          position: absolute;
-          z-index: 2;
-          top: 0;
-          right: -50px;
-          .wh(50, 50);
-        }
-        .add {
-          position: absolute;
-          top: -6px;
-          right: -95px;
-          i {
-            font-size: 50px;
-          }
-          .wh(50, 50);
-        }
-      }
-    }
-  }
-  .cart-rel {
-    position: relative;
-    background: #ffffff;
-    padding: 0 20px;
-    border-bottom: 1px solid @gray3;
-    &:last-child {
-      border-bottom: 1px solid #ececec;
-    }
-    .height(88);
-    .cart-pos {
-      position: absolute;
-      top: 0;
-      right: 20px;
-      .height(88);
-      .clearfix();
-      span {
-        display: inline-block;
-        text-align: right;
-        vertical-align: top;
-      }
-      .mint-switch {
-        float: right;
-        margin-top: 20px;
-        margin-left: 20px;
-      }
-    }
-  }
-
-  .cart-discounts {}
-
-  .cart-coupon {}
-
-  .cart-points {}
 
   .cart-empty {
-    padding-top: 92px;
     text-align: center;
     .img {
       display: inline-block;
-      margin-top: 209px;
-      .wh(315, 185);
+      margin-top: 100px;
+      .wh(210, 114);
       background: url('~img/cart/cart_empty.png') no-repeat;
       background-size: 100% auto;
       margin-left: 50px;
@@ -417,18 +284,108 @@ export default {
       }
     }
     p {
-      margin-top: 80px;
+      margin-top: 20px;
       .height(40);
-      font-size: 28px;
+      font-size: 20px;
       color: @gray2;
     }
     .btn {
       display: inline-block;
-      .whl(540, 80);
-      margin-top: 45px;
+      .whl(320, 50);
+      margin-top: 20px;
+      margin-bottom: 400px;
       border: 1px solid @orange;
       border-radius: 10px;
       color: @orange;
+    }
+  }
+}
+// 公用
+.global-layout {
+  width: 1240px;
+  margin: 0 auto;
+  .clearfix();
+  .left-layout {
+    width: 870px;
+    .left-box {
+      width: 870px;
+      border-radius: 8px;
+      border: 1px solid @bgray;
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+      .left-top {
+        padding: 0 20px;
+        font-size: 16px;
+        .height(60);
+        background-color: #F3F3F3;
+      }
+      .left-content {
+        padding: 0 20px;
+      }
+    }
+  }
+  .right-layout {
+    width: 350px;
+    border-radius: 8px;
+    border: 1px solid @bgray;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    .right-top {
+      padding: 0 20px;
+      font-size: 16px;
+      .height(59);
+      background-color: #F3F3F3;
+      border-bottom: 1px solid @bgray;
+    }
+    .right-content {
+      ul {
+        display: block;
+        padding: 12px 20px;
+        border-bottom: 1px solid @bgray;
+        li {
+          .height(32);
+          .label {
+            float: left;
+          }
+          .price {
+            float: right;
+          }
+          span {
+            color: @gray;
+          }
+          .clearfix();
+        }
+      }
+      .total-price {
+        padding: 0 20px;
+        .height(68);
+        .clearfix();
+        .label {
+          float: left;
+          font-size: 16px;
+        }
+        .price {
+          float: right;
+          font-size: 22px;
+        }
+      }
+      .submit-button {
+        margin-left: 10px;
+        .whl(330, 50);
+        background: @orange;
+        border-radius: 8px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 30px;
+      }
+      .we-accept {
+        padding: 0 20px;
+        .title {
+          font-size: 16px;
+          .height(16);
+          margin-bottom: 10px;
+        }
+      }
     }
   }
 }

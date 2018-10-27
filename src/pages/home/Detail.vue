@@ -39,19 +39,19 @@
           <ul class="detail-some">
             <li class="li1">Deals</li>
             <li>
-              <img src="~img/detail/s1.png">
+              <i class="iconfont icon orange">&#xe612;</i>
               <span>BUY $300 GET $50 </span>
-              <i class="iconfont">&#xe62e;</i>
-              <i class="iconfont">&#xe62e;</i>
+              <i class="iconfont arrow">&#xe62e;</i>
+              <i class="iconfont arrow">&#xe62e;</i>
             </li>
             <li>
-              <img src="~img/detail/s2.png">
+              <i class="iconfont icon red">&#xe710;</i>
               <span>BUY 2 GET 70% OFF</span>
-              <i class="iconfont">&#xe62e;</i>
-              <i class="iconfont">&#xe62e;</i>
+              <i class="iconfont arrow">&#xe62e;</i>
+              <i class="iconfont arrow">&#xe62e;</i>
             </li>
             <li>
-              <img src="~img/detail/s3.png">
+              <i class="iconfont icon yellow">&#xe61c;</i>
               <span>Earn 6 Points，100 points </span>
             </li>
           </ul>
@@ -531,20 +531,27 @@ export default {
       li {
         margin-bottom: 15px;
         .height(25);
-        img {
-          vertical-align: middle;
-          margin-right: 5px;
-          height: 25px;
-          background-size: auto 100%;
+        i.icon {
+          vertical-align: top;
+          font-size: 18px;
+          &.orange {
+            color: @orange;
+          }
+          &.red {
+            color: @red;
+          }
+          &.yellow {
+            color: #FCBE01;
+          }
         }
         span {
           font-weight: 400;
-          margin-right: 10px;
+          margin-right: 15px;
         }
-        i {
+        i.arrow {
           font-weight: bold;
           font-size: 14px;
-          margin-left: -8px;
+          margin-left: -10px;
           color: @gray;
         }
         &:last-child {
@@ -554,6 +561,7 @@ export default {
       .li1 {
         margin-bottom: 5px;
         margin-top: 20px;
+        font-weight: bold;
       }
     }
     .detail-sku {
@@ -564,6 +572,7 @@ export default {
           position: relative;
           margin-top: 25px;
           margin-bottom: 10px;
+          font-weight: bold;
         }
         .attr-des {
           .clearfix();
@@ -571,6 +580,7 @@ export default {
             float: left;
             a {
               display: block;
+              // font-weight: bold;
               .whl(75,25);
               margin-right: 10px;
               text-align: center;
@@ -596,6 +606,7 @@ export default {
         position: relative;
         margin-top: 25px;
         margin-bottom: 10px;
+        font-weight: bold;
       }
       .qty {
         width: 96px;

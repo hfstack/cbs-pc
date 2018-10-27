@@ -1,7 +1,6 @@
 <template>
   <div class="logo-container">
-    <div class="logo"><span class="logo-img"></span>WaiWaiMall</div>
-    <p class="desc">Online Shopping for the Latest Clothes</p>
+    <div class="logo"></div>
   </div>
 </template>
 <script>
@@ -15,20 +14,11 @@ export default {
 };
 </script>
 <style lang="less">
+@import '~less/tool';
 .logo-container{
-  .logo{
-    .logo-img{
-      width: 50px;
-      height: 50px;
-      margin-right: 10px;
-    }
-    font-size: 40px;
-    font-weight: bold;
-    line-height: 50px;
-  }
-  .desc{
-    font-size: 16px;
-    font-weight: bold;
+  .logo {
+    .wh(150, 74);
+    background: url('~assets/logo.png') no-repeat;
   }
 }
 </style>

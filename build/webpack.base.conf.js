@@ -44,6 +44,7 @@ module.exports = {
       'common': resolve('src/pages/common'),
       'less': resolve('src/less'),
       'pages': resolve('src/pages'),
+      'assets': resolve('src/assets'),
       'img': resolve('src/assets/images')
     }
   },
