@@ -9,6 +9,9 @@ import Messagebox from './components/basic/Messagebox';
 import './less/index.less';
 import VeeValidate from 'vee-validate';
 import messages from 'components/utils/zh_CN';
+// checkwebp
+import './components/basic/checkwebp';
+
 const config = {
   errorBagName: 'verrors', // change if property conflicts.
   delay: 0,

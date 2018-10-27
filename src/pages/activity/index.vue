@@ -127,7 +127,6 @@ export default {
 </script>
 <style lang="less">
 .activity{
-  margin-top: 90px;
   text-align: center;
   .activity-header{
      height:120px;
