@@ -43,18 +43,25 @@ export default {
 };
 </script>
 <style lang="less">
+@import '~less/tool';
 .c-nav{
   width: 100%;
   box-shadow:1px 0px 0px rgba(225,225,225,1);
 }
 .c-nav-ul{
-  height: 30px;
+  display: block;
   width: 1240px;
   margin: 0 auto;
-  color: #222222;
-  .nav-item{
+  padding-left: 15px;
+  .nav-item {
     float: left;
-    margin: 0 28px;
+    margin-right: 73px;
+    font-weight: bold;
+    .height(30);
+    &:last-child {
+      margin-right:0;
+    }
   }
+  .clearfix();
 }
 </style>
