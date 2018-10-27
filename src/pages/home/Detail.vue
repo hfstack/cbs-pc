@@ -1,50 +1,143 @@
 <template>
-  <div class="detail-main">
+  <div class="detail-main-layout">
     <headers></headers>
+    <div class="detail-main">
+      <div class="chip">
+        Women
+        <span>/</span>
+        Clothing
+        <span>/</span>
+        Carding
+        <span>/</span>
+      </div>
+
+      <div class="detail-core">
+        <div class="detail-swipe fl">
+          <Swipe class="my-swipe big-img-swipe" ref="bigImgSwipeRef" :showIndicators="false" :nextCallback="nextCallback" :disabled="true">
+            <SwipeItem v-for="(img, index) in imgSwipe" :key="index">
+              <img :src="img && img.ossimg()">
+            </SwipeItem>
+          </Swipe>
+          <div class="small-img-list" ref="smallImgListRef">
+            <Swipe class="my-swipe small-img-swipe" ref="smallImgSwipeRef" :showIndicators="false" :operator="true" :disabled="true">
+              <SwipeItem v-for="(smallImgs, index) in smallImgSwipe" :key="index">
+                <img v-for="(simg, sindex) in smallImgs" :src="simg && simg.ossimg()" @click="smallImgClick(index * 4 + sindex)" :class="{'cur': index * 4 + sindex === 0}">
+              </SwipeItem>
+            </Swipe>
+          </div>
+        </div>
+
+        <div class="detail-info fl">
+          <div class="detail-title">{{data.name}}</div>
+          <div class="detail-price">
+            <div class="fl price">
+              <div class="red">${{goodsData.price}}</div>
+              <div class="gray">${{goodsData.originPrice}}</div>
+            </div>
+            <div class="fl off">-{{(goodsData.price * 100) / (goodsData.originPrice * 100) * 100}}% OFF</div>
+          </div>
+          <ul class="detail-some">
+            <li class="li1">Deals</li>
+            <li>
+              <img src="~img/detail/s1.png">
+              <span>BUY $300 GET $50 </span>
+              <i class="iconfont">&#xe62e;</i>
+              <i class="iconfont">&#xe62e;</i>
+            </li>
+            <li>
+              <img src="~img/detail/s2.png">
+              <span>BUY 2 GET 70% OFF</span>
+              <i class="iconfont">&#xe62e;</i>
+              <i class="iconfont">&#xe62e;</i>
+            </li>
+            <li>
+              <img src="~img/detail/s3.png">
+              <span>Earn 6 Points，100 points </span>
+            </li>
+          </ul>
+
+          <div class="detail-sku">
+            <div class="attr-con">
+              <div class="attr-title">{{goodsData.name}}</div>
+              <ul class="attr-des" ref="oneSkuRef">
+                <li v-for="(item, index) in data.style" @click="oneSkuClick(index, item.stock)" >
+                  <a :class="{'cur': item.value === goodsData.oneValue && +item.stock !== 0, 'disabled': +item.stock === 0}" href="javascript:;">{{item.value}}</a>
+                </li>
+              </ul>
+              <template v-if="goodsData.subArr && goodsData.subArr.length">
+                <div class="attr-title">{{goodsData.subArr[0].name}} <SizeGuide :show="goodsData.subArr[0].name === 'Size' || goodsData.subArr[0].name === 'size'"></SizeGuide></div>
+                <ul class="attr-des" ref="twoSkuRef">
+                  <li v-for="(item, index) in goodsData.subArr" @click="twoSkuClick(index, item.stock)">
+                    <a :class="{'disabled': +item.stock === 0}" href="javascript:;">{{item.value}}</a>
+                  </li>
+                </ul>
+              </template>
+            </div>
+          </div>
+
+          <div class="detail-qty">
+            <div class="qty-title">Qty</div>
+            <div class="qty">
+              <a href="javascript:;" class="reduce fl" :class="{'ban': goodsData.saleNum <= 1}"  @click="reduceClick()">
+                <i class="iconfont">&#xe62a;</i>
+              </a>
+              <div class="num fl">{{goodsData.saleNum}}</div>
+              <a href="javascript:;" class="add fl" @click="addClick()">
+                <i class="iconfont">&#xe66f;</i>
+              </a>
+            </div>
+          </div>
+
+          <div class="detail-button" @click="submitClick">ADD TO CART</div>
+        </div>
+
+        <div class="product-details fl">
+          <div class="title">Product Details</div>
+          <ul class="info-main">
+            <li v-for="(prop, key, index) in data.prop">
+              <div class="label fl">{{key}}:</div>
+              <div class="des fl">{{prop}}</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// import { Swipe, SwipeItem } from 'components/swipe';
+import { Swipe, SwipeItem } from 'components/swipe';
+import SizeGuide from './SizeGuide.vue';
 // import Coupon from 'common/Coupon.vue';
 // import Point from './Point.vue';
 export default {
   props: {},
-  components: {},
+  components: {
+    Swipe,
+    SwipeItem,
+    SizeGuide
+  },
   data () {
     return {
       data: {},
-      isShowCoupon: false, // 是否显示coupon弹层
-      isShowPoint: false,
       goodsData: {
         saleNum: 1
       }, // 选中的商品信息
       imgSwipe: [], // 大图
       smallImgSwipe: [], // 小图
       imgRelationArr: [], // 图片关系  找到图片属于第几个object
-      isBackMenuShow: false, // back菜单按钮
-      isMaskShow: false, // 背景mask
-      isPopupSkuShow: false, // 弹出SKU
       imgNum: 0, // sku中展示的图片
       oneSkuNum: 0, // sku第一排动态属性高亮
       el: {}, // dom 集合
       skuId: null, // sku id
-      submitLocked: false, // 提交锁
-      backUrl: 'home' // 返回路径
+      submitLocked: false // 提交锁
     }
   },
   created () {
     this.getDetailData();
-    if (this.$route.query.from) {
-      this.backUrl = decodeURIComponent(this.$route.query.from);
-    }
   },
   mounted () {},
-  watch: {
-    'isPopupSkuShow': function(value) {
-      document.documentElement.style.overflow = value ? 'hidden' : 'auto';
-    }
-  },
+  watch: {},
   methods: {
     // 获取详情页基础数据
     getDetailData () {
@@ -55,7 +148,10 @@ export default {
           this.data = res.content;
         }
       }, err => {
-        this.$Toast(err);
+        this.$Messagebox({
+          title: err || '网络错误',
+          type: 'error'
+        });
       }).then(() => {
         this.getOneSkuData();
       }).then(() => {
@@ -126,6 +222,7 @@ export default {
         twoValue: '', // 选中二层属性值
         img: '', // 展示图片
         price: oneSku.prom_price || oneSku.price,
+        originPrice: oneSku.price,
         stock: oneSku.stock,
         saleNum: 1 // 购物数量
       };
@@ -254,35 +351,14 @@ export default {
       }
       this.goodsData.saleNum--;
     },
-    // 返回菜单
-    backMenuClick () {
-      this.isMaskShow = !this.isMaskShow;
-      this.isBackMenuShow = !this.isBackMenuShow;
-    },
-    // 点击黑点底层
-    changeMaskClick () {
-      this.isMaskShow = !this.isMaskShow;
-      document.documentElement.style.overflow = this.isMaskShow ? 'hidden' : '';
-      this.isPopupSkuShow = false;
-      this.isBackMenuShow = false;
-    },
-    // 点击coupon
-    clickShowCouponModal () {
-      this.isShowCoupon = true;
-    },
-    clickShowPointModal () {
-      this.isShowPoint = true;
-    },
-    // 点击加入购物车
-    footCartClick () {
-      this.isMaskShow = true;
-      this.isPopupSkuShow = true;
-    },
     // OK - 提交表单
     submitClick () {
       // 判定是否选择完毕
       if (!this.skuId) {
-        this.$Toast('Please select your ' + this.goodsData.subArr[0].name);
+        this.$Messagebox({
+          title: 'Please select your ' + this.goodsData.subArr[0].name,
+          type: 'error'
+        });
         return;
       }
       // 提交锁
@@ -305,27 +381,24 @@ export default {
           localStorage.setItem('userToken', res.content.token);
           // 跳转到购物车
           setTimeout(function() {
-            document.body.scrollTop = document.documentElement.scrollTop = 0; // 滚动到顶部
-            document.documentElement.style.overflow = 'auto';
             self.submitLocked = false; // 解锁
-            self.isMaskShow = false;
-            self.isPopupSkuShow = false;
             self.$router.push({
               path: '/cart?id=' + self.$route.query.id
             });
           }, 1000);
         } else {
           this.submitLocked = false; // 解锁
-          this.$Toast(res.msg);
+          this.$Messagebox({
+            title: res.msg || '网络错误',
+            type: 'error'
+          });
         }
       }, err => {
-        this.$Toast(err);
+        this.$Messagebox({
+          title: err || '网络错误',
+          type: 'error'
+        });
       });
-    },
-    // 弹出SKU点击关闭
-    skuCloseClick () {
-      this.isMaskShow = false;
-      this.isPopupSkuShow = false;
     }
   }
 };
@@ -333,7 +406,260 @@ export default {
 
 <style lang="less">
 @import "~less/tool.less";
-.detail-main {
+.detail-main-layout {
+  width: 100%;
+  background-color: #fff;
+}
 
+.detail-main {
+  width: 1240px;
+  margin: 0 auto;
+  .chip {
+    width: 100%;
+    .height(56);
+    color: @gray;
+    text-align: left;
+    font-weight: bold;
+    font-size: 12px;
+    span {
+      color: #222;
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+}
+
+.detail-core {
+  .clearfix();
+  .detail-swipe {
+    width: 580px;
+    height: 710px;
+    .big-img-swipe {
+      .wh(580, 580);
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+    .small-img-list {
+      position: relative;
+      background-color: #fff;
+      .wh(580, 110);
+      margin-top: 20px;
+      .small-img-swipe {
+        overflow: visible;
+        .wh(580, 110);
+
+        .mint-swipe-items-wrap {
+          .clearfix();
+          .mint-swipe-item {
+            padding-left : 38px;
+          }
+          img {
+            display: block;
+            float: left;
+            .wh(110, 110);
+            margin-right: 20px;
+            -webkit-transition: -webkit-transform .3s;
+            transition: -webkit-transform .3s;
+            transition: transform .3s;
+            transition: transform .3s, -webkit-transform .3s;
+            &:nth-child(4n) {
+              margin-right: 0;
+            }
+          }
+          img.cur {
+            border: 1px solid @red;
+          }
+        }
+      }
+      .des {
+        margin-top: 20px;
+        p {
+          padding: 0 30px;
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+          font-size: 26px;
+          .line1();
+        }
+      }
+    }
+  }
+  .detail-info {
+    width: 600px;
+    margin-left: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid @bgray;
+
+    .detail-title {
+      font-size: 18px;
+      font-weight: bold;
+      .line1();
+      margin-bottom: 15px;
+    }
+    .detail-price {
+      .clearfix();
+      .price {
+        .red {
+          .height(30);
+          color: @fred;
+          font-size: 28px;
+          // font-weight: bold;
+          // margin-bottom: 5px;
+        }
+        .gray {
+          color: @gray;
+          text-decoration: line-through;
+          font-size: 18px;
+        }
+      }
+      .off {
+        .whl(80,30);
+        color: #fff;
+        margin-left: 10px;
+        // margin-top: 5px;
+        background-color: #222;
+        text-align: center;
+        font-size: 12px;
+      }
+    }
+    .detail-some {
+      display: block;
+      li {
+        margin-bottom: 15px;
+        .height(25);
+        img {
+          vertical-align: middle;
+          margin-right: 5px;
+          height: 25px;
+          background-size: auto 100%;
+        }
+        span {
+          font-weight: 400;
+          margin-right: 10px;
+        }
+        i {
+          font-weight: bold;
+          font-size: 14px;
+          margin-left: -8px;
+          color: @gray;
+        }
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      .li1 {
+        margin-bottom: 5px;
+        margin-top: 20px;
+      }
+    }
+    .detail-sku {
+      margin-top: 5px;
+      .attr-con {
+        .clearfix();
+        .attr-title {
+          position: relative;
+          margin-top: 25px;
+          margin-bottom: 10px;
+        }
+        .attr-des {
+          .clearfix();
+          li {
+            float: left;
+            a {
+              display: block;
+              .whl(75,25);
+              margin-right: 10px;
+              text-align: center;
+              border: 1px solid @bgray;
+              -webkit-transition: -webkit-transform .3s;
+              transition: -webkit-transform .3s;
+              transition: transform .3s;
+              transition: transform .3s, -webkit-transform .3s;
+              &.cur {
+                border: 1px solid @fred;
+              }
+              &.disabled {
+                border: 1px solid @bgray;
+                color: @bgray;
+              }
+            }
+          }
+        }
+      }
+    }
+    .detail-qty {
+      .qty-title {
+        position: relative;
+        margin-top: 25px;
+        margin-bottom: 10px;
+      }
+      .qty {
+        width: 96px;
+        height: 26px;
+        border: 1px solid @bgray;
+        overflow: hidden;
+        .reduce {
+          border-right: 1px solid @bgray;
+          i {
+            font-size: 14px;
+          }
+          &.ban i {
+            color: #c7c7c7;
+          }
+        }
+        .add {
+          border-left: 1px solid @bgray;
+        }
+        .reduce, .add {
+          display: block;
+          text-align: center;
+          font-weight: bold;
+          .whl(24, 24);
+        }
+        .num {
+          .whl(45, 24);
+          text-align: center;
+        }
+      }
+    }
+    .detail-button {
+      cursor: pointer;
+      .whl(340,55);
+      margin-top: 25px;
+      text-align: center;
+      background-color: @red;
+      border-radius:4px;
+      color: #fff;
+      font-size: 24px;
+    }
+  }
+
+  .product-details {
+    margin-left: 40px;
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 15px 0 20px 0;
+    }
+    .info-main {
+      display: block;
+      width: 600px;
+      li {
+        color: @gray;
+        width: 100%;
+        .clearfix();
+        .height(30);
+        .label {
+          width: 180px;
+        }
+        .des {
+          width: 400px;
+        }
+      }
+    }
+  }
 }
 </style>

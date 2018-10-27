@@ -546,7 +546,6 @@
 </script>
 
 <style lang="less">
-  @rem: 100rem;
   .mint-swipe {
     overflow: hidden;
     position: relative;
@@ -554,16 +553,22 @@
     i {
       position: absolute;
       z-index: 1;
-      top: 15/@rem;
-      width: 90/@rem;
-      font-size: 90/@rem;
-      color: #dfe0e4;
+      top: 38px;
+      width: 25px;
+      height: 40px;
+      font-size: 26px;
+      text-align: center;
+      padding-top: 5px;
+      color: #fff;
+      opacity: .4;
+      background-color: #000;
+      cursor: pointer;
     }
     i.left {
-      left: -90/@rem;
+      left: 0;
     }
     i.right {
-      right: -90/@rem;
+      right: 0;
     }
   }
   .mint-swipe-items-wrap {
@@ -588,19 +593,19 @@
   }
   .mint-swipe-indicators {
     position: absolute;
-    bottom: 0.45rem;
+    bottom: 10px;
     text-align: center;
     left: 50%;
-    width: 750/@rem;
+    width: 580px;
     margin-left: -50%;
   }
   .mint-swipe-indicator {
-    width: 20/@rem;
-    height: 20/@rem;
+    width: 8px;
+    height: 8px;
     display: inline-block;
     border-radius: 100%;
     background: #bfbfbf;
-    margin: 0 10/@rem;
+    margin: 0 8px;
   }
   .mint-swipe-indicator.is-active {
     background: #ff473c;
