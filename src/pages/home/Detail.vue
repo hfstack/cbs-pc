@@ -108,8 +108,6 @@
 <script>
 import { Swipe, SwipeItem } from 'components/swipe';
 import SizeGuide from './SizeGuide.vue';
-// import Coupon from 'common/Coupon.vue';
-// import Point from './Point.vue';
 export default {
   props: {},
   components: {
@@ -226,6 +224,7 @@ export default {
         stock: oneSku.stock,
         saleNum: 1 // 购物数量
       };
+      // console.log(this.goodsData);
       this.skuId = null; // 第二属性没选
       // 第二属性处理
       let subArr = oneSku.sub || [];
