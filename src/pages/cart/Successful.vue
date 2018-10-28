@@ -1,27 +1,34 @@
 <template>
-  <div class="successful-main">
-    <topbar title="Successful Payment" backUrl="my/orderList"></topbar>
-    <div class="successful-con">
-      <div class="title">
-        <i class="iconfont">&#xe602;</i>
-        Successful Payment
+  <div class="successful-main-layout">
+    <headers></headers>
+    <div class="successful-main">
+      <orderstatus :activetwo="true" :activethree="true"></orderstatus>
+      <div class="successful-con">
+        <div class="title">
+          <div class="icon">
+            <i class="iconfont">&#xe625;</i>
+          </div>
+          Successful Payment
+        </div>
+        <p>Thank you for shopping with WaiWaiMall, we will deliver the goods soon ! Your order number is {{$route.query.orderId}}</p>
       </div>
-      <p class="f32">Order amount: {{data.price}}</p>
-      <p>Thank you for your order, we will deliver the goods soon</p>
+      <router-link :to="{path: '/home'}" class="btn-shopping">GO SHOPPING</router-link>
+      <router-link :to="{path: '/my/orderDetail?orderid=' + data.order_id}" class="btn-order">VIEW THE ORDER</router-link>
     </div>
-    <router-link :to="{path: '/my/orderDetail?orderid=' + data.order_id}" class="btn-order">VIEW THE ORDER</router-link>
-    <router-link :to="{path: '/home'}" class="btn-shopping">GO SHOPPING</router-link>
   </div>
 </template>
 
 <script>
+import orderstatus from 'components/layout/OrderStatus';
 export default {
   data () {
     return {
       data: {}
     }
   },
-  computed: {},
+  components: {
+    orderstatus
+  },
   created () {
     //  /cart/successful?payType=2&paymentId=12344&payerId=232233
     let payParams = {};
@@ -57,56 +64,71 @@ export default {
 
 <style lang="less">
 @import '~less/tool.less';
+.successful-main-layout {
+  width: 100%;
+  margin: 0 auto;
+  background: #fff;
+}
 .successful-main {
-  padding-top: 92/@rem;
-  font-size: 28/@rem;
+  width: 1240px;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 500px;
   .successful-con {
     background-color: #fff;
-    border-top: 1px solid @gray3;
-    padding: 20/@rem;
     text-align: center;
-    padding-bottom: 50/@rem;
-    font-weight: bold;
+    padding-bottom: 50px;
+
     .title {
-      margin-top: 60/@rem;
-      margin-bottom: 25/@rem;
-      height: 100/@rem;
-      font-size: 30/@rem;
-      i {
-        color: #46C33B;
-        font-size: 80/@rem;
+      margin-top: 30px;
+      margin-bottom: 25px;
+      font-size: 24px;
+      color: #019532;
+      font-weight: bold;
+      .icon {
+        display: inline-block;
+        .whl(50, 50);
+        text-align: center;
+        background-color: #019532;
+        border-radius: 50%;
         vertical-align: middle;
-        margin-right: 10/@rem;
+        margin-right: 15px;
+        i {
+          color: #fff;
+          font-size: 40px;
+        }
       }
     }
     p {
-      .height(45);
-    }
-    .f32 {
-      font-size: 32/@rem;
+      width: 590px;
+      margin: 0 auto;
+      font-size: 18px;
+      .height(28);
+      color: @gray;
     }
   }
 
   .btn-order {
-    display: block;
-    .whl(710, 88);
-    margin: 0 auto;
+    display: inline-block;
+    margin-top: 50px;
+    .whl(330, 50);
     background-color: @orange;
-    border-radius: 8/@rem;
+    border-radius: 8px;
     color: #fff;
     text-align: center;
-    margin-top: 43/@rem;
+    font-size: 18px;
   }
   .btn-shopping {
-    display: block;
-    .whl(710, 88);
-    margin: 0 auto;
+    display: inline-block;
+    margin-top: 50px;
+    .whl(330, 50);
+    margin-right: 60px;
     background-color: #fff;
-    border-radius: 8/@rem;
+    border-radius: 8px;
     border: 1px solid @orange;
     color: @orange;
     text-align: center;
-    margin-top: 20/@rem;
+    font-size: 18px;
   }
 }
 </style>

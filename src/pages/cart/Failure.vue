@@ -1,26 +1,32 @@
 <template>
-  <div class="failure-main">
-    <topbar title="Failure Payment" backUrl="my/orderList"></topbar>
-    <div class="failure-con">
-      <div class="title">
-        <i class="iconfont">&#xe63f;</i>
-        Failure to pay
+  <div class="failure-main-layout">
+    <headers></headers>
+    <div class="failure-main">
+      <orderstatus :activetwo="true" :activethree="true"></orderstatus>
+      <div class="failure-con">
+        <div class="title">
+          <i class="iconfont">&#xe62c;</i>
+          Failure to pay
+        </div>
+        <p>Order amount: {{data.price}}</p>
+        <p>Payment failed, please pay again.</p>
       </div>
-      <p class="f32">Order amount: {{data.price}}</p>
-      <p>Payment failed, please pay again.</p>
+      <router-link :to="{path: '/my/orderDetail?orderid=' + data.order_id}" class="btn-order">VIEW THE ORDER</router-link>
     </div>
-    <router-link :to="{path: '/my/orderDetail?orderid=' + data.order_id}" class="btn-order">VIEW THE ORDER</router-link>
   </div>
 </template>
 
 <script>
+import orderstatus from 'components/layout/OrderStatus';
 export default {
   data () {
     return {
       data: []
     }
   },
-  computed: {},
+  components: {
+    orderstatus
+  },
   created () {
     //  /cart/failure?payType=2&paymentId=12344&payerId=232233
     let payParams = {};
@@ -56,49 +62,64 @@ export default {
 
 <style lang="less">
 @import '~less/tool.less';
+.failure-main-layout {
+  width: 100%;
+  margin: 0 auto;
+  background: #fff;
+}
 .failure-main {
-  padding-top: 92/@rem;
-  font-size: 28/@rem;
+  width: 1240px;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 500px;
   .failure-con {
     background-color: #fff;
-    border-top: 1px solid @gray3;
-    padding: 20/@rem;
     text-align: center;
-    padding-bottom: 50/@rem;
-    font-weight: bold;
+    padding-bottom: 50px;
+
     .title {
-      margin-top: 60/@rem;
-      margin-bottom: 5/@rem;
-      height: 100/@rem;
-      font-size: 30/@rem;
+      margin-top: 30px;
+      margin-bottom: 25px;
+      font-size: 24px;
+      color: #019532;
+      font-weight: bold;
       i {
-        color: @orange;
-        font-size: 60/@rem;
         vertical-align: middle;
-        margin-right: 10/@rem;
-        border: 2px solid @orange;
-        border-radius: 50%;
-        padding: 10/@rem;
+        margin-right: 15px;
+        color:  #019532;
+        font-size: 50px;
       }
     }
     p {
-      .height(45);
-    }
-    .f32 {
-      font-size: 32/@rem;
+      width: 590px;
+      margin: 0 auto;
+      font-size: 18px;
+      .height(28);
+      color: @gray;
     }
   }
 
   .btn-order {
-    display: block;
-    .whl(710, 88);
-    margin: 0 auto;
+    display: inline-block;
+    margin-top: 50px;
+    .whl(330, 50);
     background-color: @orange;
-    border-radius: 8/@rem;
+    border-radius: 8px;
     color: #fff;
     text-align: center;
-    margin-top: 43/@rem;
-    font-size: 28/@rem;
+    font-size: 18px;
+  }
+  .btn-shopping {
+    display: inline-block;
+    margin-top: 50px;
+    .whl(330, 50);
+    margin-right: 60px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid @orange;
+    color: @orange;
+    text-align: center;
+    font-size: 18px;
   }
 }
 </style>

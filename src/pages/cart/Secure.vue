@@ -6,9 +6,12 @@
       <div class="global-layout">
         <div class="fl left-layout">
           <div class="left-box">
-            <div class="left-top">123</div>
+            <div class="left-top">Shipping Address</div>
             <div class="left-content">
-
+              <!-- <div class="table">
+                <div class="label">* First Name</div>
+                <input type="text">
+              </div> -->
 
             </div>
           </div>
@@ -18,7 +21,7 @@
           <div class="right-content">
             <ul>
               <li>
-                <div class="label">Product Total</div>
+                <div class="label">Subtotal</div>
                 <div class="price">$654.98</div>
               </li>
               <li>
@@ -26,16 +29,11 @@
                 <div class="price">$0.00</div>
               </li>
               <li>
-                <div class="label">Buy 3 get 15% off</div>
-                <div class="price red">-$7.98</div>
-              </li>
-              <li>
-                <div class="label">Points <span>(Available: 657)</span><span></span></div>
-                <div class="price red">-$0.00</div>
-              </li>
-              <li>
-                <div class="label">Code/Coupon <span>( no coupon)</span></div>
-                <div class="price red">$654.98</div>
+                <div class="label">
+                  Balance <span>(Available: ${{data.balance}})</span>
+                  <dswitch :status.sync="isBalance" :on-change="changeBalance" class="disi"></dswitch>
+                </div>
+                <div class="price red">-${{isBalance ? data.balance : '0.00'}}</div>
               </li>
             </ul>
             <div class="total-price">
@@ -63,7 +61,7 @@ export default {
   },
   data () {
     return {
-      isBalance: true, // 余额
+      isBalance: false, // 余额
       totalPrice: 0, // 总价
       data: [],
       cards: [], // 银行卡列表
@@ -79,15 +77,7 @@ export default {
     this.getCardsData();
   },
   mounted () {},
-  watch: {
-    'isBalance': function (value) {
-      if (value) {
-        this.totalPrice = this.returnFloat(+this.data.price - +this.data.money);
-      } else {
-        this.totalPrice = this.returnFloat(+this.data.price);
-      }
-    }
-  },
+  watch: {},
   methods: {
     // 获取订单信息
     getOrdersData () {
@@ -201,17 +191,13 @@ export default {
         this.$Toast(err);
       });
     },
-    // radio click
-    radioClick (value) {
-      // Paypal支付
-      if (value === 'PayPal') {
-        this.payType = 2;
-        this.cardNumber = '';
-        return;
+    // 改变points
+    changeBalance (status) {
+      if (status) {
+        this.isBalance = true;
+      } else {
+        this.isBalance = false;
       }
-      // 银行支付卡号
-      this.payType = 3;
-      this.cardNumber = +value;
     },
     // 删除card
     clickCardDel (cardId, cardNumber) {
@@ -312,6 +298,11 @@ export default {
           .height(32);
           .label {
             float: left;
+          }
+          .disi {
+            display: inline-block;
+            top: 5px;
+            margin-left: 5px;;
           }
           .price {
             float: right;
