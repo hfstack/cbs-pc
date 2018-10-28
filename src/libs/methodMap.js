@@ -89,8 +89,9 @@ const methodMap = {
   /** PC首页 */
   PCHome: {url: '/pc/home', method: 'post'},
   /** Pc个人中心首页 */
-  PCPersonalIndex: {url: '/pc/personal/index', method: 'post'}
-
+  PCPersonalIndex: {url: '/pc/personal/index', method: 'post'},
+  /** pc分类 */
+  PCCate: { url: '/pc/cates', method: 'post' }
 };
 
 export default methodMap;

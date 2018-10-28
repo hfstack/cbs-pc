@@ -84,6 +84,11 @@ export default {
     this.getProductsList();
     this.loadMore();
   },
+  watch: {
+    '$route.query': function(val) {
+      this.getProductsList();
+    }
+  },
   methods: {
     // 获取商品列表信息
     getProductsList () {
@@ -193,6 +198,7 @@ export default {
         text-align: center;
         border-radius:4px;
         margin-left: 20px;
+        cursor: pointer;
       }
       .unit{
         font-weight: bold;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Qs from 'qs';
 import router from '@/router';
+import domain from './api';
 const config = {
   // baseURL: '',
   timeout: 200000, //
@@ -24,10 +25,10 @@ const config = {
 const AxiosInst = axios.create(config);
 //  请求拦截器
 AxiosInst.interceptors.request.use((config) => {
-
-  if(config.method == 'get'){
+  config.url = domain + config.url;
+  if (config.method === 'get') {
     config.params.token = window.localStorage.getItem('userToken') || '';
- }
+  }
   return config;
 }, (err) => {
   return Promise.reject(err);

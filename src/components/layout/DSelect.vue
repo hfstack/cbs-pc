@@ -90,7 +90,9 @@ export default {
     },
     requestParams: {
       type: Object,
-      default: {}
+      default: () => {
+        return {}
+      }
     },
     method: {
       type: String,

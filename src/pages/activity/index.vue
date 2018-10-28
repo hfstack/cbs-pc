@@ -3,10 +3,6 @@
     <headers></headers>
     <div class="activity" >
       <img src="../../assets/images/home/a_top.jpg" alt="" class="a-top">
-      <!-- <div class="activity-header" :style="{'background-color': bgColor}">
-        <p class="title">{{promotions.promotion_msg}}<a href="javascript:;" class="title" @click="getCoupon" v-if="coupons.length"> CHECK IT</a></p>
-        <div class="activity-countdown">{{startEndDesc}} <countdown v-if="promotions.promotion_end" :color="bgColor" :start-time="promotions.promotion_start" :end-time="!this.isEnd ? promotions.promotion_end : ''"></countdown></div>
-      </div> -->
       <div class="activity-content">
         <goods-list :list="goodsList" v-if="goodsList.length"></goods-list>
       </div>

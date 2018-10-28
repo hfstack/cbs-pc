@@ -350,6 +350,12 @@ var setOnline = [
     name: 'pcPersonalIndex',
     type: 'post',
     url: '/pc/personal/index'
+  },
+  // pc分类
+  {
+    name: 'pcCates',
+    type: 'post',
+    url: '/pc/cates'
   }
 ];
 
