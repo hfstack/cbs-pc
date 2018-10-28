@@ -56,7 +56,6 @@ export default {
         password: {
           required: true
         }
-
       }
     }
   },
@@ -94,25 +93,19 @@ export default {
     },
     login() {
       this.rerror = '';
-      this.$validator.validateAll().then(success => {
-        if (!success) {
-          return;
-        };
-        this.request('UsersLogin', {
-          email: this.params.email,
-          password: this.params.password
-        }).then((res) => {
-          if(res.status === 200 && res.content) {
-            window.localStorage && window.localStorage.setItem('userToken', res.content.token);
-            this.$router.push({
-              name: 'myAccount'
-            })
-          } else {
-            this.rerror = res.msg
-          }
-        })
+      this.request('UsersLogin', {
+        email: this.params.email,
+        password: this.params.password
+      }).then((res) => {
+        if(res.status === 200 && res.content) {
+          window.localStorage && window.localStorage.setItem('userToken', res.content.token);
+          this.$router.push({
+            name: 'myAccount'
+          })
+        } else {
+          this.rerror = res.msg
+        }
       })
-     
     }
   }
 }
