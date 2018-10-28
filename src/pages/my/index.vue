@@ -65,7 +65,7 @@ export default {
         {
           title: 'Profile',
           active: false,
-          routerName: 'myProfile'
+          routerName: 'profile'
         }
       ]
     };
@@ -103,6 +103,8 @@ export default {
 };
 </script>
 <style lang="less">
+@import '~less/tool.less';
+
 .c-my {
   width: 1240px;
   min-height: 630px;
@@ -136,7 +138,7 @@ export default {
       font-weight: bold;
     }
     .active {
-      color: #FF473C;
+      color: @orange
     }
   }
   .c-content{

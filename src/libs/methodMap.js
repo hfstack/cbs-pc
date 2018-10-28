@@ -87,7 +87,10 @@ const methodMap = {
   /** 优惠券apply */
   CouponsApply: {url: '/coupons/apply', method: 'post'},
   /** PC首页 */
-  PCHome: {url: '/pc/home', method: 'post'}
+  PCHome: {url: '/pc/home', method: 'post'},
+  /** Pc个人中心首页 */
+  PCPersonalIndex: {url: '/pc/personal/index', method: 'post'}
+
 };
 
 export default methodMap;

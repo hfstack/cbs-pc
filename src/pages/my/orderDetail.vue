@@ -2,7 +2,7 @@
   <div>
     <div class="order-detail">
       <div class="order-title">
-        status: <span style="color: #FF3333">{{orderDesc}}</span>
+        status: <span style="color: #F96C17">{{orderDesc}}</span>
       </div>
       
       <div  class="my-order-list">
@@ -32,6 +32,7 @@
         <p class="o-price total"><span class="fr money">${{finalAmount}}</span><span class="fr">All Total: </span></p>
       </div>
       <div class="address">
+        <div class="address-line"></div>
         <!-- <i class="iconfont address-icon">&#xe651;</i> -->
         <p class="user"><span class="name">{{name}}</span><span>{{telephone.toString().slice(0, 3)}}*****{{telephone.toString().slice(7, 10)}}</span></p>
         <p class="adddress-detail">Ship to：{{address}}</p>
@@ -39,20 +40,21 @@
       <div class="operate clearfix">
         <!-- 订单状态(订单状态 1-待付款 3-待发货 4-待收货 5-交易完成 6-交易取消 ) -->
         <!-- TODO 代付款  按钮是红色   其他时候都是正常颜色 -->
-        <div class="operate-item operate-two" v-if="orderHandle.pay">Pay now{{this.finalAmount}}</div>
+        <div class="operate-item operate-two" v-if="orderHandle.pay">Pay now {{this.finalTime}}</div>
         <div class="operate-item operate-two" @click="handleCollect" v-if="orderHandle.collect">I get it</div>
         <div class="operate-item" @click="getLogistics" v-if="orderHandle.logistic">Logistics Info</div>
         <div class="operate-item" v-if="orderHandle.delete" @click="handleDelete">Delete</div>
       </div>
       
     </div>
-    <!-- <confirm :show.sync="confirmModal.show" :title="confirmModal.title"  :content="confirmModal.content" :on-ok="confirmModal.action"  okText="Yes"></confirm> -->
+    <confirm :show.sync="confirmModal.show" :title="confirmModal.title"  :content="confirmModal.content" :on-ok="confirmModal.action"  okText="Yes"></confirm>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
+      finalTime: 0,
       orders: [],
       orderstatus: 0,
       ordergoods: [],
@@ -81,6 +83,24 @@ export default {
   },
   computed: {},
   methods: {
+     // 剩余时间倒计时
+    getCountDown() {
+      let orderTime = new Date(this.ordertime).getTime();
+      const self = this;
+      let timer = setInterval(function() {
+        let now = new Date().getTime();
+        let t = now - orderTime;
+        let min = Math.floor((t / 60000) % 60);
+        let sec = Math.floor((t / 1000) % 60);
+        if (t > 0) {
+          min = min < 10 ? '0' + min : min;
+          sec = sec < 10 ? '0' + sec : sec;
+        } else {
+          clearInterval(timer);
+        }
+        self.finalTime = min + ':' + sec;
+      }, 1000);
+    },
     getOrderDesc() {
       let handle = {};
       if(+this.orderstatus === 1) {
@@ -128,9 +148,15 @@ export default {
           this.telephone = res.content.telephone;
           this.address = res.content.address; 
           this.getOrderDesc();
+          if(this.orderstatus === 1) {
+            this.getCountDown();
+          }
         }
       }, err => {
-        this.$Toast(err.data.msg);
+        this.$Messagebox({
+          title: err.data.msg,
+          type: 'error'
+        });
       })
     },
     // 确认收货
@@ -151,24 +177,49 @@ export default {
         if(res.status === 200) {
           this.confirmModal.show = false;
           this.getOrderDetail();
-          this.$Toast('success');
+        } else {
+          this.$$Messagebox({
+            title: res.msg,
+            type: 'error'
+          })
         }
       }, err => {
-        this.$Toast(err)
+        this.$$Messagebox({
+          title: err.data.msg,
+          type: 'error'
+        })
       })
     },
-    // 删除订单
+     // 确认收货
     handleDelete() {
+      this.confirmModal = {
+        show: true,
+        type: 'confirm',
+        content: 'Are you sure to delete the order？',
+        action: this.handleDeleteCb
+      }
+    },
+    // 删除订单
+    handleDeleteCb() {
       this.request('OrdersDelete', {
         order_id: this.orderid
       }).then((res) => {
         if(res.status === 200) {
           this.confirmModal.show = false;
-          this.getOrderDetail();
-          this.$Toast(res.msg)
+          this.$router.push({
+            name: 'myOrders'
+          })
+        } else {
+          this.$$Messagebox({
+            title: res.msg,
+            type: 'error'
+          })
         }
       }, err => {
-        this.$Toast(err)
+        this.$$Messagebox({
+          title: err.data.msg,
+          type: 'error'
+        })
       })
     },
     // 物流信息
@@ -184,8 +235,11 @@ export default {
 }
 </script>
 <style lang="less">
+@import '~less/tool.less';
+
 .order-detail{
   background-color: #fff;
+  padding-bottom: 40px;
   .order-title{
     color: #010101;
     height: 58px;
@@ -229,8 +283,10 @@ export default {
     .address-line{
       position: absolute;
       left: 0px;
+      top: 0;
       width: 8px;
       height: 100%;
+      background: url('../../assets/images/my/xinfeng.png') repeat center center;
     }
     .user{
       color: #131313;
@@ -302,9 +358,10 @@ export default {
       width: 200px;
       height: 50px;
       line-height: 50px;
-      color: #DE525E;
-      border: 1px solid #DE525E;
+      color: @orange;
+      border: 1px solid @orange;
       margin-left: 20px;
+      cursor: pointer;
     }
     & > div {
       float: right;
@@ -312,7 +369,7 @@ export default {
       text-align: center;
     }
     .operate-two {
-      background: #DE525E;
+      background: @orange;
       color: #fff
     }
   }  

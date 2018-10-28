@@ -1,0 +1,17 @@
+{
+  "status": 200,
+  "msg": "success",
+  "content": {
+      "img":"http://192.168.1.122:6006/",
+      "username": "iykf",
+      "integral": "0",
+      "money": "0.00",
+      "card": "2",
+      "income": "230.46",
+      "wait_account": "12.5",
+      "funs": 20,
+      "order_unpay": 2,
+      "order_ship": 4,
+      "order_all":10
+  }
+}

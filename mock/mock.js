@@ -344,8 +344,13 @@ var setOnline = [
     name: 'pcHome',
     type: 'post',
     url: '/pc/home'
+  },
+  // pc个人中心
+  {
+    name: 'pcPersonalIndex',
+    type: 'post',
+    url: '/pc/personal/index'
   }
-
 ];
 
 // 输出配置项

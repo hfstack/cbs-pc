@@ -17,6 +17,17 @@
         },
         "name": "CS",
         "img": "http:\/\/cucoe.oss-us-west-1.aliyuncs.com\/product\/000001000001\/5b97c013e60ef.jpg"
+      },{
+        "id": 295,
+        "price": 20,
+        "num": 5,
+        "sku_value_ids": "271,273",
+        "sku_value": {
+          "color": "red1",
+          "size": "0-3y"
+        },
+        "name": "CS",
+        "img": "http://www.runoob.com/images/compatible_firefox.gif"
       }]
     }, {
       "orderid": "1227208457113410162",

@@ -8,7 +8,7 @@
     <table class="tab-orders">
       <thead>
         <tr class="tr-header">
-          <th v-bind:class="column.className" v-bind:style="{width: column.width + '%'}" v-for="(column, index) in columns" :key="index">
+          <th v-bind:class="column.className" v-bind:style="{width: column.width + 'px'}" v-for="(column, index) in columns" :key="index">
             {{column.title}}
           </th>
         </tr>
@@ -17,7 +17,17 @@
         <tr class="tr-items" v-for="(item, index) in orders" :key="index">
           <template v-for="column in columns">
             <template v-if="column.action">
-              <td class="td-actions">
+              <td v-if="column.goods">
+                <div class="order-goods">
+                  <div :style="{'width': '100px'}">
+                    <img v-show="ele.show" class="product-img" v-for="ele in item.ordergoods" width="100" height="100" :src="ele.img" />
+                    <p>{{item.ordergoods.length}} items</p>
+                    <span class="turn-left" @click="turnClick(item.ordergoods, 'left')"></span>
+                    <span class="turn-right"  @click="turnClick(item.ordergoods,'right')"></span>
+                  </div>
+                </div>
+              </td>
+              <td class="td-actions" v-else>
                 <div class="operate-item operate-two" v-if="item.orderHandle.pay">Pay now{{item.finalTime}}</div>
                 <div class="operate-item operate-two" @click="handleCollect(item)" v-if="item.orderHandle.collect">I get it</div>
                 <div class="operate-item operate-one" @click="getLogistics(item)" v-if="item.orderHandle.logistic">Logistics Info</div>
@@ -49,14 +59,17 @@ export default {
       },
       {
         title: 'Products',
-        render: function(text, item, index) {
-          let str = `<div class="order-goods"><div style="width: ${100 * item.ordergoods.length}px">`;
-          for (let i = 0; i < item.ordergoods.length; i++) {
-            str += `<img class="product-img" width="100" height="100" src="${item.ordergoods[i].img}" />`;
-          }
-          str += `</div><p>${item.ordergoods.length} items</p><span class="turn-left"></span><span class="turn-right"></span></div>`;
-          return str;
-        }
+        width: '160',
+        action: true,
+        goods: true,
+        // render: function(text, item, index) {
+        //   let str = `<div class="order-goods"><div style="width: ${100 * item.ordergoods.length}px">`;
+        //   for (let i = 0; i < item.ordergoods.length; i++) {
+        //     str += `<img class="product-img" width="100" height="100" src="${item.ordergoods[i].img}" />`;
+        //   }
+        //   str += `</div><p>${item.ordergoods.length} items</p><span class="turn-left"></span><span class="turn-right"></span></div>`;
+        //   return str;
+        // }
       },
       {
         title: 'Order Total',
@@ -137,12 +150,36 @@ export default {
       }
       return handle;
     },
+    turnClick(data, type) {
+      let cindex = 0;
+      data.forEach((item, index) => {
+        if(item.show) {
+          cindex = index;
+        }
+        item.show = false;
+      })
+      if(type === 'left') {
+        cindex === 0 ? cindex = data.length - 1 : cindex -= 1;
+        console.log(cindex)
+      }
+      if(type === 'right') {
+        cindex === data.length-1 ? cindex = 0 : cindex += 1
+      }
+      data[cindex]['show'] = true;
+    },
     getOrderList() {
       this.request('OrdersList', this.params).then((res) => {
         if (res.status === 200) {
           let orders = res.content.orderData || [];
           orders.forEach((item) => {
             item.orderHandle = this.getOrderHandle(item);
+            item.ordergoods.forEach((ele, index) => {
+              if(index === 0) {
+                ele.show = true;
+              } else {
+                ele.show = false;
+              }
+            })
           });
           this.orders = orders;
         } else {
@@ -214,6 +251,8 @@ export default {
 };
 </script>
 <style lang="less">
+@import '~less/tool.less';
+
 .my-orders {
   .order-tabs{
     height: 36px;
@@ -221,6 +260,8 @@ export default {
     border: 1px solid #444;
     border-radius: 4px;
     margin: 20px auto 10px;
+    text-align: center;
+    cursor: pointer;
     .order-tabitem{
       float: left;
       width: 120px;
@@ -240,6 +281,10 @@ export default {
   }
   .tab-orders{
     width: 914px;
+    text-align: center;
+    td{
+      position: relative;
+    }
     .tr-items {
       padding: 20px 0;
       height: 160px;
@@ -255,13 +300,13 @@ export default {
       .order-detail{
         font-size: 16px;
         a{
-          color: #E4E4E4;
+          color: #939399;
           text-decoration: underline
         }
       }
       .operate-two{
-        border: 1px solid #E4E4E4;
-        color: #E4E4E4;
+        border: 1px solid #939399;
+        color: #939399;
         width: 120px;
         height: 40px;
         line-height: 40px;
@@ -269,10 +314,12 @@ export default {
         text-align: center;
         margin: 0 auto;
         margin-bottom: 10px;
+        cursor: pointer;
       }
       .operate-one {
         text-decoration: underline;
-        color: #E4E4E4;
+        color: #939399;
+        cursor: pointer;
       }
     }
     .tr-header{
@@ -297,29 +344,35 @@ export default {
     .order-goods{
       width: 100px;
       overflow: scroll;
-      position: relative;
+      margin: 0 auto;
       .product-img{
         width: 100px;
         height: 100px;
+        display: inline-block;
       }
       .turn-left {
-        width: 27px;
-        height: 27px;
         display: block;
         position: absolute;
-        left: -10px;
-        top: 50px;
-        z-index: 22
+        left: 0px;
+        top: 60px;
+        z-index: 22;
+        cursor: pointer;
+        width:0;
+        height:0;
+        border: 8px solid transparent;
+        border-right-color: @orange;//左箭头
       }
       .turn-right {
-        width: 27px;
-        height: 27px;
-        background-color: #E9484F;
+        cursor: pointer;
         display: block;
         position: absolute;
-        right: -37px;
-        top: 50px;
-        z-index: 22
+        right: -0px;
+        top: 60px;
+        z-index: 22;
+        width:0;
+        height:0;
+        border: 8px solid transparent;
+        border-left-color: @orange;//左箭头
       }
     }
   }

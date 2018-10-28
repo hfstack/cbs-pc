@@ -80,15 +80,6 @@ export default new Router({
           }
         },
         {
-          name: 'orderDetail',
-          path: 'orders/detail',
-          component: function (resolve) {
-            require.ensure([], function () {
-              resolve(require('pages/my/orderDetail'));
-            }, 'my');
-          }
-        },
-        {
           name: 'myPoints',
           path: 'points',
           component: function (resolve) {

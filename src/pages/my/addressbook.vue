@@ -1,29 +1,17 @@
 <template>
   <div class="address-book">
     <ul class="address-list clearfix">
-      <li class="address-item fl">
+      <li class="address-item fl" v-for="item in list">
         <div class="line"></div>
         <p>
-          QIAN.XIAO
+          {{item.recipients}}
           <span class="edit"><i class="iconfont">&#xe621;</i>Edit</span>
           <span class="delete"><i class="iconfont">&#xe63d;</i>Delete</span>
         </p>
-        <p>+001123455534545</p>
-        <p>608 kingsley st</p>
-        <p>United States, 61761</p>
-        <p class="is-default">Default Shopping Address</p>
-      </li>
-      <li class="address-item fl">
-        <div class="line"></div>
-        <p>
-          QIAN.XIAO
-          <span class="edit"><i class="iconfont">&#xe621;</i>Edit</span>
-          <span class="delete"><i class="iconfont">&#xe63d;</i>Delete</span>
-        </p>
-        <p>+001123455534545</p>
-        <p>608 kingsley st</p>
-        <p>United States, 61761</p>
-        <p class="set-default"><span class="icon-select"></span>Set as Default Shipping Address</p>
+        <p>{{item.iphone}}</p>
+        <p class="address">{{item.address}}</p>
+        <p class="is-default"  v-if="item.is_default">Default Shopping Address</p>
+        <p class="set-default" v-if="!item.is_default"><span class="icon-select"></span>Set as Default Shipping Address</p>
       </li>
     </ul>
     <div class="add-address">
@@ -34,23 +22,37 @@
 <script>
 export default {
   data() {
-
+    return {
+      list: []
+    }
   },
   mounted() {
-
+    this.getAddressList();
   },
   methods: {
-
+    getAddressList () {
+      this.request('AddressList', {
+        page: 1
+      }).then((res) => {
+        if (res.status === 200 && res.content) {
+          this.list = res.content || [];
+        }
+      }, err => {
+        this.$Toast(err);
+      });
+    },
   }
 }
 </script>
 <style lang="less">
+@import '~less/tool.less';
+
 .address-book{
   padding-top: 20px;
   .address-list{
     .address-item{
       width: 445px;
-      height: 230px;
+      height: 194px;
       padding: 5px 14px 5px 30px; 
       position: relative; 
       background-color: #E4E4E4;
@@ -61,8 +63,10 @@ export default {
       .line{
         position: absolute;
         left: 0;
+        top: 0;
         width: 8px;
         height: 100%;
+        background: url('../../assets/images/my/xinfeng.png') repeat center center;
       }
       .edit{
         position: absolute;
@@ -95,9 +99,13 @@ export default {
         }
         cursor: pointer;
       }
+      .address{
+        white-space:nowrap; 
+        text-overflow:ellipsis; 
+        overflow:hidden;
+      }
       p{
         font-size: 16px;
-        font-weight: bold;
         line-height: 44px;
         text-align: left;
       }
@@ -110,13 +118,15 @@ export default {
     }
   }
   .add-address{
+    cursor: pointer;
     margin-top: 30px;
     width:200px;
     height:40px;
     line-height: 40px;
-    border:1px solid rgba(222,82,94,1);
-    border-radius:4px;
-    color: #DE525E;
+    border:1px solid @orange;
+    padding: 0 13px;
+    border-radius: 4px;
+    color: orange;
     cursor: pointer;
   }
 }
