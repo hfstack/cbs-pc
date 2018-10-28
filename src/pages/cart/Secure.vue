@@ -6,10 +6,75 @@
       <div class="global-layout">
         <div class="fl left-layout">
           <div class="left-box">
-            <div class="left-top">123</div>
+            <div class="left-top">Shipping Address</div>
             <div class="left-content">
-
-
+              <!-- <div class="table">
+                <div class="label">* First Name</div>
+                <input type="text">
+              </div> -->
+              <!-- 没有地址信息 或者 第一次进入 -->
+              <div class="shipping-table">
+                <div class="two clearfix">
+                  <div class="table-item mr fl">
+                    <div class="label">* First Name</div>
+                    <div class="input">
+                      <input type="text">
+                    </div>
+                  </div>
+                  <div class="table-item fl">
+                    <div class="label">* First Name</div>
+                    <div class="input">
+                      <input type="text">
+                    </div>
+                  </div>
+                  <div class="table-item mr fl">
+                    <div class="label">* First Name</div>
+                    <div class="input">
+                      <input type="text">
+                    </div>
+                  </div>
+                  <div class="table-item fl">
+                    <div class="label">* First Name</div>
+                    <div class="input">
+                      <input type="text">
+                    </div>
+                  </div>
+                  <div class="table-item mr fl">
+                    <div class="label">* First Name</div>
+                    <div class="input">
+                      <input type="text">
+                    </div>
+                  </div>
+                  <div class="table-item fl">
+                    <div class="label">* First Name</div>
+                    <div class="input">
+                      <input type="text">
+                    </div>
+                  </div>
+                </div>
+                <div class="table-item">
+                  <div class="lable">* Address Line1</div>
+                  <div class="input">
+                    <input type="text">
+                  </div>
+                </div>
+                <div class="table-item">
+                  <div class="lable">* Address Line1</div>
+                  <div class="input">
+                    <input type="text">
+                  </div>
+                </div>
+                <div class="table-item">
+                  <div class="lable">* Telephone</div>
+                  <div class="input">
+                    <input type="text">
+                  </div>
+                </div>
+                <div class="rember">
+                  <input type="checkbox">Set as Default Shipping Address
+                </div>
+                <div class="shipping-submit">SAVE</div>
+              </div>
             </div>
           </div>
         </div>
@@ -18,7 +83,7 @@
           <div class="right-content">
             <ul>
               <li>
-                <div class="label">Product Total</div>
+                <div class="label">Subtotal</div>
                 <div class="price">$654.98</div>
               </li>
               <li>
@@ -26,16 +91,11 @@
                 <div class="price">$0.00</div>
               </li>
               <li>
-                <div class="label">Buy 3 get 15% off</div>
-                <div class="price red">-$7.98</div>
-              </li>
-              <li>
-                <div class="label">Points <span>(Available: 657)</span><span></span></div>
-                <div class="price red">-$0.00</div>
-              </li>
-              <li>
-                <div class="label">Code/Coupon <span>( no coupon)</span></div>
-                <div class="price red">$654.98</div>
+                <div class="label">
+                  Balance <span>(Available: ${{data.balance}})</span>
+                  <dswitch :status.sync="isBalance" :on-change="changeBalance" class="disi"></dswitch>
+                </div>
+                <div class="price red">-${{isBalance ? data.balance : '0.00'}}</div>
               </li>
             </ul>
             <div class="total-price">
@@ -63,7 +123,7 @@ export default {
   },
   data () {
     return {
-      isBalance: true, // 余额
+      isBalance: false, // 余额
       totalPrice: 0, // 总价
       data: [],
       cards: [], // 银行卡列表
@@ -79,15 +139,7 @@ export default {
     this.getCardsData();
   },
   mounted () {},
-  watch: {
-    'isBalance': function (value) {
-      if (value) {
-        this.totalPrice = this.returnFloat(+this.data.price - +this.data.money);
-      } else {
-        this.totalPrice = this.returnFloat(+this.data.price);
-      }
-    }
-  },
+  watch: {},
   methods: {
     // 获取订单信息
     getOrdersData () {
@@ -184,34 +236,24 @@ export default {
               message: 'Payment Processing',
               duration: 1200
             });
-            // setTimeout(function() {
-            //   self.$router.push({path: '/secure/successful?orderId=' + self.$route.query.orderId});
-            // }, 1000);
           }
         } else {
           self.$Toast({
             message: res.msg || 'Payment Failure',
             duration: 1200
           });
-          // setTimeout(function() {
-          //   self.$router.push({path: '/secure/failure?orderId=' + self.$route.query.orderId});
-          // }, 1000);
         }
       }, err => {
         this.$Toast(err);
       });
     },
-    // radio click
-    radioClick (value) {
-      // Paypal支付
-      if (value === 'PayPal') {
-        this.payType = 2;
-        this.cardNumber = '';
-        return;
+    // 改变points
+    changeBalance (status) {
+      if (status) {
+        this.isBalance = true;
+      } else {
+        this.isBalance = false;
       }
-      // 银行支付卡号
-      this.payType = 3;
-      this.cardNumber = +value;
     },
     // 删除card
     clickCardDel (cardId, cardNumber) {
@@ -300,7 +342,7 @@ export default {
       padding: 0 20px;
       font-size: 16px;
       .height(59);
-      background-color: #F3F3F3;
+      // background-color: #F3F3F3;
       border-bottom: 1px solid @bgray;
     }
     .right-content {
@@ -312,6 +354,11 @@ export default {
           .height(32);
           .label {
             float: left;
+          }
+          .disi {
+            display: inline-block;
+            top: 5px;
+            margin-left: 5px;;
           }
           .price {
             float: right;
@@ -353,7 +400,35 @@ export default {
           .height(16);
           margin-bottom: 10px;
         }
+        .img {
+          .wh(310, 88);
+          background: url('~img/cart/1.png') no-repeat;
+          background-size: 100% auto;
+          margin-top: 10px;
+          margin-bottom: 25px;
+        }
       }
+    }
+  }
+}
+// 地址
+.shipping-table {
+
+  .table-item {
+    width: 830px;
+    &.fl {
+      width: 405px;
+    }
+    .mr {
+      margin-right: 20px;
+    }
+    .label {
+      .height(25);
+    }
+    input {
+      .height(44);
+      border: 1px solid #e4e4e4;
+      padding: 0 10px;
     }
   }
 }

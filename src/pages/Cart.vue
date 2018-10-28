@@ -89,6 +89,7 @@
                         <input type="text" v-model="redeemCode" class="s-input" placeholder="Enter Promo Code"/>
                         <div class="search-btn" @click="getCouponApply">Applay</div>
                       </div>
+                      <div class="apply-info" :class="applySuccess ? 'green' : 'red'">{{applyInfo}}</div>
                       <!-- 优惠券状态个人中心 1-可用 2-未开始 3-已过期未使用 4-已使用  商品详情页 优惠券状态 1-可领取 2-已领取 3-已领完-->
                       <div v-for="(item,index) in (couponList.length && couponList || cartsData.coupon)" :key="index" class="coupon-item" @click="clickCoupon(item)">
                         <div class="coupon-radio fl">
@@ -139,6 +140,9 @@ export default {
       cartsData: [],
       couponList: [], // 搜索出的couponlist
       redeemCode: '', // 券码
+      applyLocked: false, // 券锁
+      applySuccess: false, // 券查询成功
+      applyInfo: '', // apply 信息
       isShowCoupon: false, // 显示优惠券
       couponId: '', // 优惠券ID
       isUsePoint: false, // 是否使用积分
@@ -310,19 +314,30 @@ export default {
     },
     // 搜索券
     getCouponApply() {
+      if (this.applyLocked) {
+        return;
+      }
+      this.applyLocked = true;
       this.request('CouponsApply', {
         redeemCode: this.redeemCode
       }).then((res) => {
         if (res.status === 200 && res.content) {
           this.couponList = res.content.coupons || [];
+          // apply coupon success 信息通知
+          this.applySuccess = true;
+          this.applyInfo = 'Apply coupon successfully';
         } else {
           this.couponList = [];
+          this.applySuccess = false;
+          this.applyInfo = 'Apply coupon failure';
           this.$Messagebox({
             title: 'Wrong promo code',
             type: 'error'
           });
         }
+        this.applyLocked = false;
       }, err => {
+        this.applyLocked = false;
         this.$Toast(err);
         this.$Messagebox({
           title: err || 'system error',
@@ -546,6 +561,14 @@ export default {
       }
 
     }
+    .apply-info {
+      &.green {
+        color: #019532;
+      }
+      &.red {
+        color: #ff473c;
+      }
+    }
     .coupon-item {
       width: 310px;
       height: 52px;
@@ -632,7 +655,7 @@ export default {
       padding: 0 20px;
       font-size: 16px;
       .height(59);
-      background-color: #F3F3F3;
+      // background-color: #F3F3F3;
       border-bottom: 1px solid @bgray;
     }
     .right-content {

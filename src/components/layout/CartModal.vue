@@ -1,6 +1,6 @@
 <template>
   <div class="cart-modal-layout">
-    <div class="cart-number">1</div>
+    <div class="cart-number" v-show="cartsData.goods && cartsData.goods.length">{{cartsData.goods && cartsData.goods.length}}</div>
     <div class="cart-modal-main" v-show="show">
       <ul class="list">
         <li v-for="(item, index) in cartsData.goods" :key="index">
@@ -42,7 +42,7 @@ export default {
     }
   },
   created () {
-    this.show && this.getCartData();
+    this.getCartData();
   },
   methods: {
     getCartData () {
@@ -92,7 +92,7 @@ export default {
     position: absolute;
     top: 52px;
     left: -188px;
-    z-index: 2;
+    z-index: 20;
     width: 390px;
     padding: 15px 20px;
     height: auto;

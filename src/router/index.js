@@ -43,6 +43,24 @@ export default new Router({
       }
     },
     {
+      name: 'successful',
+      path: '/cart/successful',
+      component: function (resolve) {
+        require.ensure([], function () {
+          resolve(require('pages/cart/Successful'));
+        }, 'successful');
+      }
+    },
+    {
+      name: 'failure',
+      path: '/cart/failure',
+      component: function (resolve) {
+        require.ensure([], function () {
+          resolve(require('pages/cart/Failure'));
+        }, 'failure');
+      }
+    },
+    {
       name: 'my',
       path: '/my',
       component: function (resolve) {
