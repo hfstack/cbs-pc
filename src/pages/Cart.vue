@@ -11,48 +11,79 @@
         <orderstatus></orderstatus>
         <div class="global-layout">
           <div class="fl left-layout">
+            <div class="left-title">Shopping Cart<span> ( 4 Items )</span></div>
             <div class="left-box">
-              <div class="left-top">123</div>
+              <div class="left-top">
+                .More $20 to get $10 off.
+                <router-link :to="{path: '/'}">Explore more >></router-link>
+              </div>
               <div class="left-content">
-                <!-- <ul class="cart-list">
-                  <li></li>
-                </ul> -->
+                <div class="goods">
+                  <div class="img fl"><img src="https://g-search1.alicdn.com/img/bao/uploaded/i4/i2/1905882464/O1CN011U4YM0F0X2S73du_!!1905882464.jpg_.webp?x-oss-process=image/format,webp"></div>
+                  <div class="info fl">
+                    <div class="title">Women's T Shirt O Neck Short Sleeve Figure Pattern Casual Style Top Casual StyleCasual Style</div>
+                    <div class="sku">
+                      <span>Color : </span><span class="mr">White</span>
+                      <span>Size : </span><span>M</span>
+                    </div>
+                    <div class="operator">
+                      <i class="iconfont">&#xe63d;</i> Delete
+                    </div>
+                  </div>
+                  <div class="price fl">
+                    <div class="now-price">$150.00</div>
+                    <div class="origin-price">$244.99</div>
+                  </div>
+                  <div class="qty fl">
+                    <a href="javascript:;" class="reduce fl">
+                      <i class="iconfont">&#xe62a;</i>
+                    </a>
+                    <div class="num fl">1</div>
+                    <a href="javascript:;" class="add fl">
+                      <i class="iconfont">&#xe66f;</i>
+                    </a>
+                  </div>
+                  <div class="total-price red fl">$244.99</div>
+                </div>
               </div>
             </div>
           </div>
           <div class="fr right-layout">
-            <div class="right-top">Order Summary</div>
-            <div class="right-content">
-              <ul>
-                <li>
-                  <div class="label">Product Total</div>
-                  <div class="price">$654.98</div>
-                </li>
-                <li>
-                  <div class="label">Estimated Shipping</div>
-                  <div class="price">$0.00</div>
-                </li>
-                <li>
-                  <div class="label">Buy 3 get 15% off</div>
-                  <div class="price red">-$7.98</div>
-                </li>
-                <li>
-                  <div class="label">Points <span>(Available: 657)</span><span></span></div>
-                  <div class="price red">-$0.00</div>
-                </li>
-                <li>
-                  <div class="label">Code/Coupon <span>( no coupon)</span></div>
-                  <div class="price red">$654.98</div>
-                </li>
-              </ul>
-              <div class="total-price">
-                <div class="label">Total</div>
-                <div class="price red">$256.00</div>
-              </div>
-              <div class="submit-button">CHECKOUT</div>
-              <div class="we-accept">
-                <div class="title">we accept</div>
-                <div class="img"></div>
+            <div class="right-title">Checkout</div>
+            <div class="right-box">
+              <div class="right-top">Order Summary</div>
+              <div class="right-content">
+                <ul>
+                  <li>
+                    <div class="label">Product Total</div>
+                    <div class="price">$654.98</div>
+                  </li>
+                  <li>
+                    <div class="label">Estimated Shipping</div>
+                    <div class="price">$0.00</div>
+                  </li>
+                  <li>
+                    <div class="label">Buy 3 get 15% off</div>
+                    <div class="price red">-$7.98</div>
+                  </li>
+                  <li>
+                    <div class="label">Points <span>(Available: 657)</span><span></span></div>
+                    <div class="price red">-$0.00</div>
+                  </li>
+                  <li>
+                    <div class="label">Code/Coupon <span>( no coupon)</span></div>
+                    <div class="price red">$654.98</div>
+                  </li>
+                </ul>
+                <div class="total-price">
+                  <div class="label">Total</div>
+                  <div class="price red">$256.00</div>
+                </div>
+                <div class="submit-button">CHECKOUT</div>
+                <div class="we-accept">
+                  <div class="title">we accept</div>
+                  <div class="img"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -269,6 +300,7 @@ export default {
 .cart-main {
   width: 1240px;
   margin: 0 auto;
+  padding-bottom: 200px;
 
   .cart-empty {
     text-align: center;
@@ -299,6 +331,109 @@ export default {
       color: @orange;
     }
   }
+
+  .left-title,
+  .right-title {
+    .height(20);
+    font-size: 20px;
+    margin-bottom: 12px;
+    span {
+      color: @gray;
+      font-size: 16px;
+    }
+  }
+
+  .goods {
+    .wh(830, 150);
+    border-bottom: 1px solid @bgray;
+    margin-top: 30px;
+    padding-bottom: 30px;
+    font-size: 16px;
+    &:last-child {
+      border: none;
+    }
+    .clearfix();
+    .img {
+      .wh(120, 120);
+      img {
+        .wh(120, 120);
+      }
+      .status {
+
+      }
+    }
+    .info {
+      width: 280px;
+      margin-left: 20px;
+      margin-top: -5px;
+      .title {
+        line-height: 25px;
+        .line2();
+      }
+      .sku {
+        margin-top: 20px;
+        color: @gray;
+        .mr {
+          margin-right: 38px;
+        }
+      }
+      .operator {
+        cursor: pointer;
+        margin-top: 24px;
+        color: @gray;
+        i {
+          vertical-align: top;
+          font-size: 18px;
+          font-weight: bold;
+        }
+      }
+    }
+    .price {
+      width: 130px;
+      margin: 40px 0 0 35px;
+      line-height: 25px;
+      font-size: 22px;
+      .origin-price {
+        color: @gray;
+        text-decoration: line-through;
+      }
+    }
+    .total-price {
+      margin-top: 50px;
+      font-size: 22px;
+    }
+    .qty {
+      width: 96px;
+      height: 26px;
+      border: 1px solid #666;
+      overflow: hidden;
+      margin-top: 50px;
+      margin-right: 50px;
+      cursor: pointer;
+      .reduce {
+        border-right: 1px solid #666;
+        i {
+          font-size: 14px;
+        }
+        &.ban i {
+          color: #c7c7c7;
+        }
+      }
+      .add {
+        border-left: 1px solid #666;
+      }
+      .reduce, .add {
+        display: block;
+        text-align: center;
+        font-weight: bold;
+        .whl(24, 24);
+      }
+      .num {
+        .whl(45, 24);
+        text-align: center;
+      }
+    }
+  }
 }
 // 公用
 .global-layout {
@@ -317,6 +452,15 @@ export default {
         font-size: 16px;
         .height(60);
         background-color: #F3F3F3;
+        position: relative;
+        color: @orange;
+        a {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          .height(18);
+          color: @gray;
+        }
       }
       .left-content {
         padding: 0 20px;
@@ -325,9 +469,12 @@ export default {
   }
   .right-layout {
     width: 350px;
-    border-radius: 8px;
-    border: 1px solid @bgray;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    .right-box {
+      width: 350px;
+      border-radius: 8px;
+      border: 1px solid @bgray;
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    }
     .right-top {
       padding: 0 20px;
       font-size: 16px;
@@ -384,6 +531,13 @@ export default {
           font-size: 16px;
           .height(16);
           margin-bottom: 10px;
+        }
+        .img {
+          .wh(310, 88);
+          background: url('~img/cart/1.png') no-repeat;
+          background-size: 100% auto;
+          margin-top: 10px;
+          margin-bottom: 25px;
         }
       }
     }

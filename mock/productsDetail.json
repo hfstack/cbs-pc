@@ -148,7 +148,8 @@
           "http://img.alicdn.com/imgextra/i2/792382564/TB27rsfnz3z9KJjy0FmXXXiwXXa_!!792382564.jpg_640x0q85s150_.webp",
           "https://gw3.alicdn.com/bao/uploaded/i4/3017834712/TB1aMWnaHSYBuNjSspfXXcZCpXa_!!0-item_pic.jpg_.webp"
         ],
-        "supply_price": "185.00",
+        "price": "20.00",
+        "prom_price": "10.00",
         "stock": "0",
         "value_ids": "6",
         "sub": [

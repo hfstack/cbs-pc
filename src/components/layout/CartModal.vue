@@ -42,7 +42,7 @@ export default {
     }
   },
   created () {
-    this.getCartData();
+    this.show && this.getCartData();
   },
   methods: {
     getCartData () {
