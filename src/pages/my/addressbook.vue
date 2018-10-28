@@ -11,12 +11,13 @@
         <p>{{item.iphone}}</p>
         <p class="address">{{item.address}}</p>
         <p class="is-default"  v-if="item.is_default">Default Shopping Address</p>
-        <p class="set-default" v-if="!item.is_default"><span class="icon-select"></span>Set as Default Shipping Address</p>
+        <p class="set-default" v-if="!item.is_default"><checkbox></checkbox> as Default Shipping Address</p>
       </li>
     </ul>
     <div class="add-address">
       + ADD NEW ADDRESS
     </div>
+    
   </div>
 </template>
 <script>

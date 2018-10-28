@@ -72,6 +72,9 @@ export default {
       info: {}
     }
   },
+  mounted() {
+    this.getPersonalIndex()
+  },
   methods: {
     editPorfile() {
       this.$router.push({

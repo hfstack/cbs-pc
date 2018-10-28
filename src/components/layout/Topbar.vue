@@ -16,11 +16,9 @@ export default {
   },
   methods: {
     login: function() {
-      this.request('UsersLogin').then((res) => {
-        if (res.status === 200) {
-          alert('success');
-        }
-      });
+      this.$router.push({
+        name: 'login'
+      })
     }
   }
 };
@@ -42,6 +40,9 @@ export default {
     }
     .lang{
       margin-right: 30px;
+    }
+    .l-r{
+      cursor: pointer;
     }
   }
 }

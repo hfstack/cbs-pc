@@ -66,12 +66,14 @@ html, body{
 .forgetpwd-page{
   background-color: #fff;
   padding-top: 90px;
+  padding-bottom: 90px;
   p{
     margin: 0 auto;
   }
   .title{
     font-size: 30px;
     color: #222222;
+    text-align: center;
   }
   .desc{
     width: 556px;
