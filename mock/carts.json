@@ -13,10 +13,11 @@
         "sku_id": 1,
         "is_sold_out": 0,
         "price": "20.00",
+        "origin_price": "100.00",
         "num": 4,
         "props": {
-          "Clothing version": "修身",
-          "size": "S (175/92A)"
+          "Color": "red",
+          "size": "S"
         }
       },
       {
@@ -27,11 +28,12 @@
         "stock": 50,
         "sku_id": 1,
         "is_sold_out": 0,
-        "price": "20.00",
+        "price": "21.00",
+        "origin_price": "100.00",
         "num": 1,
         "props": {
-          "Clothing version": "修身2",
-          "size": "S (175/92A)"
+          "Color": "blue",
+          "size": "S"
         }
       }
     ],

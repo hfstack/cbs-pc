@@ -10,76 +10,105 @@
       <div class="cart-have" v-else>
         <orderstatus></orderstatus>
         <div class="global-layout">
+          <!-- 左边内容 -->
           <div class="fl left-layout">
-            <div class="left-title">Shopping Cart<span> ( 4 Items )</span></div>
+            <div class="left-title">SHOPPING CART<span> ( {{cartsData.goods && cartsData.goods.length || 0}} Items )</span></div>
             <div class="left-box">
-              <div class="left-top">
-                .More $20 to get $10 off.
-                <router-link :to="{path: '/'}">Explore more >></router-link>
-              </div>
+              <router-link :to="{path: '/activity?activity_id=' + cartsData.promotion_id}" class="left-top">
+                {{cartsData.promotion_msg}}
+                <span>Explore more >></span>
+              </router-link>
               <div class="left-content">
-                <div class="goods">
-                  <div class="img fl"><img src="https://g-search1.alicdn.com/img/bao/uploaded/i4/i2/1905882464/O1CN011U4YM0F0X2S73du_!!1905882464.jpg_.webp?x-oss-process=image/format,webp"></div>
+                <div class="goods" v-for="(item, index) in cartsData.goods" :key="index">
+                  <div class="img fl"><img :src="item.img && item.img.ossimg()"></div>
                   <div class="info fl">
-                    <div class="title">Women's T Shirt O Neck Short Sleeve Figure Pattern Casual Style Top Casual StyleCasual Style</div>
+                    <div class="title">{{item.name}}</div>
                     <div class="sku">
-                      <span>Color : </span><span class="mr">White</span>
-                      <span>Size : </span><span>M</span>
+                      <template v-for="(prop, key, index) in item.props">
+                        <span>{{key}} : </span><span class="mr">{{prop}}</span>
+                      </template>
                     </div>
-                    <div class="operator">
+                    <div class="operator" @click="removeGoods(item)">
                       <i class="iconfont">&#xe63d;</i> Delete
                     </div>
                   </div>
                   <div class="price fl">
-                    <div class="now-price">$150.00</div>
-                    <div class="origin-price">$244.99</div>
+                    <div class="now-price">${{item.price}}</div>
+                    <div class="origin-price">${{item.origin_price}}</div>
                   </div>
                   <div class="qty fl">
-                    <a href="javascript:;" class="reduce fl">
+                    <a href="javascript:;" class="reduce fl" @click="reduce(item)">
                       <i class="iconfont">&#xe62a;</i>
                     </a>
-                    <div class="num fl">1</div>
-                    <a href="javascript:;" class="add fl">
+                    <div class="num fl">{{item.num}}</div>
+                    <a href="javascript:;" class="add fl" @click="add(item)">
                       <i class="iconfont">&#xe66f;</i>
                     </a>
                   </div>
-                  <div class="total-price red fl">$244.99</div>
+                  <div class="total-price red fl">${{item.num * (item.price * 100) / 100}}</div>
                 </div>
               </div>
             </div>
           </div>
+          <!-- 右边内容 -->
           <div class="fr right-layout">
-            <div class="right-title">Checkout</div>
+            <div class="right-title">CHECKOUT</div>
             <div class="right-box">
               <div class="right-top">Order Summary</div>
               <div class="right-content">
                 <ul>
                   <li>
                     <div class="label">Product Total</div>
-                    <div class="price">$654.98</div>
+                    <div class="price">${{productTotal}}</div>
                   </li>
                   <li>
                     <div class="label">Estimated Shipping</div>
-                    <div class="price">$0.00</div>
+                    <div class="price">${{cartsData.shippingPrice || 0}}</div>
                   </li>
                   <li>
-                    <div class="label">Buy 3 get 15% off</div>
-                    <div class="price red">-$7.98</div>
+                    <div class="label">{{cartsData.promotion_msg}}</div>
+                    <div class="price red">-${{cartsData.specialoffer}}</div>
                   </li>
                   <li>
-                    <div class="label">Points <span>(Available: 657)</span><span></span></div>
-                    <div class="price red">-$0.00</div>
+                    <div class="label">
+                      Points <span>( Available: {{cartsData.integral}} )</span>
+                      <dswitch :status.sync="isUsePoint" :on-change="changePoints" class="disi"></dswitch>
+                    </div>
+                    <div class="price red">-${{ isUsePoint ? cartsData.integral / 100 : '0.00'}}</div>
                   </li>
-                  <li>
-                    <div class="label">Code/Coupon <span>( no coupon)</span></div>
-                    <div class="price red">$654.98</div>
+                  <li class="li-h">
+                    <div class="clearfix">
+                      <div class="label" @click="clickShowCoupon">
+                        Code/Coupon <span>( {{cartsData.coupon && cartsData.coupon.length || 'no'}} coupon <i class="iconfont icon">&#xe611;</i> )</span>
+                      </div>
+                      <div class="price red">-${{couponPrice}}</div>
+                    </div>
+                    <!-- 券 -->
+                    <div class="coupon-info a-fadeinT" v-show="!isShowCoupon">
+                      <div class="c-search">
+                        <input type="text" v-model="redeemCode" class="s-input" placeholder="Enter Promo Code"/>
+                        <div class="search-btn" @click="getCouponApply">Applay</div>
+                      </div>
+                      <!-- 优惠券状态个人中心 1-可用 2-未开始 3-已过期未使用 4-已使用  商品详情页 优惠券状态 1-可领取 2-已领取 3-已领完-->
+                      <div v-for="(item,index) in (couponList.length && couponList || cartsData.coupon)" :key="index" class="coupon-item" @click="clickCoupon(item)">
+                        <div class="coupon-radio fl">
+                          <input type="radio" name="coupon" v-if="couponId === item.id" checked>
+                          <input type="radio" name="coupon" v-else>
+                        </div>
+                        <div class="img fl">
+                          <p class="price red">{{item.price}}</p>
+                          <p class="des">For a purchase over {{item.use_price}}</p>
+                          <p class="time">{{item.startdate}} - {{item.enddate}}</p>
+                        </div>
+                      </div>
+                    </div>
                   </li>
                 </ul>
                 <div class="total-price">
                   <div class="label">Total</div>
-                  <div class="price red">$256.00</div>
+                  <div class="price red">${{totalPrice}}</div>
                 </div>
-                <div class="submit-button">CHECKOUT</div>
+                <div class="submit-button" @click="submitCart">CHECKOUT</div>
                 <div class="we-accept">
                   <div class="title">we accept</div>
                   <div class="img"></div>
@@ -90,44 +119,43 @@
         </div>
       </div>
     </div>
+    <confirm :show.sync="confirmModal.show" :title="confirmModal.title"  :content="confirmModal.content" :on-ok="confirmModal.action"  okText="Yes"></confirm>
   </div>
 </template>
 
 <script>
 import orderstatus from 'components/layout/OrderStatus';
+import dswitch from 'components/basic/Switch';
+import confirm from 'components/layout/ConfirmModal';
 export default {
   name: 'cart',
   components: {
-    orderstatus
+    orderstatus,
+    dswitch,
+    confirm
   },
   data () {
     return {
       cartsData: [],
+      couponList: [], // 搜索出的couponlist
+      redeemCode: '', // 券码
       isShowCoupon: false, // 显示优惠券
       couponId: '', // 优惠券ID
       isUsePoint: false, // 是否使用积分
       addSt: null, // 添加数据节流st
       reduceSt: null, // 减少数据节流st
-      totalPrice: 0,
+      productTotal: 0, // 商品总价
+      totalPrice: 0, // 减积分和券的总价
       confirmModal: {},
       cartEmpty: false,
-      couponPrice: '$0' // 券价
+      couponPrice: 0 // 券价
     };
   },
   computed: {},
   mounted () {
     this.getCartData();
   },
-  watch: {
-    'isUsePoint': function (value) {
-      // 积分的使用
-      if (value) {
-        this.totalPrice -= this.cartsData.integral / 100;
-      } else {
-        this.totalPrice += this.cartsData.integral / 100;
-      }
-    }
-  },
+  watch: {},
   methods: {
     // 获取购物车数据
     getCartData () {
@@ -146,23 +174,34 @@ export default {
           }
         } else {
           this.cartEmpty = true;
-          // this.$router.push({name: 'sign'})
         }
       }, err => {
-        // this.$Toast(err);
+        this.$Messagebox({
+          title: err || 'system error',
+          type: 'error'
+        });
       });
     },
     // 计算总价格
     computeTotalPrice () {
+      // 初始化价格
+      this.productTotal = 0;
+      this.totalPrice = 0;
+
       let goods = this.cartsData.goods;
       let len = goods.length;
       for (let i = 0; i < len; i++) {
-        this.totalPrice += goods[i].num * goods[i].price;
+        this.productTotal += goods[i].num * (goods[i].price * 100) / 100;
       }
-      this.totalPrice -= +this.cartsData.specialoffer;
+
+      // 计算后的
+      this.totalPrice = this.productTotal;
+      // 活动
+      this.totalPrice =  (this.totalPrice * 100 - +this.cartsData.specialoffer * 100) / 100;
+      // 运费
+      this.totalPrice = (this.totalPrice * 100 + (this.cartsData.shippingPrice || 0) * 100) / 100; //加运费
       // 处理券价格
-      // this.totalPrice = this.totalPrice - this.couponPrice.substring(1, this.couponPrice.length);
-      this.totalPrice = this.totalPrice - this.couponPrice.replace(/[^0-9]/ig, '');
+      this.totalPrice = (this.totalPrice * 100 - +((this.couponPrice + '').replace(/[^0-9]/ig, '')) * 100) / 100;
       if (this.totalPrice < 0) {
         this.totalPrice = 0;
       }
@@ -174,7 +213,8 @@ export default {
         return false;
       }
       item.num++;
-      this.totalPrice = this.totalPrice + (+item.price);
+      this.productTotal = (this.productTotal * 100 + +item.price * 100) / 100;
+      this.totalPrice = (this.totalPrice * 100 + +item.price * 100) / 100;
       clearTimeout(self.addSt);
       // 函数节流
       self.addSt = setTimeout(function() {
@@ -184,12 +224,18 @@ export default {
           num: item.num
         }).then((res) => {
           if (res.status === 200) {
-            this.$Toast('add success')
+            // 成功
           } else {
-            this.$Toast(res.msg)
+            self.$Messagebox({
+              title: res.msg,
+              type: 'error'
+            });
           }
         }, err => {
-          self.$Toast(err);
+          self.$Messagebox({
+            title: err || 'system error',
+            type: 'error'
+          });
         });
       }, 1000);
     },
@@ -199,38 +245,10 @@ export default {
       if (item.num <= 0) {
         return;
       }
-      // item.num--;
-      // this.totalPrice = this.totalPrice - (+item.price);
       clearTimeout(self.reduceSt);
-      if (item.num <= 1) {
-        self.confirmModal = {
-          show: true,
-          title: 'Confirmed to delete?',
-          onText: 'Yes',
-          content: `Delete the product!`,
-          action: function () {
-            self.confirmModal.show = false;
-            self.reduceSt = setTimeout(function() {
-              self.request('CartsAdd', {
-                good_id: item.id,
-                sku_id: item.sku_id,
-                num: item.num
-              }).then((res) => {
-                if (res.status === 200) {
-                  self.cartsData.goods = res.content.goods;
-                  item.num--;
-                  self.totalPrice = self.totalPrice - (+item.price);
-                }
-              }, err => {
-                self.$Toast(err);
-              });
-            }, 1000);
-          }
-        }
-        return;
-      }
       item.num--;
-      self.totalPrice = self.totalPrice - (+item.price);
+      self.productTotal = (this.productTotal * 100 - +item.price * 100) / 100;
+      self.totalPrice = (this.totalPrice * 100 - +item.price * 100) / 100;
       // 函数节流
       self.reduceSt = setTimeout(function() {
         self.request('CartsAdd', {
@@ -240,24 +258,77 @@ export default {
         }).then((res) => {
           if (res.status === 200) {}
         }, err => {
-          self.$Toast(err);
+          self.$Messagebox({
+            title: err || 'system error',
+            type: 'error'
+          });
         });
       }, 1000);
     },
+    // 删除
+    removeGoods (item) {
+      let self = this;
+      self.confirmModal = {
+        show: true,
+        title: 'Confirmed to delete?',
+        onText: 'Yes',
+        content: `Delete the product!`,
+        // desc: '',
+        action: function () {
+          self.confirmModal.show = false;
+          self.reduceSt = setTimeout(function() {
+            self.request('CartsAdd', {
+              good_id: item.id,
+              sku_id: item.sku_id,
+              num: 0
+            }).then((res) => {
+              if (res.status === 200) {
+                self.cartsData = res.content;
+                self.productTotal = (self.productTotal * 100 - +item.price * 100) / 100;
+                self.totalPrice = (self.totalPrice * 100 - +item.price * 100) / 100;
+              }
+            }, err => {
+              self.$Messagebox({
+                title: err || 'system error',
+                type: 'error'
+              });
+            });
+          }, 1000);
+        }
+      }
+    },
     // 弹出券
     clickShowCoupon () {
-      this.isShowCoupon = true;
+      this.isShowCoupon = !this.isShowCoupon;
     },
     // 点击购物券
     clickCoupon (item) {
-      this.couponPrice = item.price + '';
-      this.isShowCoupon = false;
+      this.couponPrice = item.price;
       this.couponId = item.id;
       // 计算券
-      this.totalPrice = this.totalPrice - this.couponPrice.replace(/[^0-9]/ig, '');
-      if (this.totalPrice < 0) {
-        this.totalPrice = 0;
-      }
+      this.computeTotalPrice();
+    },
+    // 搜索券
+    getCouponApply() {
+      this.request('CouponsApply', {
+        redeemCode: this.redeemCode
+      }).then((res) => {
+        if (res.status === 200 && res.content) {
+          this.couponList = res.content.coupons || [];
+        } else {
+          this.couponList = [];
+          this.$Messagebox({
+            title: 'Wrong promo code',
+            type: 'error'
+          });
+        }
+      }, err => {
+        this.$Toast(err);
+        this.$Messagebox({
+          title: err || 'system error',
+          type: 'error'
+        });
+      })
     },
     // 提交购物车
     submitCart () {
@@ -278,16 +349,30 @@ export default {
         } else if (res.status === 403 || res.status === 402) {
           this.$router.push({name: 'sign'})
         } else {
-          this.$Toast(res.msg)
+          this.$Messagebox({
+            title: res.msg || 'system error',
+            type: 'error'
+          });
         }
       }, err => {
-        this.$Toast(err);
+        this.$Messagebox({
+          title: err || 'system error',
+          type: 'error'
+        });
       });
+    },
+    // 改变points
+    changePoints (status) {
+      if (status) {
+        this.totalPrice = (this.totalPrice * 100 - this.cartsData.integral) / 100;
+        this.isUsePoint = true;
+      } else {
+        this.totalPrice = (this.totalPrice * 100 + this.cartsData.integral) / 100;
+        this.isUsePoint = false;
+      }
     }
   },
-  beforeDestroy () {
-    // this.$refs.indexMain.removeEventListener('scroll', this.dispatchScroll, false);
-  }
+  beforeDestroy () {}
 };
 </script>
 
@@ -368,6 +453,8 @@ export default {
       margin-top: -5px;
       .title {
         line-height: 25px;
+        word-break: break-all;
+        min-height: 44px;
         .line2();
       }
       .sku {
@@ -434,6 +521,71 @@ export default {
       }
     }
   }
+
+  .coupon-info {
+    width: 310px;
+    background-color: #F7F9FA;
+    padding: 10px;
+    .c-search {
+      position: relative;;
+      .wh(290, 40);
+      background-color: #fff;
+      input {
+        .whl(200, 40);
+        padding: 10px;
+        border: 0;
+      }
+      .search-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        .whl(88, 40);
+        color: @gray;
+        background-color: #E4E4E4;
+        text-align: center;
+      }
+
+    }
+    .coupon-item {
+      width: 310px;
+      height: 52px;
+      margin-top: 10px;
+      .coupon-radio {
+        input {
+          width: 20px;
+          height: 20px;
+          margin: 16px 4px 0 0;
+        }
+      }
+      .img {
+        position: relative;
+        width: 286px;
+        height: 52px;
+        background: url('~img/cart/coupon_bg.png') no-repeat;
+        .price {
+          position: absolute;
+          font-size: 18px;
+          left: 0px;
+          top: 10px;
+          text-align: center;
+          width: 70px;
+        }
+        .des {
+          font-size: 12px;
+          margin-left: 80px;
+          .height(30);
+        }
+        .time {
+          font-size: 12px;
+          margin-left: 80px;
+          .height(15);
+          color: @gray;
+          .line1();
+          width: 185px;
+        }
+      }
+    }
+  }
 }
 // 公用
 .global-layout {
@@ -448,13 +600,14 @@ export default {
       border: 1px solid @bgray;
       box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
       .left-top {
+        display: block;
         padding: 0 20px;
         font-size: 16px;
         .height(60);
         background-color: #F3F3F3;
         position: relative;
         color: @orange;
-        a {
+        span {
           position: absolute;
           top: 20px;
           right: 20px;
@@ -491,6 +644,19 @@ export default {
           .height(32);
           .label {
             float: left;
+            .wh(230, 32);
+            .line1();
+
+            .disi {
+              display: inline-block;
+              top: 5px;
+              margin-left: 5px;;
+            }
+            .icon {
+              vertical-align: top;
+              margin-top: 2px;
+              display: inline-block;
+            }
           }
           .price {
             float: right;
@@ -499,6 +665,9 @@ export default {
             color: @gray;
           }
           .clearfix();
+        }
+        .li-h {
+          height: auto;
         }
       }
       .total-price {
