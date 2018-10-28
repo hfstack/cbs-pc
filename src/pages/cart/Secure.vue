@@ -12,7 +12,69 @@
                 <div class="label">* First Name</div>
                 <input type="text">
               </div> -->
-
+              <!-- 没有地址信息 或者 第一次进入 -->
+              <div class="shipping-table">
+                <div class="two clearfix">
+                  <div class="table-item mr fl">
+                    <div class="label">* First Name</div>
+                    <div class="input">
+                      <input type="text">
+                    </div>
+                  </div>
+                  <div class="table-item fl">
+                    <div class="label">* First Name</div>
+                    <div class="input">
+                      <input type="text">
+                    </div>
+                  </div>
+                  <div class="table-item mr fl">
+                    <div class="label">* First Name</div>
+                    <div class="input">
+                      <input type="text">
+                    </div>
+                  </div>
+                  <div class="table-item fl">
+                    <div class="label">* First Name</div>
+                    <div class="input">
+                      <input type="text">
+                    </div>
+                  </div>
+                  <div class="table-item mr fl">
+                    <div class="label">* First Name</div>
+                    <div class="input">
+                      <input type="text">
+                    </div>
+                  </div>
+                  <div class="table-item fl">
+                    <div class="label">* First Name</div>
+                    <div class="input">
+                      <input type="text">
+                    </div>
+                  </div>
+                </div>
+                <div class="table-item">
+                  <div class="lable">* Address Line1</div>
+                  <div class="input">
+                    <input type="text">
+                  </div>
+                </div>
+                <div class="table-item">
+                  <div class="lable">* Address Line1</div>
+                  <div class="input">
+                    <input type="text">
+                  </div>
+                </div>
+                <div class="table-item">
+                  <div class="lable">* Telephone</div>
+                  <div class="input">
+                    <input type="text">
+                  </div>
+                </div>
+                <div class="rember">
+                  <input type="checkbox">Set as Default Shipping Address
+                </div>
+                <div class="shipping-submit">SAVE</div>
+              </div>
             </div>
           </div>
         </div>
@@ -174,18 +236,12 @@ export default {
               message: 'Payment Processing',
               duration: 1200
             });
-            // setTimeout(function() {
-            //   self.$router.push({path: '/secure/successful?orderId=' + self.$route.query.orderId});
-            // }, 1000);
           }
         } else {
           self.$Toast({
             message: res.msg || 'Payment Failure',
             duration: 1200
           });
-          // setTimeout(function() {
-          //   self.$router.push({path: '/secure/failure?orderId=' + self.$route.query.orderId});
-          // }, 1000);
         }
       }, err => {
         this.$Toast(err);
@@ -286,7 +342,7 @@ export default {
       padding: 0 20px;
       font-size: 16px;
       .height(59);
-      background-color: #F3F3F3;
+      // background-color: #F3F3F3;
       border-bottom: 1px solid @bgray;
     }
     .right-content {
@@ -344,7 +400,35 @@ export default {
           .height(16);
           margin-bottom: 10px;
         }
+        .img {
+          .wh(310, 88);
+          background: url('~img/cart/1.png') no-repeat;
+          background-size: 100% auto;
+          margin-top: 10px;
+          margin-bottom: 25px;
+        }
       }
+    }
+  }
+}
+// 地址
+.shipping-table {
+
+  .table-item {
+    width: 830px;
+    &.fl {
+      width: 405px;
+    }
+    .mr {
+      margin-right: 20px;
+    }
+    .label {
+      .height(25);
+    }
+    input {
+      .height(44);
+      border: 1px solid #e4e4e4;
+      padding: 0 10px;
     }
   }
 }

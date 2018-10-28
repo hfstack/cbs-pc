@@ -655,7 +655,7 @@ export default {
       padding: 0 20px;
       font-size: 16px;
       .height(59);
-      background-color: #F3F3F3;
+      // background-color: #F3F3F3;
       border-bottom: 1px solid @bgray;
     }
     .right-content {
