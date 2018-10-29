@@ -1,119 +1,174 @@
 <template>
-  <div class="shipping-address-main">
-    <topbar title="Shipping Address"></topbar>
-    <div class="address-con" v-for="item in data">
-      <div class="address-detail">
-        <div class="info">
-          <div class="fl">{{item.recipients}}</div>
-          <div class="fr">{{item.iphone}}</div>
-        </div>
-        <div class="address">{{item.address}}</div>
-        <div class="pos">
-          <i class="iconfont gray2">&#xe62e;</i>
+  <div class="shipping-table">
+    <div class="clearfix">
+      <div class="table-item mr fl">
+        <div class="label">* First Name</div>
+        <div class="input">
+          <input type="text" v-model="data.firstname">
         </div>
       </div>
-      <div class="operate">
-        <div class="fl">
-          <input type="radio" name="radio" @click="addressDefault(item.id)" v-if="item.is_default === 1" checked>
-          <input type="radio" name="radio" @click="addressDefault(item.id)" v-else>
-          Set as Default Shipping Address
+      <div class="table-item fl">
+        <div class="label">* Last Name</div>
+        <div class="input">
+          <input type="text" v-model="data.lastname">
         </div>
-        <div class="fr">
-          <div class="edit" @click="edit(item.id)">
-            <i class="iconfont">&#xe621;</i>Edit
-          </div>
-          <div class="delete" @click="del(item.id)">
-            <i class="iconfont">&#xe63d;</i>Delete
-          </div>
+      </div>
+      <div class="table-item mr fl">
+        <div class="label">* Country</div>
+        <div class="input">
+          <input type="text" v-model="data.country" placeholder="Fill in a country">
+        </div>
+      </div>
+      <div class="table-item fl">
+        <div class="label">* State / Province / Region</div>
+        <div class="input">
+          <input type="text" v-model="data.state" placeholder="Fill in your state or region">
+        </div>
+      </div>
+      <div class="table-item mr fl">
+        <div class="label">* City</div>
+        <div class="input">
+          <input type="text" v-model="data.city" placeholder="Fill in your city">
+        </div>
+      </div>
+      <div class="table-item fl">
+        <div class="label">* Post／Zip Code</div>
+        <div class="input">
+          <input type="text" v-model="data.postalcode" placeholder="Fill in your post code">
         </div>
       </div>
     </div>
-    <div class="global-fixed-btn">
-      <router-link :to="{path: '/cart/addAddress', query: {orderId: this.$route.query.orderId || ''}}" class="fixed-btn">+ ADD NEW ADDRESS</router-link>
+    <div class="table-item">
+      <div class="label">* Address Line1</div>
+      <div class="input">
+        <input type="text" v-model="data.street" placeholder="Street/Building/Apartment">
+      </div>
     </div>
-    <confirm :show.sync="confirmModal.show" :title="confirmModal.title"  :content="confirmModal.content" :on-ok="confirmModal.action"  okText="Yes"></confirm>
+    <div class="table-item">
+      <div class="label">* Address Line2</div>
+      <div class="input">
+        <input type="text" v-model="data.suburb" placeholder="Suite/Unit/Building/Floor">
+      </div>
+    </div>
+    <div class="table-item">
+      <div class="label">* Telephone</div>
+      <div class="input">
+        <input type="text" v-model="data.iphone">
+      </div>
+    </div>
+    <div class="rember">
+      <input type="checkbox" v-model="data.default">Set as Default Shipping Address
+    </div>
+    <div class="shipping-submit">
+      <div class="btn-submit" @click="saveAddress">SAVE</div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    editAddressId: {
+      type: String,
+      default: ''
+    },
+    callback: {
+      type: Function,
+      default: () => {}
+    }
+  },
   data () {
     return {
-      data: [],
-      confirmModal: {}
+      data: {}
     }
   },
-  computed: {
-    backUrl: function() {
-      if(this.$route.query.orderId) {
-        return 'cart/secure/' + this.$route.query.orderId;
-      } else {
-        return null
-      }
-    }
-  },
-  created () {
-    this.getAddressList();
-  },
+  created () {},
   mounted () {},
   watch: {},
   methods: {
-    getAddressList () {
-      this.request('AddressList', {
-        page: 1
-      }).then((res) => {
-        if (res.status === 200 && res.content) {
-          this.data = res.content;
-        }
-      }, err => {
-        this.$Toast(err);
-      });
+    // 编辑
+    getAddressInfoData () {
+
     },
-    edit (addressId) {
-      this.$router.push({path: '/cart/addAddress', query: {orderId: this.$route.params.orderId, addressId: addressId}});
-    },
-    del (addressId) {
-      let self = this;
-      self.confirmModal = {
-        show: true,
-        title: 'Confirmed to delete?',
-        onText: 'Yes',
-        content: `Delete the Address!`,
-        action: function () {
-          self.request('AddressDelete', {
-            address_id: addressId
-          }).then((res) => {
-            if (res.status === 200 && res.content) {
-              self.confirmModal.show = false;
-              self.$Toast({
-                message: 'Success',
-                duration: 1200
-              });
-              setTimeout(function() {
-                self.data = res.content;
-              }, 500);
-            } else {
-              self.$Toast(res.msg);
-            }
-          }, err => {
-            self.$Toast(err);
-          });
-        }
+    // 保存
+    saveAddress () {
+      let data = Object.assign({}, this.data);
+      if (!data.firstname) {
+        this.$Messagebox({
+          title: 'Firstname must be more than 2 letters',
+          type: 'error'
+        });
+        return;
       }
-    },
-    addressDefault (addressId) {
-      this.request('AddressDefault', {
-        address_id: addressId
-      }).then((res) => {
-        if (res.status === 200 && res.content) {
-          this.data = res.content;
-          this.$Toast({
-            message: 'Setting default success',
-            duration: 1000
-          });
+      if (!data.lastname) {
+        this.$Messagebox({
+          title: 'Lastname must be more than 2 letters',
+          type: 'error'
+        });
+        return;
+      }
+      if (!data.country) {
+        this.$Messagebox({
+          title: 'Country  must be more than 2 letters',
+          type: 'error'
+        });
+        return;
+      }
+      if (!data.state) {
+        this.$Messagebox({
+          title: 'State/province  must be more than 2 letters',
+          type: 'error'
+        });
+        return;
+      }
+      if (!data.city) {
+        this.$Messagebox({
+          title: 'City must be more than 2 letters',
+          type: 'error'
+        });
+        return;
+      }
+      if (!data.street) {
+        this.$Messagebox({
+          title: 'Firstname must be more than 2 letters',
+          type: 'error'
+        });
+        return;
+      }
+      if (!data.postalcode) {
+        this.$Messagebox({
+          title: 'ZIP/Post Code must be more than 2 letters',
+          type: 'error'
+        });
+        return;
+      }
+      if (!data.iphone) {
+        this.$Messagebox({
+          title: 'Phone Number must be more than 2 letters',
+          type: 'error'
+        });
+        return;
+      }
+      // country	是	string	国家 最大长度50字符 - 目前自行填写
+      // state	是	string	州/省/区域 最大长度250字符  - 目前自行填写
+      // AddressEdit
+      let url = 'AddressAdd';
+      // 如果有editAddressId 则为编辑
+      if (this.editAddressId) {
+        url = 'AddressEdit';
+      }
+
+      this.request(url, data).then((res) => {
+        if (res.status === 200) {
+          // 回调返回地址数据
+          console.log(res);
+          this.callback && this.callback(res.content);
         }
       }, err => {
-        this.$Toast(err);
+        this.$Messagebox({
+          title: err || 'system error',
+          type: 'error'
+        });
       });
     }
   },
@@ -123,58 +178,53 @@ export default {
 
 <style lang="less">
 @import '~less/tool.less';
-.shipping-address-main {
-  padding-top: 92/@rem;
-
-  .address-con {
-    font-size: 28/@rem;
-    margin-top: 20/@rem;
-    background-color: #fff;
-  }
-  .address-detail {
-    position: relative;
-    display: block;
-    padding: 20/@rem;
-    position: relative;
-    color: #535353;
-    border-bottom: 1px solid @gray3;
-
-    .info {
-      .height(40);
-      .clearfix();
+// 地址
+.shipping-table {
+  .table-item {
+    width: 830px;
+    margin-top: 20px;
+    &.mr {
+      margin-right: 20px;
     }
-    .address {
-      word-break: break-all;
-      line-height: 40/@rem;
+    .label {
+      font-weight: bold;
+      .height(25);
     }
-
-    .pos {
-      position: absolute;
-      top: 30/@rem;
-      right: -40/@rem;
+    input {
+      width: 825px;
+      .height(44);
+      border: 1px solid #e4e4e4;
+      padding: 0 10px;
     }
-  }
-  .operate {
-    .height(70);
-    .clearfix();
-    .fl input {
-      margin-left: 20/@rem;
-      vertical-align: top;
-      margin-top: 18/@rem;
-      .wh(34, 34);
-    }
-    .fr {
-      font-size: 24/@rem;
-      margin-right: 20/@rem;
-    }
-    .edit, .delete {
-      display: inline-block;
-      i {
-        color: #929299;
-        font-size: 32/@rem;
-        vertical-align: top;
-        margin-right: 5/@rem;
+    &.fl {
+      width: 400px;
+      input {
+        width: 405px;
       }
+    }
+  }
+  .rember {
+    margin-top: 20px;
+    .height(20);
+    input {
+      display: inline-block;
+      vertical-align: middle;
+      margin:0;
+      margin-right: 10px;
+      -webkit-appearance: checkbox;
+
+    }
+  }
+  .shipping-submit {
+    text-align: center;
+    .btn-submit {
+      cursor: pointer;
+      display: inline-block;
+      .whl(200, 40);
+      border: 1px solid @orange;
+      border-radius: 4px;
+      text-align: center;
+      color: @orange;
     }
   }
 }
