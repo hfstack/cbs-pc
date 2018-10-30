@@ -84,11 +84,30 @@ export default {
   },
   created () {},
   mounted () {},
-  watch: {},
+  watch: {
+    'editAddressId': function(id) {
+      if (id) {
+        this.getAddressInfoData(id);
+      } else {
+        this.data = {};
+      }
+    }
+  },
   methods: {
     // 编辑
-    getAddressInfoData () {
-
+    getAddressInfoData (addressId) {
+      this.request('AddressInfo', {
+        address_id: addressId
+      }).then((res) => {
+        if (res.status === 200 && res.content) {
+          this.data = res.content;
+        }
+      }, err => {
+        this.$Messagebox({
+          title: err || 'system error',
+          type: 'error'
+        });
+      });
     },
     // 保存
     saveAddress () {
@@ -161,8 +180,9 @@ export default {
       this.request(url, data).then((res) => {
         if (res.status === 200) {
           // 回调返回地址数据
-          console.log(res);
           this.callback && this.callback(res.content);
+          // 初始化数据
+          this.data = {};
         }
       }, err => {
         this.$Messagebox({
