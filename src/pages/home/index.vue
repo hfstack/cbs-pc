@@ -2,7 +2,7 @@
   <div class="home-index">
     <Banner :list="banners"></Banner>
     <recommend title="Daily selection":list="daily"></recommend>
-    <ShowWindows  v-for="item in storey" :data="item"></ShowWindows>
+    <ShowWindows  v-for="(item, index) in storey" :key="index" :data="item"></ShowWindows>
     <recommend title="Recommend" :list="recommends"></recommend>
   </div>
 </template>
