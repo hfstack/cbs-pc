@@ -93,7 +93,7 @@
               </li>
               <li>
                 <div class="label">Estimated Shipping</div>
-                <div class="price">${{returnFloat(shippingMoney)}}</div>
+                <div class="price">{{+data.shipping > 0 ? ('$' + returnFloat(data.shipping)) : 'Free'}}</div>
               </li>
               <li>
                 <div class="label">
@@ -154,8 +154,6 @@ export default {
   data () {
     return {
       isBalance: false, // 开启余额
-      balanceMoney: 0, // 余额
-      shippingMoney: 0, // 邮费
       subtotalPrice: 0, // 商品价格
       totalPrice: 0, // 总价
       data: [], // 订单信息
@@ -186,7 +184,6 @@ export default {
       }).then((res) => {
         if (res.status === 200 && res.content) {
           this.data = res.content;
-          this.balanceMoney = this.data.money || 0; // 余额
           // 计算总价
           this.computePice();
           // addressId
@@ -244,10 +241,10 @@ export default {
     computePice () {
       this.totalPrice = 0;
       // 邮费
-      this.totalPrice = (+this.data.price * 100 + +this.shippingMoney * 100) / 100;
+      this.totalPrice = (+this.data.price * 100 + +this.data.shipping * 100) / 100;
       // 余额
       if (this.isBalance) {
-        this.totalPrice = (this.totalPrice * 100 - +this.balanceMoney * 100) / 100;
+        this.totalPrice = (this.totalPrice * 100 - +this.data.money * 100) / 100;
       }
     },
     // 订单支付

@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-modal-layout">
+  <div class="cart-modal-layout" v-show="this.isLogin">
     <div class="cart-number" v-show="cartsData.goods && cartsData.goods.length">{{cartsData.goods && cartsData.goods.length}}</div>
     <div class="cart-modal-main" v-show="show">
       <ul class="list">
@@ -43,13 +43,12 @@ export default {
     }
   },
   created () {
-    if(this.isLogin) {
+    if (this.isLogin) {
       this.getCartData();
     }
   },
   methods: {
     getCartData () {
-
       this.request('Carts', {}).then((res) => {
         if (res.status === 200 && res.content) {
           this.cartsData = res.content;

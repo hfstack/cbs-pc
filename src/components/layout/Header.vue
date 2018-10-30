@@ -59,6 +59,7 @@ export default {
       historyShow: false
     }
   },
+  watch: {},
   mounted() {
     let history = localStorage.getItem('searchHistory')
     if(history) {
@@ -177,7 +178,7 @@ export default {
             color: #939399;
             cursor: pointer;
             font-size: 12px;
-            
+
           }
           i{
             font-size: 12px;

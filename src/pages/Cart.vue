@@ -14,10 +14,11 @@
           <div class="fl left-layout">
             <div class="left-title">SHOPPING CART<span> ( {{cartsData.goods && cartsData.goods.length || 0}} Items )</span></div>
             <div class="left-box">
-              <router-link :to="{path: '/activity?activity_id=' + cartsData.promotion_id}" class="left-top">
+              <router-link :to="{path: '/activity?activity_id=' + cartsData.promotion_id}" class="left-top" v-if="cartsData.promotion_id">
                 {{cartsData.promotion_msg}}
                 <span>Explore more >></span>
               </router-link>
+              <div class="left-top black" v-else>Products</div>
               <div class="left-content">
                 <div class="goods" v-for="(item, index) in cartsData.goods" :key="index">
                   <div class="img fl"><img :src="item.img && item.img.ossimg()"></div>
@@ -63,28 +64,28 @@
                   </li>
                   <li>
                     <div class="label">Estimated Shipping</div>
-                    <div class="price">${{cartsData.shippingPrice || 0}}</div>
+                    <div class="price">{{+cartsData.shipping > 0 ? ('$' + returnFloat(cartsData.shipping)) : 'Free'}}</div>
                   </li>
-                  <li>
+                  <li v-if="cartsData.promotion_msg">
                     <div class="label">{{cartsData.promotion_msg}}</div>
-                    <div class="price red">-${{cartsData.specialoffer}}</div>
+                    <div class="price red">-${{returnFloat(cartsData.specialoffer)}}</div>
                   </li>
                   <li>
                     <div class="label">
                       Points <span>( Available: {{cartsData.integral}} )</span>
                       <dswitch :status.sync="isUsePoint" :on-change="changePoints" class="disi"></dswitch>
                     </div>
-                    <div class="price red">-${{ isUsePoint ? cartsData.integral / 100 : '0.00'}}</div>
+                    <div class="price red">-${{ isUsePoint ? cartsData.integral * 100 / 10000 : '0.00'}}</div>
                   </li>
                   <li class="li-h">
                     <div class="clearfix">
                       <div class="label" @click="clickShowCoupon">
-                        Code/Coupon <span>( {{cartsData.coupon && cartsData.coupon.length || 'no'}} coupon <i class="iconfont icon">&#xe611;</i> )</span>
+                        Code/Coupon <span>( {{cartsData.coupon && cartsData.coupon.length || 'no'}} coupon <i class="iconfont icon" v-if="couponList.length || (cartsData.coupon && cartsData.coupon.length)">&#xe611;</i> )</span>
                       </div>
                       <div class="price red">-${{couponPrice}}</div>
                     </div>
                     <!-- 券 -->
-                    <div class="coupon-info a-fadeinT" v-show="!isShowCoupon">
+                    <div class="coupon-info a-fadeinT" v-show="!isShowCoupon && (couponList.length || (cartsData.coupon && cartsData.coupon.length))">
                       <div class="c-search">
                         <input type="text" v-model="redeemCode" class="s-input" placeholder="Enter Promo Code"/>
                         <div class="search-btn" @click="getCouponApply">Applay</div>
@@ -97,8 +98,8 @@
                           <input type="radio" name="coupon" v-else>
                         </div>
                         <div class="img fl">
-                          <p class="price red">{{item.price}}</p>
-                          <p class="des">For a purchase over {{item.use_price}}</p>
+                          <p class="price red">${{item.price}}</p>
+                          <p class="des">For a purchase over ${{item.use_price}}</p>
                           <p class="time">{{item.startdate}} - {{item.enddate}}</p>
                         </div>
                       </div>
@@ -203,7 +204,7 @@ export default {
       // 活动
       this.totalPrice =  (this.totalPrice * 100 - +this.cartsData.specialoffer * 100) / 100;
       // 运费
-      this.totalPrice = (this.totalPrice * 100 + (this.cartsData.shippingPrice || 0) * 100) / 100; //加运费
+      this.totalPrice = (this.totalPrice * 100 + +this.cartsData.shipping * 100) / 100; //加运费
       // 处理券价格
       this.totalPrice = (this.totalPrice * 100 - +((this.couponPrice + '').replace(/[^0-9]/ig, '')) * 100) / 100;
       if (this.totalPrice < 0) {
@@ -384,6 +385,21 @@ export default {
       } else {
         this.totalPrice = (this.totalPrice * 100 + this.cartsData.integral) / 100;
         this.isUsePoint = false;
+      }
+    },
+    // 自动补0
+    returnFloat (value) {
+      value = Math.round(parseFloat(value) * 100) / 100;
+      let xsd = value.toString().split('.');
+      if (xsd.length === 1) {
+        value = value.toString() + '.00';
+        return value;
+      }
+      if (xsd.length > 1 ) {
+        if (xsd[1].length < 2) {
+          value = value.toString() + '0';
+        }
+        return value;
       }
     }
   },
@@ -630,6 +646,9 @@ export default {
         background-color: #F3F3F3;
         position: relative;
         color: @orange;
+        &.black {
+          color: #222;
+        }
         span {
           position: absolute;
           top: 20px;
