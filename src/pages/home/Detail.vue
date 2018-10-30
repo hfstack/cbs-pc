@@ -224,13 +224,14 @@ export default {
         stock: oneSku.stock,
         saleNum: 1 // 购物数量
       };
-      // console.log(this.goodsData);
-      this.skuId = null; // 第二属性没选
+
       // 第二属性处理
       let subArr = oneSku.sub || [];
       let subLen = subArr.length;
       this.goodsData.subArr = subLen && subArr || [];
 
+      // SKUID 如果有第二属性 则赋值为null
+      this.skuId = subLen ? null : oneSku.id;
       // DOM未渲染所以用异步
       setTimeout(function() {
         // 展示图片
@@ -354,10 +355,10 @@ export default {
     submitClick () {
       // 判定是否选择完毕
       if (!this.skuId) {
-        // this.$Messagebox({
-        //   title: 'Please select your ' + this.goodsData.subArr[0].name,
-        //   type: 'error'
-        // });
+        this.$Messagebox({
+          title: 'Please select your ' + this.goodsData.subArr[0].name,
+          type: 'error'
+        });
         return;
       }
       // 提交锁
@@ -387,16 +388,16 @@ export default {
           }, 1000);
         } else {
           this.submitLocked = false; // 解锁
-          // this.$Messagebox({
-          //   title: res.msg || '网络错误',
-          //   type: 'error'
-          // });
+          this.$Messagebox({
+            title: res.msg || '网络错误',
+            type: 'error'
+          });
         }
       }, err => {
-        // this.$Messagebox({
-        //   title: err || '网络错误',
-        //   type: 'error'
-        // });
+        this.$Messagebox({
+          title: err || '网络错误',
+          type: 'error'
+        });
       });
     }
   }

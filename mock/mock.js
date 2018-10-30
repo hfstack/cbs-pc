@@ -42,6 +42,11 @@ var setOnline = [
     url: '/cards/default'
   },
   {
+    name: 'cardsAdd',
+    type: 'post',
+    url: '/cards/add'
+  },
+  {
     name: 'cardsEdit',
     type: 'post',
     url: '/cards/edit'

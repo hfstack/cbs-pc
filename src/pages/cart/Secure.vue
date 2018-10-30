@@ -261,14 +261,14 @@ export default {
       // 如果没有地址信息
       if (self.addressId === '') {
         this.$Messagebox({
-          title: 'Fill in a shipping address',
+          title: 'Please fill in a shipping address',
           type: 'error'
         });
         return;
       }
       if (!self.payType) {
         this.$Messagebox({
-          title: 'Select payment method',
+          title: 'Please select a payment method',
           type: 'error'
         });
         return;
@@ -286,11 +286,19 @@ export default {
             // 如果是PayPal去支付页面
             window.location.href = res.content.payUrl;
           }
-          if (self.payType === 3) {
-            self.$router.push({path: '/cart/successful?orderId=' + self.$route.query.orderId});
-          }
+          // if (self.payType === 3) {
+          //   self.$router.push({path: '/cart/successful?orderId=' + self.$route.query.orderId});
+          // }
+          self.$Messagebox({
+            title: 'Payment Processing',
+            type: 'success'
+          });
         } else {
-          self.$router.push({path: '/cart/failure?orderId=' + self.$route.query.orderId});
+          self.$Messagebox({
+            title: 'Payment Failure',
+            type: 'error'
+          });
+          // self.$router.push({path: '/cart/failure?orderId=' + self.$route.query.orderId});
         }
         locked = false;
       }, err => {

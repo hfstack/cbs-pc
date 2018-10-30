@@ -14,12 +14,6 @@
             <input type="text" placeholder="Month/Year" v-model="cardData.exp">
           </div>
         </div>
-        <!-- <div class="table-item fl">
-          <div class="label">* State / Province / Region </div>
-          <div class="input">
-            <input type="text" placeholder="State / Province / Region" v-model="">
-          </div>
-        </div> -->
         <div class="table-item  fl">
           <div class="label">* Security code</div>
           <div class="input">
@@ -60,17 +54,20 @@ export default {
     return {
       addressId: '',
       cardData: {}, // 银行卡内容
-      address: {}
+      address: {},
+      url: 'CardsAdd'
     };
   },
   watch: {
     'cardId': function(status) {
       if (status) {
         this.getEditData();
+        this.url = 'CardsEdit';
       } else {
         this.cardData = {};
         this.address = {};
         this.cardData.is_default = false;
+        this.url = 'CardsAdd';
       }
     }
   },
@@ -90,6 +87,11 @@ export default {
           this.cardData = res.content.card || {};
           this.address = res.content.address || {};
           this.cardData.is_default = res.content.is_default || false;
+        } else {
+          this.Messagebox({
+            title: res.msg || 'system error',
+            type: 'error'
+          });
         }
       }, err => {
         this.Messagebox({
@@ -125,7 +127,7 @@ export default {
       }
       this.cardData.is_default = this.cardData.is_default || false;
       Object.assign(data, this.cardData);
-      this.request('CardsEdit', data).then((res) => {
+      this.request(this.url, data).then((res) => {
         if (res.status === 200) {
           // 重置
           this.cardData = {};
@@ -133,6 +135,11 @@ export default {
           this.cardData.is_default = false;
           // callback
           this.saveCallback && this.saveCallback();
+        } else {
+          this.Messagebox({
+            title: res.msg || 'system error',
+            type: 'error'
+          });
         }
       }, err => {
         this.Messagebox({
