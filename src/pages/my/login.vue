@@ -5,11 +5,12 @@
       <div class="sign login-item fl">
         <p class="title">Sign In</p>
         <div class="form-item">
-          <i class="iconfont"></i><input type="text" placeholder="email">
+          <i class="iconfont"></i><input type="text" placeholder="email" v-model="loginEmail">
         </div>
         <div class="form-item">
-          <i class="iconfont"></i><input type="text"  placeholder="password">
+          <i class="iconfont"></i><input type="text"  placeholder="password"  v-model="loginPwd">
         </div>
+        <invalidtip  :show="loginError">{{loginError}}</invalidtip>
         <div class="sign-btn" @click="login">Sign In</div>
         <p class="forget-pwd"><router-link :to="{name: 'forgetpwd'}">Forgot Your Password?</router-link></p>
       </div>
@@ -20,11 +21,11 @@
         </div>
         <invalidtip  :show="verrors.has('email')">{{verrors.first('email')}}</invalidtip>
         <div class="form-item">
-          <i class="iconfont"></i><input type="password" placeholder="password"  v-model="params.password" v-validate="fields.password" data-vv-name="password" @keyup.enter="login">
+          <i class="iconfont"></i><input type="text" placeholder="password"  v-model="params.password" v-validate="fields.password" data-vv-name="password" @keyup.enter="login">
         </div>
         <invalidtip :show="verrors.has('password')">{{verrors.first('password')}}</invalidtip>
         <div class="form-item">
-          <i class="iconfont"></i><input type="password" placeholder="Re-Enter Password" v-model="repwd">
+          <i class="iconfont"></i><input type="text" placeholder="Re-Enter Password" v-model="repwd">
         </div>
         <invalidtip  :show="pwdError">Two passwords are inconsistent</invalidtip>
         <invalidtip  :show="rerror">{{rerror}}</invalidtip>
@@ -48,6 +49,9 @@ export default {
       pwdError: false,
       rerror: '',
       protocol: false,
+      loginError: '',
+      loginEmail: '',
+      loginPwd: '',
       fields: {
         email: {
           required: true,
@@ -93,17 +97,28 @@ export default {
     },
     login() {
       this.rerror = '';
+      this.loginError = '';
+      if(!this.loginEmail) { 
+        this.loginError = 'The email field is required.';
+        return false;
+      }
+      if(!this.fields.email.regex.test(this.loginEmail)) {
+        this.loginError = 'The email field format is invalid.';
+        return false;
+      }
       this.request('UsersLogin', {
-        email: this.params.email,
-        password: this.params.password
+        email: this.loginEmail,
+        password: this.loginPwd
       }).then((res) => {
         if(res.status === 200 && res.content) {
+          const userName = (res.content.first_name || '') + (res.content.last_name || '');
           window.localStorage && window.localStorage.setItem('userToken', res.content.token);
+          window.localStorage && window.localStorage.setItem('userName', userName);
           this.$router.push({
             name: 'myAccount'
           })
         } else {
-          this.rerror = res.msg
+          this.loginError = res.msg;
         }
       })
     }

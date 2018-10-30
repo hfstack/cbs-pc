@@ -51,7 +51,7 @@
             <router-link class="fl" :to="{path: '/detail?id=' + item.id}">
               <img :src="item.img" alt="" class="img" width="90">
             </router-link>
-            <div class="fl">
+            <div class="fl goods-detail">
               <p class="goods-name">{{item.name}}</p>
               <p class="price"><span class="current-price">${{item.price}}</span><span class="price-origin">${{item.origin_price}}</span></p>
               <p class="price-rebate">Rebate ${{item.rebate}}<span class="fh"></span></p>
@@ -104,7 +104,10 @@ export default {
     border: 1px solid #ccc;
     border-top: 2px solid #343434;
     .window-item{
-      float: left
+      float: left;
+      .goods-detail{
+        width: 120px;
+      }
     }
     a{
       display: inline-block;
@@ -163,7 +166,7 @@ export default {
     color: #363433;
   }
   .goods-item{
-    padding: 10px 5px;
+    padding: 5px 5px;
     border-bottom: 1px dashed @gray;
     
     .goods-name{

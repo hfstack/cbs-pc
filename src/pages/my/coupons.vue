@@ -3,7 +3,7 @@
     <div class="my-coupon">
       <div class="c-search">
         <input type="text" v-model="redeemCode" class="s-input" placeholder="Enter promo code here"/>
-        <div class="search-btn" @click="getCouponList">Applay</div>
+        <div class="search-btn" @click="couponApply">Applay</div>
       </div>
       <div class="coupon-list" v-if="couponList && couponList.length > 0">
         <!-- 优惠券状态 1-可用 2-未开始 3-已过期未使用 4-已使用 -->
@@ -37,6 +37,35 @@ export default {
       }).then((res) => {
         if(res.status === 200 && res.content) {
           this.couponList = res.content || [];
+        } else {
+          this.$Messagebox({
+            type: 'error',
+            title: res.msg
+          })
+        }
+      }, err => {
+        this.$Messagebox({
+          type: 'error',
+          title: err
+        })
+      });
+    },
+    // 优惠券兑换
+    couponApply() {
+      this.request('CouponsApply', {
+        redeemCode: this.redeemCode
+      }).then((res) => {
+        if(res.status === 200 && res.content) {
+          this.getCouponList();
+          this.$Messagebox({
+            type: 'success',
+            title: 'Exchange success'
+          })
+        } else {
+          this.$Messagebox({
+            type: 'error',
+            title: res.msg
+          }) 
         }
       }, err => {
         this.$Messagebox({
@@ -64,6 +93,7 @@ export default {
     
   }
   .search-btn{
+    cursor: pointer;
     position: absolute;
     right: 0px;
     top: 0;

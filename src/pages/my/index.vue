@@ -84,7 +84,7 @@ export default {
           this.bars[i].children.forEach(element => {
             if (element.routerName === name) {
               selectName = element.title;
-               this.bars[i].active = true
+              this.bars[i].active = true
             }
           });
         }

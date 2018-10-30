@@ -28,7 +28,7 @@
                 </div>
               </td>
               <td class="td-actions" v-else>
-                <div class="operate-item operate-two" v-if="item.orderHandle.pay">Pay now{{item.finalTime}}</div>
+                <div class="operate-item operate-two" v-if="item.orderHandle.pay"><router-link :to="{path: '/cart/secure?orderId=' + item.orderid}">Pay now {{item.finalTime || ''}}</router-link></div>
                 <div class="operate-item operate-two" @click="handleCollect(item)" v-if="item.orderHandle.collect">I get it</div>
                 <div class="operate-item operate-one" @click="getLogistics(item)" v-if="item.orderHandle.logistic">Logistics Info</div>
                 <div class="operate-item operate-one" v-if="item.orderHandle.delete" @click="handleDelete(item)">Delete</div>
@@ -43,6 +43,7 @@
         </tr>
       </tbody>
     </table>
+    <confirm :show.sync="confirmModal.show" :title="confirmModal.title"  :content="confirmModal.content" :on-ok="confirmModal.action"  okText="Yes"></confirm>
   </div>
 </template>
 <script>
@@ -75,7 +76,7 @@ export default {
         title: 'Order Total',
         dataIndex: 'orderTotal',
         render: function(text, item, index) {
-          var str = `<p class="order-total">$${item.orderTotal}</p>`;
+          var str = `<p class="order-total">$${item.total_amount}</p>`;
           return str;
         }
       },
@@ -97,6 +98,7 @@ export default {
       orders: {},
       params: {},
       columns: columns,
+      confirmModal: {},
       tabs: [
         {
           name: 'Unpaid',
@@ -219,22 +221,23 @@ export default {
       });
     },
     // 确认收货
-    handleDelete() {
+    handleDelete(item) {
       this.confirmModal = {
         show: true,
         type: 'confirm',
         content: 'Are you sure to delete the order？',
-        action: this.handleDeleteCb
+        action: this.handleDeleteCb,
+        item
       };
     },
     // 删除订单
     handleDeleteCb() {
       this.request('OrdersDelete', {
-        order_id: this.orderid
+        order_id: this.confirmModal.item.orderid
       }).then((res) => {
         if (res.status === 200) {
-          // this.$Toast(res.msg)
           this.confirmModal.show = false;
+          this.getOrderList();
           this.handleCb && this.handleCb();
         } else {
           this.$Messagebox({

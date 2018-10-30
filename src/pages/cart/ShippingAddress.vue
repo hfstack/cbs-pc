@@ -83,7 +83,11 @@ export default {
     }
   },
   created () {},
-  mounted () {},
+  mounted () {
+    if(this.editAddressId) {
+      this.getAddressInfoData(this.editAddressId);
+    }
+  },
   watch: {
     'editAddressId': function(id) {
       if (id) {

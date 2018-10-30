@@ -36,8 +36,8 @@ export default {
   methods: {
     handleClick() {
       if (!this.disabled) {
-        this.checked = !this.checked;
-        this.$emit('update:checked',  this.checked)
+        // this.$emit('update:checked',  this.checked)
+        this.$emit('update:checked',  !this.checked)
       }
       this.onChange(this.checked);
     }

@@ -28,7 +28,7 @@
       </div>
       <div style="padding: 10px 0;">
         <p class="o-price"><span class="fr money">${{parseFloat(finalAmount - shipping).toFixed(2)}}</span><span class="fr">Subtotal:</span></p>
-        <p class="o-price"><span class="fr money">$ {{shipping}}</span><span class="fr">Shipping:</span></p>
+        <p class="o-price"><span class="fr money">${{shipping}}</span><span class="fr">Shipping:</span></p>
         <p class="o-price total"><span class="fr money">${{finalAmount}}</span><span class="fr">All Total: </span></p>
       </div>
       <div class="address">
@@ -73,11 +73,12 @@ export default {
         logistic: false,
         collect: false
       },
+      paytime: 0,
       confirmModal: {}
     }
   },
   mounted() {
-    this.orderid = this.$route.query.orderid;
+    this.orderid = this.$route.query.orderId;
     // this.orderstatus = this.$route.query && this.$route.query.order_status || '';
     this.getOrderDetail();
   },
@@ -85,11 +86,11 @@ export default {
   methods: {
      // 剩余时间倒计时
     getCountDown() {
-      let orderTime = new Date(this.ordertime).getTime();
+      let paytime = new Date().getTime() + this.paytime * 1000;
       const self = this;
       let timer = setInterval(function() {
         let now = new Date().getTime();
-        let t = now - orderTime;
+        let t = paytime - now;
         let min = Math.floor((t / 60000) % 60);
         let sec = Math.floor((t / 1000) % 60);
         if (t > 0) {
@@ -147,6 +148,7 @@ export default {
           this.name = res.content.name;
           this.telephone = res.content.telephone;
           this.address = res.content.address; 
+          this.paytime = res.content.paytime;
           this.getOrderDesc();
           if(this.orderstatus === 1) {
             this.getCountDown();
@@ -261,15 +263,10 @@ export default {
       width: 80px;
       text-align: left;
       margin-left: 80px;
+      color: #F35262;
     }
   }
   .total{
-    span:nth-child(1){
-      color: #050505;
-    }
-    span:nth-child(2){
-      color: #FF473C;
-    }
   }
   .address{
     position: relative;
@@ -347,6 +344,7 @@ export default {
       .price{
         line-height: 180px;
         margin-right: 30px;
+        color: #F35262
       }
     }
   }

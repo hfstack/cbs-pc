@@ -84,6 +84,7 @@ export default {
   mounted() {
     this.title = this.$route.query.title || '';
     this.params.title = this.title ? encodeURIComponent(this.title) : '';
+    this.params.cate = this.$route.query.cate  || '';
     this.getProductsList();
     this.loadMore();
   },

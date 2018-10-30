@@ -22,12 +22,12 @@
       </div>
       <div  class="form-item">
         <p class="form-label">Email</p>
-        <input type="text" name="" id="" class="form-control" v-model="params.email">
+        <input type="text" name="" id="" class="form-control" readonly v-model="params.email">
       </div>
-      <div  class="form-item">
+      <!-- <div  class="form-item">
         <p class="form-label">Password</p>
         <input type="psasword" name="" id="" class="form-control" v-model="params.password">
-      </div>
+      </div> -->
       <div class="save-btn" @click="personalEdit">SAVE</div>
     </div>
   </div>
