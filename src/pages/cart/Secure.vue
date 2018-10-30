@@ -42,7 +42,7 @@
                 <!-- 卡 -->
                 <div class="card-list" v-if="cards && cards.length">
                   <div class="cards" v-for="(item, index) in cards" :key="index">
-                    <input type="radio" name="card">
+                    <input type="radio" name="card" @click="clickCardRadio(3)">
                     <div class="card-detail fl" >
                       * Card No. : <span class="num">{{item.number}}</span>
                       <div class="edit" @click="clickCardEdit(item.id)"><i class="iconfont">&#xe621;</i>Edit</div>
@@ -56,7 +56,7 @@
                 <div class="add-button" @click="clickNewCard">+ ADD NEW CARD</div>
 
                 <div class="pay-type">
-                  <input type="radio" name="card">
+                  <input type="radio" name="card" @click="clickCardRadio(2)">
                   <span>PayPal</span>
                   <img src="~img/cart/3.png">
                 </div>
@@ -107,7 +107,7 @@
               <div class="label">Total</div>
               <div class="price red">${{returnFloat(totalPrice)}}</div>
             </div>
-            <div class="submit-button">CHECKOUT</div>
+            <div class="submit-button" @click="orderPay">CHECKOUT</div>
             <div class="we-accept">
               <div class="title">we accept</div>
               <div class="img"></div>
@@ -201,7 +201,10 @@ export default {
           this.errJump ();
         }
       }, err => {
-        // this.$Toast(err);
+        this.$Messagebox({
+          title: err || 'system error',
+          type: 'error'
+        });
         this.errJump ();
       });
     },
@@ -214,7 +217,10 @@ export default {
           this.cards = res.content.cards || [];
         }
       }, err => {
-        // this.$Toast(err);
+        this.$Messagebox({
+          title: err || 'system error',
+          type: 'error'
+        });
       });
     },
     // 获取地址数据
@@ -246,48 +252,53 @@ export default {
     },
     // 订单支付
     orderPay () {
-      if (this.addressId === '') {
-        // this.$Toast('Please add a shipping address');
+      let self = this;
+      let locked = false;
+      if (locked) {
         return;
       }
-      if (!this.payType) {
-        // this.$Toast('Please select payment method');
+      locked = true;
+      // 如果没有地址信息
+      if (self.addressId === '') {
+        this.$Messagebox({
+          title: 'Fill in a shipping address',
+          type: 'error'
+        });
+        return;
+      }
+      if (!self.payType) {
+        this.$Messagebox({
+          title: 'Select payment method',
+          type: 'error'
+        });
         return;
       }
       // 若有卡或者使用Paypal支付，并选择了Credit／Debit card
-      this.request('OrdersPay', {
-        order_id: +this.$route.query.orderId, // 订单号
-        address_id:	+this.addressId, // 地址id
-        balance: this.isBalance, // 是否使用余额
-        pay_type: this.payType, //	是	Number	支付方式 2-paypal 3-stripe
-        source: this.cardNumber
+      self.request('OrdersPay', {
+        order_id: +self.$route.query.orderId, // 订单号
+        address_id:	+self.addressId, // 地址id
+        balance: self.isBalance, // 是否使用余额
+        pay_type: self.payType, //	是	Number	支付方式 2-paypal 3-stripe
+        source: self.cardNumber
       }).then((res) => {
-        let self = this;
         if (res.status === 200) {
           if (self.payType === 2 && res.content) {
-            // self.$Toast({
-            //   message: 'Payment Processing',
-            //   duration: 3000
-            // });
             // 如果是PayPal去支付页面
-            setTimeout(function() {
-              window.location.href = res.content.payUrl;
-            }, 1000);
+            window.location.href = res.content.payUrl;
           }
           if (self.payType === 3) {
-            // self.$Toast({
-            //   message: 'Payment Processing',
-            //   duration: 1200
-            // });
+            self.$router.push({path: '/cart/successful?orderId=' + self.$route.query.orderId});
           }
         } else {
-          // self.$Toast({
-          //   message: res.msg || 'Payment Failure',
-          //   duration: 1200
-          // });
+          self.$router.push({path: '/cart/failure?orderId=' + self.$route.query.orderId});
         }
+        locked = false;
       }, err => {
-        // this.$Toast(err);
+        locked = false;
+        self.$Messagebox({
+          title: err || 'system error',
+          type: 'error'
+        });
       });
     },
     // 改变balance
@@ -336,10 +347,17 @@ export default {
               }
             }
           }, err => {
-            // self.$Toast(err);
+            self.$Messagebox({
+              title: err || 'system error',
+              type: 'error'
+            });
           });
         }
       }
+    },
+    // 点击卡的radio
+    clickCardRadio (num) {
+      this.payType = num;  // 支付方式  2-paypal 3-stripe
     },
     // 新增地址
     clickNewAddress () {
@@ -588,6 +606,7 @@ export default {
         }
       }
       .submit-button {
+        cursor: pointer;
         margin-left: 10px;
         .whl(330, 50);
         background: @orange;

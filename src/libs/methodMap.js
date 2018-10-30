@@ -38,6 +38,8 @@ const methodMap = {
   AddressList: {url: '/address/list', method: 'post'},
   /** 地址添加 **/
   AddressAdd: {url: '/address/add', method: 'post'},
+  /** 地址添加 **/
+  AddressEdit: {url: '/address/edit', method: 'post'},
   /** 地址删除 **/
   AddressDelete: {url: '/address/delete', method: 'post'},
   /** 地址默认 **/
