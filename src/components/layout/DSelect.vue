@@ -28,7 +28,6 @@
 /* eslint-disable no-extra-boolean-cast */
 import EventListener from '../utils/EventListener';
 import coerceBoolean from '../utils/coerceBoolean';
-import messagebox from 'components/basic/MessageBox';
 import confirmmodal from '../layout/ConfirmModal';
 
 export default {
@@ -219,19 +218,19 @@ export default {
           this.confirmModal.show = false;
           this.value = this.confirmModal.selectval;
           this.onSelect(this.confirmModal.selectval);
-          messagebox({
+          this.$Messagebox({
             title: '修改状态成功!',
             type: 'success'
           });
         } else {
-          messagebox({
+          this.$Messagebox({
             title: res.message || '修改状态失败!',
             type: 'error'
           });
         }
       }, (res) => {
         // error callback
-        messagebox({
+        this.$Messagebox({
           title: res.message || '网络错误！',
           type: 'error'
         });

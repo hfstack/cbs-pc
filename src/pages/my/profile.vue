@@ -71,6 +71,10 @@ export default {
       this.request('PersonalInfo').then((res) => {
         if (res.status === 200 && res.content) {
           this.params = res.content;
+          this.$Messagebox({
+            type: 'error',
+            title: res.msg
+          });
         } else {
           this.$Messagebox({
             type: 'error',

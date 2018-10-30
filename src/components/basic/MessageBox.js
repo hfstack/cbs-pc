@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import getScrollBarWidth from '../utils/getScrollBarWidth.js';
-import Modal from './Modal.vue'
+import Modal from './Modal.vue';
 var MessageBoxConstructor = Vue.extend(Modal);
 var MessageBox = function(options) {
   const body = document.body;

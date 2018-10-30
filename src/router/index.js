@@ -11,7 +11,7 @@ export default new Router({
       path: '/home',
       component: function (resolve) {
         require.ensure([], function () {
-          resolve(require('pages/home'));
+          resolve(require('pages/home/main'));
         }, 'home');
       }
     },

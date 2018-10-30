@@ -2,14 +2,14 @@
 <div>
   <headers></headers>
   <div class="home-main" ref="indexMain">
-      <homeindex></homeindex>
+    <homeindex></homeindex>
   </div>
 </div>
 
 </template>
 
 <script>
-import homeindex from './home/Index'
+import homeindex from './home/main'
 export default {
   name: 'home',
   components: {
@@ -32,7 +32,10 @@ export default {
           this.store_goods = res.content.store_goods; // 商品数据
         }
       }, err => {
-        this.$Toast(err);
+        this.$Messagebox({
+          title: err,
+          type: 'err'
+        });
       });
     }
   },

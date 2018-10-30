@@ -5,13 +5,14 @@ import App from './App';
 import router from './router';
 import Http from './libs/http';
 import initComponents from './initComponents';
-import Messagebox from './components/basic/Messagebox';
+import messagebox from './components/basic/Messagebox';
 import './less/index.less';
 import VeeValidate from 'vee-validate';
 import messages from 'components/utils/zh_CN';
 // checkwebp
 import './components/basic/checkwebp';
 
+console.log(messagebox);
 // import 'iview/dist/styles/iview.css';
 
 // import { Select, Option } from 'iview';
@@ -36,7 +37,7 @@ Vue.use(VeeValidate, config);
 
 Vue.use(Http);
 Vue.config.productionTip = false;
-Vue.prototype.$Messagebox = Messagebox;
+Vue.prototype.$Messagebox = messagebox;
 initComponents(Vue);
 
 /* eslint-disable no-new */
