@@ -2,51 +2,50 @@
   "status": 200,
   "msg": "success",
   "content": {
-    "cates": [
-      {
-        "name": "HOME & LIVING",
-        "id": 193,
-        "sub": [
+      "cates":[
           {
-            "id": 1498,
-            "name": "SecondCate",
-            "sub": [
-              {
-                "id": 1498,
-                "name": "Clothing1"
-              },
-              {
-                "id": 1494,
-                "name": "Clothing2"
-              },
-              {
-                "id": 1495,
-                "name": "Clothing3"
-              }
-            ]
+              "name": "HOME & LIVING",
+              "id": 1931,
+              "sub": [
+                  {
+                      "id": 14918,
+                      "name": "SecondCate",
+                      "sub": [
+                          {
+                              "id": 1493,
+                              "name": "Clothing1"
+                          },
+                          {
+                            "id": 1494,
+                            "name": "Clothing2"
+                          },
+                          {
+                            "id": 1495,
+                            "name": "Clothing3"
+                          }
+                      ]
+                  },{
+                      "id": 1492,
+                      "name": "SecondCate",
+                      "sub": [
+                          {
+                              "id": 1113,
+                              "name": "skin care"
+                          }
+                      ]
+                  }
+              ]
           },
           {
-            "id": 1498,
-            "name": "SecondCate",
-            "sub": [
-              {
-                "id": 1113,
-                "name": "skin care"
-              }
-            ]
+              "id": 1078,
+              "name": "BEAUTY",
+              "sub": [
+                  {
+                      "id": 1428,
+                      "name":"Clothing"
+                  }
+              ]
           }
-        ]
-      },
-      {
-        "id": 1078,
-        "name": "BEAUTY",
-        "sub": [
-          {
-            "id": 1498,
-            "name": "Clothing"
-          }
-        ]
-      }
-    ]
+      ] 
   }
 }

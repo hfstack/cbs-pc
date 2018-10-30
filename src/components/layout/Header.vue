@@ -5,8 +5,12 @@
       <logo class="fl"></logo>
       <div class="search" v-show="!isCart">
         <i class="iconfont fl s-icon-a">&#xe620;</i>
-        <input type="text" placeholder="Search" class="search-input">
-        <div class="search-a"><i class="iconfont">&#xe620;</i></div>
+        <input type="text" placeholder="Search" class="search-input" v-model="search" @focus="searchFocus">
+        <div class="search-a"  @click="searchClick()"><i class="iconfont">&#xe620;</i></div>
+        <ul class="search-list" v-show="historyShow && history.length">
+          <li class="recent-search">Recent Search</li>
+          <li class="search-item" @click.capture="searchClick(item)" v-for="item in history">{{item}}<span class="close" @click.stop="clearHistory"><i class="iconfont">&#xe63f;</i> Clear</span></li>
+        </ul>
       </div>
       <div class="cart" @mousemove="mousemoveCart" @mouseout="mouseoutCart" v-show="!isCart">
         <i class="iconfont fl">&#xe624;</i>
@@ -49,7 +53,16 @@ export default {
   },
   data () {
     return {
-      isShowCart: false
+      isShowCart: false,
+      search: '',
+      history: [],
+      historyShow: false
+    }
+  },
+  mounted() {
+    let history = localStorage.getItem('searchHistory')
+    if(history) {
+      this.history = JSON.parse(history);
     }
   },
   methods: {
@@ -58,6 +71,31 @@ export default {
     },
     mouseoutCart () {
       this.isShowCart = false;
+    },
+    searchClick (keywords) {
+      if(keywords) {
+        this.search = keywords;
+      }
+      if(!this.search) {
+        return false;
+      }
+      this.history.push(this.search);
+      this.history = Array.from(new Set(this.history));
+      localStorage.setItem('searchHistory', JSON.stringify(this.history))
+      this.historyShow = false;
+      this.$router.push({
+        path: '/category/search',
+        query: {
+          title: this.search
+        }
+      })
+    },
+    searchFocus () {
+     this.historyShow = true;
+    },
+    clearHistory (index) {
+      this.history.splice(index, 1);
+      localStorage.setItem('searchHistory', JSON.stringify(this.history));
     }
   }
 };
@@ -85,6 +123,7 @@ export default {
       margin-left: 392px;
       margin-top: 10px;
       .search-a{
+        cursor: pointer;
         width: 70px;
         height: 45px;
         position: absolute;
@@ -111,6 +150,44 @@ export default {
         height: 40px;
         background: transparent;
         float: left;
+      }
+      .search-list{
+        position: absolute;
+        top: 44px;
+        left: 15px;
+        width: 550px;
+        border:1px solid rgba(225,225,225,1);
+        padding: 20px;
+        z-index: 222;
+        background: #fff;
+        li{
+          padding-left: 10px;
+          margin-top: 20px;
+          height: 14px;
+          line-height: 14px;
+          color: #222222;
+          position: relative;
+          font-weight: bold;
+          font-size: 12px;
+          cursor: pointer;
+          .close{
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: #939399;
+            cursor: pointer;
+            font-size: 12px;
+            
+          }
+          i{
+            font-size: 12px;
+          }
+        }
+        .recent-search{
+          font-size:14px;
+          font-weight: bold;
+          margin-top: 0;
+        }
       }
     }
     .cart{

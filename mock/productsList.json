@@ -52,6 +52,9 @@
         "price": 20
       }
     ],
+    "nav": ["home", "women", "shoes"],
+    "title": "women",
+    "total_goods": 2202,
     "total_page": 4
   }
 }

@@ -3,7 +3,7 @@
     <headers></headers>
     <div class="category-search">
       <div class="filter-list">
-        <p class="current-cate">home/Women</p>
+        <p class="current-cate"><span v-for="(item, index) in navs">{{item}}<i class="aicon" v-if="index < navs.length - 1">/</i></span></p>
         <p class="filter-title">FILTER</p>
         <div class="filter">
           <p class="title">Price Range</p>
@@ -15,7 +15,7 @@
       </div>
       <div class="result-content">
         <div class="total">
-          <p class="fl title"> Women ( 2655 Results )<p>
+          <p class="fl title"> {{searchTitle}} ( {{total_goods}} Results )<p>
           <div class="sort fr">
             <div class="fl" style="margin-right: 10px">SORT BY</div>
             <dselect :border="true" placeholder="" :options="searchOptions" :value.sync="params.sort"></dselect>
@@ -49,10 +49,13 @@ export default {
         title: '',
         sort: ''
       },
+      navs: [],
       loadingContent: '',
       isFinishedLoading: true,
       loadingEmpty: false,
       dataSearch: [],
+      searchTitle: '',
+      total_goods: '',
       searchOptions: [
         {
           label: 'Best Match',
@@ -102,6 +105,9 @@ export default {
       // 发送请求
       this.request('ProductsList', this.params).then((res) => {
         if (res.status === 200 && res.content) {
+          this.navs = res.content.nav;
+          this.searchTitle = res.content.title;
+          this.total_goods = res.content.total_goods;
           this.loadingContent = '';
           // this.isShowSearchHistory = false; // 隐藏搜索历史
           // option.title && this.getHistory(option.title); // 记录搜索历史
@@ -166,6 +172,13 @@ export default {
       color: @gray;
       font-size: 12px;
       margin-bottom: 23px;
+      .aicon{
+        display: inline-block;
+        margin: 0 5px;
+        color: #000;
+        font-size: 10px;
+        font-weight: bold
+      }
     }
     .filter-title{
       color: #000000;
