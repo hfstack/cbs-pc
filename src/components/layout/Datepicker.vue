@@ -9,8 +9,8 @@
       <div class="datepicker-inner">
         <div class="datepicker-body">
           <div class="datepicker-ctrl">
-            <span class="month-btn datepicker-preBtn bicon" @click="preNextMonthClick(0)">&#xe612;</span>
-            <span class="month-btn datepicker-nextBtn bicon" @click="preNextMonthClick(1)">&#xe608;</span>
+            <span class="month-btn datepicker-preBtn iconfont" @click="preNextMonthClick(0)">&#xe62f;</span>
+            <span class="month-btn datepicker-nextBtn iconfont" @click="preNextMonthClick(1)">&#xe62e;</span>
             <p @click="switchMonthView">{{stringifyDayHeader(currDate)}}</p>
           </div>
           <div class="datepicker-weekRange">
@@ -26,8 +26,8 @@
       <div class="datepicker-inner">
         <div class="datepicker-body">
           <div class="datepicker-ctrl">
-            <span class="month-btn datepicker-preBtn iconhandle" @click="preNextYearClick(0)">&#xe642;</span>
-            <span class="month-btn datepicker-nextBtn iconhandle" @click="preNextYearClick(1)">&#xe643;</span>
+            <span class="month-btn datepicker-preBtn iconfont" @click="preNextYearClick(0)">&#xe62f;</span>
+            <span class="month-btn datepicker-nextBtn iconfont" @click="preNextYearClick(1)">&#xe62e;</span>
             <p @click="switchDecadeView">{{stringifyYearHeader(currDate)}}</p>
           </div>
           <div class="datepicker-monthRange">
@@ -46,8 +46,8 @@
       <div class="datepicker-inner">
         <div class="datepicker-body">
           <div class="datepicker-ctrl">
-            <span class="month-btn datepicker-preBtn iconhandle" @click="preNextDecadeClick(0)">&#xe642;</span>
-            <span class="month-btn datepicker-nextBtn iconhandle" @click="preNextDecadeClick(1)">&#xe643;</span>
+            <span class="month-btn datepicker-preBtn iconfont" @click="preNextDecadeClick(0)">&#xe62f;</span>
+            <span class="month-btn datepicker-nextBtn iconfont" @click="preNextDecadeClick(1)">&#xe62e;</span>
             <p>{{stringifyDecadeHeader(currDate)}}</p>
           </div>
           <div class="datepicker-monthRange decadeRange">

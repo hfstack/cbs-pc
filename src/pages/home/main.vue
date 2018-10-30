@@ -39,14 +39,11 @@ export default {
           this.storey = res.content.storey;
         }
       }, err => {
-        this.$Toast(err);
+        this.$Messagebox({
+          title: err,
+          type: 'error'
+        });
       });
-    },
-    // 去搜索
-    goToSearch () {
-      this.$router.push({
-        name: 'search'
-      })
     }
   }
 }

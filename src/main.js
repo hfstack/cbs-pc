@@ -12,7 +12,6 @@ import messages from 'components/utils/zh_CN';
 // checkwebp
 import './components/basic/checkwebp';
 
-console.log(messagebox);
 // import 'iview/dist/styles/iview.css';
 
 // import { Select, Option } from 'iview';

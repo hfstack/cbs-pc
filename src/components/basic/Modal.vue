@@ -24,11 +24,11 @@
           <div class="modal-body">
             <template v-if="isMessage">
               <p v-if="messageType === 'success'">
-                <i class="bicon success">&#xe602;</i>
+                <i class="bicon success iconfont">&#xe602;</i>
                 {{title}}
               </p>
               <p v-else>
-                <i class="bicon error">&#xe653;</i>
+                <i class="bicon error iconfont">&#xe653;</i>
                 {{title}}
               </p>
             </template>

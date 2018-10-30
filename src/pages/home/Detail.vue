@@ -382,7 +382,7 @@ export default {
           setTimeout(function() {
             self.submitLocked = false; // 解锁
             self.$router.push({
-              path: '/cart?id=' + self.$route.query.id
+              path: '/mycart?id=' + self.$route.query.id
             });
           }, 1000);
         } else {

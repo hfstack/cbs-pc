@@ -71,10 +71,6 @@ export default {
       this.request('PersonalInfo').then((res) => {
         if (res.status === 200 && res.content) {
           this.params = res.content;
-          this.$Messagebox({
-            type: 'error',
-            title: res.msg
-          });
         } else {
           this.$Messagebox({
             type: 'error',
@@ -128,7 +124,8 @@ export default {
     .img{
       width: 140px;
       height: 140px;
-      margin: 0 auto;
+      margin-left: 15px;
+      margin-bottom: 20px;
     }
     .upload-btn{
       width: 170px;
@@ -138,6 +135,9 @@ export default {
       line-height: 35px;
       display: block;
       text-align: center;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer
     }
   }
   .form-group{
@@ -151,6 +151,7 @@ export default {
       width:680px;
       border:1px solid rgba(221,221,221,1);
       border-radius:2px;
+      padding-left: 10px;
     }
     .form-label{
       width: 100%;

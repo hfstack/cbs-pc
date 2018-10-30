@@ -8,10 +8,10 @@ export default new Router({
   routes: [
     {
       name: 'home',
-      path: '/home',
+      path: '/index',
       component: function (resolve) {
         require.ensure([], function () {
-          resolve(require('pages/home/main'));
+          resolve(require('pages/Home'));
         }, 'home');
       }
     },
@@ -26,7 +26,7 @@ export default new Router({
     },
     {
       name: 'cart',
-      path: '/cart',
+      path: '/mycart',
       component: function (resolve) {
         require.ensure([], function () {
           resolve(require('pages/Cart'));

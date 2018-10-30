@@ -21,7 +21,7 @@
         <span class="lalel">Total:</span>
         <span class="price">${{totalPrice}}</span>
       </div>
-      <router-link :to="{path: '/cart'}" class="submit-button">View Cart</router-link>
+      <router-link :to="{path: '/mycart'}" class="submit-button">View Cart</router-link>
       <div class="arrow-up"></div>
     </div>
   </div>

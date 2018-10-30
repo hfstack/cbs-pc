@@ -5,7 +5,7 @@
       <div class="cart-empty" v-if="cartEmpty">
         <div class="img"></div>
         <p>Your shopping cart is currently empty</p>
-        <router-link :to="{path: '/home'}" class="btn">SHOP NOW</router-link>
+        <router-link :to="{path: '/index'}" class="btn">SHOP NOW</router-link>
       </div>
       <div class="cart-have" v-else>
         <orderstatus></orderstatus>
