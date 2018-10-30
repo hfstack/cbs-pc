@@ -5,14 +5,14 @@
       "cates":[
           {
               "name": "HOME & LIVING",
-              "id": 193,
+              "id": 1931,
               "sub": [
                   {
-                      "id": 1498,
+                      "id": 14918,
                       "name": "SecondCate",
                       "sub": [
                           {
-                              "id": 1498,
+                              "id": 1493,
                               "name": "Clothing1"
                           },
                           {
@@ -25,7 +25,7 @@
                           }
                       ]
                   },{
-                      "id": 1498,
+                      "id": 1492,
                       "name": "SecondCate",
                       "sub": [
                           {
@@ -41,7 +41,7 @@
               "name": "BEAUTY",
               "sub": [
                   {
-                      "id": 1498,
+                      "id": 1428,
                       "name":"Clothing"
                   }
               ]

@@ -2,7 +2,7 @@
   <div>
     <headers></headers>
     <div class="activity" >
-      <img src="../../assets/images/home/a_top.jpg" alt="" class="a-top">
+      <img :src="promotions.promotion_pc_banner" alt="" class="a-top">
       <div class="activity-content">
         <goods-list :list="goodsList" v-if="goodsList.length"></goods-list>
       </div>
@@ -35,7 +35,9 @@ export default {
       promotions: {
         promotion_start: '',
         promotion_end: '',
-        promotion_msg: ''
+        promotion_msg: '',
+        promotion_h5_banner: '',
+        promotion_pc_banner: ''
       },
       activityType: '', //活动类型
       startEndDesc: '',

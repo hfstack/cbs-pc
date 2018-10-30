@@ -62,7 +62,9 @@
         "promotions": {
             "promotion_start": "2018-09-30 15:38:38",
             "promotion_end": "2018-10-31 15:38:51",
-            "promotion_msg": "满¥100减¥10"
+            "promotion_msg": "满¥100减¥10",
+            "promotion_h5_banner": "http://cucoe.oss-us-west-1.aliyuncs.com/promotion/5bcdcbc33c86e.jpg",
+            "promotion_pc_banner": "http://cucoe.oss-us-west-1.aliyuncs.com/promotion/5bcdcbc33c86e.jpg"
         },
         "activityType": "reduce",
         "total_page": 1

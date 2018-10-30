@@ -1,13 +1,12 @@
 <template>
   <div class="c-nav">
     <ul class="c-nav-ul">
-      <!-- <li class="nav-item" v-for="(item, index) in navs" :class="{'active': item.id === +cate}" :key="index">{{item.name}}</li> -->
-      <li class="nav-item" v-for="(item, index) in category" @mouseover="catemousemove(item)"  @mouseout="item.show = false"  @click="cateSelect(item)"  :class="{'active': item.id === +cate}" :key="index">
-       <span class="first-cate" >{{item.name}}</span>
+      <li class="nav-item" v-for="(item, index) in category" @mouseover="catemousemove(item)"  @mouseout="item.show = false"  @click.capture="cateSelect(item)"  :class="{'active': item.id === firstSelect.id}" :key="index">
+        <span class="first-cate" >{{item.name}}</span>
         <div class="sub-nav" v-show="item.show">
           <div v-for="ele in item.sub">
             <p class="sub-title" @click="cateSelect(ele)" >{{ele.name}}</p>
-            <p v-for="p in ele.sub" class="three-cate" @click="cateSelect(p)">{{p.name}}</p>
+            <p v-for="p in ele.sub" class="three-cate" @click="cateSelect(p)" :class="{'active': p.id === $route.query.cate}">{{p.name}}</p>
           </div>
         </div>
       </li>
@@ -62,8 +61,42 @@ export default {
   },
   mounted() {
     this.cate = this.$route.query.cate || '';
-    this.getFirstCate();
     this.getCategory();
+  },
+  watch: {
+    '$route.query': function() {
+      this.cate = this.$route.query.cate || '';
+    }
+  },
+  computed: {
+    'firstSelect': function() {
+      let firstSelect = {}; 
+      if (!this.category.length) {
+        return {};
+      }
+      for(let i = 0,len = this.category.length; i < len; i++) {
+        const secondeCate = this.category[i].sub;
+        let secondSelect = {};
+        if (this.category[i].id === +this.$route.query.cate) {
+          firstSelect = this.category[i];
+        }
+        secondeCate.length && secondeCate.forEach((item) => {
+          const threeCate = item.sub;
+          threeCate && threeCate.length && threeCate.forEach((ele) => {
+            if(ele.id === +this.$route.query.cate) {
+              console.log(ele)
+              console.log(item)
+              secondSelect = item;
+            }
+          })
+        })
+        // console.log(secondSelect)
+        if(secondSelect.id) {
+          firstSelect = this.category[i];
+        }
+      }
+      return firstSelect;
+    }
   },
   methods: {
     catemousemove(item) {
@@ -72,28 +105,6 @@ export default {
       // })
       item.show = true;
     },
-    // 根据三级分类找到一级分类
-    getFirstCate() {
-      let secondSelect = {};
-      let firstSelect = {};
-      for(let i = 0,len = this.category.length; i < len; i++) {
-        const secondeCate = this.category[i].sub;
-        secondeCate.forEach((item) => {
-          const threeCate = item.sub;
-          threeCate.forEach((ele) => {
-            if(ele.id === this.cate) {
-              secondSelect = item;
-            }
-          })
-        })
-        if(secondSelect.id === secondeCate.id) {
-          firstSelect = this.category[i];
-          this.cate = firstSelect.id;
-          return;
-        }
-      }
-    },
-    // 获取分类
     getCategory() {
       this.request('PCCate').then((res) => {
         if (res.status === 200) {
@@ -148,8 +159,10 @@ export default {
     cursor: pointer;
     
     &.active{
-      color: @orange;
-      border-bottom: 3px solid @orange
+      .first-cate{
+        color: @orange;
+        border-bottom: 3px solid @orange
+      }
     }
     position: relative;
   }
@@ -178,6 +191,9 @@ export default {
   }
   .three-cate{
      &:hover{
+      color: @orange
+    }
+    &.active{
       color: @orange
     }
   }
