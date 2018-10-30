@@ -103,14 +103,14 @@ export default {
           })
         } else {
           this.$Messagebox({
-            type: res.msg,
+            title: res.msg,
             title: err
           });
         }
       }, err => {
         this.$Messagebox({
-          type: res.msg,
-          title: err
+          title: res.msg,
+          type: 'error'
         });
       })
     }

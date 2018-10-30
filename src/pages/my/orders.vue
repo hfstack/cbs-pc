@@ -183,7 +183,11 @@ export default {
           });
           this.orders = orders;
         } else {
-          this.$Toast(res.msg);
+          this.$Messagebox({
+            title: res.msg,
+            type: 'error'
+          });
+          // this.$Toast(res.msg);
         }
       }, err => {
         this.$Toast(err.data.msg);
@@ -207,10 +211,11 @@ export default {
         if (res.status === 200) {
           this.confirmModal.show = false;
           this.handleCb && this.handleCb();
-          this.$Toast('success');
+          // this.$Toast('success');
         }
       }, err => {
-        this.$Toast(err);
+        // this.$Toast(err);
+
       });
     },
     // 确认收货
@@ -232,10 +237,16 @@ export default {
           this.confirmModal.show = false;
           this.handleCb && this.handleCb();
         } else {
-          this.$Toast(res.msg);
+          this.$Messagebox({
+            title: res.msg,
+            type: 'error'
+          });
         }
       }, err => {
-        this.$Toast(err);
+        this.$Messagebox({
+          title: res.msg,
+          type: 'error'
+        });
       });
     },
     // 物流信息

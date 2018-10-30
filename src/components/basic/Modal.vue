@@ -12,7 +12,7 @@
       <div class="modal-content">
         <slot name="modal-header" v-if="!isMessage">
           <div class="modal-header">
-            <i class="iconhandle close" @click="close">&#xe609;</i>
+            <i class="iconhandle close" @click="close">&#xe63f;</i>
             <h4 class="modal-title" >
               <slot name="title">
                 {{title}}
@@ -24,11 +24,11 @@
           <div class="modal-body">
             <template v-if="isMessage">
               <p v-if="messageType === 'success'">
-                <i class="bicon success">&#xe60b;</i>
+                <i class="bicon success">&#xe602;</i>
                 {{title}}
               </p>
               <p v-else>
-                <i class="bicon error">&#xe60c;</i>
+                <i class="bicon error">&#xe653;</i>
                 {{title}}
               </p>
             </template>

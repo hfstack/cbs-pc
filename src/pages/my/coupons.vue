@@ -39,7 +39,10 @@ export default {
           this.couponList = res.content || [];
         }
       }, err => {
-        this.$Toast(err);
+        this.$Messagebox({
+          type: 'error',
+          title: err
+        })
       });
     }
   }

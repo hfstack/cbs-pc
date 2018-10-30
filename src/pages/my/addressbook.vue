@@ -39,7 +39,7 @@ export default {
           this.list = res.content || [];
         }
       }, err => {
-        this.$Toast(err);
+        // this.$Toast(err);
       });
     },
   }

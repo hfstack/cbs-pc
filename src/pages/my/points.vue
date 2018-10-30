@@ -50,7 +50,7 @@ export default {
           this.personal_integral = res.content.personal_integral;
         }
       }, err => {
-        this.$Toast(err);
+        // this.$Toast(err);
       });
     }
   }

@@ -114,7 +114,10 @@ export default {
           this.promotionsInfo();
         }
       }, err => {
-        this.$Toast(err);
+        this.$Messagebox({
+          tittle: err,
+          type: 'error'
+        });
       })
     },
     // 关闭优惠券
