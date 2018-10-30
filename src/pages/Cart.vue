@@ -64,7 +64,7 @@
                   </li>
                   <li>
                     <div class="label">Estimated Shipping</div>
-                    <div class="price">{{+cartsData.shipping > 0 ? ('$' + returnFloat(cartsData.shipping)) : 'Free'}}</div>
+                    <div class="price">{{+shippingMoney > 0 ? ('$' + returnFloat(shippingMoney)) : 'Free'}}</div>
                   </li>
                   <li v-if="cartsData.promotion_msg">
                     <div class="label">{{cartsData.promotion_msg}}</div>
@@ -153,7 +153,8 @@ export default {
       totalPrice: 0, // 减积分和券的总价
       confirmModal: {},
       cartEmpty: false,
-      couponPrice: 0 // 券价
+      couponPrice: 0, // 券价
+      shippingMoney: 0 // 邮费 > $19美元包邮
     };
   },
   computed: {},
@@ -203,10 +204,17 @@ export default {
       this.totalPrice = this.productTotal;
       // 活动
       this.totalPrice =  (this.totalPrice * 100 - +this.cartsData.specialoffer * 100) / 100;
-      // 运费
-      this.totalPrice = (this.totalPrice * 100 + +this.cartsData.shipping * 100) / 100; //加运费
+
       // 处理券价格
       this.totalPrice = (this.totalPrice * 100 - +((this.couponPrice + '').replace(/[^0-9]/ig, '')) * 100) / 100;
+      // 邮费计算
+      if (this.totalPrice >= 19) {
+        this.shippingMoney = 0;
+      } else {
+        this.shippingMoney = 10;
+      }
+      // 运费
+      this.totalPrice = (this.totalPrice * 100 + +this.shippingMoney * 100) / 100; //加运费
       if (this.totalPrice < 0) {
         this.totalPrice = 0;
       }
