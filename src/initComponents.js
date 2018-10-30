@@ -3,7 +3,6 @@ import InvalidTip from 'components/basic/InvalidTip';
 import DSelect from 'components/layout/DSelect';
 import Confirm from 'components/layout/ConfirmModal';
 import CheckBox from 'components/layout/CheckBox';
-
 const Components = {
   Headers,
   InvalidTip,
