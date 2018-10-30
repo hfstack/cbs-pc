@@ -218,7 +218,7 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: '/my'
+      redirect: '/index'
     }
   ]
 });

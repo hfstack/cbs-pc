@@ -10,11 +10,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
-const HOST = process.env.HOST
-const PORT = process.env.PORT && Number(process.env.PORT)
+const HOST = process.env.HOST;
+const PORT = process.env.PORT && Number(process.env.PORT);
 // ----- 路由 && mock - 动态查找所有index.html页面 ----- //
 var mock = require('../mock/mock.js');
 var setOnline = mock.setOnline;
+
+function isEmptyObject(obj) {
+  for (var key in obj) {
+    return false;
+  };
+  return true;
+};
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
@@ -46,9 +53,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       poll: config.dev.poll,
     },
     before: function(app) {
-      setOnline.forEach(function(m) {
-        app[m.type](m.url, mock[m.name]);
-      });
+      if (isEmptyObject(config.dev.proxyTable)) {
+        setOnline.forEach(function(m) {
+          app[m.type](m.url, mock[m.name]);
+        });
+      }
     }
   },
   plugins: [

@@ -50,7 +50,7 @@ AxiosInst.interceptors.response.use(response => {
     window.localStorage.removeItem('userInfo');
     window.localStorage.removeItem('userToken');
     router.push({
-      name: '/login'
+      name: 'login'
     });
     return Promise.reject(response);
     // return response;

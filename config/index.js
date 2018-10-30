@@ -6,11 +6,76 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/personal/*': {
+        target: 'http://api.cucoe.net',
+        changeOrigin: true,
+        secure: false
+      },
+      '/users/*': {
+        target: 'http://api.cucoe.net',
+        changeOrigin: true,
+        secure: false
+      },
+      '/coupon/*': {
+        target: 'http://api.cucoe.net',
+        changeOrigin: true,
+        secure: false
+      },
+      '/coupons/*': {
+        target: 'http://api.cucoe.net',
+        changeOrigin: true,
+        secure: false
+      },
+      '/orders/*': {
+        target: 'http://api.cucoe.net',
+        changeOrigin: true,
+        secure: false
+      },
+      '/products/*': {
+        target: 'http://api.cucoe.net',
+        changeOrigin: true,
+        secure: false
+      },
+      '/home': {
+        target: 'http://api.cucoe.net',
+        changeOrigin: true,
+        secure: false
+      },
+      '/promotions/*': {
+        target: 'http://api.cucoe.net',
+        changeOrigin: true,
+        secure: false
+      },
+      '/carts': {
+        target: 'http://api.cucoe.net',
+        changeOrigin: true,
+        secure: false
+      },
+      '/cates': {
+        target: 'http://api.cucoe.net',
+        changeOrigin: true,
+        secure: false
+      },
+      '/address/*': {
+        target: 'http://api.cucoe.net',
+        changeOrigin: true,
+        secure: false
+      },
+      '/cards/*': {
+        target: 'http://api.cucoe.net',
+        changeOrigin: true,
+        secure: false
+      },
+      '/pc/*': {
+        target: 'http://api.cucoe.net',
+        changeOrigin: true,
+        secure: false
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

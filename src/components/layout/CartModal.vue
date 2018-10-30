@@ -38,14 +38,18 @@ export default {
   data() {
     return {
       cartsData: [],
-      totalPrice: 0
+      totalPrice: 0,
+      isLogin: window.localStorage.getItem('userToken') || false
     }
   },
   created () {
-    this.getCartData();
+    if(this.isLogin) {
+      this.getCartData();
+    }
   },
   methods: {
     getCartData () {
+
       this.request('Carts', {}).then((res) => {
         if (res.status === 200 && res.content) {
           this.cartsData = res.content;
