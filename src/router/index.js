@@ -9,6 +9,9 @@ export default new Router({
     {
       name: 'home',
       path: '/index',
+      meta: {
+        title: 'WaiWaiMall'
+      },
       component: function (resolve) {
         require.ensure([], function () {
           resolve(require('pages/Home'));
@@ -201,6 +204,9 @@ export default new Router({
     {
       name: 'categorySearch',
       path: '/category/search',
+      meta: {
+        title: 'WaiWaiMall'
+      },
       component: function (resolve) {
         require.ensure([], function () {
           resolve(require('pages/categories/index'));

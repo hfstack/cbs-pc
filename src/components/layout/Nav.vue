@@ -126,6 +126,7 @@ export default {
       this.category.forEach((ele) => {
         ele.show = false;
       })
+      
       this.$router.push({
         name: 'categorySearch',
         query: {

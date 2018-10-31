@@ -85,11 +85,14 @@ export default {
     this.title = this.$route.query.title || '';
     this.params.title = this.title ? encodeURIComponent(this.title) : '';
     this.params.cate = this.$route.query.cate  || '';
+    console.log("mounted query id",this.params.cate)
+
     this.getProductsList();
     this.loadMore();
   },
   watch: {
     '$route.query': function(val) {
+      this.params.cate = this.$route.query.cate
       this.getProductsList();
     }
   },
@@ -104,6 +107,7 @@ export default {
         this.dataSearch = [];
       }
       // 发送请求
+      console.log("methods query id",this.params.cate)
       this.request('ProductsList', this.params).then((res) => {
         if (res.status === 200 && res.content) {
           this.navs = res.content.nav;
