@@ -8,7 +8,7 @@
           <i class="iconfont"></i><input type="text" placeholder="email" v-model="loginEmail">
         </div>
         <div class="form-item">
-          <i class="iconfont"></i><input type="text"  placeholder="password"  v-model="loginPwd">
+          <i class="iconfont"></i><input type="password"  placeholder="password"  v-model="loginPwd">
         </div>
         <invalidtip  :show="loginError">{{loginError}}</invalidtip>
         <div class="sign-btn" @click="login">Sign In</div>
@@ -66,9 +66,11 @@ export default {
   methods: {
     register() {
       if(!this.protocol) {
+        this.rerror = 'Exchange success';
         return;
       }
       this.pwdError = false;
+      this.rerror = '';
       this.$validator.validateAll().then(success => {
         if (!success) {
           return;

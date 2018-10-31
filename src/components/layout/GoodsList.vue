@@ -5,7 +5,7 @@
        <a :href="item.stock > 0 ? 'detail?id=' + item.id : 'javascript:;'">
          <img :src="item.img && item.img.ossimg()" class="img">
          <p class="title">{{item.name}}</p>
-         <p class="price">${{item.price}}<span class="prom-price">${{item.prom_price}}</span></p>
+         <p class="price">${{item.price}}<span class="prom-price">${{item.origin_price}}</span></p>
        </a>
        <div class="solt-out" v-if="item.stock === 0">
          <img src="../../assets/images/my/soltout.png" alt="">

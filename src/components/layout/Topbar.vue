@@ -11,6 +11,7 @@
           <span class="arrow"></span>
           <ul class="personal-navs">
             <li v-for="item in bars"><router-link :class="{'active': item.active}" :to="{name: item.routerName}">{{item.title}}</router-link></li>
+            <li @click="signout"><a href="javascript:;">Sign Out</a></li>
           </ul>
         </template>
       </div>
@@ -105,6 +106,12 @@ export default {
     // 打开导航
     openNavs() {
       this.personalBar = true;
+    },
+    signout() {
+      localStorage.removeItem('userToken');
+      this.$router.push({
+        name: 'login'
+      })
     }
   }
 };
@@ -153,7 +160,7 @@ export default {
     box-shadow:0px 3px 5px 0px rgba(225,225,225,1), 0px 3px 10px 0px rgba(225,225,225,1);
     z-index: 999;
     li {
-      line-height: 46px;
+      line-height: 40px;
       a:hover{
         color: @orange
       }

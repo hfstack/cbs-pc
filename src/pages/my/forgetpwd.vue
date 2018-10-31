@@ -21,7 +21,7 @@ export default {
       fields: {
         email: {
           required: true,
-          regex: /(?!(?:\d+|[a-zA-Z]+)$)[\da-zA-Z]{2,47}$/
+          regex: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
         }
       }
     }
@@ -43,13 +43,13 @@ export default {
               }
             })
           } else {
-            messagebox({
+            this.$Messagebox({
               title: res.msg || '网络错误',
               type: 'error'
             })
           }
         }).catch(res => {
-          messagebox({
+          this.$Messagebox({
             title: res.msg || '网络错误',
             type: 'error'
           })

@@ -164,6 +164,7 @@ export default {
   padding-left: 372px;
   background-color: #fff;
   padding-top: 24px;
+  min-height: 500px;
   .filter-list{
     position: absolute;
     left: 100px;;

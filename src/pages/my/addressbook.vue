@@ -58,8 +58,9 @@ export default {
       if(!item.checked) {
         return;
       }
-      const params = Object.assign(item, {default: true})
-      this.request('AddressEdit', params).then((res) => {
+      this.request('AddressDefault', {
+        address_id: item.id
+      }).then((res) => {
         if (res.status === 200) {
           // 回调返回地址数据
           this.callback && this.callback(res.content);
