@@ -44,15 +44,17 @@
               <i class="iconfont arrow">&#xe62e;</i>
               <i class="iconfont arrow">&#xe62e;</i>
             </li>
-            <li>
-              <i class="iconfont icon red">&#xe710;</i>
-              <span>BUY 2 GET 70% OFF</span>
-              <i class="iconfont arrow">&#xe62e;</i>
-              <i class="iconfont arrow">&#xe62e;</i>
+            <li v-if="data.promotion && data.promotion.id">
+              <router-link :to="{path: '/activity?activity_id=' + (data.promotion && data.promotion.id)}">
+                <i class="iconfont icon red">&#xe710;</i>
+                <span>{{data.promotion && data.promotion.role}}</span>
+                <i class="iconfont arrow">&#xe62e;</i>
+                <i class="iconfont arrow">&#xe62e;</i>
+              </router-link>
             </li>
             <li>
               <i class="iconfont icon yellow">&#xe61c;</i>
-              <span>Earn 6 Points，100 points </span>
+              <span>Earn {{data.max_integral}} Points，100 points equals to U.S. $1.00</span>
             </li>
           </ul>
 
@@ -531,6 +533,9 @@ export default {
       li {
         margin-bottom: 15px;
         .height(25);
+        a {
+          display: block;
+        }
         i.icon {
           vertical-align: top;
           font-size: 18px;
