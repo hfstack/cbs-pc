@@ -7,7 +7,9 @@
         </a>
       </swipe-item>
     </swipe>
-    <img :src="list[0].url" v-if="list.length === 1" alt="">
+    <a :href="list[0].url || 'javascript:;'" v-if="list.length === 1">
+      <img :src="list[0].img && list[0].img.ossimg()">
+    </a>
   </div>
 </template>
 <script>
