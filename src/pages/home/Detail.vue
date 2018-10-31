@@ -34,7 +34,7 @@
               <div class="red">${{goodsData.price}}</div>
               <div class="gray">${{goodsData.originPrice}}</div>
             </div>
-            <div class="fl off" if="+goodsData.price > +goodsData.originPrice">-{{((goodsData.price * 100) / (goodsData.originPrice * 100)) * 100}}% OFF</div>
+            <div class="fl off" if="+goodsData.originPrice > +goodsData.price">-{{((goodsData.price * 100) / (goodsData.originPrice * 100)) * 100}}% OFF</div>
           </div>
           <ul class="detail-some">
             <li class="li1">Deals</li>
