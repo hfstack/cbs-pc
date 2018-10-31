@@ -3,7 +3,7 @@
     <div class="content">
       <div class="lang fl">Englist</div>
       <div class="area fl">US$ USD</div>
-      Wlecom to WIWIMAL!
+      Welcome to WAIWAIMALL
       <div class="contact fr">Contact US</div>
       <div class="l-r fr" @click="login"  @mouseover="openNavs" v-if="!userToken">Login | Register</div>
       <div class="l-r fr" @mouseover="openNavs" @mouseout="() => {personalBar = false}" v-if="userToken">{{userName}}
