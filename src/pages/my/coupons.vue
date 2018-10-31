@@ -53,7 +53,7 @@ export default {
     // 优惠券兑换
     couponApply() {
       this.request('CouponsApply', {
-        redeemCode: this.redeemCode
+        key: this.redeemCode
       }).then((res) => {
         if(res.status === 200 && res.content) {
           this.getCouponList();

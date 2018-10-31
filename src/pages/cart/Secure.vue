@@ -276,7 +276,7 @@ export default {
       }
       // 若有卡或者使用Paypal支付，并选择了Credit／Debit card
       self.request('OrdersPay', {
-        order_id: +self.$route.query.orderId, // 订单号
+        order_id: self.$route.query.orderId, // 订单号
         address_id:	+self.addressId, // 地址id
         balance: self.isBalance, // 是否使用余额
         pay_type: self.payType, //	是	Number	支付方式 2-paypal 3-stripe
@@ -299,7 +299,6 @@ export default {
             title: 'Payment Failure',
             type: 'error'
           });
-          // self.$router.push({path: '/cart/failure?orderId=' + self.$route.query.orderId});
         }
         locked = false;
       }, err => {
