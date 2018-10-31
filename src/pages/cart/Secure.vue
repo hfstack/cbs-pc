@@ -8,7 +8,7 @@
           <div class="left-box">
             <div class="left-top">
               Shipping Address
-              <router-link :to="{path: '/my/account'}">More >></router-link>
+              <router-link :to="{path: '/my/addressbook'}">More >></router-link>
             </div>
             <div class="left-content">
               <!-- 有地址信息-->
@@ -193,6 +193,10 @@ export default {
             if (userAddress[i].is_default === 1) {
               this.addressId = userAddress[i].id;
             }
+          }
+          // 特殊处理
+          if (len === 1) {
+            this.addressId = userAddress[0].id;
           }
         } else {
           this.errJump ();
