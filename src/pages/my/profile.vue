@@ -100,7 +100,7 @@ export default {
         } else {
           this.$Messagebox({
             title: res.msg,
-            title: err
+            type: 'error'
           });
         }
       }, err => {

@@ -179,9 +179,17 @@ export default {
     .sub-title{
       color: #222222;
       font-weight: bold;
+      white-space:nowrap; 
+      text-overflow:ellipsis;
+      overflow:hidden; 
+      width:100%; 
     }
     .three-cate {
-      font-weight: normal
+      font-weight: normal;
+      white-space:nowrap; 
+      text-overflow:ellipsis;
+      overflow:hidden; 
+      width:100%; 
     }
   }
   .first-cate{

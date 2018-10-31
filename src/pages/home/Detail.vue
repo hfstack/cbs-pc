@@ -34,7 +34,7 @@
               <div class="red">${{goodsData.price}}</div>
               <div class="gray">${{goodsData.originPrice}}</div>
             </div>
-            <div class="fl off" if="+goodsData.originPrice > +goodsData.price">-{{((goodsData.price * 100) / (goodsData.originPrice * 100)) * 100}}% OFF</div>
+            <div class="fl off" if="+goodsData.originPrice > +goodsData.price">-{{goodsData.discount}} OFF</div>
           </div>
           <ul class="detail-some">
             <li class="li1">Deals</li>
@@ -234,9 +234,10 @@ export default {
         oneValue: oneSku.value, // 选中一层属性值
         twoValue: '', // 选中二层属性值
         img: '', // 展示图片
-        price: oneSku.prom_price || oneSku.price,
-        originPrice: oneSku.price,
+        price: oneSku.price,
+        originPrice: oneSku.origin_price,
         stock: oneSku.stock,
+        discount: oneSku.discount,
         saleNum: 1 // 购物数量
       };
 

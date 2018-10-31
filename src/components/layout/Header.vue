@@ -5,11 +5,11 @@
       <logo class="fl"></logo>
       <div class="search" v-show="!isCart">
         <i class="iconfont fl s-icon-a">&#xe620;</i>
-        <input type="text" placeholder="Search" class="search-input" v-model="search" @focus="searchFocus">
+        <input type="text" placeholder="Search" class="search-input" v-model="search" @blur="searchBlur" @click="searchFocus" @focus="searchFocus">
         <div class="search-a"  @click="searchClick()"><i class="iconfont">&#xe620;</i></div>
-        <ul class="search-list" v-show="historyShow && history.length">
+        <ul class="search-list" v-show="historyShow && history.length"  @mousemove="historyShow = true"  @mouseout="historyShow = false">
           <li class="recent-search">Recent Search</li>
-          <li class="search-item" @click.capture="searchClick(item)" v-for="item in history">{{item}}<span class="close" @click.stop="clearHistory"><i class="iconfont">&#xe63f;</i> Clear</span></li>
+          <li class="search-item" @click.capture="searchClick(item)" v-for="(item, index) in history">{{item}}<span class="close" @click.stop="clearHistory(index)"><i class="iconfont">&#xe63f;</i> Clear</span></li>
         </ul>
       </div>
       <div class="cart" @mousemove="mousemoveCart" @mouseout="mouseoutCart" v-show="!isCart">
@@ -67,6 +67,11 @@ export default {
     }
   },
   methods: {
+    searchBlur() {
+      setTimeout(() => {
+        this.historyShow = false
+      }, 200)
+    },
     mousemoveCart () {
       this.isShowCart = true;
     },
@@ -80,8 +85,9 @@ export default {
       if(!this.search) {
         return false;
       }
-      this.history.push(this.search);
+      this.history.unshift(this.search);
       this.history = Array.from(new Set(this.history));
+      this.history.length > 6 && this.history.splice(6);
       localStorage.setItem('searchHistory', JSON.stringify(this.history))
       this.historyShow = false;
       this.$router.push({
@@ -163,8 +169,7 @@ export default {
         background: #fff;
         li{
           padding-left: 10px;
-          margin-top: 20px;
-          height: 14px;
+          padding-top: 20px;
           line-height: 14px;
           color: #222222;
           position: relative;
@@ -178,7 +183,6 @@ export default {
             color: #939399;
             cursor: pointer;
             font-size: 12px;
-
           }
           i{
             font-size: 12px;

@@ -29,7 +29,7 @@
             <router-link :to="{path: '/detail?id=' + item.id + '&from=' + encodeURIComponent('categories/search?name=' + $route.params.name)}">
               <img class="img" :src="item.img && item.img.ossimg()">
               <p class="title">{{item.name}}</p>
-               <p class="price">${{item.price}}<span class="prom-price">${{item.prom_price}}</span></p>
+               <p class="price">${{item.price}}<span class="prom-price">${{item.origin_price}}</span></p>
             </router-link>
           </li>
         </ul>
@@ -85,14 +85,13 @@ export default {
     this.title = this.$route.query.title || '';
     this.params.title = this.title ? encodeURIComponent(this.title) : '';
     this.params.cate = this.$route.query.cate  || '';
-    console.log("mounted query id",this.params.cate)
-
     this.getProductsList();
     this.loadMore();
   },
   watch: {
     '$route.query': function(val) {
       this.params.cate = this.$route.query.cate
+      this.params.title = this.$route.query.title
       this.getProductsList();
     }
   },
@@ -147,8 +146,7 @@ export default {
         var b = document.documentElement.clientHeight || document.body.clientHeight; // 可视区域的高度
         var c = document.documentElement.scrollHeight || document.body.scrollHeight; // 可视化的高度与溢出的距离（总高度）
         if (a + b >= c - 200 && self.isFinishedLoading && !self.loadingEmpty) {
-          let page = self.searchParams.page + 1;
-          this.params.page = self.params.page + 1
+          self.params.page = self.params.page + 1
           self.getProductsList();
         }
       }
@@ -162,6 +160,9 @@ export default {
 }
 </script>
 <style lang="less">
+html, body {
+  height: auto;
+}
 @import '~less/tool.less';
 .category-search{
   position: relative;
@@ -272,6 +273,7 @@ export default {
         text-decoration: line-through;
       }
       .title{
+        height: 48px;
         width: 220px;
         padding: 10px 0;
         color: #000000;

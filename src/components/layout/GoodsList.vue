@@ -56,7 +56,7 @@ export default {
       display: block;
     }
     .title{
-      padding: 10px 0;
+      margin: 10px 0;
       color: #000000;
       font-weight: bold;
       display: -webkit-box;
@@ -64,6 +64,7 @@ export default {
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-align: left;
+      height: 32px;
     }
     .price{
       color: @red;

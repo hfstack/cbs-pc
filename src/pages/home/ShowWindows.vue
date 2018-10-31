@@ -118,7 +118,6 @@ export default {
     
     .win5{
       float: left;
-      border: 1px solid red;
       .win5-1{
         width: 380px;
         height: 100%;

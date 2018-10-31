@@ -17,11 +17,11 @@
       <div class="register login-item fr">
         <p class="title">Create an account</p>
         <div class="form-item">
-          <i class="iconfont"></i><input type="text"  placeholder="Frequent Email Address" v-model="params.email"  v-validate="fields.email" data-vv-name="email" data-vv-validate-on="none">
+          <i class="iconfont"></i><input type="text" @focus="clearError" placeholder="Frequent Email Address" v-model="params.email"  v-validate="fields.email" data-vv-name="email" data-vv-validate-on="none">
         </div>
         <invalidtip  :show="verrors.has('email')">{{verrors.first('email')}}</invalidtip>
         <div class="form-item">
-          <i class="iconfont"></i><input type="text" placeholder="password"  v-model="params.password" v-validate="fields.password" data-vv-name="password" @keyup.enter="login">
+          <i class="iconfont"></i><input type="text" @focus="clearError" placeholder="password"  v-model="params.password" v-validate="fields.password" data-vv-name="password" @keyup.enter="login">
         </div>
         <invalidtip :show="verrors.has('password')">{{verrors.first('password')}}</invalidtip>
         <div class="form-item">
@@ -30,7 +30,7 @@
         <invalidtip  :show="pwdError">Two passwords are inconsistent</invalidtip>
         <invalidtip  :show="rerror">{{rerror}}</invalidtip>
         <p class="check"><checkbox :checked.sync="protocol"></checkbox> agree to the Privacy Policy.</p>
-        <p class="check"><checkbox></checkbox>I'd like to receive exclusive offers and latest news by email.</p>
+        <p class="check"><checkbox :checked.sync="receive"></checkbox>I'd like to receive exclusive offers and latest news by email.</p>
         <div class="register-btn" @click="register">Register</div>
       </div>
     </div>
@@ -45,6 +45,7 @@ export default {
         email: '',
         password: ''
       },
+      receive: false,
       repwd: '',
       pwdError: false,
       rerror: '',
@@ -64,11 +65,13 @@ export default {
     }
   },
   methods: {
+    clearError: function() {
+      this.verrors.clear();
+      this.rerror = '';
+      this.pwdError = false;
+    },
     register() {
-      if(!this.protocol) {
-        this.rerror = 'Exchange success';
-        return;
-      }
+      
       this.pwdError = false;
       this.rerror = '';
       this.$validator.validateAll().then(success => {
@@ -76,7 +79,11 @@ export default {
           return;
         };
         if(this.params.password !== this.repwd) {
-          this.pwdError = false;
+          this.pwdError = true;
+          return;
+        }
+        if(!this.protocol) {
+          this.rerror = 'Please agree to our Privacy Policy';
           return;
         }
         this.request('UsersRegister', this.params).then((res) => {

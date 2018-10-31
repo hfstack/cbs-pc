@@ -130,6 +130,8 @@ export default {
 <style lang="less">
 .activity{
   text-align: center;
+  min-height: 300px;
+  background: #fff;
   .a-top{
     width: 1440px;
     height: 400px;
