@@ -30,7 +30,7 @@
         <invalidtip  :show="pwdError">Two passwords are inconsistent</invalidtip>
         <invalidtip  :show="rerror">{{rerror}}</invalidtip>
         <p class="check"><checkbox :checked.sync="protocol"></checkbox> agree to the Privacy Policy.</p>
-        <p class="check"><checkbox :checked.sync="receive"></checkbox>I'd like to receive exclusive offers and latest news by email.</p>
+        <p class="check"><checkbox :checked.sync="params.subscribe"></checkbox>I'd like to receive exclusive offers and latest news by email.</p>
         <div class="register-btn" @click="register">Register</div>
       </div>
     </div>
@@ -43,7 +43,8 @@ export default {
       params: {
         touristToken: window.localStorage.getItem('userToken') ||　'',
         email: '',
-        password: ''
+        password: '',
+        subscribe: false
       },
       receive: false,
       repwd: '',
