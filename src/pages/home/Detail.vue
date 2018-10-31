@@ -38,11 +38,23 @@
           </div>
           <ul class="detail-some">
             <li class="li1">Deals</li>
-            <li>
+            <li @mousemove="couponMousemove" @mouseout="couponMouseout">
               <i class="iconfont icon orange">&#xe612;</i>
-              <span>BUY $300 GET $50 </span>
+              <span v-if="data.coupon && data.coupon.length">{{data.coupon && data.coupon.length}} coupons</span>
+              <span v-else> No Coupon </span>
               <i class="iconfont arrow">&#xe62e;</i>
               <i class="iconfont arrow">&#xe62e;</i>
+              <!-- 券 -->
+              <div class="coupon-list a-fadeinT" v-if="isShowCouponList && data.coupon && data.coupon.length">
+                <!-- 优惠券状态个人中心 1-可用 2-未开始 3-已过期未使用 4-已使用  商品详情页 优惠券状态 1-可领取 2-已领取 3-已领完-->
+                <div v-for="(item,index) in data.coupon" :key="index" class="coupon-item">
+                  <div class="img fl">
+                    <p class="price red">${{item.price}}</p>
+                    <p class="des">For a purchase over ${{item.use_price}}</p>
+                    <p class="time">{{item.startdate}} - {{item.enddate}}</p>
+                  </div>
+                </div>
+              </div>
             </li>
             <li v-if="data.promotion && data.promotion.id">
               <router-link :to="{path: '/activity?activity_id=' + (data.promotion && data.promotion.id)}">
@@ -130,7 +142,8 @@ export default {
       oneSkuNum: 0, // sku第一排动态属性高亮
       el: {}, // dom 集合
       skuId: null, // sku id
-      submitLocked: false // 提交锁
+      submitLocked: false, // 提交锁
+      isShowCouponList: false // 展示券
     }
   },
   created () {
@@ -401,6 +414,12 @@ export default {
           type: 'error'
         });
       });
+    },
+    couponMousemove () {
+      this.isShowCouponList = true;
+    },
+    couponMouseout () {
+      this.isShowCouponList = false;
     }
   }
 };
@@ -531,6 +550,7 @@ export default {
     .detail-some {
       display: block;
       li {
+        position: relative;
         margin-bottom: 15px;
         .height(25);
         a {
@@ -539,6 +559,7 @@ export default {
         i.icon {
           vertical-align: top;
           font-size: 18px;
+          margin-right: 5px;
           &.orange {
             color: @orange;
           }
@@ -567,6 +588,47 @@ export default {
         margin-bottom: 5px;
         margin-top: 20px;
         font-weight: bold;
+      }
+      .coupon-list {
+        position: absolute;
+        top: 25px;
+        left: 0;
+        z-index: 1;
+        padding: 10px 0px 20px 20px;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+      }
+      .coupon-item {
+        height: 52px;
+        margin-top: 10px;
+        .img {
+          position: relative;
+          width: 286px;
+          height: 52px;
+          background: url('~img/cart/coupon_bg.png') no-repeat;
+          .price {
+            position: absolute;
+            font-size: 18px;
+            left: 0px;
+            top: 10px;
+            text-align: center;
+            width: 70px;
+          }
+          .des {
+            font-size: 12px;
+            margin-left: 80px;
+            .height(30);
+          }
+          .time {
+            font-size: 12px;
+            margin-left: 80px;
+            .height(15);
+            color: @gray;
+            .line1();
+            width: 185px;
+          }
+        }
       }
     }
     .detail-sku {
