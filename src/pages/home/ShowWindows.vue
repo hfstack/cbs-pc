@@ -108,6 +108,9 @@ export default {
       .goods-detail{
         width: 120px;
       }
+      .goods-list:last-child{
+        border-bottom: none;
+      }
     }
     a{
       display: inline-block;
@@ -115,10 +118,16 @@ export default {
     
     .win5{
       float: left;
+      border: 1px solid red;
       .win5-1{
         width: 380px;
         height: 100%;
         float: left;
+      }
+      .win5-1>a>img {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
       }
       .win5-2{
         width: 600px;
@@ -133,6 +142,10 @@ export default {
           }
         }
       }
+      .win5-2>a>img{
+        width: 100%;
+        height: 100%;
+      }
     }
     .win3{
       float: left;
@@ -140,6 +153,11 @@ export default {
         width: 380px;
         height: 100%;
         float: left;
+      }
+      .win3-1>a>img {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
       }
       .win3-2{
         width: 600px;
@@ -151,6 +169,10 @@ export default {
           border-bottom: 1px solid @bgray;
         }
       }
+      .win3-2>a>img{
+        width: 100%;
+        height: 100%;
+      }
     }
     .right {
       float: left;
@@ -159,9 +181,14 @@ export default {
       padding: 0 10px;
     }
   }
+  .clearfix:after {
+    display: block;
+    content: '';
+    clear: both;
+  }
   .win-title{
-    margin-top: 27px;
-    margin-bottom: 5px;
+    margin-top: 22px;
+    // margin-bottom: 5px;
     font-size: 20px;
     color: #363433;
   }
