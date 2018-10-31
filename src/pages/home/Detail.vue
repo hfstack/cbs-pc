@@ -570,7 +570,7 @@ export default {
         .clearfix();
         .attr-title {
           position: relative;
-          margin-top: 25px;
+          margin-top: 15px;
           margin-bottom: 10px;
           font-weight: bold;
         }
@@ -581,8 +581,11 @@ export default {
             a {
               display: block;
               // font-weight: bold;
-              .whl(75,25);
+              min-width: 75px;
+              .height(25);
+              padding: 0 20px;
               margin-right: 10px;
+              margin-bottom: 10px;
               text-align: center;
               border: 1px solid @bgray;
               -webkit-transition: -webkit-transform .3s;

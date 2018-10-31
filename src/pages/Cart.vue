@@ -21,7 +21,11 @@
               <div class="left-top black" v-else>Products</div>
               <div class="left-content">
                 <div class="goods" v-for="(item, index) in cartsData.goods" :key="index">
-                  <div class="img fl"><img :src="item.img && item.img.ossimg()"></div>
+                  <div class="img fl">
+                    <router-link :to="{path: '/detail?id=' + item.id}">
+                      <img :src="item.img && item.img.ossimg()">
+                    </router-link>
+                  </div>
                   <div class="info fl">
                     <div class="title">{{item.name}}</div>
                     <div class="sku">
