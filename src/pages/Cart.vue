@@ -60,7 +60,7 @@
                 <ul>
                   <li>
                     <div class="label">Product Total</div>
-                    <div class="price">${{productTotal}}</div>
+                    <div class="price">${{returnFloat(productTotal)}}</div>
                   </li>
                   <li>
                     <div class="label">Estimated Shipping</div>
@@ -197,9 +197,10 @@ export default {
       let goods = this.cartsData.goods;
       let len = goods.length;
       for (let i = 0; i < len; i++) {
-        this.productTotal += goods[i].num * (goods[i].price * 100) / 100;
+        this.productTotal += goods[i].num * (goods[i].price * 100);
       }
-
+      // 浮点数处理
+      this.productTotal = this.productTotal / 100;
       // 计算后的
       this.totalPrice = this.productTotal;
       // 活动
