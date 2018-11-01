@@ -41,6 +41,7 @@
   height: 435px;
   .mint-swipe{
     height: 435px;
+    position: relative;
   }
   img{
     width: 100%;
@@ -48,24 +49,22 @@
     display: block;
   }
   .mint-swipe-indicators {
-    width: 100px;
-    margin: 0 auto;
+    width: 100%;
     position: absolute;
     bottom: 0.45rem;
     text-align: center;
     left: 50%;
-    margin-left: -50px;
   }
   .mint-swipe-indicator {
     width: 20px;
     height: 20px;
     display: inline-block;
     border-radius: 100%;
-    background: #bfbfbf;
+    background: rgba(255,255,255,0.8);
     margin: 0 10px;
   }
   .mint-swipe-indicator.is-active {
-    background: #000000
+    background: rgba(0,0,0,0.7);
   }
 }
 </style>

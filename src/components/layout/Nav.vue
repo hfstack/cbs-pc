@@ -149,20 +149,17 @@ export default {
 .c-nav{
   width: 100%;
   box-shadow:1px 0px 0px rgba(225,225,225,1);
-  // border: 1px solid black;
 }
 .c-nav-ul{
   display: flex;
   justify-content: space-between;
-  width: 1240px;
-  margin: 0 auto;
-  padding-left: 15px;
+  margin-right: 113px;
+  margin-left:113px;
   background: #fff;
-  // border: 1px solid red;
   .nav-item {
-    // float: left;
+    // border: 1px solid red;
     font-weight: bold;
-    // border: 1px solid blue;
+    position: relative;
     .height(30);
     &:last-child {
       margin-right:0;
@@ -175,13 +172,13 @@ export default {
         border-bottom: 3px solid @orange
       }
     }
-    position: relative;
+    
   }
   .sub-nav{
     position: absolute;
-    width: 160px;
+    width: 200px;
     left: -26px;
-    top: 28px;
+    top: 29px;
     padding: 5px 26px;
     box-shadow:0px 3px 5px 0px rgba(225,225,225,1), 0px 3px 10px 0px rgba(225,225,225,1);
     background: #fff;

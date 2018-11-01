@@ -100,7 +100,7 @@ export default {
     }
   }
   .windows{
-    height: 600px;
+    height: 602px;
     border: 1px solid #ccc;
     border-top: 2px solid #343434;
     .window-item{
