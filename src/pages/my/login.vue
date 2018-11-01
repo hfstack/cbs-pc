@@ -21,11 +21,11 @@
         </div>
         <invalidtip  :show="verrors.has('email')">{{verrors.first('email')}}</invalidtip>
         <div class="form-item">
-          <i class="iconfont"></i><input type="text" @focus="clearError" placeholder="password"  v-model="params.password" v-validate="fields.password" data-vv-name="password" @keyup.enter="login">
+          <i class="iconfont"></i><input type="password" @focus="clearError" placeholder="password"  v-model="params.password" v-validate="fields.password" data-vv-name="password" @keyup.enter="login">
         </div>
         <invalidtip :show="verrors.has('password')">{{verrors.first('password')}}</invalidtip>
         <div class="form-item">
-          <i class="iconfont"></i><input type="text" placeholder="Re-Enter Password" v-model="repwd">
+          <i class="iconfont"></i><input type="password" placeholder="Re-Enter Password" v-model="repwd">
         </div>
         <invalidtip  :show="pwdError">Two passwords are inconsistent</invalidtip>
         <invalidtip  :show="rerror">{{rerror}}</invalidtip>

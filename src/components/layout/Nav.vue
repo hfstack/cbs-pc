@@ -5,7 +5,8 @@
         <span class="first-cate" >{{item.name}}</span>
         <div class="sub-nav" v-show="item.show">
           <div v-for="ele in item.sub">
-            <p class="sub-title" @click="cateSelect(ele)" >{{ele.name}}</p>
+            <!-- <p class="sub-title" @click="cateSelect(ele)" >{{ele.name}}</p> -->
+            <abbr class="sub-title" @click="cateSelect(ele)" title="" @mouseover="showTitle(e)">{{ele.name}}</abbr>
             <p v-for="p in ele.sub" class="three-cate" @click="cateSelect(p)" :class="{'active': p.id === $route.query.cate}">{{p.name}}</p>
           </div>
         </div>
@@ -99,6 +100,12 @@ export default {
     }
   },
   methods: {
+    showTitle(e){
+      var e = e || window.event
+      let target = e.target ||e.srcElement
+      let text = target.innerText;
+      this.$set(target,'title',text)
+    },
     catemousemove(item) {
       // this.category.forEach((ele) => {
       //   ele.show = false;
@@ -177,12 +184,17 @@ export default {
     background: #fff;
     z-index: 100;
     .sub-title{
+      display: block;
+      text-decoration: none;
       color: #222222;
       font-weight: bold;
       white-space:nowrap; 
       text-overflow:ellipsis;
       overflow:hidden; 
       width:100%; 
+      &:hover {
+      color: @orange;
+    }
     }
     .three-cate {
       font-weight: normal;
