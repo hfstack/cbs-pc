@@ -149,6 +149,7 @@ export default {
 .c-nav{
   width: 100%;
   box-shadow:1px 0px 0px rgba(225,225,225,1);
+  // border: 1px solid black;
 }
 .c-nav-ul{
   display: block;
@@ -156,10 +157,12 @@ export default {
   margin: 0 auto;
   padding-left: 15px;
   background: #fff;
+  // border: 1px solid red;
   .nav-item {
     float: left;
     margin-right: 70px;
     font-weight: bold;
+    // border: 1px solid blue;
     .height(30);
     &:last-child {
       margin-right:0;

@@ -9,7 +9,9 @@
         <div class="search-a"  @click="searchClick()"><i class="iconfont">&#xe620;</i></div>
         <ul class="search-list" v-show="historyShow && history.length"  @mousemove="historyShow = true"  @mouseout="historyShow = false">
           <li class="recent-search">Recent Search</li>
-          <li class="search-item" @click.capture="searchClick(item)" v-for="(item, index) in history">{{item}}<span class="close" @click.stop="clearHistory(index)"><i class="iconfont">&#xe63f;</i> Clear</span></li>
+          <li class="search-item" @click="searchClick(item)" v-for="(item, index) in history">{{item}}
+            <span class="close" @click.stop="clearHistory(index)"><i class="iconfont">&#xe63f;</i> Clear</span>
+            </li>
         </ul>
       </div>
       <div class="cart" @mousemove="mousemoveCart" @mouseout="mouseoutCart" v-show="!isCart">
@@ -179,7 +181,7 @@ export default {
           .close{
             position: absolute;
             right: 0;
-            top: 0;
+            bottom: 0;
             color: #939399;
             cursor: pointer;
             font-size: 12px;
