@@ -152,15 +152,15 @@ export default {
   // border: 1px solid black;
 }
 .c-nav-ul{
-  display: block;
+  display: flex;
+  justify-content: space-between;
   width: 1240px;
   margin: 0 auto;
   padding-left: 15px;
   background: #fff;
   // border: 1px solid red;
   .nav-item {
-    float: left;
-    margin-right: 70px;
+    // float: left;
     font-weight: bold;
     // border: 1px solid blue;
     .height(30);
