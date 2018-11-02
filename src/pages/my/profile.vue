@@ -17,7 +17,7 @@
         <p class="form-label">Gender</p>
         <input class="form-radio" ref="radio1" name="sex" value="men" type="radio"/><span class="radio-detail">Ms</span>
         <input class="form-radio" ref="radio2" name="sex"  value="femal" type="radio" /><span class="radio-detail">Mr</span>
-        <input class="form-radio" ref="radio3" name="sex"  value=""  type="radio" /><span class="radio-detail">Privacy</span>
+        <input class="form-radio" ref="radio3" name="sex"  value="privacy"  type="radio" /><span class="radio-detail">Privacy</span>
         
       </div>
       <div  class="form-item">
