@@ -54,7 +54,7 @@ export default {
         display: block;
       }
       .goods-title{
-        padding: 10px 0;
+        margin: 10px 0;
         width: 232px;
         font-weight: bold;
         color: #000;

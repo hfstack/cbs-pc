@@ -160,9 +160,6 @@ export default {
 }
 </script>
 <style lang="less">
-html, body {
-  height: auto;
-}
 @import '~less/tool.less';
 .category-search{
   position: relative;
@@ -197,9 +194,6 @@ html, body {
         color: #000000;
         margin-bottom: 16px;
         font-weight: bold
-      }
-      .content{
-
       }
       .input-price{
         width: 60px;
