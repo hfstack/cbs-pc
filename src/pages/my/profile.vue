@@ -89,7 +89,7 @@ export default {
       const radios = this.$refs;
       for(let p in radios) {
         if(radios[p].checked) {
-          this.params.sex = radios[p].value
+          this.params.gender = radios[p].value
         }
       }
       this.request('PersonalEdit', this.params).then((res) => {

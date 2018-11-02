@@ -37,7 +37,7 @@ export default {
         }).then((res) => {
           if (res.status === 200) {
             this.$router.push({
-              name: 'forgetSendSuccess',
+              name: 'sendsuccess',
               query: {
                 email: this.email
               }

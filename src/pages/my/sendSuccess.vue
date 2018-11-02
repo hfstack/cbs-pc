@@ -9,6 +9,7 @@
       <p class="desc">2. Try to <a href="javascript:;"@click="resend" style="color: #0069D9; text-decoration: underline">reset your password</a> again.</p>
       <p class="desc">3. If you still don't receive the email after requesting a password reset, wait 24 hours and try again.</p>
     </div>
+    <confirm :show.sync="confirmModal.show" :title="confirmModal.title"  :content="confirmModal.content" :on-ok="confirmModal.action"  okText="Yes"></confirm>
   </div>
 </template>
 <script>
@@ -46,6 +47,10 @@ export default {
       }).then((res) => {
         if (res.status === 200) {
           this.confirmModal.show = false;
+          this.$Messagebox({
+            title: 'send success',
+            type: 'success'
+          })
         }
       })
     }
