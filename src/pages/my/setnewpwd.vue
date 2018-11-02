@@ -6,19 +6,19 @@
       <div class="form-item">
         <i class="iconfont input-icon"></i>
 
-        <input type="text" class="input-control" v-model="email" placeholder="Frequent Email Address" v-validate="fields.email" data-vv-name="email" data-vv-validate-on="none">
+        <input type="text" class="input-control" v-model="params.email" placeholder="Frequent Email Address" v-validate="fields.email" data-vv-name="email" data-vv-validate-on="none">
         <invalidtip  :show="verrors.has('email')">{{verrors.first('email')}}</invalidtip>
       </div>
       <div class="form-item">
         <i class="iconfont input-icon"></i>
-        <input type="text" class="input-control" v-model="email" placeholder="New Password" v-validate="fields.email" data-vv-name="email" data-vv-validate-on="none">
-        <invalidtip  :show="verrors.has('email')">{{verrors.first('email')}}</invalidtip>
+        <input type="text" class="input-control" v-model="params.password" placeholder="New Password" v-validate="fields.password" data-vv-name="password" data-vv-validate-on="none">
+        <invalidtip  :show="verrors.has('password')">{{verrors.first('password')}}</invalidtip>
       </div>
       <div class="form-item">
         <i class="iconfont input-icon"></i>
 
-        <input type="text" class="input-control" v-model="email" placeholder="Re-Enter Password" v-validate="fields.email" data-vv-name="email" data-vv-validate-on="none">
-        <invalidtip  :show="verrors.has('email')">{{verrors.first('email')}}</invalidtip>
+        <input type="text" class="input-control" v-model="params.repassword" placeholder="Re-Enter Password" v-validate="fields.repassword" data-vv-name="repassword" data-vv-validate-on="none">
+        <invalidtip  :show="verrors.has('repassword')">{{verrors.first('repassword')}}</invalidtip>
       </div>
       <div class="submit-btn" @click="send">Submit</div>
     </div>
@@ -28,11 +28,21 @@
 export default {
   data() {
     return {
-      email: '',
+      params: {
+        email: '',
+        password: '',
+        repassword: ''
+      },
       fields: {
         email: {
           required: true,
-          regex: /(?!(?:\d+|[a-zA-Z]+)$)[\da-zA-Z]{2,47}$/
+          regex: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+        },
+        password: {
+          required: true,
+        },
+        repassword: {
+          required: true,
         }
       }
     }
@@ -43,24 +53,19 @@ export default {
         if (!success) {
           return;
         };
-        this.request('PwdReset', {
-          email: this.email
-        }).then((res) => {
+        this.request('Pwsave', this.params).then((res) => {
           if (res.status === 200) {
             this.$router.push({
-              name: 'forgetSendSuccess',
-              query: {
-                email: this.email
-              }
+              name: 'login'
             })
           } else {
-            messagebox({
+            this.$Messagebox({
               title: res.msg || '网络错误',
               type: 'error'
             })
           }
         }).catch(res => {
-          messagebox({
+          this.$Messagebox({
             title: res.msg || '网络错误',
             type: 'error'
           })
@@ -81,6 +86,7 @@ html, body{
   .title{
     font-size: 30px;
     color: #222222;
+    text-align: center;
   }
   .form-item{
     width: 556px;

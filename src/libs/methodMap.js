@@ -95,7 +95,10 @@ const methodMap = {
   /** Pc个人中心首页 */
   PCPersonalIndex: {url: '/pc/personal/index', method: 'post'},
   /** pc分类 */
-  PCCate: { url: '/pc/cates', method: 'post' }
+  PCCate: { url: '/pc/cates', method: 'post' },
+  /** pc分类 */
+  Pwsave: { url: '/users/pwsave', method: 'post' }
+
 };
 
 export default methodMap;
