@@ -369,7 +369,7 @@ export default {
         return;
       }
       this.request('OrdersCheckout', {
-        type: 2,	// 是	Number	单订来源(1：PC端，2：H5，4：APP)
+        type: 1,	// 是	Number	单订来源(1：PC端，2：H5，4：APP)
         coupon_id: this.couponId,	// 是	String或者null	优惠券id 没有则为空
         integral: this.isUsePoint,	// 是	Boolean	积分是否选择 ture或者false
         date: Date.parse(new Date())	// 否	string	用户本地时间
