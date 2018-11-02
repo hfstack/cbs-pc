@@ -1,11 +1,11 @@
 <template>
   <div class="topbar">
     <div class="content">
-      <div class="lang fl">Englist</div>
-      <div class="area fl">US$ USD</div>
-      Welcome to WAIWAIMALL
-      <div class="contact fr">Contact US</div>
-      <div class="l-r fr" @click="login"  @mouseover="openNavs" v-if="!userToken">Login | Register</div>
+      <div class="lang fl">English</div>
+      <div class="area fl">USD</div>
+      FREE SHIPPING on orders over $19.00
+      <div class="contact fr">Contact us</div>
+      <div class="l-r fr" @click="login"  @mouseover="openNavs" v-if="!userToken">Log in | Register</div>
       <div class="l-r fr" @mouseover="openNavs" @mouseout="() => {personalBar = false}" v-if="userToken">{{userName}}
         <template v-if="personalBar">
           <span class="arrow"></span>
@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       userToken: localStorage.getItem('userToken'),
-      userName: localStorage.getItem('userName') || 'Hi User',
+      userName: localStorage.getItem('userName') || window.localStorage.getItem('userEmail') || 'welcome!',
       personalBar: false,
       bars: [
         {

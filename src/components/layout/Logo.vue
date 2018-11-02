@@ -24,6 +24,7 @@ export default {
      cursor: pointer;
     .wh(150, 74);
     background: url('~assets/logo.png') no-repeat;
+    background-size: cover;
   }
 }
 </style>

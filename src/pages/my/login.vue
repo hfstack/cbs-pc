@@ -124,6 +124,7 @@ export default {
           const userName = (res.content.first_name || '') + (res.content.last_name || '');
           window.localStorage && window.localStorage.setItem('userToken', res.content.token);
           window.localStorage && window.localStorage.setItem('userName', userName);
+          window.localStorage && window.localStorage.setItem('userEmail',res.content.email);
           this.$router.push({
             name: 'myAccount'
           })

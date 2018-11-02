@@ -187,14 +187,16 @@ export default {
   }
   .win-title{
     margin-top: 22px;
-    // margin-bottom: 5px;
+    margin-bottom: 5px;
     font-size: 20px;
     color: #363433;
   }
   .goods-item{
-    padding: 5px 5px;
+    padding: 8px 5px;
     border-bottom: 1px dashed @gray;
-    
+    &:last-child {
+      border-bottom: none;
+    }
     .goods-name{
       color: #000000;
       display: -webkit-box; 

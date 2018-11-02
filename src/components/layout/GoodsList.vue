@@ -39,7 +39,7 @@ export default {
   padding: 0 100px;
   background: #fff;
   .goods-item{
-    width: 252px;
+    width: 248px;
     height: 320px;
     padding: 10px;
     float: left;
@@ -89,8 +89,8 @@ export default {
       }
     }
   }
-  li:nth-child(odd){
-    margin-right: 20px;
-  }
+  // li:nth-child(odd){
+  //   margin-right: 20px;
+  // }
 }
 </style>
