@@ -95,10 +95,15 @@ export default {
     ];
     return {
       finalTime: 0,
-      orders: {},
-      params: {},
+      orders: [],
+      params: {
+        page: 1
+      },
       columns: columns,
       confirmModal: {},
+      loadingContent: '',
+      isFinishedLoading: true,
+      loadingEmpty: false,
       tabs: [
         {
           name: 'Unpaid',
@@ -120,6 +125,7 @@ export default {
   },
   mounted() {
     this.getOrderList();
+    this.loadMore();
   },
   methods: {
     tabClick(item) {
@@ -170,6 +176,13 @@ export default {
       data[cindex]['show'] = true;
     },
     getOrderList() {
+       // 初始化
+      this.loadingContent = 'Loading...';
+      this.isFinishedLoading = false;
+      this.loadingEmpty = false;
+      if (this.params.page === 1) {
+        this.orders = [];
+      }
       this.request('OrdersList', this.params).then((res) => {
         if (res.status === 200) {
           let orders = res.content.orderData || [];
@@ -181,9 +194,16 @@ export default {
               } else {
                 ele.show = false;
               }
+              this.orders.push(item);
             })
           });
-          this.orders = orders;
+          if (this.params.page < res.content.total_page) {
+            this.loadingEmpty = false;
+          } else {
+            this.loadingContent = 'No More';
+            this.loadingEmpty = true;
+          }
+          this.isFinishedLoading = true;
         } else {
           this.$Messagebox({
             title: res.msg,
@@ -192,8 +212,21 @@ export default {
           // this.$Toast(res.msg);
         }
       }, err => {
-        this.$Toast(err.data.msg);
+        // this.$Toast(err.data.msg);
       });
+    },
+    // 加载更多
+    loadMore () {
+      let self = this;
+      window.onscroll = function () {
+        var a = document.documentElement.scrollTop || document.body.scrollTop; // 滚动条y轴上的距离
+        var b = document.documentElement.clientHeight || document.body.clientHeight; // 可视区域的高度
+        var c = document.documentElement.scrollHeight || document.body.scrollHeight; // 可视化的高度与溢出的距离（总高度）
+        if (a + b >= c - 200 && self.isFinishedLoading && !self.loadingEmpty) {
+          self.params.page = self.params.page + 1
+          self.getOrderList();
+        }
+      }
     },
     // 确认收货
     handleCollect() {
