@@ -42,7 +42,7 @@ export default {
       isLogin: window.localStorage.getItem('userToken') || false
     }
   },
-  created () {
+  mounted () {
     if (this.isLogin) {
       this.getCartData();
     }

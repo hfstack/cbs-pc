@@ -12,8 +12,8 @@
         </div>
         <p>Thank you for shopping with WaiWaiMall, we will deliver the goods soon ! Your order number is {{$route.query.orderId}}</p>
       </div>
-      <router-link :to="{path: '/home'}" class="btn-shopping">GO SHOPPING</router-link>
-      <router-link :to="{path: '/my/orderDetail?orderid=' + data.order_id}" class="btn-order">VIEW THE ORDER</router-link>
+      <router-link :to="{path: '/index'}" class="btn-shopping">GO SHOPPING</router-link>
+      <router-link :to="{path: '/my/orderDetail?orderid=' + $route.query.orderId}" class="btn-order">VIEW THE ORDER</router-link>
     </div>
   </div>
 </template>

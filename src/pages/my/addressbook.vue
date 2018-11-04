@@ -52,6 +52,7 @@ export default {
       });
     },
     addressClick() {
+      this.addressId = '';
       this.showAddress = true;
     },
     setDefaultAddress(item) {

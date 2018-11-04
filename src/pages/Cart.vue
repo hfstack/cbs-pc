@@ -242,7 +242,7 @@ export default {
           num: item.num
         }).then((res) => {
           if (res.status === 200) {
-            
+            localStorage.setItem('userToken',res.content.token || '')
             // 成功
           } else {
             self.$Messagebox({

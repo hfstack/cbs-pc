@@ -198,6 +198,8 @@ export default {
       border-bottom: none;
     }
     .goods-name{
+      width: 120px;
+      height: 36px;
       color: #000000;
       display: -webkit-box; 
       -webkit-line-clamp: 2;

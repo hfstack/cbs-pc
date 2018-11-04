@@ -18,6 +18,54 @@
                 "price": 20,
                 "prom_price": 0,
                 "stock": 0
+            },
+            {
+                "id": 294,
+                "name": "One Sheer Lace Yoke Tee La Tee",
+                "img": "https://gw3.alicdn.com/bao/uploaded/i1/1825922675/TB1l4q4wYwrBKNjSZPcXXXpapXa_!!0-item_pic.jpg_.webp",
+                "price": 20,
+                "prom_price": 10,
+                "stock": 85
+            },
+            {
+                "id": 295,
+                "img": "http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+                "name": "CS",
+                "price": 20,
+                "prom_price": 0,
+                "stock": 0
+            },
+            {
+                "id": 294,
+                "name": "One Sheer Lace Yoke Tee La Tee",
+                "img": "https://gw3.alicdn.com/bao/uploaded/i1/1825922675/TB1l4q4wYwrBKNjSZPcXXXpapXa_!!0-item_pic.jpg_.webp",
+                "price": 20,
+                "prom_price": 10,
+                "stock": 85
+            },
+            {
+                "id": 295,
+                "img": "http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+                "name": "CS",
+                "price": 20,
+                "prom_price": 0,
+                "stock": 0
+            },
+            {
+                "id": 294,
+                "name": "One Sheer Lace Yoke Tee La Tee",
+                "img": "https://gw3.alicdn.com/bao/uploaded/i1/1825922675/TB1l4q4wYwrBKNjSZPcXXXpapXa_!!0-item_pic.jpg_.webp",
+                "price": 20,
+                "prom_price": 10,
+                "stock": 85
+            },
+            {
+                "id": 295,
+                "img": "http://cucoe.oss-us-west-1.aliyuncs.com/product/000001000001/5b97c013e60ef.jpg",
+                "name": "CS",
+                "price": 20,
+                "prom_price": 0,
+                "stock": 0
             }
         ],
         "coupons": [
