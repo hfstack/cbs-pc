@@ -1,6 +1,6 @@
 <template>
   <div class="showwindow">
-    <p class="head"><span class="title">{{data.storey_title}}</span><a :href="data.storey_url" class="more">More >></a></p>
+    <p class="head"><span class="title">{{data.storey_title}}</span><a :href="data.storey_url" class="more">MORE >></a></p>
     <div class="windows clearfix">
       <div class="window-item left">
         <template v-if="data.storey_left && data.storey_left.length === 5">
@@ -87,7 +87,7 @@ export default {
   width: 1240px;
   margin: 0 auto;
   .head{
-    padding: 22px 0;
+    padding: 50px 0 22px 0;
     .title{
       font-size: 22px
     }
@@ -213,6 +213,7 @@ export default {
     }
     .price-rebate{
       // padding: 3px;
+      width: 90px;
       background-color: #F96C17;
       padding-left: 5px;
       padding-right: 10px;

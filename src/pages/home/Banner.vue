@@ -43,10 +43,16 @@
     height: 435px;
     position: relative;
   }
+  .slide{
+    a{
+     
+    }
+  }
   img{
-    width: 100%;
     height: 100%;
-    display: block;
+    display: block; 
+    width: 1438px;
+    margin: 0 auto;
   }
   .mint-swipe-indicators {
     width: 100%;

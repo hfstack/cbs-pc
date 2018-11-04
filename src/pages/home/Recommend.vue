@@ -40,6 +40,7 @@ export default {
       color: #000000;
       padding: 60px 0 50px;
       text-align: center;
+      font-weight: bold
     }
     .recommend-goods{
       float: left;
@@ -56,7 +57,6 @@ export default {
       .goods-title{
         margin: 10px 0;
         width: 232px;
-        font-weight: bold;
         color: #000;
         overflow: hidden;
         display: -webkit-box; 
