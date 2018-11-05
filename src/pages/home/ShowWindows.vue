@@ -204,7 +204,7 @@ export default {
       border-bottom: none;
     }
     .goods-name{
-      width: 120px;
+      width: 126px;
       height: 36px;
       color: #000000;
       display: -webkit-box; 
@@ -221,13 +221,13 @@ export default {
       padding: 10px 0;
     }
     .price-rebate{
-      // padding: 3px;
       width: 90px;
       background-color: #F96C17;
       padding-left: 5px;
       padding-right: 10px;
       color: #fff;
       position: relative;
+      white-space: nowrap;
     }
     .current-price{
       color: #F45263;
