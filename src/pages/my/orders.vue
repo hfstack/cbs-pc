@@ -22,8 +22,8 @@
                   <div :style="{'width': '100px'}">
                     <img v-show="ele.show" class="product-img" v-for="ele in item.ordergoods" width="100" height="100" :src="ele.img" />
                     <p>{{item.ordergoods.length}} items</p>
-                    <span class="turn-left" @click="turnClick(item.ordergoods, 'left')"></span>
-                    <span class="turn-right"  @click="turnClick(item.ordergoods,'right')"></span>
+                    <span class="turn-left" @click="turnClick(item.ordergoods, 'left')" v-show="showArrow(item.ordergoods)"></span>
+                    <span class="turn-right"  @click="turnClick(item.ordergoods,'right')" v-show="showArrow(item.ordergoods)"></span>
                   </div>
                 </div>
               </td>
@@ -128,6 +128,14 @@ export default {
     this.loadMore();
   },
   methods: {
+    showArrow(val) {
+      let len = val.length;
+      if (len > 1) {
+        return true;
+      }else{
+        return false;
+      }
+    },
     tabClick(item) {
       this.tabs.forEach(element => {
         element.active = false;
@@ -168,7 +176,6 @@ export default {
       })
       if(type === 'left') {
         cindex === 0 ? cindex = data.length - 1 : cindex -= 1;
-        console.log(cindex)
       }
       if(type === 'right') {
         cindex === data.length-1 ? cindex = 0 : cindex += 1
@@ -186,16 +193,25 @@ export default {
       this.request('OrdersList', this.params).then((res) => {
         if (res.status === 200) {
           let orders = res.content.orderData || [];
+          // console.log("orders",orders)
           orders.forEach((item) => {
             item.orderHandle = this.getOrderHandle(item);
+            // this.ordergoodsLength = item.ordergoods.length;
+            // console.log(this.ordergoodsLength)
+            // if(this.ordergoodsLength > 1) {
+            //   this.showArrow = true
+            // }else {
+            //   this.showArrow = false;
+            // }
             item.ordergoods.forEach((ele, index) => {
               if(index === 0) {
                 ele.show = true;
               } else {
                 ele.show = false;
               }
-              this.orders.push(item);
+             
             })
+              this.orders.push(item);
           });
           if (this.params.page < res.content.total_page) {
             this.loadingEmpty = false;
