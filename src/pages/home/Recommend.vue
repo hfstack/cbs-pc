@@ -60,7 +60,7 @@ export default {
         color: #000;
         display: -webkit-box; 
         -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+        -webkit-box-orient: vertical!important;
         overflow: hidden;
         text-overflow: ellipsis;
       }
