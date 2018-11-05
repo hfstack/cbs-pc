@@ -1,9 +1,9 @@
 <template>
   <div class="home-index">
     <Banner :list="banners"></Banner>
-    <recommend title="Daily selection":list="daily"></recommend>
+    <recommend title="DAILY SELECTIONS":list="daily"></recommend>
     <ShowWindows  v-for="(item, index) in storey" :key="index" :data="item"></ShowWindows>
-    <recommend title="Recommend" :list="recommends"></recommend>
+    <recommend title="RECOMMEND" :list="recommends"></recommend>
   </div>
 </template>
 <script>

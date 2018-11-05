@@ -122,11 +122,11 @@
     </div>
 
     <!-- 弹层 - 地址 -->
-    <div class="modal-popup address-modal" v-show="isShowAddressModal">
+    <div class="modal-popup address-modal" v-if="isShowAddressModal">
       <div class="modal-content">
         <div class="title">Add New Shipping Address</div>
         <div class="close" @click="clickCloseAddress"><i class="iconfont">&#xe63f;</i></div>
-        <shippingaddress :callback="getAddressData" :editAddressId="editAddressId"></shippingaddress>
+        <shippingaddress :callback="() => {this.isShowAddressModal = false; this.editAddressId = ''; this.getOrdersData()}" :editAddressId="editAddressId"></shippingaddress>
       </div>
     </div>
     <!-- 弹层 - 银行卡 -->
@@ -377,6 +377,7 @@ export default {
     },
     // 关闭
     clickCloseAddress () {
+      this.editAddressId = '';
       this.isShowAddressModal = false;
     },
     // 新增银行卡

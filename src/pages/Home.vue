@@ -22,7 +22,7 @@ export default {
   },
   computed: {},
   mounted () {
-    this.getHomeData();
+    // this.getHomeData();
   },
   watch: {},
   methods: {

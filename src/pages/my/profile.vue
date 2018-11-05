@@ -2,7 +2,12 @@
   <div class="my-profile clearfix">
     <div class="avator fl">
       <img src="../../assets/images/my/head.png" class="img" alt="">
-      <a class="upload-btn">Upload a Photo</a>
+        <Upload 
+        :on-success="handleSuccess"
+        :format="['jpg','jpeg','png']"
+        action="">
+        <a class="upload-btn">Upload a Photo</a>
+      </Upload>
     </div>
     <div class="form-group fl">
       <div class="form-item">
@@ -15,9 +20,9 @@
       </div>
       <div  class="form-item">
         <p class="form-label">Gender</p>
-        <input class="form-radio" ref="radio1" name="sex" value="man" type="radio"/><span class="radio-detail">Ms</span>
-        <input class="form-radio" ref="radio2" name="sex"  value="female" type="radio" /><span class="radio-detail">Mr</span>
-        <input class="form-radio" ref="radio3" name="sex"  value="privacy"  type="radio" /><span class="radio-detail">Privacy</span>
+        <input class="form-radio" ref="radio1" name="sex" :checked="params.gender === 'man'"value="man" type="radio"/><span class="radio-detail">Ms</span>
+        <input class="form-radio" ref="radio2" name="sex" :checked="params.gender === 'female'" value="female" type="radio" /><span class="radio-detail">Mr</span>
+        <input class="form-radio" ref="radio3" name="sex"  :checked="params.gender === 'privacy'" value="privacy"  type="radio" /><span class="radio-detail">Privacy</span>
         
       </div>
       <div  class="form-item">
@@ -43,6 +48,9 @@ export default {
         email: 'huanglongfei@1212.com',
         password: 'huanglongfei'
       },
+      imgUploadUrl: '',
+      accept: 'jpg,png,jpeg',
+      size: 1024 * 1024,
       genders: [
         {
           name: 'Man',
@@ -66,6 +74,9 @@ export default {
   },
   watch: {},
   methods: {
+    handleSuccess (file) {
+      console.log(file)
+    },
     getUserInfo() {
       // 表单校验
       this.request('PersonalInfo').then((res) => {
@@ -93,7 +104,7 @@ export default {
         }
       }
       this.request('PersonalEdit', this.params).then((res) => {
-        if (res.status === 200 && res.content) {
+        if (res.status === 200) {
           this.$router.push({
             name: 'my'
           })
@@ -117,6 +128,9 @@ export default {
 @import '~less/tool.less';
 
 .my-profile{
+  .ivu-upload-input{
+    display: none;
+  }
   .avator{
     width: 170px;
     margin: 0 36px;

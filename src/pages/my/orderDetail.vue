@@ -40,7 +40,7 @@
       <div class="operate clearfix">
         <!-- 订单状态(订单状态 1-待付款 3-待发货 4-待收货 5-交易完成 6-交易取消 ) -->
         <!-- TODO 代付款  按钮是红色   其他时候都是正常颜色 -->
-        <div class="operate-item operate-two" v-if="orderHandle.pay">Pay now {{this.finalTime}}</div>
+        <div class="operate-item operate-two" v-if="orderHandle.pay" @click="pay">Pay now {{this.finalTime}}</div>
         <div class="operate-item operate-two" @click="handleCollect" v-if="orderHandle.collect">I get it</div>
         <div class="operate-item" @click="getLogistics" v-if="orderHandle.logistic">Logistics Info</div>
         <div class="operate-item" v-if="orderHandle.delete" @click="handleDelete">Delete</div>
@@ -231,6 +231,28 @@ export default {
         query: {
           order_id: this.orderid
         }
+      })
+    },
+    // 支付
+    pay() {
+      this.request('OrdersPayment', {
+        order_id: this.orderid
+      }).then((res) => {
+        if(res.status === 200) {
+          this.$router.push({
+            name: 'myOrders'
+          })
+        } else {
+          this.$$Messagebox({
+            title: res.msg,
+            type: 'error'
+          })
+        }
+      }, err => {
+        this.$$Messagebox({
+          title: err.data.msg,
+          type: 'error'
+        })
       })
     }
   }

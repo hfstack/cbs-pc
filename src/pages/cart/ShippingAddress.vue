@@ -72,6 +72,10 @@ export default {
       type: String,
       default: ''
     },
+    show: {
+      type: Boolean,
+      default: false
+    },
     callback: {
       type: Function,
       default: () => {}

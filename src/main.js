@@ -14,10 +14,9 @@ import './components/basic/checkwebp';
 
 // import 'iview/dist/styles/iview.css';
 
-// import { Select, Option } from 'iview';
+import { Upload } from 'iview';
 
-// Vue.component('Select', Select);
-// Vue.component('Option', Option);
+Vue.component('Upload', Upload);
 
 const config = {
   errorBagName: 'verrors', // change if property conflicts.
