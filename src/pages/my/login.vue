@@ -88,16 +88,16 @@ export default {
           return;
         }
         this.request('UsersRegister', this.params).then((res) => {
-          if(res.status === 200 && res.content) {
+          if(res.status === 200) {
             window.localStorage && window.localStorage.setItem('userToken', res.content.token);
             this.$router.push({
               name: 'myAccount'
             })
           } else {
-            this.$Messagebox({
-              title: res.msg,
-              type: 'error'
-            })
+            // this.$Messagebox({
+            //   title: res.msg,
+            //   type: 'error'
+            // })
           }
         }, err => {
           // this.$Toast(err)
