@@ -89,14 +89,19 @@ export default {
   .head{
     padding: 50px 0 22px 0;
     .title{
-      font-size: 22px
+      font-size: 22px;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-family: Helvetica;
+      color: rgba(54,52,51,1);
     }
     .more{
       display: block;
       font-size: 12px;
       line-height: 28px;
       float: right;
-      color: @gray
+      color: @gray;
+      text-transform: uppercase;
     }
   }
   .windows{
@@ -190,6 +195,7 @@ export default {
     margin-bottom: 5px;
     font-size: 20px;
     color: #363433;
+    text-transform: uppercase;
   }
   .goods-item{
     padding: 8px 5px;
@@ -206,6 +212,7 @@ export default {
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-align: left;
+      text-overflow: ellipsis;
     }
     .img {
       margin-right: 10px;

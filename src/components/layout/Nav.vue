@@ -157,7 +157,7 @@ export default {
   margin-left:113px;
   background: #fff;
   .nav-item {
-    // border: 1px solid red;
+    font-family: Helvetica;
     font-weight: bold;
     position: relative;
     .height(30);

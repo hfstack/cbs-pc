@@ -37,7 +37,7 @@ export default {
     background-color: #fff;
     .home-recommend-title{
       font-size: 22px;
-      color: #000000;
+      color:rgba(54,52,51,1);
       padding: 60px 0 50px;
       text-align: center;
       font-weight: bold
