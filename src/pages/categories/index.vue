@@ -92,6 +92,7 @@ export default {
     '$route.query': function(val) {
       this.params.cate = this.$route.query.cate
       this.params.title = this.$route.query.title
+      this.params.page = 1;
       this.getProductsList();
     }
   },
