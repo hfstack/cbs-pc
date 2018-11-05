@@ -47,17 +47,17 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       ? { warnings: false, errors: true }
       : false,
     publicPath: config.dev.assetsPublicPath,
-    // proxy: config.dev.proxyTable,
+    proxy: config.dev.proxyTable,
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
     },
     before: function(app) {
-      // if (isEmptyObject(config.dev.proxyTable)) {
+      if (isEmptyObject(config.dev.proxyTable)) {
         setOnline.forEach(function(m) {
           app[m.type](m.url, mock[m.name]);
         });
-      // }
+      }
     }
   },
   plugins: [

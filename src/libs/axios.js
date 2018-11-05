@@ -25,7 +25,7 @@ const config = {
 const AxiosInst = axios.create(config);
 //  请求拦截器
 AxiosInst.interceptors.request.use((config) => {
-  // config.url = domain + config.url;
+  config.url = domain + config.url;
   if (config.method === 'get') {
     config.params.token = window.localStorage.getItem('userToken') || '';
   }
