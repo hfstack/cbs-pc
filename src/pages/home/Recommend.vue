@@ -58,11 +58,11 @@ export default {
         margin: 10px 0;
         width: 232px;
         color: #000;
-        overflow: hidden;
         display: -webkit-box; 
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        text-overflow: ellipsis;
       }
       .price-now{
         color: #FF473C;
