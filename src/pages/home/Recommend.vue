@@ -37,10 +37,11 @@ export default {
     background-color: #fff;
     .home-recommend-title{
       font-size: 22px;
-      color: #000000;
+      color:rgba(54,52,51,1);
       padding: 60px 0 50px;
       text-align: center;
-      font-weight: bold
+      font-weight: bold;
+      font-family: Helvetica-Bold;
     }
     .recommend-goods{
       float: left;
@@ -58,11 +59,11 @@ export default {
         margin: 10px 0;
         width: 232px;
         color: #000;
-        overflow: hidden;
         display: -webkit-box; 
         -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+        -webkit-box-orient: vertical!important;
         overflow: hidden;
+        text-overflow: ellipsis;
       }
       .price-now{
         color: #FF473C;

@@ -52,7 +52,7 @@
               <img :src="item.img" alt="" class="img" width="90">
             </router-link>
             <div class="fl goods-detail">
-              <p class="goods-name">{{item.name}}</p>
+              <p class="goods-name" @mouseover="showTitle(e)">{{item.name}}</p>
               <p class="price"><span class="current-price">${{item.price}}</span><span class="price-origin">${{item.origin_price}}</span></p>
               <p class="price-rebate">Rebate ${{item.rebate}}<span class="fh"></span></p>
             </div>
@@ -77,6 +77,14 @@ export default {
     return {
 
     }
+  },
+  methods: {
+    showTitle(e){
+      var e = e || window.event
+      let target = e.target ||e.srcElement
+      let text = target.innerText;
+      this.$set(target,'title',text)
+    }
   }
 }
 </script>
@@ -89,14 +97,20 @@ export default {
   .head{
     padding: 50px 0 22px 0;
     .title{
-      font-size: 22px
+      font-size: 22px;
+      line-height:22px;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-family: Helvetica;
+      color: rgba(54,52,51,1);
     }
     .more{
       display: block;
       font-size: 12px;
       line-height: 28px;
       float: right;
-      color: @gray
+      color: @gray;
+      text-transform: uppercase;
     }
   }
   .windows{
@@ -190,6 +204,7 @@ export default {
     margin-bottom: 5px;
     font-size: 20px;
     color: #363433;
+    text-transform: uppercase;
   }
   .goods-item{
     padding: 8px 5px;
@@ -198,14 +213,15 @@ export default {
       border-bottom: none;
     }
     .goods-name{
-      width: 120px;
+      width: 126px;
       height: 36px;
       color: #000000;
       display: -webkit-box; 
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-      overflow: hidden;
+      overflow: hidden!important;
       text-align: left;
+      text-overflow: ellipsis;
     }
     .img {
       margin-right: 10px;
@@ -214,13 +230,13 @@ export default {
       padding: 10px 0;
     }
     .price-rebate{
-      // padding: 3px;
-      width: 90px;
+      width: 100px;
       background-color: #F96C17;
       padding-left: 5px;
       padding-right: 10px;
       color: #fff;
       position: relative;
+      white-space: nowrap;
     }
     .current-price{
       color: #F45263;

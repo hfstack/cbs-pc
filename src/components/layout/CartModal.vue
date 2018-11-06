@@ -105,8 +105,9 @@ export default {
     padding: 15px 20px;
     height: auto;
     background-color: #fff;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
-
+    // box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    // box-shadow: 0px 2px 8px #e1e1e1;
+    box-shadow: 0px 1px 5px 0px #e1e1e1;
     .list {
       // margin-top: 15px;
       border-bottom: 1px solid @bgray;

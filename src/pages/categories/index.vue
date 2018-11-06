@@ -2,6 +2,7 @@
   <div>
     <headers></headers>
     <div class="category-search">
+      <div class="category-wrapper">
       <div class="filter-list">
         <p class="current-cate"><span v-for="(item, index) in navs">{{item}}<i class="aicon" v-if="index < navs.length - 1">/</i></span></p>
         <p class="filter-title">FILTER</p>
@@ -34,6 +35,7 @@
           </li>
         </ul>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -168,11 +170,17 @@ export default {
   background-color: #fff;
   padding-top: 24px;
   min-height: 500px;
+  // border: 10px solid black;
+  .category-wrapper {
+    margin:0 auto;
+    width: 1240px;
+    position: relative;
   .filter-list{
     position: absolute;
     left: 165px;;
     width: 250px;
     display: inline-block;
+
     .current-cate{
       color: @gray;
       font-size: 12px;
@@ -229,8 +237,10 @@ export default {
   }
   .result-content{
     display: inline-block;
+    margin-left: 260px;
     margin-top: 55px;
-    width: 970px;
+    width: 980px;
+    // border: 1px solid black;
     .total{
       .clearfix;
       .title{
@@ -282,8 +292,8 @@ export default {
       }
     }
   }
+  }
 }
-
 </style>
 
 

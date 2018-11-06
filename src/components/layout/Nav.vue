@@ -120,6 +120,7 @@ export default {
             ele.show = false;
           });
           this.category = cates;
+          console.log("category",this.category)
         } else {
           this.$Messagebox({
             title: 'res.msg',
@@ -150,16 +151,20 @@ export default {
   width: 100%;
   box-shadow:1px 0px 0px rgba(225,225,225,1);
 }
+
 .c-nav-ul{
   display: flex;
-  justify-content: space-between;
-  margin-right: 113px;
-  margin-left:113px;
+  justify-content: flex-end;
+  width: 1240px;
+  margin: 0 auto;
   background: #fff;
+  // border: 1px solid black;
   .nav-item {
-    // border: 1px solid red;
+    font-family: Helvetica;
     font-weight: bold;
     position: relative;
+    // border: 1px solid red;
+    margin: 0 56px;
     .height(30);
     &:last-child {
       margin-right:0;
@@ -171,16 +176,15 @@ export default {
         color: @orange;
         border-bottom: 3px solid @orange
       }
-    }
-    
+    } 
   }
   .sub-nav{
     position: absolute;
     width: 200px;
     left: -26px;
-    top: 29px;
+    top: 31px;
     padding: 5px 26px;
-    box-shadow:0px 3px 5px 0px rgba(225,225,225,1), 0px 3px 10px 0px rgba(225,225,225,1);
+    box-shadow: 0px 1px 5px 0px #eee, 0px 1px 10px 0px #eee;
     background: #fff;
     z-index: 100;
     .sub-title{

@@ -197,7 +197,6 @@ export default {
       // 初始化价格
       this.productTotal = 0;
       this.totalPrice = 0;
-
       let goods = this.cartsData.goods;
       let len = goods.length;
       for (let i = 0; i < len; i++) {
