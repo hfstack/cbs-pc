@@ -52,7 +52,7 @@
               <img :src="item.img" alt="" class="img" width="90">
             </router-link>
             <div class="fl goods-detail">
-              <p class="goods-name">{{item.name}}</p>
+              <p class="goods-name" @mouseover="showTitle(e)">{{item.name}}</p>
               <p class="price"><span class="current-price">${{item.price}}</span><span class="price-origin">${{item.origin_price}}</span></p>
               <p class="price-rebate">Rebate ${{item.rebate}}<span class="fh"></span></p>
             </div>
@@ -76,6 +76,14 @@ export default {
   data() {
     return {
 
+    }
+  },
+  methods: {
+    showTitle(e){
+      var e = e || window.event
+      let target = e.target ||e.srcElement
+      let text = target.innerText;
+      this.$set(target,'title',text)
     }
   }
 }
@@ -211,7 +219,7 @@ export default {
       display: -webkit-box; 
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-      overflow: hidden;
+      overflow: hidden!important;
       text-align: left;
       text-overflow: ellipsis;
     }
