@@ -90,6 +90,7 @@ export default {
     padding: 50px 0 22px 0;
     .title{
       font-size: 22px;
+      line-height:22px;
       font-weight: bold;
       text-transform: uppercase;
       font-family: Helvetica;
@@ -221,7 +222,7 @@ export default {
       padding: 10px 0;
     }
     .price-rebate{
-      width: 90px;
+      width: 100px;
       background-color: #F96C17;
       padding-left: 5px;
       padding-right: 10px;

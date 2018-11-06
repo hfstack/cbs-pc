@@ -2,6 +2,7 @@
   <div>
     <headers></headers>
     <div class="category-search">
+      <div class="category-wrapper">
       <div class="filter-list">
         <p class="current-cate"><span v-for="(item, index) in navs">{{item}}<i class="aicon" v-if="index < navs.length - 1">/</i></span></p>
         <p class="filter-title">FILTER</p>
@@ -34,6 +35,7 @@
           </li>
         </ul>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -163,16 +165,20 @@ export default {
 <style lang="less">
 @import '~less/tool.less';
 .category-search{
-  position: relative;
-  padding-left: 372px;
   background-color: #fff;
   padding-top: 24px;
   min-height: 500px;
+  // border: 10px solid black;
+  .category-wrapper {
+    margin:0 auto;
+    width: 1240px;
+    position: relative;
   .filter-list{
     position: absolute;
-    left: 100px;;
+    left: 0px;;
     width: 250px;
     display: inline-block;
+
     .current-cate{
       color: @gray;
       font-size: 12px;
@@ -208,8 +214,8 @@ export default {
         height: 25px;
         font-size: 12px;
         line-height: 25px;
-        border:1px solid @bred;
-        color: @bred;
+        border:1px solid @orange;
+        color: @orange;
         text-align: center;
         border-radius:4px;
         margin-left: 20px;
@@ -229,8 +235,10 @@ export default {
   }
   .result-content{
     display: inline-block;
+    margin-left: 260px;
     margin-top: 55px;
-    width: 970px;
+    width: 980px;
+    // border: 1px solid black;
     .total{
       .clearfix;
       .title{
@@ -272,7 +280,7 @@ export default {
         width: 220px;
         padding: 10px 0;
         color: #000000;
-        font-weight: bold;
+        // font-weight: bold;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -283,8 +291,8 @@ export default {
       }
     }
   }
+  }
 }
-
 </style>
 
 

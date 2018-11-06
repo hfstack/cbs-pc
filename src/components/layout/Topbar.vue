@@ -4,8 +4,8 @@
       <div class="lang fl">English</div>
       <div class="area fl">USD</div>
       FREE SHIPPING on orders over $19.00
-      <div class="contact fr">Contact us</div>
-      <div class="l-r fr" @click="login"  @mouseover="openNavs" v-if="!userToken">Log in | Register</div>
+      <div class="contact fr">Contact Us</div>
+      <div class="l-r fr" @click="login"  @mouseover="openNavs" v-if="!userToken">Log In | Register</div>
       <div class="l-r fr" @mouseover="openNavs" @mouseout="() => {personalBar = false}" v-if="userToken">{{userName}}
         <template v-if="personalBar">
           <span class="arrow"></span>
@@ -157,7 +157,8 @@ export default {
     width:146px;
     height:370px;
     background:rgba(255,255,255,1);
-    box-shadow:0px 3px 5px 0px rgba(225,225,225,1), 0px 3px 10px 0px rgba(225,225,225,1);
+    // box-shadow:0px 3px 5px 0px rgba(225,225,225,1), 0px 3px 10px 0px rgba(225,225,225,1);
+    box-shadow: 0px 1px 5px 0px #eee, 0px 1px 10px 0px #eee;
     z-index: 999;
     li {
       line-height: 40px;

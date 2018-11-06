@@ -129,8 +129,7 @@ export default {
       font-size: 16px;
       border:2px solid @orange;
       border-radius:23px;
-      margin-left: 392px;
-      margin-top: 10px;
+      margin: 11px auto;
       .search-a{
         cursor: pointer;
         width: 70px;
