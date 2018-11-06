@@ -36,17 +36,23 @@
 </script>
 <style lang="less">
 @import '~less/tool.less';
+@media screen and (max-width: 1440px) {
+  .mint-swipe {
+    height: 435px !important;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .mint-swipe {
+    height: 580px !important;
+  }
+}
 .g-banner {
   width: 100%;
-  height: 435px;
+  max-height: 580px;
+  
   .mint-swipe{
-    height: 435px;
+    max-height: 580px;
     position: relative;
-  }
-  .slide{
-    a{
-     
-    }
   }
   img{
     height: 100%;
@@ -62,8 +68,8 @@
     left: 50%;
   }
   .mint-swipe-indicator {
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     display: inline-block;
     border-radius: 100%;
     background: rgba(255,255,255,0.8);

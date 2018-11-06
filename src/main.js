@@ -17,7 +17,7 @@ import './components/basic/checkwebp';
 import { Upload } from 'iview';
 
 Vue.component('Upload', Upload);
-
+Vue.config.devtools = true;
 const config = {
   errorBagName: 'verrors', // change if property conflicts.
   delay: 0,

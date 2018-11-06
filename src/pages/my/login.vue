@@ -150,6 +150,7 @@ export default {
       .title{
         margin: 20px 0 30px;
         text-align: left;
+        font-weight: bold;
       }
       .form-item{
         height: 56px;

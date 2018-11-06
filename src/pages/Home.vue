@@ -22,22 +22,9 @@ export default {
   },
   computed: {},
   mounted () {
-    // this.getHomeData();
   },
   watch: {},
   methods: {
-    getHomeData () {
-      this.request('Home', {}).then((res) => {
-        if (res.status === 200 && res.content) {
-          this.store_goods = res.content.store_goods; // 商品数据
-        }
-      }, err => {
-        this.$Messagebox({
-          title: err,
-          type: 'err'
-        });
-      });
-    }
   },
   beforeDestroy () {}
 };

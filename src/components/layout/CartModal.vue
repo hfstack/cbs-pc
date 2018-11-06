@@ -1,7 +1,7 @@
 <template>
   <div class="cart-modal-layout" v-show="this.isLogin">
     <div class="cart-number" v-show="cartsData.goods && cartsData.goods.length">{{cartsData.goods && cartsData.goods.length}}</div>
-    <div class="cart-modal-main" v-show="show">
+    <div class="cart-modal-main" v-if="show">
       <ul class="list">
         <li v-for="(item, index) in cartsData.goods" :key="index">
           <router-link :to="{path: '/detail?id=' + item.id}">
@@ -38,13 +38,33 @@ export default {
   data() {
     return {
       cartsData: [],
-      totalPrice: 0,
       isLogin: window.localStorage.getItem('userToken') || false
     }
   },
   mounted () {
     if (this.isLogin) {
       this.getCartData();
+    }
+  },
+  computed: {
+    'totalPrice': function() {
+      let goods = this.cartsData.goods;
+      let len = goods.length;
+      let price = 0;
+      for (let i = 0, len = goods.length; i < len; i++) {
+        price += goods[i].num * goods[i].price;
+      }
+      if (this.price < 0) {
+        this.price = 0;
+      }
+      return price.toFixed(2);
+    }
+  },
+  watch: {
+    show: function(val) {
+      if (val) {
+        this.getCartData()
+      }
     }
   },
   methods: {
@@ -58,31 +78,16 @@ export default {
           }
           if (this.cartsData && this.cartsData.goods && this.cartsData.goods.length) {
             this.cartEmpty = false;
-            this.computeTotalPrice();
           } else {
             this.cartEmpty = true;
           }
         } else {
           this.cartEmpty = true;
-          // this.$router.push({name: 'sign'})
+           console.log(res.msg)
         }
       }, err => {
-        // this.$Toast(err);
+        console.log(err)
       });
-    },
-    computeTotalPrice () {
-      let goods = this.cartsData.goods;
-      let len = goods.length;
-      for (let i = 0; i < len; i++) {
-        this.totalPrice += goods[i].num * goods[i].price;
-      }
-      // this.totalPrice -= +this.cartsData.specialoffer;
-      // 处理券价格
-      // this.totalPrice = this.totalPrice - this.couponPrice.substring(1, this.couponPrice.length);
-      // this.totalPrice = this.totalPrice - this.couponPrice.replace(/[^0-9]/ig, '');
-      if (this.totalPrice < 0) {
-        this.totalPrice = 0;
-      }
     }
   }
 }
@@ -105,7 +110,7 @@ export default {
     .list {
       // margin-top: 15px;
       border-bottom: 1px solid @bgray;
-      max-height: 350px;
+      max-height: 400px;
       overflow-y: scroll;
       li {
         margin: 12px 0;

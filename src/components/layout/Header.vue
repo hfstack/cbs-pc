@@ -45,6 +45,10 @@ export default {
     isCart: {
       type: Boolean,
       default: false
+    },
+    cartshow: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
@@ -61,7 +65,11 @@ export default {
       historyShow: false
     }
   },
-  watch: {},
+  watch: {
+    cartshow: function(val) {
+      this.isShowCart = val
+    }
+  },
   mounted() {
     let history = localStorage.getItem('searchHistory')
     if(history) {

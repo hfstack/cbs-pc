@@ -2,14 +2,14 @@
 <div class="select-group" :class="{open: show}" ref="container" :disabled="disabled" >
   <span class="select-toggle" ref="trigger">
     {{selectItem && selectItem[keyname]}}
-    <i class="bicon" v-show="!show">&#xe613;</i>
-    <i class="bicon" v-show="show">&#xe611;</i>
+    <i class="bicon iconfont fr" v-show="show">&#xe64b;</i>
+    <i class="bicon iconfont fr" v-show="!show">&#xe611;</i>
   </span >
   <ul class="select-menu" v-show="!disabled && show" :class="{'select-top': direction === 'top'}" :style="{'width': width}">
     <template v-if="options.length" >
       <li v-if="search" class="dselect-search">
         <input type="text" v-model="iFilterKey" :placeholder="placeholder">
-        <i class="bicon magnifier">&#xe61d;</i>
+        <i class="iconfont magnifier">&#xe61d;</i>
       </li>
       <li v-for="option in iFilteredData" :id="option.id || option[idName]" :class="{'active': isSelected(option)}">
         <a @click="select($event, (option.id || option[idName]))">

@@ -45,7 +45,7 @@
         </template>
       </div>
       <div class="window-item right">
-        <p class="win-title">Latest Hot Sale</p>
+        <p class="win-title">LATEST HOT SALE</p>
         <ul class="goods-list">
           <li v-for="item in data.storey_right" class="goods-item clearfix">
             <router-link class="fl" :to="{path: '/detail?id=' + item.id}">

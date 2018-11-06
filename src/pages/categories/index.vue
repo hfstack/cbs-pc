@@ -164,13 +164,13 @@ export default {
 @import '~less/tool.less';
 .category-search{
   position: relative;
-  padding-left: 372px;
+  padding-left: 420px;
   background-color: #fff;
   padding-top: 24px;
   min-height: 500px;
   .filter-list{
     position: absolute;
-    left: 100px;;
+    left: 165px;;
     width: 250px;
     display: inline-block;
     .current-cate{
@@ -208,8 +208,8 @@ export default {
         height: 25px;
         font-size: 12px;
         line-height: 25px;
-        border:1px solid @bred;
-        color: @bred;
+        border:1px solid @orange;
+        color: @orange;
         text-align: center;
         border-radius:4px;
         margin-left: 20px;
@@ -272,7 +272,6 @@ export default {
         width: 220px;
         padding: 10px 0;
         color: #000000;
-        font-weight: bold;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;

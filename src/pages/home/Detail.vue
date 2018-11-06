@@ -1,6 +1,6 @@
 <template>
   <div class="detail-main-layout">
-    <headers></headers>
+    <headers :cartshow="cartshow"></headers>
     <div class="detail-main">
       <div class="chip">
         Women
@@ -132,6 +132,7 @@ export default {
   data () {
     return {
       data: {},
+      cartshow: false,
       goodsData: {
         saleNum: 1
       }, // 选中的商品信息
@@ -369,6 +370,8 @@ export default {
     },
     // OK - 提交表单
     submitClick () {
+      this.cartshow = false;
+
       // 判定是否选择完毕
       if (!this.skuId) {
         this.$Messagebox({
@@ -395,13 +398,19 @@ export default {
         if (res.status === 200) {
           let self = this;
           localStorage.setItem('userToken', res.content.token);
+          self.submitLocked = false; // 解锁
+          this.cartshow = true;
+          this.$Messagebox({
+            title: 'add success',
+            type: 'success'
+          });
           // 跳转到购物车
-          setTimeout(function() {
-            self.submitLocked = false; // 解锁
-            self.$router.push({
-              path: '/mycart?id=' + self.$route.query.id
-            });
-          }, 1000);
+          // setTimeout(function() {
+            // self.submitLocked = false; // 解锁
+            // self.$router.push({
+            //   path: '/mycart?id=' + self.$route.query.id
+            // });
+          // }, 1000);
         } else {
           this.submitLocked = false; // 解锁
           this.$Messagebox({
