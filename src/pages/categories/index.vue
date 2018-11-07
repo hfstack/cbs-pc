@@ -164,23 +164,28 @@ export default {
 </script>
 <style lang="less">
 @import '~less/tool.less';
+html,body{
+  padding:0;
+  margin:0;
+  background: #fff;
+}
 .category-search{
   position: relative;
-  padding-left: 420px;
   background-color: #fff;
   padding-top: 24px;
   min-height: 500px;
-  // border: 10px solid black;
   .category-wrapper {
     margin:0 auto;
     width: 1240px;
+    height:100%;
     position: relative;
+    // border: 1px solid red;
   .filter-list{
     position: absolute;
-    left: 165px;;
+    // left: 165px;;
     width: 250px;
     display: inline-block;
-
+    // border: 1px solid black;
     .current-cate{
       color: @gray;
       font-size: 12px;
@@ -238,7 +243,6 @@ export default {
   .result-content{
     display: inline-block;
     margin-left: 260px;
-    margin-top: 55px;
     width: 980px;
     // border: 1px solid black;
     .total{

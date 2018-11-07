@@ -46,18 +46,23 @@ export default {
     .recommend-goods{
       float: left;
       height: 325px;
-      margin-right: 20px;
-      &:nth-child(even) {
+      margin-right: 15px;
+      // &:nth-child(even) {
+      //   margin-right: 0;
+      // }
+      &:last-child{
         margin-right: 0;
       }
       .goods-img{
         width: 232px;
         height: 232px;
         display: block;
+        // border: 1px solid black;
       }
       .goods-title{
         margin: 10px 0;
-        width: 232px;
+        width: 220px;
+        height: 40px;
         color: #000;
         display: -webkit-box; 
         -webkit-line-clamp: 2;

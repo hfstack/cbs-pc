@@ -1,7 +1,7 @@
 <template>
   <div class="home-index">
     <Banner :list="banners"></Banner>
-    <recommend title="DAILY SELECTIONS":list="daily"></recommend>
+    <recommend title="DAILY SELECTIONS" :list="daily"></recommend>
     <ShowWindows  v-for="(item, index) in storey" :key="index" :data="item"></ShowWindows>
     <recommend title="RECOMMEND" :list="recommends"></recommend>
   </div>
@@ -46,12 +46,13 @@ export default {
           this.banners = res.content.banners;
           this.recommends = res.content.goods;
           this.daily = res.content.daily;
+          // console.log("daily",this.daily.length);
           this.storey = res.content.storey;
         }
         if(this.params.page === 1) {
           this.navList = res.content.icons;
           this.banners = res.content.banners;
-          this.daily = res.content.daily;
+          this.daily = res.content.daily;      
           this.storey = res.content.storey;
         }
         this.recommends =  this.recommends.concat(res.content.goods);

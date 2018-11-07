@@ -164,7 +164,7 @@ export default {
     font-weight: bold;
     position: relative;
     // border: 1px solid red;
-    margin: 0 56px;
+    margin: 0 50px;
     .height(30);
     &:last-child {
       margin-right:0;

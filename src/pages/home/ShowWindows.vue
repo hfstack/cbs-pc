@@ -207,7 +207,7 @@ export default {
     text-transform: uppercase;
   }
   .goods-item{
-    padding: 8px 5px;
+    padding: 5px;
     border-bottom: 1px dashed @gray;
     &:last-child {
       border-bottom: none;
