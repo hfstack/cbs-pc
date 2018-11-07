@@ -49,7 +49,9 @@ export default {
   computed: {
     'totalPrice': function() {
       let goods = this.cartsData.goods;
-      let len = goods.length;
+      if(!goods) {
+        return 0.00
+      }
       let price = 0;
       for (let i = 0, len = goods.length; i < len; i++) {
         price += goods[i].num * goods[i].price;

@@ -166,21 +166,18 @@ export default {
 @import '~less/tool.less';
 .category-search{
   position: relative;
-  padding-left: 420px;
   background-color: #fff;
   padding-top: 24px;
   min-height: 500px;
-  // border: 10px solid black;
   .category-wrapper {
     margin:0 auto;
     width: 1240px;
     position: relative;
   .filter-list{
     position: absolute;
-    left: 165px;;
+    left: 0px;;
     width: 250px;
     display: inline-block;
-
     .current-cate{
       color: @gray;
       font-size: 12px;
