@@ -56,7 +56,7 @@
             </div>
           </div>
           <!-- 右边内容 -->
-          <div class="fr right-layout">
+          <div class="fl right-layout">
             <div class="right-title">CHECKOUT</div>
             <div class="right-box">
               <div class="right-top">Order Summary</div>
@@ -650,7 +650,7 @@ export default {
       width: 870px;
       border-radius: 8px;
       border: 1px solid @bgray;
-      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
       .left-top {
         display: block;
         padding: 0 20px;
@@ -677,11 +677,13 @@ export default {
   }
   .right-layout {
     width: 350px;
+    margin-left: 20px;
+    border: none;
     .right-box {
       width: 350px;
       border-radius: 8px;
       border: 1px solid @bgray;
-      // box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     }
     .right-top {
       padding: 0 20px;

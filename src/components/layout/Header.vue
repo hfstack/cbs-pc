@@ -84,9 +84,11 @@ export default {
     },
     mousemoveCart () {
       this.isShowCart = true;
+      document.documentElement.style.overflow = 'hidden';
     },
     mouseoutCart () {
       this.isShowCart = false;
+      document.documentElement.style.overflow = 'auto';
     },
     searchClick (keywords) {
       if(keywords) {

@@ -71,7 +71,7 @@ export default {
   },
   computed: {
     'firstSelect': function() {
-      let firstSelect = {}; 
+      let firstSelect = {};
       if (!this.category.length) {
         return {};
       }
@@ -134,7 +134,7 @@ export default {
       this.category.forEach((ele) => {
         ele.show = false;
       })
-      
+
       this.$router.push({
         name: 'categorySearch',
         query: {
@@ -158,25 +158,28 @@ export default {
   width: 1240px;
   margin: 0 auto;
   background: #fff;
+  padding-left: 20px;
   // border: 1px solid black;
   .nav-item {
     font-family: Helvetica;
     font-weight: bold;
     position: relative;
     // border: 1px solid red;
-    margin: 0 56px;
+    margin-right: 50px;
+    width: 135px;
+
     .height(30);
     &:last-child {
       margin-right:0;
     }
     cursor: pointer;
-    
+
     &.active{
       .first-cate{
         color: @orange;
         border-bottom: 3px solid @orange
       }
-    } 
+    }
   }
   .sub-nav{
     position: absolute;
@@ -192,20 +195,20 @@ export default {
       text-decoration: none;
       color: #222222;
       font-weight: bold;
-      white-space:nowrap; 
+      white-space:nowrap;
       text-overflow:ellipsis;
-      overflow:hidden; 
-      width:100%; 
+      overflow:hidden;
+      width:100%;
       &:hover {
       color: @orange;
     }
     }
     .three-cate {
       font-weight: normal;
-      white-space:nowrap; 
+      white-space:nowrap;
       text-overflow:ellipsis;
-      overflow:hidden; 
-      width:100%; 
+      overflow:hidden;
+      width:100%;
     }
   }
   .first-cate{
