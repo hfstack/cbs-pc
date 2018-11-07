@@ -149,6 +149,14 @@ export default {
           }
         }
       }
+      &::-webkit-scrollbar {
+        display: inline-block;
+        width: 6px;
+        background-color: #fff;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: @orange;
+      }
     }
     .arrow-up {
       position: absolute;
