@@ -14,7 +14,7 @@
             </li>
         </ul>
       </div>
-      <div class="cart" @mousemove="mousemoveCart" @mouseout="mouseoutCart" v-show="!isCart">
+      <div class="cart" @mouseover="mouseoverCart" @mouseout="mouseoutCart" v-show="!isCart">
         <i class="iconfont fl">&#xe624;</i>
         <span class="fb">CART</span>
         <div class="pos-rel">
@@ -82,11 +82,13 @@ export default {
         this.historyShow = false
       }, 200)
     },
-    mousemoveCart () {
+    mouseoverCart () {
       this.isShowCart = true;
+      document.documentElement.style.overflow = 'hidden';
     },
     mouseoutCart () {
       this.isShowCart = false;
+      document.documentElement.style.overflow = 'auto';
     },
     searchClick (keywords) {
       if(keywords) {

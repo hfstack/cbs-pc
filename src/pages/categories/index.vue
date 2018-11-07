@@ -182,10 +182,9 @@ html,body{
     // border: 1px solid red;
   .filter-list{
     position: absolute;
-    // left: 165px;;
+    left: 0px;;
     width: 250px;
     display: inline-block;
-    // border: 1px solid black;
     .current-cate{
       color: @gray;
       font-size: 12px;
