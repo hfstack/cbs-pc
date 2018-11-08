@@ -42,7 +42,7 @@
                     <div class="origin-price">${{item.origin_price}}</div>
                   </div>
                   <div class="qty fl">
-                    <a href="javascript:;" class="reduce fl" @click="reduce(item)">
+                    <a href="javascript:;" class="reduce fl" :class="{'ban': item.num <= 1}" @click="reduce(item)">
                       <i class="iconfont">&#xe62a;</i>
                     </a>
                     <div class="num fl">{{item.num}}</div>
@@ -260,7 +260,7 @@ export default {
     // 减少 - 登录后
     reduce (item) {
       let self = this;
-      if (item.num <= 0) {
+      if (item.num <= 1) {
         return;
       }
       clearTimeout(self.reduceSt);
@@ -295,15 +295,17 @@ export default {
         action: function () {
           self.confirmModal.show = false;
           self.reduceSt = setTimeout(function() {
-            self.request('CartsAdd', {
-              good_id: item.id,
-              sku_id: item.sku_id,
-              num: 0
+            self.request('CartsDelete', {
+              cart_id: item.cart_id
             }).then((res) => {
               if (res.status === 200) {
-                self.cartsData = res.content;
-                self.productTotal = (self.productTotal * 100 - +item.price * 100) / 100;
-                self.totalPrice = (self.totalPrice * 100 - +item.price * 100) / 100;
+                if (self.cartsData.goods && self.cartsData.goods.length) {
+                  self.cartsData = res.content;
+                  self.productTotal = (self.productTotal * 100 - +item.price * 100) / 100;
+                  self.totalPrice = (self.totalPrice * 100 - +item.price * 100) / 100;
+                } else {
+                  self.cartEmpty = true;
+                }
               }
             }, err => {
               self.$Messagebox({
