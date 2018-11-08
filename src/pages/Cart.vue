@@ -232,6 +232,15 @@ export default {
       item.num++;
       this.productTotal = (this.productTotal * 100 + +item.price * 100) / 100;
       this.totalPrice = (this.totalPrice * 100 + +item.price * 100) / 100;
+      // 邮费计算
+      if (this.totalPrice >= 19) {
+        this.totalPrice = (this.totalPrice * 100 - +this.shippingMoney * 100) / 100; //加运费
+        this.shippingMoney = 0;
+      } else {
+        this.shippingMoney = 10;
+        this.totalPrice = (this.totalPrice * 100 + +this.shippingMoney * 100) / 100; //加运费
+      }
+
       clearTimeout(self.addSt);
       // 函数节流
       self.addSt = setTimeout(function() {
@@ -267,6 +276,14 @@ export default {
       item.num--;
       self.productTotal = (this.productTotal * 100 - +item.price * 100) / 100;
       self.totalPrice = (this.totalPrice * 100 - +item.price * 100) / 100;
+      // 邮费计算
+      if (this.totalPrice >= 19) {
+        this.totalPrice = (this.totalPrice * 100 - +this.shippingMoney * 100) / 100; //加运费
+        this.shippingMoney = 0;
+      } else {
+        this.shippingMoney = 10;
+        this.totalPrice = (this.totalPrice * 100 + +this.shippingMoney * 100) / 100; //加运费
+      }
       // 函数节流
       self.reduceSt = setTimeout(function() {
         self.request('CartsAdd', {
@@ -426,6 +443,7 @@ export default {
 @import '~less/tool.less';
 .cart-main-layout {
   width: 100%;
+  min-height: 100%;
   background-color: #fff;
 }
 .cart-main {

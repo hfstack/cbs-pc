@@ -1,7 +1,7 @@
 <template>
   <div class="cart-modal-layout" v-show="this.isLogin">
-    <div class="cart-number" v-show="cartsData.goods && cartsData.goods.length">{{cartsData.goods && cartsData.goods.length}}</div>
-    <div class="cart-modal-main" v-if="show">
+    <div class="cart-number">{{cartsData.goods && cartsData.goods.length || 0}}</div>
+    <div class="cart-modal-main" v-if="show && cartsData.goods && cartsData.goods.length">
       <ul class="list">
         <li v-for="(item, index) in cartsData.goods" :key="index">
           <router-link :to="{path: '/detail?id=' + item.id}">

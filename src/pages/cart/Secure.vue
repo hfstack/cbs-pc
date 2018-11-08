@@ -448,6 +448,7 @@ export default {
 .secure-main {
   background-color: #fff;
   padding-bottom: 200px;
+  min-height: 100%;
   .mt20 {
     margin-top: 20px;
   }
