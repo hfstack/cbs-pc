@@ -398,16 +398,16 @@ export default {
         } else if (res.status === 403 || res.status === 402) {
           this.$router.push({name: 'sign'})
         } else {
-          this.$Messagebox({
-            title: res.msg || 'system error',
-            type: 'error'
-          });
+          // this.$Messagebox({
+          //   title: res.msg || 'system error',
+          //   type: 'error'
+          // });
         }
       }, err => {
-        this.$Messagebox({
-          title: err || 'system error',
-          type: 'error'
-        });
+        // this.$Messagebox({
+        //   title: err || 'system error',
+        //   type: 'error'
+        // });
       });
     },
     // 改变points
