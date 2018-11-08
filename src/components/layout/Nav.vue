@@ -154,7 +154,7 @@ export default {
 
 .c-nav-ul{
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   width: 1240px;
   margin: 0 auto;
   background: #fff;

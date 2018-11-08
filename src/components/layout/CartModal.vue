@@ -65,6 +65,7 @@ export default {
   watch: {
     show: function(val) {
       if (val) {
+        this.isLogin = window.localStorage.getItem('userToken') || false
         this.getCartData()
       }
     }

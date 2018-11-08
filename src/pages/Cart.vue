@@ -704,7 +704,7 @@ export default {
       width: 350px;
       border-radius: 8px;
       border: 1px solid @bgray;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      // box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     }
     .right-top {
       padding: 0 20px;
