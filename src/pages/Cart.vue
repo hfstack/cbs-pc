@@ -318,8 +318,9 @@ export default {
               if (res.status === 200) {
                 if (self.cartsData.goods && self.cartsData.goods.length) {
                   self.cartsData = res.content;
-                  self.productTotal = (self.productTotal * 100 - +item.price * 100) / 100;
-                  self.totalPrice = (self.totalPrice * 100 - +item.price * 100) / 100;
+
+                  // 重新计算价格
+                  self.computeTotalPrice();
                 } else {
                   self.cartEmpty = true;
                 }
