@@ -28,7 +28,7 @@
               </div>
               <!-- 没有地址信息 或者 第一次进入 -->
               <div class="shipping-address-main" v-else>
-                <shippingaddress :callback="getAddressData" editAddressId=""></shippingaddress>
+                <shippingaddress :callback="getOrdersData" editAddressId=""></shippingaddress>
               </div>
             </div>
           </div>
@@ -68,9 +68,9 @@
           </div>
           <!-- goods -->
           <div class="left-box mt20">
-            <div class="left-top">Order ({{data.goods && data.goods.length}} items)</div>
+            <div class="left-top">Order ({{data.ordergoods && data.ordergoods.length}} items)</div>
             <div class="left-content">
-              <div class="goods" v-for="(item, index) in data.goods" :key="index">
+              <div class="goods" v-for="(item, index) in data.ordergoods" :key="index">
                 <div class="img fl">
                   <router-link :to="{path: '/detail?id=' + item.id}">
                     <img :src="item.img && item.img.ossimg()">

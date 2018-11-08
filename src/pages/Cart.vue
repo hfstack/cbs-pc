@@ -186,10 +186,10 @@ export default {
           this.cartEmpty = true;
         }
       }, err => {
-        this.$Messagebox({
-          title: err || 'system error',
-          type: 'error'
-        });
+        // this.$Messagebox({
+        //   title: err || 'system error',
+        //   type: 'error'
+        // });
       });
     },
     // 计算总价格

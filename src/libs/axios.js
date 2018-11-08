@@ -47,8 +47,8 @@ AxiosInst.interceptors.response.use(response => {
   }
   // 没有token是402，token失效是403
   if (code === 402 || code === 403) {
-    window.localStorage.removeItem('userInfo');
-    window.localStorage.removeItem('userToken');
+    // window.localStorage.removeItem('userInfo');
+    // window.localStorage.removeItem('userToken');
     router.push({
       name: 'login'
     });
