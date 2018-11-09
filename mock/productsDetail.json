@@ -56,7 +56,9 @@
           "http://img.alicdn.com/imgextra/i1/1847790286/TB2pgutmBfH8KJjy1XbXXbLdXXa_!!1847790286.jpg_2200x2200Q50s50.jpg_.webp"
         ],
         "price": "20.00",
-        "prom_price": "10.00",
+        "origin_price": "15.00",
+        "discount": "31%",
+        "prom_price":  0,
         "stock": "25",
         "value_ids": "5",
         "sub": [
@@ -64,24 +66,30 @@
             "id": "2331",
             "name": "Size",
             "value": "M",
-            "price": "190.00",
-            "prom_price": "151.00",
+            "price": "20.00",
+            "origin_price": "15.00",
+            "discount": "31%",
+            "prom_price":  0,
             "stock": "5",
             "sub": [
               {
                 "id": "3331",
                 "name": "Sex",
                 "value": "MAN",
-                "price": "109.00",
-                "prom_price": "91.00",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "0"
               },
               {
                 "id": "3332",
                 "name": "Sex",
                 "value": "LADY",
-                "price": "109.00",
-                "prom_price": "91.00",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "5"
               }
             ]
@@ -90,24 +98,30 @@
             "id": "2332",
             "name": "Size",
             "value": "L",
-            "price": "169.00",
-            "prom_price": "152.00",
+            "price": "20.00",
+            "origin_price": "15.00",
+            "discount": "31%",
+            "prom_price":  0,
             "stock": "0",
             "sub": [
               {
                 "id": "3333",
                 "name": "Sex",
                 "value": "MAN",
-                "price": "109.00",
-                "prom_price": "91.00",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "0"
               },
               {
                 "id": "3334",
                 "name": "Sex",
                 "value": "LADY",
-                "price": "109.00",
-                "prom_price": "91.00",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "0"
               }
             ]
@@ -116,24 +130,30 @@
             "id": "2333",
             "name": "Size",
             "value": "XL",
-            "price": "169.00",
-            "prom_price": "153",
+            "price": "20.00",
+            "origin_price": "15.00",
+            "discount": "31%",
+            "prom_price":  0,
             "stock": "20",
             "sub": [
               {
                 "id": "3335",
                 "name": "Sex",
                 "value": "MAN",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "10"
               },
               {
                 "id": "3336",
                 "name": "Sex",
                 "value": "LADY",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "10"
               }
             ]
@@ -149,7 +169,9 @@
           "https://gw3.alicdn.com/bao/uploaded/i4/3017834712/TB1aMWnaHSYBuNjSspfXXcZCpXa_!!0-item_pic.jpg_.webp"
         ],
         "price": "20.00",
-        "prom_price": "10.00",
+        "origin_price": "15.00",
+        "discount": "31%",
+        "prom_price":  0,
         "stock": "0",
         "value_ids": "6",
         "sub": [
@@ -157,24 +179,30 @@
             "id": "2331",
             "name": "Size",
             "value": "M",
-            "price": "169.00",
-            "prom_price": "151",
+            "price": "20.00",
+            "origin_price": "15.00",
+            "discount": "31%",
+            "prom_price":  0,
             "stock": "0",
             "sub": [
               {
                 "id": "4335",
                 "name": "Sex",
                 "value": "MAN",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "0"
               },
               {
                 "id": "4336",
                 "name": "Sex",
                 "value": "LADY",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "0"
               }
             ]
@@ -183,24 +211,30 @@
             "id": "2332",
             "name": "Size",
             "value": "L",
-            "price": "169.00",
-            "prom_price": "152",
+            "price": "20.00",
+            "origin_price": "15.00",
+            "discount": "31%",
+            "prom_price":  0,
             "stock": "0",
             "sub": [
               {
                 "id": "4335",
                 "name": "Sex",
                 "value": "MAN",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "0"
               },
               {
                 "id": "4336",
                 "name": "Sex",
                 "value": "LADY",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "0"
               }
             ]
@@ -209,24 +243,30 @@
             "id": "2333",
             "name": "Size",
             "value": "XL",
-            "price": "169.00",
-            "prom_price": "153",
+            "price": "20.00",
+            "origin_price": "15.00",
+            "discount": "31%",
+            "prom_price":  0,
             "stock": "0",
             "sub": [
               {
                 "id": "4335",
                 "name": "Sex",
                 "value": "MAN",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "0"
               },
               {
                 "id": "4336",
                 "name": "Sex",
                 "value": "LADY",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "0"
               }
             ]
@@ -241,7 +281,9 @@
           "https://img.alicdn.com/imgextra/i1/792382564/TB2HK5JoJrJ8KJjSspaXXXuKpXa_!!792382564.jpg_640x0q85s150_.webp"
         ],
         "price": "20.00",
-        "prom_price": "10.00",
+        "origin_price": "15.00",
+        "discount": "31%",
+        "prom_price":  0,
         "stock": "30",
         "value_ids": "7",
         "sub": [
@@ -249,24 +291,30 @@
             "id": "2331",
             "name": "Size",
             "value": "M",
-            "price": "169.00",
-            "prom_price": "151",
+            "price": "20.00",
+            "origin_price": "15.00",
+            "discount": "31%",
+            "prom_price":  0,
             "stock": "10",
             "sub": [
               {
                 "id": "5335",
                 "name": "Sex",
                 "value": "MAN",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "5"
               },
               {
                 "id": "5336",
                 "name": "Sex",
                 "value": "LADY",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "5"
               }
             ]
@@ -275,24 +323,30 @@
             "id": "2332",
             "name": "Size",
             "value": "L",
-            "price": "169.00",
-            "prom_price": "152",
+            "price": "20.00",
+            "origin_price": "15.00",
+            "discount": "31%",
+            "prom_price":  0,
             "stock": "10",
             "sub": [
               {
                 "id": "5366",
                 "name": "Sex",
                 "value": "MAN",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "5"
               },
               {
                 "id": "5377",
                 "name": "Sex",
                 "value": "LADY",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "5"
               }
             ]
@@ -301,24 +355,30 @@
             "id": "2333",
             "name": "Size",
             "value": "XL",
-            "price": "169.00",
-            "prom_price": "153",
+            "price": "20.00",
+            "origin_price": "15.00",
+            "discount": "31%",
+            "prom_price":  0,
             "stock": "10",
             "sub": [
               {
                 "id": "5995",
                 "name": "Sex",
                 "value": "MAN",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "5"
               },
               {
                 "id": "5996",
                 "name": "Sex",
                 "value": "LADY",
-                "price": "109.00",
-                "prom_price": "91",
+                "price": "20.00",
+                "origin_price": "15.00",
+                "discount": "31%",
+                "prom_price":  0,
                 "stock": "5"
               }
             ]

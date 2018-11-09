@@ -12,20 +12,23 @@
             </div>
             <div class="left-content">
               <!-- 有地址信息-->
-              <div class="shipping-address-main" v-if="data.user_address && data.user_address.length">
-                <div class="shipping-address" v-for="item in data.user_address" v-if="(data.user_address && data.user_address.length === 1)  || item.is_default === 1">
-                  <p>{{item.recipients}}</p>
-                  <p>{{item.iphone}}</p>
-                  <p>{{item.address}}</p>
-                  <div class="edit" @click="clickEditAddress(item.id)">
+              <div class="shipping-address-main" v-if="JSON.stringify(addressData).length > 2">
+                <div class="shipping-address" >
+                  <p>{{addressData.recipients}}</p>
+                  <p>{{addressData.iphone}}</p>
+                  <p>{{addressData.address}}</p>
+                  <div class="edit" @click="clickEditAddress(addressData.id)">
                     <i class="iconfont">&#xe621;</i>Edit
                   </div>
                 </div>
-                <div class="add-button" @click="clickNewAddress">+ ADD NEW ADDRESS</div>
+                <div class="address-button">
+                  <div class="add-button fl" @click="clickOtherAddress">+ OTHER ADDRESS</div>
+                  <div class="add-button fl" @click="clickNewAddress">+ ADD NEW ADDRESS</div>
+                </div>
               </div>
               <!-- 没有地址信息 或者 第一次进入 -->
               <div class="shipping-address-main" v-else>
-                <shippingaddress :callback="getAddressData" editAddressId=""></shippingaddress>
+                <shippingaddress :callback="getOrdersData" editAddressId=""></shippingaddress>
               </div>
             </div>
           </div>
@@ -65,9 +68,9 @@
           </div>
           <!-- goods -->
           <div class="left-box mt20">
-            <div class="left-top">Order ({{data.goods && data.goods.length}} items)</div>
+            <div class="left-top">Order ({{data.ordergoods && data.ordergoods.length}} items)</div>
             <div class="left-content">
-              <div class="goods" v-for="(item, index) in data.goods" :key="index">
+              <div class="goods" v-for="(item, index) in data.ordergoods" :key="index">
                 <div class="img fl">
                   <router-link :to="{path: '/detail?id=' + item.id}">
                     <img :src="item.img && item.img.ossimg()">
@@ -121,12 +124,24 @@
       </div>
     </div>
 
-    <!-- 弹层 - 地址 -->
+    <!-- 弹层 - 地址 - 编辑 & 新增-->
     <div class="modal-popup address-modal" v-if="isShowAddressModal">
       <div class="modal-content">
         <div class="title">Add New Shipping Address</div>
         <div class="close" @click="clickCloseAddress"><i class="iconfont">&#xe63f;</i></div>
         <shippingaddress :callback="() => {this.isShowAddressModal = false; this.editAddressId = ''; this.getOrdersData()}" :editAddressId="editAddressId"></shippingaddress>
+      </div>
+    </div>
+    <!-- 弹层 - 地址 - 地址列表 -->
+    <div class="modal-popup address-list-modal" v-if="isShowAddressListModal && data.user_address && data.user_address.length">
+      <div class="modal-content">
+        <div class="title">Choose Other Address</div>
+        <div class="close" @click="clickCloseAddressList"><i class="iconfont">&#xe63f;</i></div>
+        <div class="shipping-address" v-for="item in data.user_address" @click="clickChooseAddress(item)">
+          <p>{{item.recipients}}</p>
+          <p>{{item.iphone}}</p>
+          <p>{{item.address}}</p>
+        </div>
       </div>
     </div>
     <!-- 弹层 - 银行卡 -->
@@ -163,9 +178,11 @@ export default {
       data: [], // 订单信息
       cards: [], // 银行卡列表
       addressId: '', // 地址ID
+      addressData: {}, // 地址数据
       cardNumber: '', // 卡号
       payType: 0, // 支付方式  2-paypal 3-stripe
       editAddressId: '', // 编辑地址ID
+      isShowAddressListModal: false, // 显示地址列表弹层
       isShowAddressModal: false, // 显示地址弹层
       isShowCardModal: false, // 显示银行卡弹层
       cardModalData: {}, // 银行卡编辑内容
@@ -196,6 +213,8 @@ export default {
           for (let i = 0; i < len; i++) {
             if (userAddress[i].is_default === 1) {
               this.addressId = userAddress[i].id;
+              this.addressData = userAddress[i];
+              return false;
             }
           }
           // 特殊处理
@@ -371,6 +390,21 @@ export default {
     clickCardRadio (num) {
       this.payType = num;  // 支付方式  2-paypal 3-stripe
     },
+    // 显示其他地址
+    clickOtherAddress () {
+      this.isShowAddressListModal = true;
+    },
+    // 关闭
+    clickCloseAddressList () {
+      this.isShowAddressListModal = false;
+    },
+    // 选择地址
+    clickChooseAddress (item) {
+      // console.log(item.id);
+      this.addressId = item.id;
+      this.isShowAddressListModal = false;
+      this.addressData = item;
+    },
     // 新增地址
     clickNewAddress () {
       this.isShowAddressModal = true;
@@ -414,6 +448,7 @@ export default {
 .secure-main {
   background-color: #fff;
   padding-bottom: 200px;
+  min-height: 100%;
   .mt20 {
     margin-top: 20px;
   }
@@ -430,44 +465,19 @@ export default {
     margin-left: 325px;
     margin-top: 20px;
   }
+  // 地址列表
+  .address-button {
+    text-align: center;
+    .clearfix();
+    .add-button {
+      display: inline-block;
+      margin-left: 135px;
+    }
+  }
 
   // 有地址信息
   .shipping-address-main {
     margin-bottom: 30px;
-  }
-  .shipping-address {
-    position: relative;
-    .wh(800, 150);
-    font-size: 16px;
-    background-color: #F7F9FA;
-    padding: 10px 20px;
-    margin: 30px 12px;
-    p {
-      width: 700px;
-      .line1();
-      .height(40);
-    }
-    &::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: url('~img/cart/left_bg.png') no-repeat;
-      width: 8px;
-      height: 150px;
-      display: block;
-      content: '';
-    }
-    .edit {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      color: @gray;
-      cursor: pointer;
-      font-size: 14px;
-      i {
-        margin-right: 5px;
-      }
-    }
   }
 
   // 卡
@@ -534,6 +544,48 @@ export default {
       margin: 46px 0 0 120px;
       font-size: 22px;
     }
+  }
+}
+
+.secure-main-layout {
+  .shipping-address {
+    position: relative;
+    .wh(800, 150);
+    font-size: 16px;
+    background-color: #F7F9FA;
+    padding: 10px 20px;
+    margin: 30px 12px;
+    p {
+      width: 700px;
+      .line1();
+      .height(40);
+    }
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: url('~img/cart/left_bg.png') no-repeat;
+      width: 8px;
+      height: 150px;
+      display: block;
+      content: '';
+    }
+    .edit {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: @gray;
+      cursor: pointer;
+      font-size: 14px;
+      i {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .address-list-modal .shipping-address {
+    cursor: pointer;
+    margin: 15px;
   }
 }
 // 公用

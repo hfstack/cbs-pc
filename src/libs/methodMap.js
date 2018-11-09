@@ -12,6 +12,8 @@ const methodMap = {
   Carts: {url: '/carts', method: 'post'},
   /** 购物车添加 **/
   CartsAdd: {url: '/carts/add', method: 'post'},
+  /** 购物车删除 **/
+  CartsDelete: {url: '/carts/delete', method: 'post'},
   /** 银行卡列表 **/
   CardsList: {url: '/cards/list', method: 'post'},
   /** 银行卡信息 **/

@@ -81,10 +81,11 @@
               <template v-if="goodsData.subArr && goodsData.subArr.length">
                 <div class="attr-title">{{goodsData.subArr[0].name}} <SizeGuide :show="goodsData.subArr[0].name === 'Size' || goodsData.subArr[0].name === 'size'"></SizeGuide></div>
                 <ul class="attr-des" ref="twoSkuRef">
-                  <li v-for="(item, index) in goodsData.subArr" @click="twoSkuClick(index, item.stock)">
+                  <li v-for="(item, index) in goodsData.subArr" @click="twoSkuClick(index, item.stock)" @mousedown="chooseSkuTwo">
                     <a :class="{'disabled': +item.stock === 0}" href="javascript:;">{{item.value}}</a>
                   </li>
                 </ul>
+                <div class="red" if="skuErrorTip">{{skuErrorTip}}</div>
               </template>
             </div>
           </div>
@@ -144,7 +145,8 @@ export default {
       el: {}, // dom 集合
       skuId: null, // sku id
       submitLocked: false, // 提交锁
-      isShowCouponList: false // 展示券
+      isShowCouponList: false, // 展示券
+      skuErrorTip: '' // sku错误提示
     }
   },
   created () {
@@ -267,6 +269,8 @@ export default {
       // 变化
       let arr = this.goodsData.subArr[num];
       this.goodsData.price = arr.prom_price || arr.price;
+      this.goodsData.originPrice = arr.origin_price;
+      this.goodsData.discount = arr.discount;
       this.goodsData.stock = arr.stock;
       this.goodsData.twoValue = arr.value;
       this.goodsData.saleNum = 1;
@@ -368,16 +372,17 @@ export default {
       }
       this.goodsData.saleNum--;
     },
+    // 选择了sku2
+    chooseSkuTwo () {
+      this.skuErrorTip = '';
+    },
     // OK - 提交表单
     submitClick () {
       this.cartshow = false;
 
       // 判定是否选择完毕
       if (!this.skuId) {
-        this.$Messagebox({
-          title: 'Please select your ' + this.goodsData.subArr[0].name,
-          type: 'error'
-        });
+        this.skuErrorTip = 'Please select your ' + this.goodsData.subArr[0].name + ' !';
         return;
       }
       // 提交锁
@@ -399,18 +404,7 @@ export default {
           let self = this;
           localStorage.setItem('userToken', res.content.token);
           self.submitLocked = false; // 解锁
-          this.cartshow = true;
-          this.$Messagebox({
-            title: 'add success',
-            type: 'success'
-          });
-          // 跳转到购物车
-          // setTimeout(function() {
-            // self.submitLocked = false; // 解锁
-            // self.$router.push({
-            //   path: '/mycart?id=' + self.$route.query.id
-            // });
-          // }, 1000);
+          this.cartshow = true; // 展示右上角购物车
         } else {
           this.submitLocked = false; // 解锁
           this.$Messagebox({

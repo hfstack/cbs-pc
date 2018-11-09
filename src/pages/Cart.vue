@@ -42,7 +42,7 @@
                     <div class="origin-price">${{item.origin_price}}</div>
                   </div>
                   <div class="qty fl">
-                    <a href="javascript:;" class="reduce fl" @click="reduce(item)">
+                    <a href="javascript:;" class="reduce fl" :class="{'ban': item.num <= 1}" @click="reduce(item)">
                       <i class="iconfont">&#xe62a;</i>
                     </a>
                     <div class="num fl">{{item.num}}</div>
@@ -186,10 +186,10 @@ export default {
           this.cartEmpty = true;
         }
       }, err => {
-        this.$Messagebox({
-          title: err || 'system error',
-          type: 'error'
-        });
+        // this.$Messagebox({
+        //   title: err || 'system error',
+        //   type: 'error'
+        // });
       });
     },
     // 计算总价格
@@ -232,6 +232,15 @@ export default {
       item.num++;
       this.productTotal = (this.productTotal * 100 + +item.price * 100) / 100;
       this.totalPrice = (this.totalPrice * 100 + +item.price * 100) / 100;
+      // 邮费计算
+      if (this.totalPrice >= 19) {
+        this.totalPrice = (this.totalPrice * 100 - +this.shippingMoney * 100) / 100; //加运费
+        this.shippingMoney = 0;
+      } else {
+        this.shippingMoney = 10;
+        this.totalPrice = (this.totalPrice * 100 + +this.shippingMoney * 100) / 100; //加运费
+      }
+
       clearTimeout(self.addSt);
       // 函数节流
       self.addSt = setTimeout(function() {
@@ -260,13 +269,21 @@ export default {
     // 减少 - 登录后
     reduce (item) {
       let self = this;
-      if (item.num <= 0) {
+      if (item.num <= 1) {
         return;
       }
       clearTimeout(self.reduceSt);
       item.num--;
       self.productTotal = (this.productTotal * 100 - +item.price * 100) / 100;
       self.totalPrice = (this.totalPrice * 100 - +item.price * 100) / 100;
+      // 邮费计算
+      if (this.totalPrice >= 19) {
+        this.totalPrice = (this.totalPrice * 100 - +this.shippingMoney * 100) / 100; //加运费
+        this.shippingMoney = 0;
+      } else {
+        this.shippingMoney = 10;
+        this.totalPrice = (this.totalPrice * 100 + +this.shippingMoney * 100) / 100; //加运费
+      }
       // 函数节流
       self.reduceSt = setTimeout(function() {
         self.request('CartsAdd', {
@@ -295,15 +312,18 @@ export default {
         action: function () {
           self.confirmModal.show = false;
           self.reduceSt = setTimeout(function() {
-            self.request('CartsAdd', {
-              good_id: item.id,
-              sku_id: item.sku_id,
-              num: 0
+            self.request('CartsDelete', {
+              cart_id: item.cart_id
             }).then((res) => {
               if (res.status === 200) {
-                self.cartsData = res.content;
-                self.productTotal = (self.productTotal * 100 - +item.price * 100) / 100;
-                self.totalPrice = (self.totalPrice * 100 - +item.price * 100) / 100;
+                if (self.cartsData.goods && self.cartsData.goods.length) {
+                  self.cartsData = res.content;
+
+                  // 重新计算价格
+                  self.computeTotalPrice();
+                } else {
+                  self.cartEmpty = true;
+                }
               }
             }, err => {
               self.$Messagebox({
@@ -378,16 +398,16 @@ export default {
         } else if (res.status === 403 || res.status === 402) {
           this.$router.push({name: 'sign'})
         } else {
-          this.$Messagebox({
-            title: res.msg || 'system error',
-            type: 'error'
-          });
+          // this.$Messagebox({
+          //   title: res.msg || 'system error',
+          //   type: 'error'
+          // });
         }
       }, err => {
-        this.$Messagebox({
-          title: err || 'system error',
-          type: 'error'
-        });
+        // this.$Messagebox({
+        //   title: err || 'system error',
+        //   type: 'error'
+        // });
       });
     },
     // 改变points
@@ -424,6 +444,7 @@ export default {
 @import '~less/tool.less';
 .cart-main-layout {
   width: 100%;
+  min-height: 100%;
   background-color: #fff;
 }
 .cart-main {
@@ -680,7 +701,7 @@ export default {
       width: 350px;
       border-radius: 8px;
       border: 1px solid @bgray;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      // box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     }
     .right-top {
       padding: 0 20px;

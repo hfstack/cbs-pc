@@ -95,6 +95,8 @@ export default {
       this.params.cate = this.$route.query.cate
       this.params.title = this.$route.query.title
       this.params.page = 1;
+      this.params.minprice =  '';
+      this.params.maxprice =  '';
       this.getProductsList();
     }
   },
@@ -259,6 +261,7 @@ html,body{
       height: 40px;
       line-height: 40px;
       cursor: pointer;
+      margin-top: -5px;
     }
     .goods-list{
       li{

@@ -27,6 +27,11 @@ var setOnline = [
     url: '/carts/add'
   },
   {
+    name: 'cartsDelete',
+    type: 'post',
+    url: '/carts/delete'
+  },
+  {
     name: 'cardsList',
     type: 'post',
     url: '/cards/list'
