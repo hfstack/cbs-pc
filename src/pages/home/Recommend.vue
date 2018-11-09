@@ -41,7 +41,6 @@ export default {
       padding: 60px 0 50px;
       text-align: center;
       font-weight: bold;
-      font-family: Helvetica-Bold;
     }
     .recommend-goods{
       float: left;

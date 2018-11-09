@@ -5,7 +5,7 @@
       <div class="sign login-item fl">
         <p class="title">Sign In</p>
         <div class="form-item">
-          <i class="iconfont email">&#xe618;</i><input type="text" placeholder="email" v-model="loginEmail">
+          <i class="iconfont email">&#xe60f;</i><input type="text" placeholder="email" v-model="loginEmail">
         </div>
         <div class="form-item">
           <i class="iconfont pwd">&#xe616;</i><input type="password"  placeholder="password"  v-model="loginPwd">
@@ -17,7 +17,7 @@
       <div class="register login-item fr">
         <p class="title">Create an account</p>
         <div class="form-item">
-          <i class="iconfont email">&#xe618;</i><input type="text" @focus="clearError" placeholder="Frequent Email Address" v-model="params.email"  v-validate="fields.email" data-vv-name="email" data-vv-validate-on="none">
+          <i class="iconfont email">&#xe60f;</i><input type="text" @focus="clearError" placeholder="Frequent Email Address" v-model="params.email"  v-validate="fields.email" data-vv-name="email" data-vv-validate-on="none">
         </div>
         <invalidtip  :show="verrors.has('email')">{{verrors.first('email')}}</invalidtip>
         <div class="form-item">
@@ -157,22 +157,15 @@ export default {
         line-height: 56px;
         display: flex;
         i {
-          font-size: 20px;
+          font-size: 21px;
           display: inline-block;
-          // border: 1px solid red;
-        }
-        i.pwd{
-          font-size: 25px;
-          padding-left: 19px;
-        }
-        i.email{
-          margin-left: 1px;
           padding-left: 20px;
+          // border: 1px solid red;
         }
         input {
           padding:0 13px;
           color: #939399;
-          height: 52px;
+          height: 54px;
           flex-grow: 1;
           // border: 1px solid red;
         }

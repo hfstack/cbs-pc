@@ -120,7 +120,6 @@ export default {
             ele.show = false;
           });
           this.category = cates;
-          console.log("category",this.category)
         } else {
           this.$Messagebox({
             title: 'res.msg',

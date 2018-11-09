@@ -487,9 +487,6 @@ export default {
       img {
         .wh(120, 120);
       }
-      .status {
-
-      }
     }
     .info {
       width: 280px;

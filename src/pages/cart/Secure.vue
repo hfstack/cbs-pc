@@ -547,7 +547,7 @@ export default {
       width: 870px;
       border-radius: 8px;
       border: 1px solid @bgray;
-      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
       .left-top {
         position: relative;
         padding: 0 20px;
@@ -573,7 +573,7 @@ export default {
     width: 350px;
     border-radius: 8px;
     border: 1px solid @bgray;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     .right-top {
       padding: 0 20px;
       font-size: 16px;

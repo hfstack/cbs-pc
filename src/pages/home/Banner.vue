@@ -41,7 +41,7 @@
     height: 435px !important;
   }
 }
-@media screen and (min-width: 1920px) {
+@media screen and (max-width: 1920px) {
   .mint-swipe {
     height: 580px !important;
   }
@@ -49,15 +49,14 @@
 .g-banner {
   width: 100%;
   max-height: 580px;
-  
   .mint-swipe{
     max-height: 580px;
     position: relative;
   }
   img{
     height: 100%;
+    width: 100%;
     display: block; 
-    width: 1438px;
     margin: 0 auto;
   }
   .mint-swipe-indicators {
