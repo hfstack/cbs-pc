@@ -56,7 +56,7 @@
             </div>
           </div>
           <!-- 右边内容 -->
-          <div class="fl right-layout">
+          <div class="fl right-layout" :class="{'fixed': isRightLayoutFixed}">
             <div class="right-title">CHECKOUT</div>
             <div class="right-box">
               <div class="right-top">Order Summary</div>
@@ -75,8 +75,8 @@
                     <div class="price red">-${{returnFloat(cartsData.specialoffer)}}</div>
                   </li>
                   <li>
-                    <div class="label">
-                      Points <span>( Available: {{cartsData.integral}} )</span>
+                    <div class="label w255">
+                      Points <span>( Available: ${{cartsData.integral}} )</span>
                       <dswitch :status.sync="isUsePoint" :on-change="changePoints" class="disi"></dswitch>
                     </div>
                     <div class="price red">-${{ isUsePoint ? cartsData.integral * 100 / 10000 : '0.00'}}</div>
@@ -158,15 +158,28 @@ export default {
       confirmModal: {},
       cartEmpty: false,
       couponPrice: 0, // 券价
-      shippingMoney: 0 // 邮费 > $19美元包邮
+      shippingMoney: 0, // 邮费 > $19美元包邮
+      isRightLayoutFixed: false
     };
   },
   computed: {},
   mounted () {
     this.getCartData();
+    // this.rightLayoutFixed();
   },
   watch: {},
   methods: {
+    // 右侧模块置顶操作
+    rightLayoutFixed(){
+      let self = this;
+      let t = document.documentElement.scrollTop || document.body.scrollTop;
+      let h = document.getElementsByClassName('right-layout')[0].offsetTop;
+      window.onscroll = function () {
+        t = document.documentElement.scrollTop || document.body.scrollTop;
+        self.isRightLayoutFixed = t >= h;
+      }
+      self.isRightLayoutFixed = t >= h;
+    },
     // 获取购物车数据
     getCartData () {
       this.request('Carts', {}).then((res) => {
@@ -700,6 +713,12 @@ export default {
     width: 350px;
     margin-left: 20px;
     border: none;
+    &.fixed {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      margin-left: 270px;
+    }
     .right-box {
       width: 350px;
       border-radius: 8px;
@@ -735,6 +754,9 @@ export default {
               margin-top: 2px;
               display: inline-block;
             }
+          }
+          .w255 {
+            width: 255/@rem;
           }
           .price {
             float: right;

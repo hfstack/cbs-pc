@@ -3,7 +3,7 @@
     <headers></headers>
     <div class="secure-main">
       <orderstatus :activetwo="true"></orderstatus>
-      <div class="global-layout">
+      <div class="secure-global-layout">
         <div class="fl left-layout">
           <div class="left-box">
             <div class="left-top">
@@ -45,11 +45,15 @@
                 <!-- 卡 -->
                 <div class="card-list" v-if="cards && cards.length">
                   <div class="cards" v-for="(item, index) in cards" :key="index">
-                    <input type="radio" name="card" @click="clickCardRadio(3)">
+                    <input type="radio" class="input-radio" name="card" @click="radioClick(item.id, index)">
                     <div class="card-detail fl" >
                       * Card No. : <span class="num">{{item.number}}</span>
                       <div class="edit" @click="clickCardEdit(item.id)"><i class="iconfont">&#xe621;</i>Edit</div>
                       <div class="delete" @click="clickCardDel(item.id, item.number)"><i class="iconfont">&#xe63d;</i>Delete</div>
+                      <div class="exp-cvc" v-show="index == showCardNum">
+                        <div class="expire"><span>* EXPIRE : </span><input class="gray2" type="text" placeholder="06/23" v-model="exp"></div>
+                        <div class="cvc"><span>* CVC : </span><input class="gray2" type="text" placeholder="000" v-model="cvc"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -59,7 +63,7 @@
                 <div class="add-button" @click="clickNewCard">+ ADD NEW CARD</div>
 
                 <div class="pay-type">
-                  <input type="radio" name="card" @click="clickCardRadio(2)">
+                  <input type="radio" name="card" @click="radioClick('PayPal')">
                   <span>PayPal</span>
                   <img src="~img/cart/3.png">
                 </div>
@@ -90,7 +94,7 @@
             </div>
           </div>
         </div>
-        <div class="fr right-layout">
+        <div class="fr right-layout" :class="{'fixed': isRightLayoutFixed}">
           <div class="right-top">Order Summary</div>
           <div class="right-content">
             <ul>
@@ -179,7 +183,7 @@ export default {
       cards: [], // 银行卡列表
       addressId: '', // 地址ID
       addressData: {}, // 地址数据
-      cardNumber: '', // 卡号
+      cardId: '', // 卡号
       payType: 0, // 支付方式  2-paypal 3-stripe
       editAddressId: '', // 编辑地址ID
       isShowAddressListModal: false, // 显示地址列表弹层
@@ -187,7 +191,11 @@ export default {
       isShowCardModal: false, // 显示银行卡弹层
       cardModalData: {}, // 银行卡编辑内容
       editCardId: '', // 编辑银行卡号
-      confirmModal: {} // 银行卡删除确认框
+      confirmModal: {}, // 银行卡删除确认框
+      exp: '', // 卡日期
+      cvc: '', // 卡到期
+      showCardNum: null, // 显示卡
+      isRightLayoutFixed: false
     };
   },
   computed: {},
@@ -195,7 +203,9 @@ export default {
     this.getOrdersData();
     this.getCardsData();
   },
-  mounted () {},
+  mounted () {
+    this.rightLayoutFixed();
+  },
   watch: {},
   methods: {
     // 获取订单信息
@@ -303,25 +313,33 @@ export default {
         address_id:	+self.addressId, // 地址id
         balance: self.isBalance, // 是否使用余额
         pay_type: self.payType, //	是	Number	支付方式 2-paypal 3-stripe
-        source: self.cardNumber
+        source: self.cardId,
+        exp: self.exp,
+        cvc: self.cvc
       }).then((res) => {
         if (res.status === 200) {
-          if (self.payType === 2 && res.content) {
-            // 如果是PayPal去支付页面
-            window.location.href = res.content.payUrl;
-          }
-          // if (self.payType === 3) {
-          //   self.$router.push({path: '/cart/successful?orderId=' + self.$route.query.orderId});
-          // }
           self.$Messagebox({
             title: 'Payment Processing',
             type: 'success'
           });
+          if (self.payType === 2 && res.content) {
+            // 如果是PayPal去支付页面
+            window.location.href = res.content.payUrl;
+          }
+          if (self.payType === 3) {
+            // self.$router.push({path: '/cart/successful?orderId=' + self.$route.query.orderId});
+            setTimeout(function() {
+              self.$router.push({path: '/cart/successful?orderId=' + self.$route.query.orderId});
+            }, 1000);
+          }
         } else {
           self.$Messagebox({
             title: 'Payment Failure',
             type: 'error'
           });
+          setTimeout(function() {
+            self.$router.push({path: '/cart/failure?orderId=' + self.$route.query.orderId});
+          }, 1000);
         }
         locked = false;
       }, err => {
@@ -341,6 +359,17 @@ export default {
       }
       this.computePice();
     },
+    // 右侧模块置顶操作
+    rightLayoutFixed(){
+      let self = this;
+      let t = document.documentElement.scrollTop || document.body.scrollTop;
+      let h = document.getElementsByClassName('right-layout')[0].offsetTop;
+      window.onscroll = function () {
+        t = document.documentElement.scrollTop || document.body.scrollTop;
+        self.isRightLayoutFixed = t >= h;
+      }
+      self.isRightLayoutFixed = t >= h;
+    },
     // 编辑地址
     clickEditAddress (id) {
       this.isShowAddressModal = true;
@@ -357,8 +386,23 @@ export default {
       // 获取银行卡信息
       this.editCardId = cardId + ''; // 转化为string
     },
+    radioClick (value, index) {
+      this.exp = '';
+      this.cvc = '';
+      // Paypal支付
+      if (value === 'PayPal') {
+        this.payType = 2;
+        this.cardId = '';
+        this.showCardNum = null;
+        return;
+      }
+      this.showCardNum = index;
+      // 银行支付卡号
+      this.payType = 3;
+      this.cardId = +value;
+    },
     // 删除card
-    clickCardDel (cardId, cardNumber) {
+    clickCardDel (cardId) {
       let self = this;
       self.confirmModal = {
         show: true,
@@ -373,8 +417,8 @@ export default {
               self.confirmModal.show = false;
               self.cards = res.content.cards;
               // 如果是选中的card 被删除
-              if (self.cardNumber === +cardNumber) {
-                self.cardNumber = '';
+              if (self.cardId === +cardId) {
+                self.cardId = '';
               }
             }
           }, err => {
@@ -385,10 +429,6 @@ export default {
           });
         }
       }
-    },
-    // 点击卡的radio
-    clickCardRadio (num) {
-      this.payType = num;  // 支付方式  2-paypal 3-stripe
     },
     // 显示其他地址
     clickOtherAddress () {
@@ -588,8 +628,8 @@ export default {
     margin: 15px;
   }
 }
-// 公用
-.global-layout {
+
+.secure-global-layout {
   width: 1240px;
   margin: 0 auto;
   .clearfix();
@@ -622,10 +662,17 @@ export default {
     }
   }
   .right-layout {
+    position: relative;
     width: 350px;
     border-radius: 8px;
     border: 1px solid @bgray;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    &.fixed {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      margin-left: 270px;
+    }
     .right-top {
       padding: 0 20px;
       font-size: 16px;
@@ -706,13 +753,14 @@ export default {
   .cards {
     position: relative;
     .clearfix();
-    input {
+    .input-radio {
       position: absolute;
       top: 15px;
       left: 0;
     }
     .card-detail {
       .whl(790, 50);
+      height: auto;
       padding-left: 20px;
       margin-left: 30px;
       margin-bottom: 10px;
@@ -721,6 +769,7 @@ export default {
 
       .num {
         color: @gray;
+        margin-left: 5px;
       }
       .edit, .delete {
         cursor: pointer;
@@ -736,6 +785,20 @@ export default {
       }
       .edit {
         right: 100px;
+      }
+    }
+    .exp-cvc {
+      span {
+        display: inline-block;
+        width: 80px;
+        text-align: right;
+      }
+      input {
+        width: 200px;
+        height: 30px;
+        padding: 0 10px;
+        background-color: #fff;
+        margin-left: 5px;
       }
     }
   }
