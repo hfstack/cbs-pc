@@ -50,7 +50,14 @@
       </div>
       <div class="account-content-item" @click="navchange('myOrders')">
         <p class="account-content-title">My Orders</p>
-        <div class="account-content-detail" style="text-align: center"><div class="fl">Unpaid: <span style="color: #FF473C">{{info.order_unpay}}</span></div> Shipping: <span style="color: #FF473C">{{info.order_ship}}</span> <div class="fr">All: <span style="color: #FF473C">{{info.order_all}}</span></div></div>
+        <div class="account-content-detail" id="myorders" style="text-align: center">
+          <div class="fl"><span id="unpaid">Unpaid: 
+            <span style="color: #FF473C">{{info.order_unpay}}</span></span>
+          </div> <span id="shipping">Shipping: <span style="color: #FF473C">{{info.order_ship}}</span></span> 
+          <div class="fr"><span id="all">All: 
+            <span style="color: #FF473C">{{info.order_all}}</span></span>
+            </div>
+            </div>
       </div>
       <div class="account-content-item" @click="navchange('historyView')">
         <p class="account-content-title">History View</p>
@@ -96,6 +103,10 @@ export default {
        this.request('PCPersonalIndex').then((res) => {
         if (res.status === 200) {
           this.info = res.content || {};
+          console.log("info",this.info);
+          if(this.info.img === "") {
+            this.info.img = "/static/login.png"
+          }
         } else {
           this.$Messagebox({
             title: res.msg || '',
@@ -160,6 +171,7 @@ export default {
         height: 100%;
         border-right: 1px solid #E1E1E1;
         text-align: center;
+        // border: 1px solid green;
         cursor: pointer;
         .icon{
           width: 52px;
@@ -186,12 +198,22 @@ export default {
         
       }
       .balance-list{
-        padding-left: 20px;
-        padding-top: 20px;
+        // border: 1px solid yellow;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        margin-left: 20px;
         .balance-list-item{
           text-align: left;
           margin-bottom: 15px;
           cursor: pointer;
+          // border: 1px solid red;
+          &:first-child{
+            margin-top: 10px;
+          }
+          &:last-child{
+            margin-bottom: 0;
+          }
           i {
             font-size: 24px;
             color: @orange;
@@ -201,6 +223,9 @@ export default {
             color: @gray;
             font-size: 14px;
             margin-bottom: 6px;
+            &:hover {
+              text-decoration: underline;
+            }
           }
           .balance-list-price {
             font-size: 16px;
@@ -223,8 +248,10 @@ export default {
         margin-right: 0;
       }
       .points{
-        text-decoration: underline;
-        color: #131313
+        color: #131313;
+        &:hover {
+           text-decoration: underline;
+        }
       }
     }
     .account-content-title{
@@ -244,6 +271,19 @@ export default {
       font-size: 20px;
       text-align: left;
       cursor: pointer;
+      &:hover {
+           text-decoration: underline;
+        }
+    }
+    #myorders{
+      &:hover {
+           text-decoration: none;
+        }
+      #unpaid, #shipping, #all{
+        &:hover {
+           text-decoration: underline;
+        }
+      }
     }
   }
 }

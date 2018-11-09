@@ -120,7 +120,6 @@ export default {
             ele.show = false;
           });
           this.category = cates;
-          console.log("category",this.category)
         } else {
           this.$Messagebox({
             title: 'res.msg',
@@ -154,7 +153,7 @@ export default {
 
 .c-nav-ul{
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   width: 1240px;
   margin: 0 auto;
   background: #fff;

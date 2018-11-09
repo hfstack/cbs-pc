@@ -199,10 +199,10 @@ export default {
           this.cartEmpty = true;
         }
       }, err => {
-        this.$Messagebox({
-          title: err || 'system error',
-          type: 'error'
-        });
+        // this.$Messagebox({
+        //   title: err || 'system error',
+        //   type: 'error'
+        // });
       });
     },
     // 计算总价格
@@ -411,16 +411,16 @@ export default {
         } else if (res.status === 403 || res.status === 402) {
           this.$router.push({name: 'sign'})
         } else {
-          this.$Messagebox({
-            title: res.msg || 'system error',
-            type: 'error'
-          });
+          // this.$Messagebox({
+          //   title: res.msg || 'system error',
+          //   type: 'error'
+          // });
         }
       }, err => {
-        this.$Messagebox({
-          title: err || 'system error',
-          type: 'error'
-        });
+        // this.$Messagebox({
+        //   title: err || 'system error',
+        //   type: 'error'
+        // });
       });
     },
     // 改变points
@@ -520,9 +520,6 @@ export default {
       .wh(120, 120);
       img {
         .wh(120, 120);
-      }
-      .status {
-
       }
     }
     .info {
@@ -723,7 +720,7 @@ export default {
       width: 350px;
       border-radius: 8px;
       border: 1px solid @bgray;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      // box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     }
     .right-top {
       padding: 0 20px;

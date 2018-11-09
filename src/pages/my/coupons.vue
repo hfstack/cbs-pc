@@ -37,6 +37,7 @@ export default {
       }).then((res) => {
         if(res.status === 200 && res.content) {
           this.couponList = res.content.coupons || [];
+          console.log("coupon",this.couponList)
         } else {
           this.$Messagebox({
             type: 'error',
@@ -83,22 +84,24 @@ export default {
     width: 440px;
     margin: 30px auto;
     position: relative;
-    height: 50px;
+    height: 52px;
     line-height: 50px;
+    border:1px solid rgba(240,240,243,1);
+    background:rgba(247,249,250,1);
   }
   .s-input{
     width: 100%;
     height: 100%;
     padding: 0 14px;
-    
+    color:rgba(147,147,153,1);
   }
   .search-btn{
     cursor: pointer;
     position: absolute;
-    right: 0px;
-    top: 0;
+    right: -1px;
+    top: -1px;
     width:90px;
-    height: 50px;
+    height: 52px;
     line-height: 50px;
     font-size: 18px;
     text-align: center;

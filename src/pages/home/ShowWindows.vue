@@ -101,7 +101,6 @@ export default {
       line-height:22px;
       font-weight: bold;
       text-transform: uppercase;
-      font-family: Helvetica;
       color: rgba(54,52,51,1);
     }
     .more{

@@ -136,16 +136,17 @@ export default {
           // callback
           this.saveCallback && this.saveCallback();
         } else {
-          this.Messagebox({
-            title: res.msg || 'system error',
-            type: 'error'
-          });
+          // this.Messagebox({
+          //   title: res.msg || 'system error',
+          //   type: 'error'
+          // });
+          console.log(res.msg)
         }
       }, err => {
-        this.Messagebox({
-          title: err || 'sysytem error',
-          type: 'error'
-        });
+        // this.Messagebox({
+        //   title: err || 'sysytem error',
+        //   type: 'error'
+        // });
       });
     }
   },
