@@ -48,14 +48,14 @@
         <p class="account-content-title">My Coupons</p>
         <div class="account-content-detail">Coupons : <span style="color: #FF473C">{{info.card}}</span></div>
       </div>
-      <div class="account-content-item" @click="navchange('myOrders')">
+      <div class="account-content-item">
         <p class="account-content-title">My Orders</p>
         <div class="account-content-detail" id="myorders" style="text-align: center">
-          <div class="fl"><span id="unpaid">Unpaid: 
-            <span style="color: #FF473C">{{info.order_unpay}}</span></span>
-          </div> <span id="shipping">Shipping: <span style="color: #FF473C">{{info.order_ship}}</span></span> 
-          <div class="fr"><span id="all">All: 
-            <span style="color: #FF473C">{{info.order_all}}</span></span>
+          <div class="fl"><router-link :to="{name: 'myOrders', query: {type: 1}}" id="unpaid">Unpaid: 
+            <span style="color: #FF473C">{{info.order_unpay}}</span></router-link>
+          </div> <router-link   :to="{name: 'myOrders', query: {type: 4}}" id="shipping">Shipping: <span style="color: #FF473C">{{info.order_ship}}</span></router-link> 
+          <div class="fr"><router-link id="all"  :to="{name: 'myOrders'}">All: 
+            <span style="color: #FF473C">{{info.order_all}}</span></router-link>
             </div>
             </div>
       </div>

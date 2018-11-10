@@ -20,9 +20,6 @@
           <div class="sort fr">
             <div class="fl" style="margin-right: 10px">SORT BY</div>
             <dselect :border="true" placeholder="" :options="searchOptions" :value.sync="params.sort"></dselect>
-            <!-- <Select v-model="params.sort" style="width:200px" class="fl" :placement="'bottom-end'" size="large" @change="getProductsList">
-              <Option v-for="item in searchOptions" :value="item.id" :key="item.id">{{ item.label }}</Option>
-            </Select> -->
           </div>
         </div>
         <ul class="goods-list">
@@ -257,7 +254,6 @@ html,body{
       }
     }
     .sort{
-      width: 270px;
       height: 40px;
       line-height: 40px;
       cursor: pointer;

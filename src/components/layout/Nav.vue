@@ -5,8 +5,7 @@
         <span class="first-cate" >{{item.name}}</span>
         <div class="sub-nav" v-show="item.show">
           <div v-for="ele in item.sub">
-            <!-- <p class="sub-title" @click="cateSelect(ele)" >{{ele.name}}</p> -->
-            <abbr class="sub-title" @click="cateSelect(ele)" title="" @mouseover="showTitle(e)">{{ele.name}}</abbr>
+            <abbr class="sub-title" @click="cateSelect(ele)" title="" @mouseover="showTitle(e)" :class="{'active': ele.id === $route.query.cate}">{{ele.name}}</abbr>
             <p v-for="p in ele.sub" class="three-cate" @click="cateSelect(p)" :class="{'active': p.id === $route.query.cate}">{{p.name}}</p>
           </div>
         </div>
@@ -19,45 +18,7 @@ export default {
   data() {
     return {
       cate: '',
-      category: [],
-      navs: [
-        {
-          name: 'NEW IN',
-          id: 1
-        },
-        {
-          name: 'WOMEN',
-          id: 2
-        },
-        {
-          name: 'MEN',
-          id: 3
-        },
-        {
-          name: 'BEAUTY',
-          id: 4
-        },
-        {
-          name: 'KIDS & MOM',
-          id: 5
-        },
-        {
-          id: 6,
-          name: 'ELECTRONICS'
-        },
-        {
-          name: 'HOME & LIVING',
-          id: 7
-        },
-        {
-          name: 'SPORTS',
-          id: 8
-        },
-        {
-          name: 'FLASH SALE',
-          id: 9
-        }
-      ]
+      category: []
     };
   },
   mounted() {
@@ -91,7 +52,6 @@ export default {
             }
           })
         })
-        // console.log(secondSelect)
         if(secondSelect.id) {
           firstSelect = this.category[i];
         }

@@ -3,12 +3,9 @@
     <headers :cartshow="cartshow"></headers>
     <div class="detail-main">
       <div class="chip">
-        Women
-        <span>/</span>
-        Clothing
-        <span>/</span>
-        Carding
-        <span>/</span>
+        <template v-for="item in data.category_path">
+          {{item}} <span>/</span> 
+        </template>
       </div>
 
       <div class="detail-core">

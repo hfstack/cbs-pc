@@ -97,7 +97,8 @@ export default {
       finalTime: 0,
       orders: [],
       params: {
-        page: 1
+        page: 1,
+        type: ''
       },
       columns: columns,
       confirmModal: {},
@@ -124,6 +125,17 @@ export default {
     };
   },
   mounted() {
+    const type = +this.$route.query.type;
+    if(type) {
+      this.params.type = type;
+      this.tabs.forEach((item) => {
+        if (item.type === type) {
+          item.active = true;
+        } else {
+          item.active = false;
+        }
+      })
+    }
     this.getOrderList();
     this.loadMore();
   },
@@ -142,6 +154,7 @@ export default {
       });
       item.active = true;
       this.params.type = item.type;
+      this.params.page = 1;
       this.getOrderList();
     },
     // 获取订单的可操作项
@@ -318,7 +331,7 @@ export default {
 
 .my-orders {
   .order-tabs{
-    height: 36px;
+    height: 37px;
     width: 362px;
     border: 1px solid #444;
     border-radius: 4px;
