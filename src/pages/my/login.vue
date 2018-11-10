@@ -90,6 +90,7 @@ export default {
         this.request('UsersRegister', this.params).then((res) => {
           if(res.status === 200) {
             window.localStorage && window.localStorage.setItem('userToken', res.content.token);
+            window.localStorage && window.localStorage.setItem('userEmail', res.content.email);
             this.$router.push({
               name: 'myAccount'
             })
